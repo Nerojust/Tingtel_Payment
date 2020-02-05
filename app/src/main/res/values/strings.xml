@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Tingtel Payment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="ob_header1">WELCOME TO TINGTEL</string>
+    <string name="ob_header2">GET BALANCE IN REAL-TIME</string>
+    <string name="ob_header3">PERMISSION REQUIRED</string>
+
+    <string name="ob_get_started">GET STARTED</string>
+
+    <string name="ob_desc1">Tingtel is a unified app to check  Data Balance of Networks all over the world</string>
+    <string name="ob_desc2">You dont need to memorize ussd codes to check data &amp; airtime balance</string>
+    <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, Click on "Get Started"</string>
+
+</resources>
