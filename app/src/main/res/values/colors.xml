@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#FE4537</color>
+    <color name="colorPrimaryDark">#D9392D</color>
+    <color name="colorAccent">#FE4537</color>
+    <color name="black">#000000</color>
 
     <color name="tingtel_red_color">#E64405</color>
 
@@ -13,7 +14,7 @@
     <color name="tingtel_light_gray">#EAEAEE</color>
     <color name="colorSplash">#E83F07</color>
 
-    <color name="black">#000000</color>
+
     <color name="white">#FFFFFF</color>
 
 </resources>
