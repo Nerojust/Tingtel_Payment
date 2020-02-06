@@ -9,5 +9,31 @@
         android:id="@+id/signUpHomeFragment"
         android:name="tingtel.payment.fragments.signup.SignUpHomeFragment"
         android:label="fragment_sign_up_home"
-        tools:layout="@layout/fragment_sign_up_home" />
+        tools:layout="@layout/fragment_sign_up_home" >
+        <action
+            android:id="@+id/action_signUpHomeFragment_to_signUpSimrequestFragment"
+            app:destination="@id/signUpSimrequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSimrequestFragment"
+        android:name="tingtel.payment.fragments.signup.SignUpSimrequestFragment"
+        android:label="fragment_sign_up_simrequest"
+        tools:layout="@layout/fragment_sign_up_simrequest" >
+        <action
+            android:id="@+id/action_signUpSimrequestFragment_to_signUpSim1Fragment"
+            app:destination="@id/signUpSim1Fragment" />
+        <action
+            android:id="@+id/action_signUpSimrequestFragment_to_signUpSim2Fragment"
+            app:destination="@id/signUpSim2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSim1Fragment"
+        android:name="tingtel.payment.fragments.signup.SignUpSim1Fragment"
+        android:label="fragment_sign_up_sim1"
+        tools:layout="@layout/fragment_sign_up_sim1" />
+    <fragment
+        android:id="@+id/signUpSim2Fragment"
+        android:name="tingtel.payment.fragments.signup.SignUpSim2Fragment"
+        android:label="fragment_sign_up_sim2"
+        tools:layout="@layout/fragment_sign_up_sim2" />
 </navigation>

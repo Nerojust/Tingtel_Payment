@@ -49,6 +49,7 @@ public class SessionManager {
     private static final String COUNTRYSIM1 = "COUNTRY_SIM1";
     private static final String COUNTRYSIM2 = "COUNTRY_SIM2";
     private static final String APPSTATE = "APP_STATE";
+    private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
 
 
     private void setIntPreference(String name, int value) {
@@ -390,5 +391,12 @@ public class SessionManager {
         setBooleanPreference(IS_LOGIN, isLogin);
     }
 
+    public String getNoOfRegisteredSim() {
+
+        return getStringPreference(NO_OF_REGISTERED_SIM);
+    }
+    public void setNoOfRegisteredSim(String NoOfRegisteredSim) {
+        setStringPreference(NO_OF_REGISTERED_SIM, NoOfRegisteredSim);
+    }
 
 }

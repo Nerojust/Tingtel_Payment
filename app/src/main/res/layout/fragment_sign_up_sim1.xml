@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.signup.SignUpSim1Fragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,25 +36,28 @@
                 android:layout_marginTop="110dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="20dp"
-
                 app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="30dp"
                 app:cardCornerRadius="22dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="10dp">
+                    android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Login"
+                        android:text="Enter Sim 1 Details"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:textSize="22sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"/>
 
+                    <Spinner
+                        android:id="@+id/sp_network"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -63,43 +66,13 @@
                         android:layout_margin="@dimen/activity_horizontal_margin">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_email_address"
+                            android:id="@+id/tv_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Email" />
+                            android:hint="Phone Number" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="@dimen/activity_horizontal_margin">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Password" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remember Me?"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password? Sign up"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
-
-</RelativeLayout>
 
 
                     <Button
@@ -108,20 +81,21 @@
                         android:background="@drawable/rounded_button_corners"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="30dp"
                         android:paddingHorizontal="60dp"
-                        android:text="Sign In"/>
+                        android:text="Sign Up"/>
                     <TextView
-                        android:id="@+id/tv_signup"
+                        android:id="@+id/tv_login"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Not Registered? Sign up"
+                        android:text="Have an account? Login"
                         android:layout_marginBottom="40dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
     </ScrollView>
+
 </RelativeLayout>

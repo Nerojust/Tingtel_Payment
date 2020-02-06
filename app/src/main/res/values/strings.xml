@@ -15,4 +15,8 @@
     <string name="ob_desc2">You dont need to memorize ussd codes to check data &amp; airtime balance</string>
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, Click on "Get Started"</string>
 
+    <string-array name="sim">
+        <item>Sim 1</item>
+        <item>Sim 2</item>
+    </string-array>
 </resources>
