@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_sign_up_home" >
         <action
             android:id="@+id/action_signUpHomeFragment_to_signUpSimrequestFragment"
-            app:destination="@id/signUpSimrequestFragment" />
+            app:destination="@id/signUpSimrequestFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/signUpSimrequestFragment"
@@ -21,19 +25,67 @@
         tools:layout="@layout/fragment_sign_up_simrequest" >
         <action
             android:id="@+id/action_signUpSimrequestFragment_to_signUpSim1Fragment"
-            app:destination="@id/signUpSim1Fragment" />
-        <action
-            android:id="@+id/action_signUpSimrequestFragment_to_signUpSim2Fragment"
-            app:destination="@id/signUpSim2Fragment" />
+            app:destination="@id/signUpSim1Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/signUpSim1Fragment"
         android:name="tingtel.payment.fragments.signup.SignUpSim1Fragment"
         android:label="fragment_sign_up_sim1"
-        tools:layout="@layout/fragment_sign_up_sim1" />
+        tools:layout="@layout/fragment_sign_up_sim1" >
+        <action
+            android:id="@+id/action_signUpSim1Fragment_to_signUpSim1OtpFragment"
+            app:destination="@id/signUpSim1OtpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/signUpSim2Fragment"
         android:name="tingtel.payment.fragments.signup.SignUpSim2Fragment"
         android:label="fragment_sign_up_sim2"
-        tools:layout="@layout/fragment_sign_up_sim2" />
+        tools:layout="@layout/fragment_sign_up_sim2" >
+        <action
+            android:id="@+id/action_signUpSim2Fragment_to_signUpSim2OtpFragment2"
+            app:destination="@id/signUpSim2OtpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSim1OtpFragment"
+        android:name="tingtel.payment.fragments.signup.SignUpSim1OtpFragment"
+        android:label="fragment_sign_up_sim1_otp"
+        tools:layout="@layout/fragment_sign_up_sim1_otp" >
+        <action
+            android:id="@+id/action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment"
+            app:destination="@id/SIgnUpSim1SuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSim2OtpFragment"
+        android:name="tingtel.payment.fragments.signup.SignUpSim2OtpFragment"
+        android:label="fragment_sign_up_sim2_otp"
+        tools:layout="@layout/fragment_sign_up_sim2_otp" />
+    <fragment
+        android:id="@+id/SIgnUpSim1SuccessFragment"
+        android:name="tingtel.payment.fragments.signup.SIgnUpSim1SuccessFragment"
+        android:label="fragment_sign_up_sim1_success"
+        tools:layout="@layout/fragment_sign_up_sim1_success" >
+        <action
+            android:id="@+id/action_SIgnUpSim1SuccessFragment_to_signUpSim2Fragment"
+            app:destination="@id/signUpSim2Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>

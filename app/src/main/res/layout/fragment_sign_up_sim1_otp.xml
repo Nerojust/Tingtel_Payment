@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.signup.SignUpSim2Fragment">
+    tools:context=".fragments.signup.SignUpSim1OtpFragment">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -43,56 +44,65 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingHorizontal="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Enter Sim 2 Details"
+                        android:text="OTP Verification"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:textSize="22sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textView_noti"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Select Network"
-                            android:textColor="@color/black"/>
-                        />
-                        <Spinner
-                            android:id="@+id/sp_network"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#9E9A9A"/>
-                    </LinearLayout>
+                        android:layout_marginTop="80dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Enter the 4 digit OTP"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+         />
 
+                    <com.chaos.view.PinView
+                        android:id="@+id/pinView"
+                        style="@style/PinWidget.PinView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="18sp"
+                        app:itemCount="4"
+                        app:itemHeight="48dp"
+                        app:itemRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lineColor="@android:color/darker_gray"
+                        app:viewType="rectangle" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="40dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_phone_number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Phone Number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Didn't get the OTP? RESEND OTP."
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/pinView"
+                        app:layout_constraintHorizontal_bias="0.473"
+                        app:layout_constraintStart_toStartOf="@+id/pinView"
+                        app:layout_constraintTop_toBottomOf="@+id/pinView" />
 
 
                     <Button
-                        android:id="@+id/btn_next"
+                        android:id="@+id/btn_confirm_otp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_button_corners"
@@ -101,13 +111,12 @@
                         android:layout_marginTop="30dp"
                         android:paddingHorizontal="60dp"
                         android:layout_marginBottom="50dp"
-                        android:text="Next"/>
+                        android:text="Verify"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
     </ScrollView>
-
 
 </RelativeLayout>

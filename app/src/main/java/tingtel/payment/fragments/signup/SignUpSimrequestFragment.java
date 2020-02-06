@@ -12,14 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import tingtel.payment.R;
 
 
 public class SignUpSimrequestFragment extends Fragment {
 
-    Button btnRegister1Sim;
-    Button btnRegister2Sim;
+    RelativeLayout btnRegister1Sim;
+    RelativeLayout btnRegister2Sim;
     NavController navController;
 
     @Override
@@ -34,8 +35,8 @@ public class SignUpSimrequestFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        btnRegister1Sim = view.findViewById(R.id.btn_register_1_sim);
-        btnRegister2Sim = view.findViewById(R.id.btn_register_2_sim);
+        btnRegister1Sim = view.findViewById(R.id.rel_register_1_sim);
+        btnRegister2Sim = view.findViewById(R.id.rel_register_2_sim);
 
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(navhost);
