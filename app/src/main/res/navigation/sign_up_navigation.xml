@@ -74,7 +74,11 @@
         android:id="@+id/signUpSim2OtpFragment"
         android:name="tingtel.payment.fragments.signup.SignUpSim2OtpFragment"
         android:label="fragment_sign_up_sim2_otp"
-        tools:layout="@layout/fragment_sign_up_sim2_otp" />
+        tools:layout="@layout/fragment_sign_up_sim2_otp" >
+        <action
+            android:id="@+id/action_signUpSim2OtpFragment_to_setPasswordFragment"
+            app:destination="@id/setPasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/SIgnUpSim1SuccessFragment"
         android:name="tingtel.payment.fragments.signup.SIgnUpSim1SuccessFragment"
@@ -87,5 +91,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_SIgnUpSim1SuccessFragment_to_setPasswordFragment"
+            app:destination="@id/setPasswordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/setPasswordFragment"
+        android:name="tingtel.payment.fragments.signup.SetPasswordFragment"
+        android:label="fragment_set_password"
+        tools:layout="@layout/fragment_set_password" />
 </navigation>

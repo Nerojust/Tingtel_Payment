@@ -19,6 +19,7 @@ import tingtel.payment.R;
 public class SIgnUpSim1SuccessFragment extends Fragment {
 
 Button btnRegSim2Now;
+Button btnRegSim2Later;
     NavController navController;
 
     @Override
@@ -43,10 +44,18 @@ Button btnRegSim2Now;
                 navController.navigate(R.id.action_SIgnUpSim1SuccessFragment_to_signUpSim2Fragment, null);
             }
         });
+
+        btnRegSim2Later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_SIgnUpSim1SuccessFragment_to_setPasswordFragment, null);
+            }
+        });
     }
 
     private void initViews(View view) {
         btnRegSim2Now = view.findViewById(R.id.btn_reg_sim2_now);
+        btnRegSim2Later = view.findViewById(R.id.btn_reg_sim2_later);
 
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(navhost);

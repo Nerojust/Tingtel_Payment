@@ -68,7 +68,7 @@
                         android:id="@+id/rel_register_1_sim"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/rounded_relative_layout"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="60dp"
                         android:paddingHorizontal="10dp"
@@ -94,11 +94,13 @@
                             android:src="@drawable/ic_navigate_next_white_32"/>
 
                     </RelativeLayout>
+
+
                     <RelativeLayout
                         android:id="@+id/rel_register_2_sim"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/rounded_relative_layout"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="22dp"
                         android:paddingHorizontal="10dp"

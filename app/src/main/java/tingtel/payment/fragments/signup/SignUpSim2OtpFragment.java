@@ -37,7 +37,7 @@ public class SignUpSim2OtpFragment extends Fragment {
         btnConfirmOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
