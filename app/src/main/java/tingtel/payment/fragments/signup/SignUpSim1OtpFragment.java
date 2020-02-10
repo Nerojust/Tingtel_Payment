@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,8 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import tingtel.payment.R;
+import tingtel.payment.database.AppDatabase;
+import tingtel.payment.models.SimCards;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +31,10 @@ public class SignUpSim1OtpFragment extends Fragment {
 
    Button btnConfirmOtp;
     NavController navController;
+    String Sim1Network;
+    String Sim1Serial;
+    String Sim1PhoneNumber;
+    SessionManager sessionManager;
 
 
     @Override
@@ -40,15 +53,75 @@ public class SignUpSim1OtpFragment extends Fragment {
         btnConfirmOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment, null);
+
+
+                saveSimDetails();
+
+
+                String NoOfSIm = sessionManager.getSimStatus();
+
+                switch (NoOfSIm) {
+
+                    case "SIM1":
+
+                        navController.navigate(R.id.action_signUpSim1OtpFragment_to_setPasswordFragment, null);
+                        break;
+                    case "SIM1 SIM2":
+
+                        navController.navigate(R.id.action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment, null);
+                        break;
+                }
+
+
             }
         });
 
     }
 
+    private void saveSimDetails() {
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                Date queryDate = Calendar.getInstance().getTime();
+                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
+
+                //creating a task
+                SimCards simCards = new SimCards();
+
+                simCards.setSimNetwork(Sim1Network);
+                simCards.setSimSerial(Sim1Serial);
+                simCards.setPhoneNumber(Sim1PhoneNumber);
+
+                //adding to database
+                appdatabase.simCardsDao().insert(simCards);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Toast.makeText(getContext(), "Sim 1 Details Saved", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
     private void initViews(View view) {
 
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
+
+        Sim1Network = getArguments().getString("Sim1Network");
+        Sim1Serial = getArguments().getString("Sim1Serial");
+        Sim1PhoneNumber = getArguments().getString("Sim1PhoneNumber");
+
+        sessionManager = AppUtils.getSessionManagerInstance();
 
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(navhost);

@@ -1,4 +1,4 @@
-package tingtel.payment.fragments;
+package tingtel.payment.fragments.dashboard;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import tingtel.payment.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class TransferAirtimeHomeFragment extends Fragment {
 
 
-    public MainFragment() {
+    public TransferAirtimeHomeFragment() {
         // Required empty public constructor
     }
 

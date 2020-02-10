@@ -7,7 +7,51 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="tingtel.payment.fragments.MainFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransferAirtimeHomeFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_transferAirtimeFragment"
+            app:destination="@id/transferAirtimeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_transactionHistoryFragment"
+            app:destination="@id/transactionHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferAirtimeFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransferAirtimeFragment"
+        android:label="fragment_transfer_airtime"
+        tools:layout="@layout/fragment_transfer_airtime" >
+        <action
+            android:id="@+id/action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment"
+            app:destination="@id/transferAirtimeReceiverInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferAirtimePreviewFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransferAirtimePreviewFragment"
+        android:label="fragment_transfer_airtime_preview"
+        tools:layout="@layout/fragment_transfer_airtime_preview" >
+        <action
+            android:id="@+id/action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment"
+            app:destination="@id/transferAirtimeSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferAirtimeSuccessFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransferAirtimeSuccessFragment"
+        android:label="fragment_transfer_airtime_success"
+        tools:layout="@layout/fragment_transfer_airtime_success" />
+    <fragment
+        android:id="@+id/transferAirtimeReceiverInfoFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransferAirtimeReceiverInfoFragment"
+        android:label="fragment_transfer_airtime_receiver_info"
+        tools:layout="@layout/fragment_transfer_airtime_receiver_info" >
+        <action
+            android:id="@+id/action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment"
+            app:destination="@id/transferAirtimePreviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionHistoryFragment"
+        android:name="tingtel.payment.fragments.dashboard.TransactionHistoryFragment"
+        android:label="fragment_transaction_history"
+        tools:layout="@layout/fragment_transaction_history" />
 </navigation>

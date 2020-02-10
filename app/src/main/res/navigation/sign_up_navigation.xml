@@ -69,6 +69,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="Sim1Network"
+            app:argType="string" />
+        <argument android:name="Sim1Serial" />
+        <argument android:name="Sim1PhoneNumber" />
+        <action
+            android:id="@+id/action_signUpSim1OtpFragment_to_setPasswordFragment"
+            app:destination="@id/setPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpSim2OtpFragment"
