@@ -146,7 +146,8 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(OnBoardActivity.this, MainActivity.class);
+        Intent intent = new Intent(OnBoardActivity.this, SignUpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
