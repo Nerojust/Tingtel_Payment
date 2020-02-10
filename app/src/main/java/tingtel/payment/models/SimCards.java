@@ -1,10 +1,12 @@
 package tingtel.payment.models;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class SimCards {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String SimSerial;
     private String SimNetwork;
