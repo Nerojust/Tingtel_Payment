@@ -19,42 +19,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:background="@drawable/fragment_header">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="Tingtel"
                     android:textColor="@color/white"
                     android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold" />
             </RelativeLayout>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginTop="110dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginBottom="20dp"
 
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="22dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:paddingHorizontal="10dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
                         android:text="Login"
                         android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
                         android:textSize="22sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"/>
-
+                        android:textStyle="bold" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -76,6 +78,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                         android:layout_marginTop="@dimen/activity_horizontal_margin">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_password"
                             android:layout_width="match_parent"
@@ -84,41 +87,80 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remember Me?"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password? Sign up"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:gravity="center">
 
-</RelativeLayout>
+                        <CheckBox
+                            android:id="@+id/checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="25dp"
+                            android:gravity="center"
+                            android:text="Remember Me?" />
+
+                        <TextView
+                            android:id="@+id/fpass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/checkbox"
+                            android:gravity="center"
+                            android:text="Forgot Password?" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/fpass"
+                            android:gravity="center"
+                            android:text="Reset"
+                            android:textColor="@color/tingtel_red_color" />
+
+                    </RelativeLayout>
 
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_button_corners"
-                        android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="50dp"
+                        android:background="@drawable/rounded_button_corners"
                         android:paddingHorizontal="60dp"
-                        android:text="Sign In"/>
-                    <TextView
-                        android:id="@+id/tv_signup"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
+                        android:text="Sign In"
+                        android:textColor="@color/white" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Not Registered? Sign up"
-                        android:layout_marginBottom="40dp"/>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tv_signup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="40dp"
+                            android:text="Not Registered?" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="40dp"
+                            android:text="Sign up"
+                            android:textColor="@color/tingtel_red_color" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
