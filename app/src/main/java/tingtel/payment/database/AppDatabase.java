@@ -16,10 +16,11 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import java.util.concurrent.Executors;
 
 import tingtel.payment.dao.SimCardsDao;
+import tingtel.payment.models.DateConverter;
 import tingtel.payment.models.SimCards;
 
 @Database(entities = {SimCards.class},version = 1, exportSchema = false)
-
+@TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase mInstance;

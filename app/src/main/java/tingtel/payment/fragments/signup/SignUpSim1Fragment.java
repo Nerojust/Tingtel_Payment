@@ -61,7 +61,7 @@ Spinner  mSpinner;
         initListeners(view);
         getDataFromCarrier(view);
 
-        mSpinner = (Spinner) view.findViewById(R.id.sp_network);
+
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
        spinnerImages = new int[]{R.drawable.mtn_logo
                 , R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo
@@ -116,7 +116,7 @@ Spinner  mSpinner;
         btnSaveSim1NetworkDetails = view.findViewById(R.id.btn_next);
         tvPhoneNumber = view.findViewById(R.id.tv_phone_number);
         tvSimInfo = view.findViewById(R.id.tv_sim_info);
-
+        mSpinner = (Spinner) view.findViewById(R.id.sp_network);
         sessionManager = AppUtils.getSessionManagerInstance();
 
 

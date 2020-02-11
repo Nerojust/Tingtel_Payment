@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings_navigation"
+    app:startDestination="@id/settingsHome">
+
+    <fragment
+        android:id="@+id/settingsHome"
+        android:name="tingtel.payment.fragments.settings.SettingsHome"
+        android:label="fragment_settings_home"
+        tools:layout="@layout/fragment_settings_home" >
+        <action
+            android:id="@+id/action_settingsHome_to_changeEmailAddress"
+            app:destination="@id/changeEmailAddress" />
+        <action
+            android:id="@+id/action_settingsHome_to_addNewSimFragment"
+            app:destination="@id/addNewSimFragment" />
+        <action
+            android:id="@+id/action_settingsHome_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_settingsHome_to_manageSimsFragment"
+            app:destination="@id/manageSimsFragment" />
+        <action
+            android:id="@+id/action_settingsHome_to_tutorialFragment"
+            app:destination="@id/tutorialFragment" />
+        <action
+            android:id="@+id/action_settingsHome_to_reportIssueFragment"
+            app:destination="@id/reportIssueFragment" />
+        <action
+            android:id="@+id/action_settingsHome_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewSimFragment"
+        android:name="tingtel.payment.fragments.settings.AddNewSimFragment"
+        android:label="fragment_add_new_sim"
+        tools:layout="@layout/fragment_add_new_sim" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="tingtel.payment.fragments.settings.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/changeEmailAddress"
+        android:name="tingtel.payment.fragments.settings.ChangeEmailAddress"
+        android:label="fragment_change_email_address"
+        tools:layout="@layout/fragment_change_email_address" />
+    <fragment
+        android:id="@+id/manageSimsFragment"
+        android:name="tingtel.payment.fragments.settings.ManageSimsFragment"
+        android:label="fragment_manage_sims"
+        tools:layout="@layout/fragment_manage_sims" />
+    <fragment
+        android:id="@+id/tutorialFragment"
+        android:name="tingtel.payment.fragments.settings.TutorialFragment"
+        android:label="fragment_tutorial"
+        tools:layout="@layout/fragment_tutorial" />
+    <fragment
+        android:id="@+id/reportIssueFragment"
+        android:name="tingtel.payment.fragments.settings.ReportIssueFragment"
+        android:label="fragment_report_issue"
+        tools:layout="@layout/fragment_report_issue" />
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="tingtel.payment.fragments.settings.DeleteAccountFragment"
+        android:label="fragment_delete_account"
+        tools:layout="@layout/fragment_delete_account" />
+</navigation>
