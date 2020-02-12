@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="70dp"/>
 
     <TextView
         android:id="@+id/tv_sim1reg"
@@ -52,7 +55,7 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="80dp"/>
     <Button
         android:id="@+id/btn_reg_sim2_later"
         android:layout_width="match_parent"
@@ -68,3 +71,4 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_reg_sim2_now"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -49,7 +49,7 @@
                         android:text="Select Sim To Register"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="90dp"/>
 
@@ -57,9 +57,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Do you want to register one or more sim?"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginHorizontal="20dp"
-                        android:textSize="28sp"
+                        android:textSize="24sp"
                         android:textAlignment="center"
                         android:layout_gravity="center_horizontal"/>
 

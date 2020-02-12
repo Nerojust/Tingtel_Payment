@@ -1,9 +1,11 @@
 package tingtel.payment.models;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+@Entity
 public class History {
 
     @PrimaryKey(autoGenerate = true)

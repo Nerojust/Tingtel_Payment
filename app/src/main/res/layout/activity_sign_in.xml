@@ -92,17 +92,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember Me?"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password? Sign up"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+
 
 </RelativeLayout>
 
 
                     <Button
+                        android:id="@+id/btn_sign_in"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_button_corners"
@@ -118,6 +114,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Not Registered? Sign up"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Forgot Password? Retrieve"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignParentRight="true"
                         android:layout_marginBottom="40dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -20,24 +20,37 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:paddingHorizontal="20dp">
+              android:layout_marginTop="20dp"
+              android:paddingHorizontal="60dp"
+              >
 
               <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textAlignment="center"
+                  android:textStyle="bold"
+                  android:text="Welcome"/>
 
               <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-              <Button
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="Transfer Airtime"/>
+                  android:textAlignment="center"
+                  android:text="Tingtel helps you transfer airtime of any networkto other networks. \n\n In order to transfer airtime, please click on the transfer airtime button"
+                 />
+              <Button
+                  android:id="@+id/btn_transfer_airtime"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:text="Transfer Airtime"
+                  android:paddingVertical="40dp"/>
 
               <Button
-                  android:layout_width="wrap_content"
+                  android:id="@+id/btn_history"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="History"/>
+                  android:text="History"
+                  android:paddingVertical="40dp"/>
 
           </LinearLayout>
       </RelativeLayout>

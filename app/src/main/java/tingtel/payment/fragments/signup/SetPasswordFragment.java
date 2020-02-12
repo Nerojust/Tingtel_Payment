@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 
 public class SetPasswordFragment extends Fragment {
@@ -23,6 +25,7 @@ public class SetPasswordFragment extends Fragment {
     TextInputEditText tvPassword1;
     TextInputEditText tvPassword2;
     Button btnSetPassword;
+    SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +45,9 @@ public class SetPasswordFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(intent);
+
+                sessionManager.setIsLogin(true);
+
             }
         });
 
@@ -53,6 +59,8 @@ public class SetPasswordFragment extends Fragment {
         tvPassword2= view.findViewById(R.id.tv_password2);
 
         btnSetPassword = view.findViewById(R.id.btn_set_password);
+
+        sessionManager = AppUtils.getSessionManagerInstance();
 
 
 

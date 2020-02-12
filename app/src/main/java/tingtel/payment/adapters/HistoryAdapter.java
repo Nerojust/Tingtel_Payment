@@ -44,6 +44,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
         holder.tvAmount.setText("#" + mData.get(position).getAmount());
         holder.tvDate.setText(new SimpleDateFormat("MMMM dd, hh:mm a").format(mData.get(position).getDate()));
+        holder.tvSenderPhoneNumber.setText(mData.get(position).getSenderPhoneNumber());
+        holder.tvReceiverPhoneNumber.setText(mData.get(position).getReceiverPhoneNumber());
 
 
 //        setNetworkImage(holder, mData.get(position).getSimName());

@@ -14,6 +14,7 @@ public class SplashActivity extends AppCompatActivity {
 
     SessionManager sessionManager = getSessionManagerInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                 if (sessionManager.getIsLogin()) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();

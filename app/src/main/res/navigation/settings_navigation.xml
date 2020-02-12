@@ -51,7 +51,11 @@
         android:id="@+id/manageSimsFragment"
         android:name="tingtel.payment.fragments.settings.ManageSimsFragment"
         android:label="fragment_manage_sims"
-        tools:layout="@layout/fragment_manage_sims" />
+        tools:layout="@layout/fragment_manage_sims" >
+        <action
+            android:id="@+id/action_manageSimsFragment_self"
+            app:destination="@id/manageSimsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tutorialFragment"
         android:name="tingtel.payment.fragments.settings.TutorialFragment"

@@ -26,4 +26,7 @@ public interface SimCardsDao {
 
     @Query("SELECT * FROM SimCards WHERE SimSerial = :Serial")
     List<SimCards> getSerial(String Serial);
+
+    @Query("DELETE FROM SimCards WHERE id = :id")
+    void deleteSimCard(int id);
 }
