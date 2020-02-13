@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Network"/>
-    <EditText
+    <Spinner
+        android:id="@+id/sp_network"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -44,15 +45,18 @@
         android:layout_marginTop="30dp"
         android:text="Phone Number"/>
     <EditText
+        android:id="@+id/ed_receiver_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Pin"/>
     <EditText
+        android:id="@+id/ed_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -68,6 +72,7 @@
 
 
     <Button
+        android:id="@+id/btn_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Preview"/>

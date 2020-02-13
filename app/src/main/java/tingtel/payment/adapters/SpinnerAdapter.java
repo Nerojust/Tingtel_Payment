@@ -20,7 +20,7 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 
     Context mContext;
 
-    public SpinnerAdapter(@NonNull Context context, String[] titles, int[] images, String[] population) {
+    public SpinnerAdapter(@NonNull Context context, String[] titles, int[] images) {
         super(context, R.layout.row_spinner);
         this.spinnerTitles = titles;
         this.spinnerImages = images;

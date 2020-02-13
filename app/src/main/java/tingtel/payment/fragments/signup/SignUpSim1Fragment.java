@@ -67,7 +67,7 @@ Spinner  mSpinner;
                 , R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo
               };
 
-        SpinnerAdapter mCustomAdapter = new SpinnerAdapter (getActivity(), spinnerTitles, spinnerImages, spinnerPopulation);
+        SpinnerAdapter mCustomAdapter = new SpinnerAdapter (getActivity(), spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

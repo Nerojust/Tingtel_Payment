@@ -34,6 +34,21 @@
         <action
             android:id="@+id/action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment"
             app:destination="@id/transferAirtimeSuccessFragment" />
+        <argument
+            android:name="senderSimNetwork"
+            app:argType="string" />
+        <argument
+            android:name="receiverSimNetwork"
+            app:argType="string" />
+        <argument
+            android:name="simSerial"
+            app:argType="string" />
+        <argument
+            android:name="SimNo"
+            app:argType="integer" />
+        <argument
+            android:name="amount"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/transferAirtimeSuccessFragment"
@@ -48,6 +63,18 @@
         <action
             android:id="@+id/action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment"
             app:destination="@id/transferAirtimePreviewFragment" />
+        <argument
+            android:name="simNo"
+            app:argType="integer" />
+        <argument
+            android:name="simNetwork"
+            app:argType="string" />
+        <argument
+            android:name="amount"
+            app:argType="integer" />
+        <argument
+            android:name="simSerial"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/transactionHistoryFragment"
