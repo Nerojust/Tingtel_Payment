@@ -19,7 +19,9 @@ public class History {
 
     private String ReceiverPhoneNumber;
 
-    private int Amount;
+    private String SimSerial;
+
+    private String Amount;
 
     private Date Date;
 
@@ -64,11 +66,19 @@ public class History {
         ReceiverPhoneNumber = receiverPhoneNumber;
     }
 
-    public int getAmount() {
+    public String getSimSerial() {
+        return SimSerial;
+    }
+
+    public void setSimSerial(String simSerial) {
+        SimSerial = simSerial;
+    }
+
+    public String getAmount() {
         return Amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         Amount = amount;
     }
 

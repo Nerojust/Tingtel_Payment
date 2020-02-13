@@ -80,6 +80,8 @@ public class SignUpSim1OtpFragment extends Fragment {
 
     private void saveSimDetails() {
 
+        sessionManager.setSimPhoneNumber(Sim1PhoneNumber);
+
         class SaveTask extends AsyncTask<Void, Void, Void> {
 
             @Override

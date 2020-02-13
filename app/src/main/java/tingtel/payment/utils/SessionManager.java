@@ -40,6 +40,8 @@ public class SessionManager {
 
     private static final String RECEIVER_STATUS = "RECEIVER_STATUS";
     private static final String IS_LOGIN = "IS_LOGIN";
+    private static final String PHONE_NUMBER = "PHONE_NUMBER";
+    private static final String PHONE_NUMBER1 = "PHONE_NUMBER1";
 
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
@@ -125,6 +127,22 @@ public class SessionManager {
 
     public void setNetworkName(String networkname) {
         setStringPreference(NETWORK_NAME, networkname);
+    }
+
+    public String getSimPhoneNumber() {
+        return getStringPreference(PHONE_NUMBER);
+    }
+
+    public void setSimPhoneNumber(String phoneNumber) {
+        setStringPreference(PHONE_NUMBER, phoneNumber);
+    }
+
+    public String getSimPhoneNumber1() {
+        return getStringPreference(PHONE_NUMBER1);
+    }
+
+    public void setSimPhoneNumber1(String phoneNumber) {
+        setStringPreference(PHONE_NUMBER1, phoneNumber);
     }
 
     public int getNumberOfSimsOnTheDevice() {

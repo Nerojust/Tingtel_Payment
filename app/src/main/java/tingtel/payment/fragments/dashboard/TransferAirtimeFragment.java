@@ -144,7 +144,7 @@ sessionManager = AppUtils.getSessionManagerInstance();
                 bundle.putString("simNetwork", SimNetwork);
                 bundle.putString("simSerial", SimSerial);
                 bundle.putInt("simNo", SimNo);
-                bundle.putInt("amount", Integer.parseInt(edAmount.getText().toString()));
+                bundle.putString("amount", edAmount.getText().toString());
                 navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
 
 

@@ -29,7 +29,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     String SenderSimNetwork;
     String ReceiverSimNetwork;
     int SimNo;
-    int Amount;
+    String Amount;
     String SimSerial;
      Button btnPreview;
      NavController navController;
@@ -44,7 +44,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         SenderSimNetwork = getArguments().getString("simNetwork");
         SimNo = getArguments().getInt("simNo");
-        Amount = getArguments().getInt("amount");
+        Amount = getArguments().getString("amount");
         SimSerial = getArguments().getString("simSerial");
 
         mSpinner = (Spinner) view.findViewById(R.id.sp_network);
@@ -106,7 +106,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
                 bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
                 bundle.putString("simSerial", SimSerial);
                 bundle.putInt("simNo", SimNo);
-                bundle.putInt("amount", Amount);
+                bundle.putString("amount", Amount);
                 bundle.putString("receiverPhoneNumber", edReceiverPhoneNumber.getText().toString());
                 bundle.putString("pin", edPin.getText().toString());
                 navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment, bundle);

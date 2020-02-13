@@ -15,11 +15,13 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import java.util.concurrent.Executors;
 
+import tingtel.payment.dao.HistoryDao;
 import tingtel.payment.dao.SimCardsDao;
 import tingtel.payment.models.DateConverter;
+import tingtel.payment.models.History;
 import tingtel.payment.models.SimCards;
 
-@Database(entities = {SimCards.class},version = 1, exportSchema = false)
+@Database(entities = {SimCards.class, History.class},version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -34,6 +36,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
     public abstract SimCardsDao simCardsDao();
+    public abstract HistoryDao historyDao();
 
 
     public synchronized static AppDatabase getInstance(Context context) {
