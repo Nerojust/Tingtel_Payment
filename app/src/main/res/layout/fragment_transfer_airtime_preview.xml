@@ -117,10 +117,17 @@
         android:id="@+id/btn_transfer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_round_corners"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
         android:text="Transfer"/>
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_round_corners"
+        android:textColor="@color/white"
         android:text="Back"/>
 </LinearLayout>

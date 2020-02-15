@@ -6,9 +6,18 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import tingtel.payment.R;
+import tingtel.payment.SignInActivity;
 
 public class AppUtils {
 
@@ -60,5 +69,32 @@ public class AppUtils {
         activity.startActivity(intent);
     }
 
+
+
+    public static void showDialog(String message, Activity activity) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        ViewGroup viewGroup = activity.findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_info, viewGroup, false);
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+
+        TextView tvMessage = (TextView) dialogView.findViewById(R.id.tv_message);
+        Button btnOk = (Button)dialogView.findViewById(R.id.btn_ok);
+
+        tvMessage.setText(message);
+
+
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+
+    }
 
 }

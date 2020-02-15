@@ -1,12 +1,13 @@
 package tingtel.payment.dao;
 
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
 
 import tingtel.payment.models.History;
-
+@Dao
 public interface HistoryDao {
 
     @Query("SELECT * FROM History")

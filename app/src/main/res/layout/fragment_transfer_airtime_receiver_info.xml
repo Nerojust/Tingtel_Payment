@@ -46,6 +46,8 @@
         android:text="Phone Number"/>
     <EditText
         android:id="@+id/ed_receiver_phone_number"
+        android:inputType="number"
+        android:background="@drawable/textview_rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -57,6 +59,8 @@
         android:text="Pin"/>
     <EditText
         android:id="@+id/ed_pin"
+        android:inputType="numberPassword"
+        android:background="@drawable/textview_rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -66,6 +70,8 @@
         android:layout_marginTop="30dp"
         android:text="Confirm Amount"/>
     <EditText
+        android:id="@+id/ed_amount"
+        android:background="@drawable/textview_rounded"
         android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -75,6 +81,9 @@
         android:id="@+id/btn_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_round_corners"
+        android:textColor="@color/white"
         android:text="Preview"/>
 
 </LinearLayout>

@@ -35,6 +35,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
      NavController navController;
      EditText edPin;
      EditText edReceiverPhoneNumber;
+     EditText edAmount;
 
 
     @Override
@@ -52,9 +53,17 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         edPin = (EditText) view.findViewById(R.id.ed_pin);
         edReceiverPhoneNumber = (EditText) view.findViewById(R.id.ed_receiver_phone_number);
+        edAmount = (EditText) view.findViewById(R.id.ed_amount);
+
 
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(navhost);
+
+
+
+
+        edAmount.setText("#" +Amount);
+
 
 
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};

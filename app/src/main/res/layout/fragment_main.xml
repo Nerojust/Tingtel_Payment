@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".fragments.dashboard.TransferAirtimeHomeFragment">
 
   <ScrollView
@@ -31,9 +32,18 @@
                   android:textStyle="bold"
                   android:text="Welcome"/>
 
+              <ImageView
+                  android:layout_width="186dp"
+                  android:layout_height="136dp"
+                  android:layout_gravity="center"
+                  android:scaleType="fitCenter"
+                  android:src="@drawable/celebration" />
+
               <TextView
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:fontFamily="@font/poppins_regular_o"
                   android:textAlignment="center"
                   android:text="Tingtel helps you transfer airtime of any networkto other networks. \n\n In order to transfer airtime, please click on the transfer airtime button"
                  />
@@ -41,16 +51,21 @@
                   android:id="@+id/btn_transfer_airtime"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:background="@drawable/button_round_corners"
                   android:layout_marginTop="30dp"
+                  android:textColor="@color/white"
                   android:text="Transfer Airtime"
-                  android:paddingVertical="40dp"/>
+                  android:paddingVertical="30dp"/>
 
               <Button
                   android:id="@+id/btn_history"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="History"
-                  android:paddingVertical="40dp"/>
+                  android:layout_marginTop="30dp"
+                  android:background="@drawable/button_round_corners"
+                  android:textColor="@color/white"
+                  android:paddingVertical="30dp"/>
 
           </LinearLayout>
       </RelativeLayout>

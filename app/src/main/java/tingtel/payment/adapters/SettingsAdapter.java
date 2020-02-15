@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -24,6 +25,7 @@ import java.util.List;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.SettingsActivity;
+import tingtel.payment.SignInActivity;
 
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyViewHolder> {
     private final Context mContext;
@@ -128,7 +130,34 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
 
                 }  else if ((ClickedItem.equalsIgnoreCase("Delete Account"))) {
 
-                    navController.navigate(R.id.action_settingsHome_to_deleteAccountFragment, null);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    ViewGroup viewGroup = activity.findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_account, viewGroup, false);
+                    builder.setView(dialogView);
+                    AlertDialog alertDialog = builder.create();
+
+                    Button btnYes = (Button)dialogView.findViewById(R.id.btn_yes);
+                    Button btnNo = (Button)dialogView.findViewById(R.id.btn_no);
+
+                    btnYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent(activity, SignInActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            activity.startActivity(intent);
+
+                        }
+                    });
+
+                    btnNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+
+                    alertDialog.show();
 
 
                 }  else if ((ClickedItem.equalsIgnoreCase("Share App"))) {
@@ -146,13 +175,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
                     }
 
                 }
-
-
-
-
-
-
-
 
             });
 

@@ -53,7 +53,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     @Override
     public void onBindViewHolder(final SimCardsAdapter.MyViewHolder holder, final int position) {
         holder.itemView.setTag(mData.get(position));
-        holder.btnDelete.setTag(mData.get(position));
+        holder.imgDelete.setTag(mData.get(position));
         holder.tvPhoneNumber.setText(mData.get(position).getPhoneNumber());
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
 
@@ -74,7 +74,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
 
         final TextView tvPhoneNumber;
         final TextView tvNetworkName;
-        final Button btnDelete;
+        final ImageView imgDelete;
 
 
 
@@ -82,7 +82,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             super(itemView);
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
             tvNetworkName = itemView.findViewById(R.id.tv_network_name);
-            btnDelete = itemView.findViewById(R.id.btn_delete);
+            imgDelete = itemView.findViewById(R.id.btn_delete);
 
 
 
@@ -102,7 +102,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             });
             itemView.setOnLongClickListener(v -> true);
 
-            btnDelete.setOnClickListener(new View.OnClickListener() {
+            imgDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);

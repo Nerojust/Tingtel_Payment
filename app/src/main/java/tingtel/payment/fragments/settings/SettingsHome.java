@@ -47,7 +47,7 @@ public class SettingsHome extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
+        settingsList.clear();
         prepareeSettings();
     }
 

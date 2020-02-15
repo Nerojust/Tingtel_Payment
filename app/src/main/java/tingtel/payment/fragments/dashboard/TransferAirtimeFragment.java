@@ -66,6 +66,7 @@ sessionManager = AppUtils.getSessionManagerInstance();
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+              //  Toast.makeText(getContext(), "testing for checked", Toast.LENGTH_LONG).show();
                 // get selected radio button from radioGroup
                 int selectedId = rdSimGroup.getCheckedRadioButtonId();
 
@@ -140,9 +141,16 @@ sessionManager = AppUtils.getSessionManagerInstance();
             @Override
             public void onClick(View v) {
 
+                if (!checkSelectedSim(view)) {
+                    return;
+                }
+                if (!validateFields(view)) {
+                    return;
+                }
+
                 Bundle bundle = new Bundle();
                 bundle.putString("simNetwork", SimNetwork);
-                bundle.putString("simSerial", SimSerial);
+                bundle.putString("simSerial","" + SimSerial);
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", edAmount.getText().toString());
                 navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
@@ -154,7 +162,45 @@ sessionManager = AppUtils.getSessionManagerInstance();
         return view;
     }
 
+    private boolean validateFields(View view) {
 
+        if (edAmount.getText().toString().equalsIgnoreCase("")) {
+            edAmount.setError("Kindly Input an Amount");
+            edAmount.setFocusable(true);
+            return false;
+        } else {
+            return true;
+        }
+
+
+    }
+
+    private boolean checkSelectedSim(View v) {
+
+
+        int selectedId = rdSimGroup.getCheckedRadioButtonId();
+
+        // find the radiobutton by returned id
+        rdSimButton = (RadioButton) v.findViewById(selectedId);
+
+        if (rdSimButton.getText().toString().substring(0,3).equalsIgnoreCase("mtn")) {
+            SimNetwork = "Mtn";
+            return true;
+        } else if (rdSimButton.getText().toString().substring(0,3).equalsIgnoreCase("air")) {
+            SimNetwork = "Airtel";
+            return true;
+        } else if (rdSimButton.getText().toString().substring(0,3).equalsIgnoreCase("glo")) {
+            SimNetwork = "Glo";
+            return true;
+        } else if (rdSimButton.getText().toString().substring(0,3).equalsIgnoreCase("9mo") ||
+                (rdSimButton.getText().toString().substring(0,3).equalsIgnoreCase("eti"))) {
+            SimNetwork = "9mobile";
+            return true;
+        } else {
+            Toast.makeText(getContext(), "Selected Sim Not Recognised", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
 
 
 }

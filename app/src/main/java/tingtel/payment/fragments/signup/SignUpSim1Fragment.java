@@ -41,6 +41,7 @@ public class SignUpSim1Fragment extends Fragment {
 
 Spinner  mSpinner;
     String[] spinnerTitles;
+    String selectedSpinnerNetwork;
     String[] spinnerPopulation;
     int[] spinnerImages;
     NavController navController;
@@ -75,6 +76,7 @@ Spinner  mSpinner;
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                     Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
+                    selectedSpinnerNetwork = spinnerTitles[i];
 
             }
             @Override
@@ -105,7 +107,8 @@ Spinner  mSpinner;
 
                 Bundle bundle = new Bundle();
                 bundle.putString("Sim1Serial", Sim1Serial);
-                bundle.putString("Sim1Network", Sim1Network);
+//                bundle.putString("Sim1Network", Sim1Network);
+                bundle.putString("Sim1Network", selectedSpinnerNetwork);
                 bundle.putString("Sim1PhoneNumber", tvPhoneNumber.getText().toString());
                 navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
             }
