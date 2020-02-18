@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -17,11 +18,14 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
+import tingtel.payment.MainActivity;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+
+import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +48,7 @@ public class SignUpSim1OtpFragment extends Fragment {
 
         initViews(view);
         initListeners(view);
+        getCarrierOfSim(getContext(), getActivity());
 
         return view;
     }
@@ -58,18 +63,26 @@ public class SignUpSim1OtpFragment extends Fragment {
                 saveSimDetails();
 
 
-                String NoOfSIm = sessionManager.getSimStatus();
+                if (sessionManager.getIsRegistered()) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                } else {
 
-                switch (NoOfSIm) {
 
-                    case "SIM1":
+                    String NoOfSIm = sessionManager.getSimStatus();
 
-                        navController.navigate(R.id.action_signUpSim1OtpFragment_to_setPasswordFragment, null);
-                        break;
-                    case "SIM1 SIM2":
+                    switch (NoOfSIm) {
 
-                        navController.navigate(R.id.action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment, null);
-                        break;
+                        case "SIM1":
+
+                            navController.navigate(R.id.action_signUpSim1OtpFragment_to_setPasswordFragment, null);
+                            break;
+                        case "SIM1 SIM2":
+
+                            navController.navigate(R.id.action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment, null);
+                            break;
+                    }
                 }
 
 
@@ -80,7 +93,9 @@ public class SignUpSim1OtpFragment extends Fragment {
 
     private void saveSimDetails() {
 
+        //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
         sessionManager.setSimPhoneNumber(Sim1PhoneNumber);
+        sessionManager.setNetworkName(Sim1Network);
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
 

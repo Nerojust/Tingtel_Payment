@@ -51,7 +51,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
                         " the Tingtel App");
                 sendIntent.putExtra("address", ReceiverPhoneNumber);
                 sendIntent.setType("vnd.android-dir/mms-sms");
-                startActivity(sendIntent);
+                getActivity().startActivity(sendIntent);
 
             }
         });

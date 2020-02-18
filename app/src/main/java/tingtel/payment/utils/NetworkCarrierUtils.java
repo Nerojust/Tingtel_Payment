@@ -51,12 +51,9 @@ public class NetworkCarrierUtils {
                 }
                 if (numberOfSimsOnTheDevice == 0) {
                     sessionManager.setSimStatus("NO SIM");
-                    sessionManager.setTotalNumberOfSimsDetectedOnDevice(numberOfSimsOnTheDevice);
                 } else if (numberOfSimsOnTheDevice == 1) {
-                    sessionManager.setTotalNumberOfSimsDetectedOnDevice(numberOfSimsOnTheDevice);
                     sessionManager.setSimStatus("SIM1");
                 } else if (numberOfSimsOnTheDevice == 2) {
-                    sessionManager.setTotalNumberOfSimsDetectedOnDevice(numberOfSimsOnTheDevice);
                     sessionManager.setSimStatus("SIM1 SIM2");
                     Log.e("getDefaultCarrier", "sim 1 sim2");
                 }

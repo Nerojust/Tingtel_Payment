@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
             if (sessionManager.getOnboardStatus()) {
 
 
-                if (sessionManager.getIsLogin()) {
+                if (sessionManager.getIsRegistered()) {
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

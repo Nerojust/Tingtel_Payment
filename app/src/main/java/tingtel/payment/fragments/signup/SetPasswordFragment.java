@@ -44,10 +44,11 @@ public class SetPasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getActivity().startActivity(intent);
 
-                sessionManager.setIsLogin(true);
-
+                sessionManager.setIsRegistered(true);
+                getActivity().finish();
             }
         });
 

@@ -50,4 +50,6 @@ public class ManageSimsFragment extends Fragment {
         return view;
     }
 
+
+
 }

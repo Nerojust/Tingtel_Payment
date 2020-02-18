@@ -1,16 +1,31 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.database.AppDatabase;
+import tingtel.payment.models.SimCards;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
+
+import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +34,11 @@ public class SignUpSim2OtpFragment extends Fragment {
 
 
     Button btnConfirmOtp;
+    NavController navController;
+    String Sim2Network;
+    String Sim2Serial;
+    String Sim2PhoneNumber;
+    SessionManager sessionManager;
 
 
     @Override
@@ -28,7 +48,11 @@ public class SignUpSim2OtpFragment extends Fragment {
 
         initViews(view);
         initListeners(view);
+        getCarrierOfSim(getContext(), getActivity());
 
+        Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
+        navController = NavHostFragment.findNavController(navhost);
+        sessionManager = AppUtils.getSessionManagerInstance();
 
         return view;
     }
@@ -38,12 +62,72 @@ public class SignUpSim2OtpFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+                saveSimDetails();
+
+                if (sessionManager.getIsRegistered()) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                } else {
+
+                    navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
+
+                }
+
+
             }
         });
     }
 
+    private void saveSimDetails() {
+
+        //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
+        sessionManager.setSimPhoneNumber1(Sim2PhoneNumber);
+        sessionManager.setNetworkName1(Sim2Network);
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                Date queryDate = Calendar.getInstance().getTime();
+                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
+
+                //creating a task
+                SimCards simCards = new SimCards();
+
+                simCards.setSimNetwork(Sim2Network);
+                simCards.setSimSerial(Sim2Serial);
+                simCards.setPhoneNumber(Sim2PhoneNumber);
+
+                //adding to database
+                appdatabase.simCardsDao().insert(simCards);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Toast.makeText(getContext(), "Sim 2 Details Saved", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
+
     private void initViews(View view) {
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
+
+        Sim2Network = getArguments().getString("Sim2Network");
+        Sim2Serial = getArguments().getString("Sim2Serial");
+        Sim2PhoneNumber = getArguments().getString("Sim2PhoneNumber");
+
+        Toast.makeText(getActivity(), ""+ Sim2Network + Sim2Serial+ Sim2PhoneNumber, Toast.LENGTH_LONG).show();
     }
 
 }

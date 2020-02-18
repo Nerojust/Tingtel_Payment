@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_manageSimsFragment_self"
             app:destination="@id/manageSimsFragment" />
+        <action
+            android:id="@+id/action_manageSimsFragment_to_settingsHome"
+            app:destination="@id/settingsHome" />
     </fragment>
     <fragment
         android:id="@+id/tutorialFragment"

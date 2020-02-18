@@ -11,25 +11,11 @@
         android:label="fragment_sign_up_home"
         tools:layout="@layout/fragment_sign_up_home" >
         <action
-            android:id="@+id/action_signUpHomeFragment_to_signUpSimrequestFragment"
-            app:destination="@id/signUpSimrequestFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpSimrequestFragment"
-        android:name="tingtel.payment.fragments.signup.SignUpSimrequestFragment"
-        android:label="fragment_sign_up_simrequest"
-        tools:layout="@layout/fragment_sign_up_simrequest" >
+            android:id="@+id/action_signUpHomeFragment_to_signUpSim1Fragment"
+            app:destination="@id/signUpSim1Fragment" />
         <action
-            android:id="@+id/action_signUpSimrequestFragment_to_signUpSim1Fragment"
-            app:destination="@id/signUpSim1Fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_signUpHomeFragment_to_signUpSim2Fragment"
+            app:destination="@id/signUpSim2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpSim1Fragment"
@@ -86,6 +72,15 @@
         <action
             android:id="@+id/action_signUpSim2OtpFragment_to_setPasswordFragment"
             app:destination="@id/setPasswordFragment" />
+        <argument
+            android:name="Sim2Network"
+            app:argType="string" />
+        <argument
+            android:name="Sim2Serial"
+            app:argType="string" />
+        <argument
+            android:name="Sim2PhoneNumber"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/SIgnUpSim1SuccessFragment"

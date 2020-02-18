@@ -34,6 +34,8 @@ import tingtel.payment.models.SimCards;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
+import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -60,11 +62,12 @@ Spinner  mSpinner;
 
         initViews(view);
         initListeners(view);
+        getCarrierOfSim(getContext(), getActivity());
         getDataFromCarrier(view);
 
 
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
-       spinnerImages = new int[]{R.drawable.mtn_logo
+        spinnerImages = new int[]{R.drawable.mtn_logo
                 , R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo
               };
 
@@ -102,7 +105,6 @@ Spinner  mSpinner;
                     return;
                 }
 
-                saveSimDetails(tvPhoneNumber.getText().toString());
 
 
                 Bundle bundle = new Bundle();
@@ -127,11 +129,6 @@ Spinner  mSpinner;
         navController = NavHostFragment.findNavController(navhost);
     }
 
-    public void saveSimDetails(String phoneNumber) {
-
-
-
-    }
 
 
 

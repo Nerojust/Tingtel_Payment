@@ -40,6 +40,7 @@ public class SessionManager {
 
     private static final String RECEIVER_STATUS = "RECEIVER_STATUS";
     private static final String IS_LOGIN = "IS_LOGIN";
+    private static final String IS_REGISTERED = "IS_REGISTERED";
     private static final String PHONE_NUMBER = "PHONE_NUMBER";
     private static final String PHONE_NUMBER1 = "PHONE_NUMBER1";
 
@@ -407,6 +408,14 @@ public class SessionManager {
 
     public void setIsLogin(Boolean isLogin) {
         setBooleanPreference(IS_LOGIN, isLogin);
+    }
+
+    public Boolean getIsRegistered() {
+        return getBooleanPreference(IS_REGISTERED);
+    }
+
+    public void setIsRegistered(Boolean isRegistered) {
+        setBooleanPreference(IS_REGISTERED, isRegistered);
     }
 
     public String getNoOfRegisteredSim() {

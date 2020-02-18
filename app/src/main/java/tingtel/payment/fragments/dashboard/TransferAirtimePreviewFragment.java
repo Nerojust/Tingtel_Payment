@@ -79,7 +79,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber();
             SimSerial = sessionManager.getSimSerialICCID();
         } else if (SimNo == 1) {
-            SenderPhoneNumber = sessionManager.getSimPhoneNumber();
+            SenderPhoneNumber = sessionManager.getSimPhoneNumber1();
             SimSerial = sessionManager.getSimSerialICCID1();
         }
 

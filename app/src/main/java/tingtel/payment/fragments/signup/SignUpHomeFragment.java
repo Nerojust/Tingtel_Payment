@@ -53,7 +53,7 @@ public class SignUpHomeFragment extends Fragment {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_signUpHomeFragment_to_signUpSimrequestFragment, null);
+                navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
             }
         });
     }
