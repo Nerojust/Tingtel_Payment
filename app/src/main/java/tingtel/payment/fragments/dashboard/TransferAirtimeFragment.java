@@ -203,7 +203,7 @@ public class TransferAirtimeFragment extends Fragment {
             startActivity(intent);
             return;
         }
-        Toast.makeText(getActivity(), "hhhy", Toast.LENGTH_LONG).show();
+
 
     }
 

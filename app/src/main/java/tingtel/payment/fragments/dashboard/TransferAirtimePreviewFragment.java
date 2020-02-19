@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
     TextView tvAmount;
     TextView tvServiceFee;
     TextView tvCreditedAmount;
+    ImageView imgSender;
+    ImageView imgReceiver;
     Button btnTransfer;
     Button btnBack;
     NavController navController;
@@ -64,6 +67,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         sessionManager = AppUtils.getSessionManagerInstance();
 
+        imgSender = view.findViewById(R.id.img_sender);
+        imgReceiver = view.findViewById(R.id.img_receiver);
 
         tvSenderPhoneNumber = view.findViewById(R.id.tv_sender_phone_number);
         tvReceiverPhoneNumber = view.findViewById(R.id.tv_receiver_phone_number);
@@ -72,6 +77,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
         btnBack = view.findViewById(R.id.btn_back);
+
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(navhost);
 
@@ -82,6 +88,10 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber1();
             SimSerial = sessionManager.getSimSerialICCID1();
         }
+
+
+        populateDetailsTextViews();
+
 
 
         btnTransfer.setOnClickListener(new View.OnClickListener() {
@@ -97,12 +107,50 @@ public class TransferAirtimePreviewFragment extends Fragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeReceiverInfoFragment, null);
+
+                getActivity().onBackPressed();
             }
         });
 
 
         return view;
+    }
+
+    private void populateDetailsTextViews() {
+
+        tvSenderPhoneNumber.setText(SenderPhoneNumber);
+        tvReceiverPhoneNumber.setText(ReceiverPhoneNumber);
+        tvAmount.setText(Amount);
+        setNetworkLogo();
+
+    }
+
+    private void setNetworkLogo() {
+
+        if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+            imgSender.setBackgroundResource(R.drawable.mtn_logo);
+        } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+            imgSender.setBackgroundResource(R.drawable.airtel_logo);
+        }  else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+            imgSender.setBackgroundResource(R.drawable.glo_logo);
+        }  else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("9mo")
+        || (SenderSimNetwork.substring(0,3).equalsIgnoreCase("eti"))) {
+            imgSender.setBackgroundResource(R.drawable.nmobile_logo);
+        }
+
+
+
+        if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+            imgReceiver.setBackgroundResource(R.drawable.mtn_logo);
+        } else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+            imgReceiver.setBackgroundResource(R.drawable.airtel_logo);
+        }  else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+            imgReceiver.setBackgroundResource(R.drawable.glo_logo);
+        }  else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("9mo")
+                || (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("eti"))) {
+            imgReceiver.setBackgroundResource(R.drawable.nmobile_logo);
+        }
+
     }
 
     private void runAirtimeTransferUssd() {

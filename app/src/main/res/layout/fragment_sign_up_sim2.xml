@@ -60,6 +60,12 @@
                         android:layout_marginTop="40dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_info"
+                            android:textColor="#ff0000"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="Select Network"
@@ -73,11 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:background="#9E9A9A"/>
-                        <TextView
-                            android:id="@+id/tv_info"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
 
 

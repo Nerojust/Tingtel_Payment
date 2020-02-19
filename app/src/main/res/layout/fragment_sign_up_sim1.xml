@@ -63,6 +63,7 @@
                             android:id="@+id/tv_sim_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="#ff0000"
                             android:layout_gravity="center_horizontal"/>
                         <TextView
                             android:layout_height="wrap_content"

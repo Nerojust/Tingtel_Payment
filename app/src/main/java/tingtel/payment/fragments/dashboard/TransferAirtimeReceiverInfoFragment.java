@@ -86,14 +86,18 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
                     case "Mtn":
                         ReceiverSimNetwork = "Mtn";
+                        break;
                     case "Airtel":
                         ReceiverSimNetwork = "Airtel";
+                        break;
                     case "9Mobile":
                         ReceiverSimNetwork = "9Mobile";
+                        break;
                     case "Glo":
                         ReceiverSimNetwork = "Glo";
+                        break;
                         default:
-                        ReceiverSimNetwork = "";
+                        ReceiverSimNetwork = spinnerTitles[i];
 
 
                 }
