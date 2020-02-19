@@ -11,9 +11,9 @@ public class History {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private  String SenderNetwork;
+    private String SenderNetwork;
 
-    private  String SenderPhoneNumber;
+    private String SenderPhoneNumber;
 
     private String ReceiverNetwork;
 

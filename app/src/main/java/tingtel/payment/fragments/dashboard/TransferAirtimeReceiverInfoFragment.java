@@ -2,11 +2,6 @@ package tingtel.payment.fragments.dashboard;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +9,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import tingtel.payment.R;
 import tingtel.payment.adapters.SpinnerAdapter;
@@ -31,17 +29,17 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     int SimNo;
     String Amount;
     String SimSerial;
-     Button btnPreview;
-     NavController navController;
-     EditText edPin;
-     EditText edReceiverPhoneNumber;
-     EditText edAmount;
+    Button btnPreview;
+    NavController navController;
+    EditText edPin;
+    EditText edReceiverPhoneNumber;
+    EditText edAmount;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_transfer_airtime_receiver_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_transfer_airtime_receiver_info, container, false);
 
         SenderSimNetwork = getArguments().getString("simNetwork");
         SimNo = getArguments().getInt("simNo");
@@ -60,10 +58,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         navController = NavHostFragment.findNavController(navhost);
 
 
-
-
-        edAmount.setText("#" +Amount);
-
+        edAmount.setText("#" + Amount);
 
 
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
@@ -71,7 +66,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
                 , R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo
         };
 
-        SpinnerAdapter mCustomAdapter = new SpinnerAdapter (getActivity(), spinnerTitles, spinnerImages);
+        SpinnerAdapter mCustomAdapter = new SpinnerAdapter(getActivity(), spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,7 +74,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
-
 
 
                 switch (spinnerTitles[i]) {
@@ -96,7 +90,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
                     case "Glo":
                         ReceiverSimNetwork = "Glo";
                         break;
-                        default:
+                    default:
                         ReceiverSimNetwork = spinnerTitles[i];
 
 
@@ -104,6 +98,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
 
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 

@@ -3,22 +3,20 @@ package tingtel.payment.fragments.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
 import tingtel.payment.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
-import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
 import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
@@ -27,8 +25,8 @@ import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
 public class TransferAirtimeHomeFragment extends Fragment {
 
 
-   Button btnTransferAirtime;
-   Button btnHistory;
+    Button btnTransferAirtime;
+    Button btnHistory;
     NavController navController;
     AppDatabase appDatabase;
     SessionManager sessionManager;
@@ -57,7 +55,7 @@ public class TransferAirtimeHomeFragment extends Fragment {
 
                 if (!sim1ExistsCheck()) {
                     Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                   // navigateToSim1Register();
+                    // navigateToSim1Register();
                     Intent intent = new Intent(getActivity(), SignUpActivity.class);
                     intent.putExtra("task", "registerSim1");
                     startActivity(intent);
@@ -66,7 +64,7 @@ public class TransferAirtimeHomeFragment extends Fragment {
 
                 if (!sim2ExistsCheck()) {
                     Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                   // navigateToSim2Register();
+                    // navigateToSim2Register();
                     Intent intent = new Intent(getActivity(), SignUpActivity.class);
                     intent.putExtra("task", "registerSim2");
                     startActivity(intent);
