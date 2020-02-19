@@ -27,6 +27,8 @@ import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
+import static tingtel.payment.utils.DialUtils.dialUssdCode;
+
 public class TransferAirtimePreviewFragment extends Fragment {
 
     String SenderSimNetwork;
@@ -155,18 +157,44 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
     private void runAirtimeTransferUssd() {
 
-        TingtelNumber = "08174612405";
+
+
         String UssdCode;
 
         if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+            TingtelNumber = "08145995531";
            UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
+
+            dialUssdCode(
+                    getActivity(),
+                    UssdCode,
+                    SimNo
+            );
+
         } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+            TingtelNumber = "08";
                     sendSms();
-                    return;
+            UssdCode = "";
         } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("9mo")) {
+
+            TingtelNumber = "08174612405";
             UssdCode = "*223*" + Pin + "*" + Amount + "*" + TingtelNumber + "#";
+            dialUssdCode(
+                    getActivity(),
+                    UssdCode,
+                    SimNo
+            );
+
         } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+
+            TingtelNumber = "08174612405";
             UssdCode = "*131*" + TingtelNumber + "*" +  Amount + "*" + Pin + "#";
+            dialUssdCode(
+                    getActivity(),
+                    UssdCode,
+                    SimNo
+            );
+
 
         } else {
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();

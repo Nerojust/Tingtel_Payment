@@ -27,8 +27,8 @@ import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
 public class TransferAirtimeHomeFragment extends Fragment {
 
 
-   Button btnTransferAirtime;
-   Button btnHistory;
+    Button btnTransferAirtime;
+    Button btnHistory;
     NavController navController;
     AppDatabase appDatabase;
     SessionManager sessionManager;
@@ -55,22 +55,50 @@ public class TransferAirtimeHomeFragment extends Fragment {
 
                 //check if both sim 1 and sim 2 are in the db registered.
 
-                if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                   // navigateToSim1Register();
-                    Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                    intent.putExtra("task", "registerSim1");
-                    startActivity(intent);
-                    return;
-                }
 
-                if (!sim2ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                   // navigateToSim2Register();
-                    Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                    intent.putExtra("task", "registerSim2");
-                    startActivity(intent);
-                    return;
+                String NoOfSIm = sessionManager.getSimStatus();
+
+                switch (NoOfSIm) {
+
+
+                    case "NO SIM":
+                        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                        intent.putExtra("task", "registerSim1");
+                        startActivity(intent);
+
+                        break;
+
+                    case "SIM1":
+
+                        if (!sim1ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim1Register();
+                            Intent intent2 = new Intent(getActivity(), SignUpActivity.class);
+                            intent2.putExtra("task", "registerSim1");
+                            startActivity(intent2);
+                            return;
+                        }
+                        break;
+                    case "SIM1 SIM2":
+
+                        if (!sim1ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim1Register();
+                            Intent intent3 = new Intent(getActivity(), SignUpActivity.class);
+                            intent3.putExtra("task", "registerSim1");
+                            startActivity(intent3);
+                            return;
+                        }
+
+                        if (!sim2ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim2Register();
+                            Intent intent4 = new Intent(getActivity(), SignUpActivity.class);
+                            intent4.putExtra("task", "registerSim2");
+                            startActivity(intent4);
+                            return;
+                        }
+                        break;
                 }
 
 
