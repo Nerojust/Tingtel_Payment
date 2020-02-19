@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import tingtel.payment.MainActivity;
@@ -39,6 +40,7 @@ public class TransferAirtimeFragment extends Fragment {
     private RadioGroup rdSimGroup;
     private RadioButton rdSimButton;
     private RadioButton rdSim1, rdSim2;
+    TextView tvGetTransferPin;
     EditText edAmount;
     Button btnNext;
     NavController navController;
@@ -66,23 +68,25 @@ public class TransferAirtimeFragment extends Fragment {
         rdSim1 = (RadioButton) view.findViewById(R.id.radioSim1);
         rdSim2 = (RadioButton) view.findViewById(R.id.radioSim2);
 
+        tvGetTransferPin = (TextView) view.findViewById(R.id.tv_get_transfer_pin);
+
         appDatabase = AppDatabase.getDatabaseInstance(getContext());
 
         Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(navhost);
 
 
-
         confirmSimRegistrations();
 
 
-
-
-
-
-
-
         populateSimRadioButtons();
+
+        tvGetTransferPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_transferAirtimeFragment_to_getTransferPinTutorialFragment, null);
+            }
+        });
 
 
         rdSimGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -233,7 +237,6 @@ public class TransferAirtimeFragment extends Fragment {
         }
 
 
-
     }
 
 
@@ -281,8 +284,8 @@ public class TransferAirtimeFragment extends Fragment {
                 rdSim1.setVisibility(View.VISIBLE);
                 rdSim2.setVisibility(View.VISIBLE);
 
-                rdSim1.setText(sessionManager.getNetworkName() + " ("+ sessionManager.getSimPhoneNumber()+")");
-                rdSim2.setText(sessionManager.getNetworkName1() + " ("+ sessionManager.getSimPhoneNumber1()+")");
+                rdSim1.setText(sessionManager.getNetworkName() + " (" + sessionManager.getSimPhoneNumber() + ")");
+                rdSim2.setText(sessionManager.getNetworkName1() + " (" + sessionManager.getSimPhoneNumber1() + ")");
                 break;
         }
 

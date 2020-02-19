@@ -164,7 +164,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
             TingtelNumber = "08145995531";
            UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-
+            Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
             dialUssdCode(
                     getActivity(),
                     UssdCode,

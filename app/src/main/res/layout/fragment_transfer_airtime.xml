@@ -81,5 +81,13 @@
         android:layout_marginVertical="30dp"
         android:text="@string/next"/>
 
+    <TextView
+        android:id="@+id/tv_get_transfer_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff0000"
+        android:text="New Users? Learn How To get your Transfer Pin"
+        android:layout_marginBottom="30dp"/>
 </LinearLayout>
 </ScrollView>
