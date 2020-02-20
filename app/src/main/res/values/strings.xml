@@ -21,6 +21,14 @@
     <string name="sim_2">Sim 2</string>
     <string name="check_your_current_balance_before_transfer">Check your current balance before transfer</string>
     <string name="next">Next</string>
+    <string name="change_your_email_address">Change Email Address</string>
+    <string name="enter_your_current_email_address">Enter your current email address</string>
+    <string name="enter_new_email_address">Enter your new Email Address</string>
+    <string name="re_enter_your_email_address">Re-enter your Email Address</string>
+    <string name="change_password">Change Password</string>
+    <string name="message">Message</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="tingtel">Tingtel</string>
 
     <string-array name="sim">
         <item>Sim 1</item>

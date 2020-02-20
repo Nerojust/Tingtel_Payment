@@ -1,7 +1,6 @@
 package tingtel.payment.adapters;
 
 import android.content.Context;
-import android.media.ImageWriter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +51,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return mData.size();
@@ -79,9 +76,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             imgSenderNetwork = itemView.findViewById(R.id.img_sender_network);
             tvReceiverPhoneNumber = itemView.findViewById(R.id.tv_receiver_phone_number);
             imgReceiverNetwork = itemView.findViewById(R.id.img_receiver_network);
-           btnDelete = itemView.findViewById(R.id.btn_delete);
-
-
+            btnDelete = itemView.findViewById(R.id.btn_delete);
 
 
             Context context = itemView.getContext();

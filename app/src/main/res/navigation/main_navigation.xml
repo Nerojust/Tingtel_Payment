@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment"
             app:destination="@id/transferAirtimeReceiverInfoFragment" />
+        <action
+            android:id="@+id/action_transferAirtimeFragment_to_getTransferPinTutorialFragment"
+            app:destination="@id/getTransferPinTutorialFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferAirtimePreviewFragment"
@@ -97,4 +100,9 @@
         android:name="tingtel.payment.fragments.dashboard.TransactionHistoryFragment"
         android:label="fragment_transaction_history"
         tools:layout="@layout/fragment_transaction_history" />
+    <fragment
+        android:id="@+id/getTransferPinTutorialFragment"
+        android:name="tingtel.payment.fragments.dashboard.GetTransferPinTutorialFragment"
+        android:label="fragment_get_transfer_pin_tutorial"
+        tools:layout="@layout/fragment_get_transfer_pin_tutorial" />
 </navigation>

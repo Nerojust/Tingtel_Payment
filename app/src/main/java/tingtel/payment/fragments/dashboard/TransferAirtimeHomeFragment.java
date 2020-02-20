@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.Objects;
+
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
 import tingtel.payment.SignUpActivity;
@@ -35,7 +37,7 @@ public class TransferAirtimeHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
+        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Dashboard");
 
         btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         btnHistory = view.findViewById(R.id.btn_history);
@@ -53,22 +55,50 @@ public class TransferAirtimeHomeFragment extends Fragment {
 
                 //check if both sim 1 and sim 2 are in the db registered.
 
-                if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                    // navigateToSim1Register();
-                    Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                    intent.putExtra("task", "registerSim1");
-                    startActivity(intent);
-                    return;
-                }
 
-                if (!sim2ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                    // navigateToSim2Register();
-                    Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                    intent.putExtra("task", "registerSim2");
-                    startActivity(intent);
-                    return;
+                String NoOfSIm = sessionManager.getSimStatus();
+
+                switch (NoOfSIm) {
+
+
+                    case "NO SIM":
+                        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                        intent.putExtra("task", "registerSim1");
+                        startActivity(intent);
+
+                        break;
+
+                    case "SIM1":
+
+                        if (!sim1ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim1Register();
+                            Intent intent2 = new Intent(getActivity(), SignUpActivity.class);
+                            intent2.putExtra("task", "registerSim1");
+                            startActivity(intent2);
+                            return;
+                        }
+                        break;
+                    case "SIM1 SIM2":
+
+                        if (!sim1ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim1Register();
+                            Intent intent3 = new Intent(getActivity(), SignUpActivity.class);
+                            intent3.putExtra("task", "registerSim1");
+                            startActivity(intent3);
+                            return;
+                        }
+
+                        if (!sim2ExistsCheck()) {
+                            Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                            // navigateToSim2Register();
+                            Intent intent4 = new Intent(getActivity(), SignUpActivity.class);
+                            intent4.putExtra("task", "registerSim2");
+                            startActivity(intent4);
+                            return;
+                        }
+                        break;
                 }
 
 
