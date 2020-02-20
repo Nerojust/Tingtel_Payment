@@ -1,74 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingHorizontal="20dp"
-    tools:context=".fragments.signup.SIgnUpSim1SuccessFragment">
 
-    <ImageView
-        android:id="@+id/img_good"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_thumb_up_black_24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="70dp"/>
-
-    <TextView
-        android:id="@+id/tv_sim1reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Good Job"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="55sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/img_good"/>
-    <TextView
-        android:id="@+id/tv_simreg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You have successfully registered Sim 1"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sim1reg"/>
-
-    <Button
-        android:id="@+id/btn_reg_sim2_now"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register Sim 2 Now"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_simreg"
-        android:background="@drawable/rounded_button_corners"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="80dp"/>
-    <Button
-        android:id="@+id/btn_reg_sim2_later"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register Sim 2 Later"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_button_corners"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/btn_reg_sim2_now"/>
+        android:paddingHorizontal="20dp"
+        tools:context=".fragments.signup.SIgnUpSim1SuccessFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img_good"
+            android:layout_width="81dp"
+            android:layout_height="81dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_thumb_up_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sim1reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/good_job"
+            android:textColor="@color/black"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_good" />
+
+        <TextView
+            android:id="@+id/tv_simreg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/you_have_successfully_registered_your_sim"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sim1reg" />
+
+        <Button
+            android:id="@+id/btn_reg_sim2_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/rounded_button_corners"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/register_sim_2_now"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_simreg" />
+
+        <Button
+            android:id="@+id/btn_reg_sim2_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/proceed_button"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/no_thanks_later"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_reg_sim2_now" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

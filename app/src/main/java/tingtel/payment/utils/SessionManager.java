@@ -43,6 +43,7 @@ public class SessionManager {
     private static final String IS_REGISTERED = "IS_REGISTERED";
     private static final String PHONE_NUMBER = "PHONE_NUMBER";
     private static final String PHONE_NUMBER1 = "PHONE_NUMBER1";
+    private static final String SCANNED_CODE = "SCANNED_CODE";
 
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
@@ -424,6 +425,13 @@ public class SessionManager {
     }
     public void setNoOfRegisteredSim(String NoOfRegisteredSim) {
         setStringPreference(NO_OF_REGISTERED_SIM, NoOfRegisteredSim);
+    }
+    public String getScannedCodeResult(){
+        return getStringPreference(SCANNED_CODE);
+    }
+
+    public void setScannedCodeResult(String code) {
+        setStringPreference(SCANNED_CODE,code);
     }
 
 }

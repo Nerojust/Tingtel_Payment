@@ -1,135 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tingtel_light_gray"
     tools:context=".fragments.signup.SignUpHomeFragment">
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
-
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@drawable/fragment_header">
-        <TextView
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Tingtel"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="@drawable/fragment_header">
+
+                <ImageView
+                    android:layout_width="62dp"
+                    android:layout_height="53dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/tingtel_one"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
 
-          <androidx.cardview.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_marginTop="110dp"
-              android:layout_height="match_parent"
-              android:layout_marginHorizontal="10dp"
-              app:cardBackgroundColor="@color/white"
-              android:layout_marginBottom="30dp"
-              app:cardCornerRadius="22dp">
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:paddingHorizontal="10dp">
-                  <TextView
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Create An Account"
-                      android:textColor="@color/colorPrimary"
-                      android:textStyle="bold"
-                      android:textSize="22sp"
-                      android:layout_gravity="center_horizontal"
-                      android:layout_marginTop="30dp"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginBottom="30dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="22dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="@string/create_an_account"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_horizontal_margin">
 
-                  <com.google.android.material.textfield.TextInputLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:layout_margin="@dimen/activity_horizontal_margin">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tv_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_person"
+                            android:fontFamily="@font/raleway_regular"
+                            android:hint="@string/enter_your_first_name"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="17sp" />
 
-                      <com.google.android.material.textfield.TextInputEditText
-                          android:id="@+id/tv_first_name"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:hint="First Name" />
-
-                  </com.google.android.material.textfield.TextInputLayout>
-
-
-                  <com.google.android.material.textfield.TextInputLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:layout_margin="@dimen/activity_horizontal_margin">
-                      <com.google.android.material.textfield.TextInputEditText
-                          android:id="@+id/tv_last_name"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:hint="Last Name" />
-                  </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                  <com.google.android.material.textfield.TextInputLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:layout_margin="@dimen/activity_horizontal_margin">
-                      <com.google.android.material.textfield.TextInputEditText
-                          android:id="@+id/tv_email_address"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:hint="Email Address" />
-                  </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_horizontal_margin">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tv_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_person"
+                            android:fontFamily="@font/raleway_regular"
+                            android:hint="@string/etner_your_last_name"
+                            android:textSize="17sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                  <com.google.android.material.textfield.TextInputLayout
-                      android:id="@+id/tv_username"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:layout_margin="@dimen/activity_horizontal_margin">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_horizontal_margin">
 
-                      <com.google.android.material.textfield.TextInputEditText
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:hint="Username" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tv_email_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_mail"
+                            android:fontFamily="@font/raleway_regular"
+                            android:hint="@string/enter_your_email_address"
+                            android:textSize="17sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                  </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tv_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_horizontal_margin">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_person"
+                            android:fontFamily="@font/raleway_regular"
+                            android:hint="@string/enter_your_username"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                  <Button
-                      android:id="@+id/btn_sign_up"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:background="@drawable/rounded_button_corners"
-                      android:textColor="@color/white"
-                      android:layout_gravity="center_horizontal"
-                      android:layout_marginTop="30dp"
-                      android:paddingHorizontal="60dp"
-                      android:text="Sign Up"/>
-                  <TextView
-                      android:id="@+id/tv_login"
-                      android:layout_marginTop="10dp"
-                      android:layout_gravity="center_horizontal"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Have an account? Login"
-                      android:layout_marginBottom="40dp"/>
-              </LinearLayout>
-          </androidx.cardview.widget.CardView>
-      </RelativeLayout>
+                    <Button
+                        android:id="@+id/btn_sign_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/rounded_button_corners"
+                        android:fontFamily="@font/raleway_regular"
+                        android:paddingHorizontal="60dp"
+                        android:text="@string/sign_up"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
 
-  </ScrollView>
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="40dp"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="@string/have_an_account_login" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

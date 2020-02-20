@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.signup.SignUpSim1OtpFragment">
 
 
@@ -13,48 +13,49 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:background="@drawable/fragment_header">
-                <TextView
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Tingtel"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:layout_width="62dp"
+                    android:layout_height="53dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/tingtel_one"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginTop="110dp"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                app:cardBackgroundColor="@color/white"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginBottom="30dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="22dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingHorizontal="16dp"
-                    android:gravity="center">
+                    android:paddingHorizontal="20dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="OTP Verification"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="22sp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"/>
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/otp_verification"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView_noti"
@@ -62,11 +63,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/raleway_regular"
                         android:paddingHorizontal="50dp"
-                        android:text="Enter the 4 digit OTP sent to your phone or email"
+                        android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
                         android:textAlignment="center"
-                        android:textStyle="bold"
-         />
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="52dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_lock"
+                        android:textStyle="bold" />
 
                     <com.chaos.view.PinView
                         android:id="@+id/pinView"
@@ -90,11 +98,14 @@
                         app:viewType="rectangle" />
 
                     <TextView
+                        android:id="@+id/resendOTPTextview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Didn't get the OTP? RESEND OTP."
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/didn_t_get_the_otp_resend_otp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/pinView"
                         app:layout_constraintHorizontal_bias="0.473"
@@ -104,15 +115,17 @@
 
                     <Button
                         android:id="@+id/btn_confirm_otp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_button_corners"
-                        android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"
-                        android:paddingHorizontal="60dp"
                         android:layout_marginBottom="50dp"
-                        android:text="Verify"/>
+                        android:background="@drawable/rounded_button_corners"
+                        android:drawableRight="@drawable/ic_keyboard_arrow_right"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="@string/verify"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

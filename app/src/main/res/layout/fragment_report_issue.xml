@@ -10,26 +10,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Title of issue"/>
+        android:fontFamily="@font/rubik_regular"
+        android:text="@string/title_of_issue" />
+
     <EditText
         android:id="@+id/ed_title"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/textview_rounded"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/rubik_regular"
+        android:background="@drawable/textview_rounded"
+        android:textSize="17sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Explain In Details"/>
+        android:fontFamily="@font/rubik_regular"
+        android:text="@string/explain_in_details" />
+
     <EditText
         android:id="@+id/ed_details"
-        android:layout_marginTop="4dp"
-        android:minLines="8"
-        android:background="@drawable/textview_rounded"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/rubik_regular"
+        android:background="@drawable/textview_rounded"
+        android:minLines="8"
+        android:textSize="17sp" />
 
 
     <Button
@@ -37,10 +45,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/rubik_regular"
         android:background="@drawable/button_round_corners"
+        android:text="@string/report_issue"
         android:textColor="@color/white"
-
-        android:text="Report issue"/>
+        android:textSize="17sp" />
 
 
 </LinearLayout>
