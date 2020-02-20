@@ -105,6 +105,7 @@
     <string name="select_sim_2_network">Select SIM 2 network</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="confirmation_amount_is_displayed_here">Confirmation Amount is displayed here</string>
 
 
     <string-array name="sim">

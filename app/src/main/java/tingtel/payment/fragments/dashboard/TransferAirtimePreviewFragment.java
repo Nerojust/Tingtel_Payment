@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
@@ -52,33 +53,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_transfer_airtime_preview, container, false);
+        View view = inflater.inflate(R.layout.fragment_transfer_airtime_preview, container, false);
 
-        SenderSimNetwork = getArguments().getString("senderSimNetwork");
-        ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
-        SimNo = getArguments().getInt("simNo");
-        Amount = getArguments().getString("amount");
-        ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
-        Pin = getArguments().getString("pin");
-
-        sessionManager = AppUtils.getSessionManagerInstance();
-
-        imgSender = view.findViewById(R.id.img_sender);
-        imgReceiver = view.findViewById(R.id.img_receiver);
-
-        tvSenderPhoneNumber = view.findViewById(R.id.tv_sender_phone_number);
-        tvReceiverPhoneNumber = view.findViewById(R.id.tv_receiver_phone_number);
-        tvAmount = view.findViewById(R.id.tv_amount);
-        tvServiceFee = view.findViewById(R.id.tv_service_fee);
-        tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
-        btnTransfer = view.findViewById(R.id.btn_transfer);
-        btnBack = view.findViewById(R.id.btn_back);
-
-        Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = NavHostFragment.findNavController(navhost);
+        getExtrasFromIntent();
+        initViews(view);
 
         if (SimNo == 0) {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber();
@@ -88,35 +68,45 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SimSerial = sessionManager.getSimSerialICCID1();
         }
 
-
         populateDetailsTextViews();
-
-
-
-        btnTransfer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                runAirtimeTransferUssd();
-
-            }
-        });
-
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getActivity().onBackPressed();
-            }
-        });
-
+        initListeners();
 
         return view;
     }
 
-    private void populateDetailsTextViews() {
+    private void initListeners() {
+        btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
+        btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+    }
 
+    private void initViews(View view) {
+        sessionManager = AppUtils.getSessionManagerInstance();
+
+        imgSender = view.findViewById(R.id.senderImage);
+        imgReceiver = view.findViewById(R.id.receiverImage);
+
+        tvSenderPhoneNumber = view.findViewById(R.id.tv_sender_phone_number);
+        tvReceiverPhoneNumber = view.findViewById(R.id.tv_receiver_phone_number);
+        tvAmount = view.findViewById(R.id.tv_amount);
+        tvServiceFee = view.findViewById(R.id.tv_service_fee);
+        tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
+        btnTransfer = view.findViewById(R.id.btn_transfer);
+        btnBack = view.findViewById(R.id.btn_back);
+
+        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+    }
+
+    private void getExtrasFromIntent() {
+        SenderSimNetwork = getArguments().getString("senderSimNetwork");
+        ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
+        SimNo = getArguments().getInt("simNo");
+        Amount = getArguments().getString("amount");
+        ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
+        Pin = getArguments().getString("pin");
+    }
+
+    private void populateDetailsTextViews() {
         tvSenderPhoneNumber.setText(SenderPhoneNumber);
         tvReceiverPhoneNumber.setText(ReceiverPhoneNumber);
         tvAmount.setText(Amount);
@@ -125,42 +115,37 @@ public class TransferAirtimePreviewFragment extends Fragment {
     }
 
     private void setNetworkLogo() {
-
-        if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             imgSender.setBackgroundResource(R.drawable.mtn_logo);
-        } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
             imgSender.setBackgroundResource(R.drawable.airtel_logo);
-        }  else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
             imgSender.setBackgroundResource(R.drawable.glo_logo);
-        }  else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("9mo")
-        || (SenderSimNetwork.substring(0,3).equalsIgnoreCase("eti"))) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")
+                || (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
             imgSender.setBackgroundResource(R.drawable.nmobile_logo);
         }
 
 
-
-        if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+        if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             imgReceiver.setBackgroundResource(R.drawable.mtn_logo);
-        } else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+        } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
             imgReceiver.setBackgroundResource(R.drawable.airtel_logo);
-        }  else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+        } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
             imgReceiver.setBackgroundResource(R.drawable.glo_logo);
-        }  else if (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("9mo")
-                || (ReceiverSimNetwork.substring(0,3).equalsIgnoreCase("eti"))) {
+        } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")
+                || (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
             imgReceiver.setBackgroundResource(R.drawable.nmobile_logo);
         }
 
     }
 
     private void runAirtimeTransferUssd() {
-
-
-
         String UssdCode;
 
-        if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("mtn")) {
+        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             TingtelNumber = "08145995531";
-           UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
+            UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
             Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
             dialUssdCode(
                     getActivity(),
@@ -168,11 +153,11 @@ public class TransferAirtimePreviewFragment extends Fragment {
                     SimNo
             );
 
-        } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("air")) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
             TingtelNumber = "08";
-                    sendSms();
+            sendSms();
             UssdCode = "";
-        } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("9mo")) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
 
             TingtelNumber = "08174612405";
             UssdCode = "*223*" + Pin + "*" + Amount + "*" + TingtelNumber + "#";
@@ -182,16 +167,15 @@ public class TransferAirtimePreviewFragment extends Fragment {
                     SimNo
             );
 
-        } else if (SenderSimNetwork.substring(0,3).equalsIgnoreCase("glo")) {
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
 
             TingtelNumber = "08174612405";
-            UssdCode = "*131*" + TingtelNumber + "*" +  Amount + "*" + Pin + "#";
+            UssdCode = "*131*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
             dialUssdCode(
                     getActivity(),
                     UssdCode,
                     SimNo
             );
-
 
         } else {
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
@@ -220,13 +204,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
                 //creating a task
                 History history = new History();
-               history.setSenderNetwork(SenderSimNetwork);
-               history.setSenderPhoneNumber(SenderPhoneNumber);
-               history.setReceiverNetwork(ReceiverSimNetwork);
-               history.setReceiverPhoneNumber(ReceiverPhoneNumber);
-               history.setSimSerial(SimSerial);
-               history.setAmount(Amount);
-               history.setDate(currentDate);
+                history.setSenderNetwork(SenderSimNetwork);
+                history.setSenderPhoneNumber(SenderPhoneNumber);
+                history.setReceiverNetwork(ReceiverSimNetwork);
+                history.setReceiverPhoneNumber(ReceiverPhoneNumber);
+                history.setSimSerial(SimSerial);
+                history.setAmount(Amount);
+                history.setDate(currentDate);
 
 
                 //adding to database
@@ -242,17 +226,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
         st.execute();
 
 
-
-
     }
 
     private void sendSms() {
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-        sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " "+Amount + " "+ Pin);
+        sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " " + Amount + " " + Pin);
         sendIntent.putExtra("address", "432");
         sendIntent.setType("vnd.android-dir/mms-sms");
         startActivity(sendIntent);
     }
-
-
 }
