@@ -106,6 +106,7 @@
     <string name="from">From:</string>
     <string name="to">To:</string>
     <string name="confirmation_amount_is_displayed_here">Confirmation Amount</string>
+    <string name="manage_sims">Manage Sims</string>
 
 
     <string-array name="sim">

@@ -1,6 +1,7 @@
 package tingtel.payment;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,14 +13,20 @@ import java.util.Objects;
 public class SettingsActivity extends AppCompatActivity {
 
     NavController navController;
+    LinearLayout backArrowLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        backArrowLayout = findViewById(R.id.backArrowLayout);
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+
+
+        backArrowLayout.setOnClickListener(v -> this.onBackPressed());
+
     }
 
 
