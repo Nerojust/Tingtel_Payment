@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tingtel_bg2"
     tools:context=".fragments.dashboard.TransferAirtimeHomeFragment">
 
     <ScrollView
@@ -12,7 +13,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -24,8 +24,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Welcome"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="@string/welcome_martins"
                     android:textAlignment="center"
+                    android:textColor="@color/tingtel_white"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -38,35 +42,37 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/poppins_regular_o"
-                    android:text="Tingtel helps you transfer airtime of any networkto other networks. \n\n In order to transfer airtime, please click on the transfer airtime button"
-                    android:textAlignment="center" />
+                    android:fontFamily="@font/rubik_light"
+                    android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
+                    android:textAlignment="center"
+                    android:textColor="@color/tingtel_white"
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_transfer_airtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/button_round_corners"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/dashboard_buttons"
+                    android:fontFamily="@font/rubik_light"
                     android:paddingVertical="30dp"
-                    android:text="Transfer Airtime"
-                    android:textColor="@color/white" />
+                    android:text="@string/transfer_airtime"
+                    android:textColor="@color/tingtel_white"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btn_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/button_round_corners"
+                    android:background="@drawable/dashboard_buttons"
+                    android:fontFamily="@font/rubik_light"
                     android:paddingVertical="30dp"
-                    android:text="History"
-                    android:textColor="@color/white" />
-
+                    android:text="@string/history"
+                    android:textColor="@color/tingtel_white"
+                    android:textSize="20sp" />
             </LinearLayout>
         </RelativeLayout>
-
     </ScrollView>
 
 </RelativeLayout>

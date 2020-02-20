@@ -122,7 +122,7 @@
                         android:background="@drawable/rounded_button_corners"
                         android:drawableRight="@drawable/ic_keyboard_arrow_right"
                         android:fontFamily="@font/raleway_regular"
-                        android:text="@string/change_password"
+                        android:text="@string/change_email"
                         android:textColor="@color/white"
                         android:textSize="17sp" />
 
