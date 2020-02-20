@@ -24,7 +24,7 @@ import tingtel.payment.utils.SessionManager;
 import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
 
 
-public class TransferAirtimeHomeFragment extends Fragment {
+public class DashboardFragment extends Fragment {
 
 
     private Button btnTransferAirtime;

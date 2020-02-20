@@ -72,7 +72,7 @@
     <string name="register_sim_2_now">Register Sim 2 Now</string>
     <string name="no_thanks_later">No Thanks, Later</string>
     <string name="check_balance">Check Balance</string>
-    <string name="service_fee">Service Fee:</string>
+    <string name="service_fee">Service Fee (10%):</string>
     <string name="amount">Amount:</string>
     <string name="amount_to_be_credited">Amount To Be Credited:</string>
     <string name="review">Review</string>
@@ -81,7 +81,7 @@
     <string name="confirm_amount">Confirm Amount</string>
     <string name="network">Network</string>
     <string name="enter_receiver_s_phone_number">Enter receiver\'s phone number</string>
-    <string name="what_is_pin">What is Pin?</string>
+    <string name="what_is_pin">What is my Pin?</string>
     <string name="mtn_sim_detected">Mtn Sim Detected</string>
     <string name="enter_your_current_password">Enter your current password</string>
     <string name="set_your_new_password">Set your new password</string>

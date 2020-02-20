@@ -1,6 +1,10 @@
-package tingtel.payment.fragments.dashboard;
+package tingtel.payment.fragments.transfer_airtime;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -19,6 +26,7 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.adapters.SpinnerAdapter;
+import tingtel.payment.utils.AppUtils;
 
 
 public class TransferAirtimeReceiverInfoFragment extends Fragment {
@@ -29,14 +37,36 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private String ReceiverSimNetwork;
     private int SimNo;
     private String Amount;
+    private final BroadcastReceiver mas = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
+                if (intent.getAction().equalsIgnoreCase("barcodeSerialcaptured")) {
+                    edReceiverPhoneNumber.setText(AppUtils.getSessionManagerInstance().getScannedCodeResult());
+                }
+            }
+        }
+    };
     private String SimSerial;
     private Button btnPreview;
     private NavController navController;
+    private TextView whatIsPin;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
+    private ImageView qrCodeImageview;
     private EditText edAmount;
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
+
+    public void onResume() {
+        super.onResume();
+        //  Log.e(TAG, "onResume()");
+        LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("barcodeSerialcaptured"));
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).unregisterReceiver(this.mas);
+    }
 
 
     @Override
@@ -78,6 +108,10 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment, bundle);
 
         });
+
+        whatIsPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_getTransferPinTutorialFragment, null));
+
+        qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_QRCodeScanActivity, null));
     }
 
     private void getExtrasFromIntent() {
@@ -88,17 +122,18 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private Spinner initViews(View view) {
-        mSpinner = view.findViewById(R.id.sp_network);
+        mSpinner = view.findViewById(R.id.network_spinner);
         btnPreview = view.findViewById(R.id.btn_preview);
-
+        qrCodeImageview = view.findViewById(R.id.codeImageView);
         edPin = view.findViewById(R.id.pinEditext);
+        whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);
-        edAmount = view.findViewById(R.id.ed_amount);
+        edAmount = view.findViewById(R.id.confirmAmount_id);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
-        edAmount.setText("#" + Amount);
+        edAmount.setText(getResources().getString(R.string.naira) + Amount);
         return mSpinner;
     }
 

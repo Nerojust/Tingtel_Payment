@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/tingtel_bg8"
     android:orientation="vertical"
-    tools:context=".fragments.dashboard.TransferAirtimePreviewFragment">
+    tools:context=".fragments.transfer_airtime.TransferAirtimePreviewFragment">
 
 
     <ScrollView
@@ -22,11 +22,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:fontFamily="@font/raleway_medium"
+                android:fontFamily="@font/rubik_medium"
                 android:text="@string/review"
                 android:textColor="@color/tingtel_red_color"
-                android:textSize="22sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -49,7 +50,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/from"
                         android:textSize="15sp" />
@@ -67,13 +68,13 @@
                     <ImageView
                         android:id="@+id/senderImage"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/mtn_logo"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/mtn_logo"
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -99,7 +100,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/to"
                         android:textSize="15sp" />
@@ -117,13 +118,13 @@
                     <ImageView
                         android:id="@+id/receiverImage"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.2"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/airtel_logo"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/airtel_logo"
                         android:textSize="17sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -171,7 +172,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:text="@string/naira"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -210,7 +211,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        tools:text="100" />
+                        tools:text="200" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -220,7 +221,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:text="@string/naira"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -244,7 +245,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_credited_amount"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
@@ -256,10 +257,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
+                        android:id="@+id/tv_credited_amount"
                         android:fontFamily="@font/rubik_medium"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        tools:text="1900" />
+                        tools:text="1800" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -269,7 +271,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:text="@string/naira"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

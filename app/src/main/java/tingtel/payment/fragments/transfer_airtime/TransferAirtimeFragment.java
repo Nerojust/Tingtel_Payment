@@ -1,4 +1,4 @@
-package tingtel.payment.fragments.dashboard;
+package tingtel.payment.fragments.transfer_airtime;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,34 +52,34 @@ public class TransferAirtimeFragment extends Fragment {
 
         Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Transfer Airtime");
 
+        initViews(view);
+        initListeners(view);
+
+        confirmSimRegistrations();
+        populateSimRadioButtons();
+
+
+        return view;
+    }
+
+    private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
 
         rdSimGroup = view.findViewById(R.id.radioSim);
         btnCheckBalance = view.findViewById(R.id.btn_check_balance);
         btnNext = view.findViewById(R.id.btn_next);
         edAmount = view.findViewById(R.id.ed_amount);
-
         rdSim1 = view.findViewById(R.id.radioSim1);
         rdSim2 = view.findViewById(R.id.radioSim2);
 
-        tvGetTransferPin = view.findViewById(R.id.tv_get_transfer_pin);
-
         appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
 
-        Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+    }
 
-
-        confirmSimRegistrations();
-
-
-        populateSimRadioButtons();
-
-        tvGetTransferPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeFragment_to_getTransferPinTutorialFragment, null));
-
-
+    private void initListeners(View view) {
         rdSimGroup.setOnCheckedChangeListener((group, checkedId) -> {
-
             //  Toast.makeText(getContext(), "testing for checked", Toast.LENGTH_LONG).show();
             // get selected radio button from radioGroup
             int selectedId = rdSimGroup.getCheckedRadioButtonId();
@@ -101,7 +101,6 @@ public class TransferAirtimeFragment extends Fragment {
                 return;
             }
 
-
             switch (selectedId) {
                 case R.id.radioSim1:
                     SimNo = 0;
@@ -114,19 +113,18 @@ public class TransferAirtimeFragment extends Fragment {
                 default:
                     return;
             }
-
         });
 
 
         btnCheckBalance.setOnClickListener(v -> {
-
-
             // get selected radio button from radioGroup
             int selectedId = rdSimGroup.getCheckedRadioButtonId();
-
+            if (selectedId == -1) {
+                Toast.makeText(getContext(), "Select a sim first", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // find the radiobutton by returned id
-            rdSimButton = (RadioButton) view.findViewById(selectedId);
-
+            rdSimButton = view.findViewById(selectedId);
 
             if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
                 UssdCode = "*556#";
@@ -143,34 +141,26 @@ public class TransferAirtimeFragment extends Fragment {
             }
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
-
         });
 
 
         btnNext.setOnClickListener(v -> {
-
             if (!checkSelectedSim(view)) {
                 return;
             }
-            if (!validateFields(view)) {
-                return;
+            //if all fields and conditions are satisfied proceed.
+            if (isValidAllFields()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("simNetwork", SimNetwork);
+                bundle.putString("simSerial", "" + SimSerial);
+                bundle.putInt("simNo", SimNo);
+                bundle.putString("amount", edAmount.getText().toString());
+                navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
             }
-
-            Bundle bundle = new Bundle();
-            bundle.putString("simNetwork", SimNetwork);
-            bundle.putString("simSerial", "" + SimSerial);
-            bundle.putInt("simNo", SimNo);
-            bundle.putString("amount", edAmount.getText().toString());
-            navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
-
-
         });
-
-        return view;
     }
 
     private void confirmSimRegistrations() {
-
         String NoOfSIm = sessionManager.getSimStatus();
 
         switch (NoOfSIm) {
@@ -221,11 +211,7 @@ public class TransferAirtimeFragment extends Fragment {
 
         String Sim1Serial = sessionManager.getSimSerialICCID();
 
-        if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0;
 
     }
 
@@ -233,11 +219,7 @@ public class TransferAirtimeFragment extends Fragment {
 
         String Sim2Serial = sessionManager.getSimSerialICCID1();
 
-        if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0;
 
     }
 
@@ -246,7 +228,6 @@ public class TransferAirtimeFragment extends Fragment {
         String NoOfSIm = sessionManager.getSimStatus();
 
         switch (NoOfSIm) {
-
             case "SIM1":
                 rdSim1.setVisibility(View.VISIBLE);
                 rdSim2.setVisibility(View.GONE);
@@ -260,27 +241,35 @@ public class TransferAirtimeFragment extends Fragment {
                 rdSim2.setText(sessionManager.getNetworkName1() + " (" + sessionManager.getSimPhoneNumber1() + ")");
                 break;
         }
-
-
     }
 
-    private boolean validateFields(View view) {
-        if (edAmount.getText().toString().equalsIgnoreCase("")) {
-            edAmount.setError("Kindly Input an Amount");
-            edAmount.setFocusable(true);
+    private boolean isValidAllFields() {
+        if (rdSimGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(getContext(), "Please select a sim", Toast.LENGTH_SHORT).show();
             return false;
-        } else {
-            return true;
+        }
+        if (edAmount.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Amount is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (edAmount.getText().toString().trim().length() < 3) {
+            Toast.makeText(getContext(), "Amount is too low. Minimum amount is 100", Toast.LENGTH_SHORT).show();
+            return false;
         }
 
-
+        return true;
     }
+
 
     private boolean checkSelectedSim(View v) {
         int selectedId = rdSimGroup.getCheckedRadioButtonId();
-
+        if (selectedId == -1) {
+            Toast.makeText(getContext(), "Select a sim first", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         // find the radiobutton by returned id
         rdSimButton = v.findViewById(selectedId);
+
 
         if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
             SimNetwork = "Mtn";

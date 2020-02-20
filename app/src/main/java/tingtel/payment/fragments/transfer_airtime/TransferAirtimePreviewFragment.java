@@ -1,4 +1,4 @@
-package tingtel.payment.fragments.dashboard;
+package tingtel.payment.fragments.transfer_airtime;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -98,7 +98,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     }
 
     private void getExtrasFromIntent() {
-        SenderSimNetwork = getArguments().getString("senderSimNetwork");
+        SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("senderSimNetwork");
         ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
         SimNo = getArguments().getInt("simNo");
         Amount = getArguments().getString("amount");
@@ -109,9 +109,14 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private void populateDetailsTextViews() {
         tvSenderPhoneNumber.setText(SenderPhoneNumber);
         tvReceiverPhoneNumber.setText(ReceiverPhoneNumber);
-        tvAmount.setText(Amount);
-        setNetworkLogo();
+        //calculate 10% of amount entered
+        double dividedAmount = Integer.parseInt(Amount) / 10;
+        double balanceAmount = Integer.parseInt(Amount) - dividedAmount;
 
+        tvAmount.setText(String.valueOf(Amount));
+        tvServiceFee.setText(String.valueOf(dividedAmount));
+        tvCreditedAmount.setText(String.valueOf(balanceAmount));
+        setNetworkLogo();
     }
 
     private void setNetworkLogo() {

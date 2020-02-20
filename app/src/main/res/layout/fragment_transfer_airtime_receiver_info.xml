@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tingtel_bg4"
-    tools:context=".fragments.dashboard.TransferAirtimeReceiverInfoFragment">
+    tools:context=".fragments.transfer_airtime.TransferAirtimeReceiverInfoFragment">
 
 
     <ScrollView
@@ -127,7 +127,7 @@
                         android:gravity="right"
                         android:text="@string/what_is_pin"
                         android:textColor="@color/tingtel_light_red"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
 
                     <com.google.android.material.textfield.TextInputLayout

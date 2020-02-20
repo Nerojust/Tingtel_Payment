@@ -1,4 +1,4 @@
-package tingtel.payment.fragments.dashboard;
+package tingtel.payment.fragments.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

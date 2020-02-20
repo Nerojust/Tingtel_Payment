@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tingtel_bg2"
-    tools:context=".fragments.dashboard.TransferAirtimeHomeFragment">
+    tools:context=".fragments.dashboard.DashboardFragment">
 
     <ScrollView
         android:layout_width="match_parent"
