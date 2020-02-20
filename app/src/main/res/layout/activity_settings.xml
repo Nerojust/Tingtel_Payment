@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -36,146 +36,385 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/rubik_regular"
-                android:textColor="@color/tingtel_red_color"
-                android:textSize="17sp"
-                tools:text="Account" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#CFCFCF" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/changePasswordTextview"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="13dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/change_password"
-                    android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_keyboard_arrow_right" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textColor="@color/tingtel_red_color"
+                        android:textSize="17sp"
+                        tools:text="Account" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
 
 
-                <TextView
-                    android:id="@+id/changeEmailTextview"
-                    android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/changePasswordTextview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/change_password"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/changeEmailTextview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/change_email"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/addNewSimTextview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="Add New Sim"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/manageSimsTextview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/manage_sims"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="13dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/change_email"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_keyboard_arrow_right" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textColor="@color/tingtel_red_color"
+                        android:textSize="17sp"
+                        tools:text="Help/Support" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
 
 
-                <TextView
-                    android:id="@+id/addNewSimTextview"
-                    android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/tutorial_how_to_use"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/report_an_issue"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="13dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="Add New Sim"
-                    android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_keyboard_arrow_right" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textColor="@color/tingtel_red_color"
+                        android:textSize="17sp"
+                        tools:text="More Options" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="Privacy Policy"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="About Us"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_keyboard_arrow_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="Share App"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="Delete Account"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CFCFCF" />
+                </LinearLayout>
             </LinearLayout>
+        </ScrollView>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/manageSimsTextview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="13dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/manage_sims"
-                    android:textColor="@color/white"
-                    android:textSize="17sp" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_keyboard_arrow_right" />
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#CFCFCF" />
-        </LinearLayout>
-    </ScrollView>
-
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="@color/tingtel_light_red"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </LinearLayout>
 </LinearLayout>

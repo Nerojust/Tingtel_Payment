@@ -107,6 +107,8 @@
     <string name="to">To:</string>
     <string name="confirmation_amount_is_displayed_here">Confirmation Amount</string>
     <string name="manage_sims">Manage Sims</string>
+    <string name="tutorial_how_to_use">Tutorial (How to use)</string>
+    <string name="report_an_issue">Report an Issue</string>
 
 
     <string-array name="sim">
