@@ -10,13 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.SettingsActivity;
@@ -27,9 +29,9 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     private final Context mContext;
     private final Activity activity;
     private final List<SimCards> mData;
-    AppDatabase appDatabase;
-    Fragment navhost;
-    NavController navController;
+    private AppDatabase appDatabase;
+    private Fragment navhost;
+    private NavController navController;
 
     public SimCardsAdapter(Context mContext, List lst, Activity activity) {
 
@@ -40,7 +42,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     }
 
     @Override
-    public SimCardsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+    public SimCardsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
@@ -57,11 +59,17 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         holder.tvPhoneNumber.setText(mData.get(position).getPhoneNumber());
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
 
-
-
+        if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+            holder.imageNetwork.setBackgroundResource(R.drawable.mtn_logo);
+        } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+            holder.imageNetwork.setBackgroundResource(R.drawable.airtel_logo);
+        } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+            holder.imageNetwork.setBackgroundResource(R.drawable.glo_logo);
+        } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("9mo")
+                || (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+            holder.imageNetwork.setBackgroundResource(R.drawable.nmobile_logo);
+        }
     }
-
-
 
 
     @Override
@@ -70,21 +78,19 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         final TextView tvPhoneNumber;
         final TextView tvNetworkName;
         final ImageView imgDelete;
-
-
+        private final ImageView imageNetwork;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
             tvNetworkName = itemView.findViewById(R.id.tv_network_name);
             imgDelete = itemView.findViewById(R.id.btn_delete);
-
-
+            imageNetwork = itemView.findViewById(R.id.img_network);
 
 
             Context context = itemView.getContext();
@@ -92,36 +98,36 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             itemView.setOnClickListener(view -> {
                 SimCards SimCardsModel = (SimCards) view.getTag();
 
-//                    Intent i = new Intent(view.getContext(), MainActivity.class);
-//                    i.putExtra("desc", cpu.getCode());
-//                    i.putExtra("title", cpu.getName());
-//                    view.getContext().startActivity(i);
                 Toast.makeText(mContext, "f" + SimCardsModel.getPhoneNumber(), Toast.LENGTH_LONG).show();
-
-                // method.DialUssdCode((BanksSimCardssActivity)context, SimCardsModel.get, context, 0);
             });
             itemView.setOnLongClickListener(v -> true);
 
-            imgDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                    navController = NavHostFragment.findNavController(navhost);
+            imgDelete.setOnClickListener(v -> {
+                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                ViewGroup viewGroup = activity.findViewById(android.R.id.content);
+                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_sim, viewGroup, false);
+                builder.setView(dialogView);
+                AlertDialog alertDialog = builder.create();
+
+                Button btnYes = dialogView.findViewById(R.id.btn_yes);
+                Button btnNo = dialogView.findViewById(R.id.btn_no);
+
+                btnYes.setOnClickListener(v1 -> {
 
                     SimCards SimCardsModel = (SimCards) v.getTag();
-
                     int id = SimCardsModel.getId();
-
                     appDatabase.simCardsDao().deleteSimCard(id);
-
                     navController.navigate(R.id.action_manageSimsFragment_self, null);
+                    alertDialog.dismiss();
 
+                });
 
-                }
+                btnNo.setOnClickListener(v12 -> alertDialog.dismiss());
+                alertDialog.show();
             });
         }
-
     }
-
-
 }

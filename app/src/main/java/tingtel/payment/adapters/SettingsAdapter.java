@@ -1,7 +1,6 @@
 package tingtel.payment.adapters;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -132,7 +130,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     ViewGroup viewGroup = activity.findViewById(android.R.id.content);
-                    View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_account, viewGroup, false);
+                    View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_sim, viewGroup, false);
                     builder.setView(dialogView);
                     AlertDialog alertDialog = builder.create();
 

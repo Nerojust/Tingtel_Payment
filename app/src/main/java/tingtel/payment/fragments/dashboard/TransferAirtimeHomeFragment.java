@@ -49,14 +49,10 @@ public class TransferAirtimeHomeFragment extends Fragment {
 
 
         btnTransferAirtime.setOnClickListener(v -> {
-
             //check if both sim 1 and sim 2 are in the db registered.
-
-
             String NoOfSIm = sessionManager.getSimStatus();
 
             switch (NoOfSIm) {
-
 
                 case "NO SIM":
                     Intent intent = new Intent(getActivity(), SignUpActivity.class);

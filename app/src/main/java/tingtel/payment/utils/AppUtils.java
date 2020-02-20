@@ -18,6 +18,9 @@ import androidx.core.content.ContextCompat;
 
 import tingtel.payment.R;
 
+/**
+ * Utilities class or helper class
+ */
 public class AppUtils {
 
     private static SessionManager sessionManager;
@@ -29,7 +32,12 @@ public class AppUtils {
         return sessionManager;
     }
 
-
+    /**
+     * version check before dialing codes
+     * @param activity
+     * @param ussdCodeTodial
+     * @param simNumber
+     */
     public static void dialUssdCode(Activity activity, String ussdCodeTodial, int simNumber) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             //if android version doesnt require permission
@@ -83,11 +91,8 @@ public class AppUtils {
         Button btnOk = dialogView.findViewById(R.id.btn_ok);
 
         tvMessage.setText(message);
-
         btnOk.setOnClickListener(v -> alertDialog.dismiss());
-
         alertDialog.show();
 
     }
-
 }

@@ -92,11 +92,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
                         break;
                     default:
                         ReceiverSimNetwork = spinnerTitles[i];
-
-
                 }
-
-
             }
 
             @Override
