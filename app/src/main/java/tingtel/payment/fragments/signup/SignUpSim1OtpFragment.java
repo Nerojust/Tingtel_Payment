@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -113,7 +112,7 @@ public class SignUpSim1OtpFragment extends Fragment {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 // startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                Toast.makeText(getContext(), "Sim 1 Details Saved", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "Sim 1 Details Saved", Toast.LENGTH_LONG).show();
             }
         }
 

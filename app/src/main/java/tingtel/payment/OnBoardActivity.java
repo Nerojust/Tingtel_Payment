@@ -1,10 +1,5 @@
 package tingtel.payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
@@ -59,12 +59,9 @@ public class OnBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_board);
 
-
-
-
-        btn_get_started = (Button) findViewById(R.id.btn_get_started);
-        onboard_pager = (ViewPager) findViewById(R.id.pager_introduction);
-        pager_indicator = (LinearLayout) findViewById(R.id.viewPagerCountDots);
+        btn_get_started = findViewById(R.id.btn_get_started);
+        onboard_pager = findViewById(R.id.pager_introduction);
+        pager_indicator = findViewById(R.id.viewPagerCountDots);
 
         loadData();
 
@@ -121,8 +118,6 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void requestPermissions() {
-
-
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.RECEIVE_SMS)

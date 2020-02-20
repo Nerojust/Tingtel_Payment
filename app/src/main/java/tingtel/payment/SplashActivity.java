@@ -1,10 +1,10 @@
 package tingtel.payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import tingtel.payment.utils.SessionManager;
 
@@ -21,11 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(() -> {
-
-
             if (sessionManager.getOnboardStatus()) {
-
-
                 if (sessionManager.getIsRegistered()) {
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -36,19 +32,13 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
-
             } else {
-
-
                 Intent mainIntent = new Intent(SplashActivity.this, OnBoardActivity.class);
                 startActivity(mainIntent);
             }
 
             finish();
         }, 2500);
-
     }
-
 }
 

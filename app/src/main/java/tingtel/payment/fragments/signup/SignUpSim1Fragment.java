@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -69,9 +68,8 @@ public class SignUpSim1Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
                 selectedSpinnerNetwork = spinnerTitles[i];
-
             }
 
             @Override

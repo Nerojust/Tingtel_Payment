@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OnBoardActivity">
-
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager_introduction"
@@ -18,17 +16,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/pager_height"
         android:layout_above="@+id/ll_footer"
-        android:layout_marginBottom="12dp"
         android:layout_alignParentLeft="true"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
         android:orientation="horizontal" />
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:id="@+id/ll_footer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <Button
@@ -41,11 +39,6 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/button_text"
-            android:visibility="gone"
-            />
-
-
+            android:visibility="gone" />
     </LinearLayout>
-
-
 </RelativeLayout>

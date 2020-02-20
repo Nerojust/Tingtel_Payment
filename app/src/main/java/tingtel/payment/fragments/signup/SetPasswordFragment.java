@@ -37,7 +37,6 @@ public class SetPasswordFragment extends Fragment {
     }
 
     private void initListeners(View view) {
-
         btnSetPassword.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,10 +49,8 @@ public class SetPasswordFragment extends Fragment {
     }
 
     private void initViews(View view) {
-
         tvPassword1 = view.findViewById(R.id.tv_password1);
         tvPassword2 = view.findViewById(R.id.tv_password2);
-
         btnSetPassword = view.findViewById(R.id.btn_set_password);
 
         sessionManager = AppUtils.getSessionManagerInstance();

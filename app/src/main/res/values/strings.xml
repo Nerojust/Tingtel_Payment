@@ -6,13 +6,13 @@
 
 
     <string name="ob_header1">WELCOME TO TINGTEL</string>
-    <string name="ob_header2">GET BALANCE IN REAL-TIME</string>
+    <string name="ob_header2">MAKE TRANSFERS TO ANY NETWORK IN NIGERIA</string>
     <string name="ob_header3">PERMISSION REQUIRED</string>
 
     <string name="ob_get_started">GET STARTED</string>
 
-    <string name="ob_desc1">Tingtel is a unified app to check  Data Balance of Networks all over the world</string>
-    <string name="ob_desc2">You dont need to memorize ussd codes to check data &amp; airtime balance</string>
+    <string name="ob_desc1">Tingtel is a unified app for airtime transfer to all networks in Nigeria</string>
+    <string name="ob_desc2">You dont need to worry about selling your airtime, we will take it off your hands and credit any number of your choosing</string>
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, Click on "Get Started"</string>
     <string name="set_your_password">Set Your Password</string>
     <string name="delete">Delete</string>
@@ -105,7 +105,7 @@
     <string name="select_sim_2_network">Select SIM 2 network</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
-    <string name="confirmation_amount_is_displayed_here">Confirmation Amount is displayed here</string>
+    <string name="confirmation_amount_is_displayed_here">Confirmation Amount</string>
 
 
     <string-array name="sim">

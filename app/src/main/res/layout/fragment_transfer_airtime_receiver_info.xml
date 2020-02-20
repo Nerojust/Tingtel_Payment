@@ -140,12 +140,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:hint="@string/confirmation_amount_is_displayed_here"
                             android:inputType="number"
                             android:maxLength="7"
+                            android:textColor="@color/black"
                             android:maxLines="1"
-                            android:textSize="15sp" />
+                            android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 

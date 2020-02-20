@@ -29,27 +29,27 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
 
-    String SenderSimNetwork;
-    String SenderPhoneNumber;
-    String ReceiverSimNetwork;
-    String ReceiverPhoneNumber;
-    String Pin;
-    int SimNo;
-    String Amount;
-    String SimSerial;
-    SessionManager sessionManager;
+    private String SenderSimNetwork;
+    private String SenderPhoneNumber;
+    private String ReceiverSimNetwork;
+    private String ReceiverPhoneNumber;
+    private String Pin;
+    private int SimNo;
+    private String Amount;
+    private String SimSerial;
+    private SessionManager sessionManager;
 
-    String TingtelNumber;
-    TextView tvSenderPhoneNumber;
-    TextView tvReceiverPhoneNumber;
-    TextView tvAmount;
-    TextView tvServiceFee;
-    TextView tvCreditedAmount;
-    ImageView imgSender;
-    ImageView imgReceiver;
-    Button btnTransfer;
-    Button btnBack;
-    NavController navController;
+    private String TingtelNumber;
+    private TextView tvSenderPhoneNumber;
+    private TextView tvReceiverPhoneNumber;
+    private TextView tvAmount;
+    private TextView tvServiceFee;
+    private TextView tvCreditedAmount;
+    private ImageView imgSender;
+    private ImageView imgReceiver;
+    private Button btnTransfer;
+    private Button btnBack;
+    private NavController navController;
 
 
     @Override
@@ -74,11 +74,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
         return view;
     }
 
+    /**
+     * instantiate listeners for click events.
+     */
     private void initListeners() {
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
     }
 
+    /**
+     * instantiate all necessary views
+     *
+     * @param view
+     */
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
 
@@ -97,6 +105,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
+    /**
+     * get detail from intent
+     */
     private void getExtrasFromIntent() {
         SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("senderSimNetwork");
         ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
@@ -106,6 +117,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
         Pin = getArguments().getString("pin");
     }
 
+    /**
+     * set data to views
+     */
     private void populateDetailsTextViews() {
         tvSenderPhoneNumber.setText(SenderPhoneNumber);
         tvReceiverPhoneNumber.setText(ReceiverPhoneNumber);
@@ -113,12 +127,15 @@ public class TransferAirtimePreviewFragment extends Fragment {
         double dividedAmount = Integer.parseInt(Amount) / 10;
         double balanceAmount = Integer.parseInt(Amount) - dividedAmount;
 
-        tvAmount.setText(String.valueOf(Amount));
+        tvAmount.setText(String.valueOf(Integer.parseInt(Amount)));
         tvServiceFee.setText(String.valueOf(dividedAmount));
         tvCreditedAmount.setText(String.valueOf(balanceAmount));
         setNetworkLogo();
     }
 
+    /**
+     * set logo images based on specific network detected.
+     */
     private void setNetworkLogo() {
         if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             imgSender.setBackgroundResource(R.drawable.mtn_logo);
@@ -145,6 +162,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
     }
 
+    /**
+     * perform the ussd code run request
+     */
     private void runAirtimeTransferUssd() {
         String UssdCode;
 
@@ -195,6 +215,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
         navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
     }
 
+    /**
+     * save the details to database.
+     */
     private void saveHistory() {
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
@@ -233,6 +256,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
     }
 
+    /**
+     * send the sms to user
+     */
     private void sendSms() {
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
         sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " " + Amount + " " + Pin);
