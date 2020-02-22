@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Objects;
 
+import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.SettingsActivity;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.utils.AppUtils;
 
@@ -36,6 +39,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private String SenderSimNetwork;
     private String ReceiverSimNetwork;
     private int SimNo;
+    private ImageView homeImageview, settingsImagview;
+    private LinearLayout backButtonLayout;
     private String Amount;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -82,6 +87,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initListeners() {
+        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
+        homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
+
+        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
+
         //todo: uncomment later
       /*  btnPreview.setOnClickListener(v -> {
             if (isValidFields()) {
@@ -122,6 +133,10 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private Spinner initViews(View view) {
+        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        homeImageview = view.findViewById(R.id.homeImageview);
+        settingsImagview = view.findViewById(R.id.settingsImageview);
+
         mSpinner = view.findViewById(R.id.network_spinner);
         btnPreview = view.findViewById(R.id.btn_preview);
         qrCodeImageview = view.findViewById(R.id.codeImageView);

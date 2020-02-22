@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
@@ -50,6 +53,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private Button btnTransfer;
     private Button btnBack;
     private NavController navController;
+    private ImageView homeImageview, settingsImagview;
+    private LinearLayout backButtonLayout;
 
 
     @Override
@@ -78,6 +83,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * instantiate listeners for click events.
      */
     private void initListeners() {
+
+        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
+        homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
+
+        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
     }
@@ -89,7 +100,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
      */
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
-
+        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        homeImageview = view.findViewById(R.id.homeImageview);
+        settingsImagview = view.findViewById(R.id.settingsImageview);
         imgSender = view.findViewById(R.id.senderImage);
         imgReceiver = view.findViewById(R.id.receiverImage);
 

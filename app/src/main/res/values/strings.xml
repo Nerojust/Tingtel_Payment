@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tingtel Payment</string>
+    <string name="app_name">Tingtel Airtime</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,7 +16,7 @@
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, Click on "Get Started"</string>
     <string name="set_your_password">Set Your Password</string>
     <string name="delete">Delete</string>
-    <string name="choose_sim_to_transfer_from">Choose Sim To Transfer From</string>
+    <string name="choose_sim_to_transfer_from">Choose a sim to transfer from</string>
     <string name="message">Message</string>
     <string name="dismiss">Dismiss</string>
     <string name="yes_delete">Yes, Delete</string>
@@ -33,8 +33,8 @@
     <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">Tingtel helps you transfer airtime of any network to other networks. \n In order to transfer airtime, please click on the transfer airtime button</string>
     <string name="transfer_airtime">Transfer Airtime</string>
     <string name="history">History</string>
-    <string name="welcome_martins">Welcome Martins</string>
-    <string name="transfer_amount">Now enter Transfer Amount</string>
+    <string name="welcome_martins">Welcome Martins Becca</string>
+    <string name="transfer_amount">Now enter the Transfer Amount</string>
     <string name="enter_amount_to_transfer">Enter amount to transfer</string>
     <string name="currently_active_sim_1">Currently Active SIM 1:</string>
     <string name="mtn_ng">MTN NG</string>

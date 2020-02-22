@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import java.util.Objects;
 
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.SettingsActivity;
 import tingtel.payment.activities.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
@@ -41,7 +44,9 @@ public class TransferAirtimeFragment extends Fragment {
     String SimSerial;
     SessionManager sessionManager;
     AppDatabase appDatabase;
+    private ImageView homeImageview, settingsImagview;
     private RadioGroup rdSimGroup;
+    private LinearLayout backButtonLayout;
     private RadioButton rdSimButton;
     private RadioButton rdSim1, rdSim2;
 
@@ -50,7 +55,7 @@ public class TransferAirtimeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime, container, false);
 
-        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Transfer Airtime");
+//        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Transfer Airtime");
 
         initViews(view);
         initListeners(view);
@@ -64,6 +69,9 @@ public class TransferAirtimeFragment extends Fragment {
 
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
+        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        homeImageview = view.findViewById(R.id.homeImageview);
+        settingsImagview = view.findViewById(R.id.settingsImageview);
 
         rdSimGroup = view.findViewById(R.id.radioSim);
         btnCheckBalance = view.findViewById(R.id.btn_check_balance);
@@ -79,6 +87,12 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
     private void initListeners(View view) {
+        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
+        homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
+
+        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
+
         rdSimGroup.setOnCheckedChangeListener((group, checkedId) -> {
             //  Toast.makeText(getContext(), "testing for checked", Toast.LENGTH_LONG).show();
             // get selected radio button from radioGroup

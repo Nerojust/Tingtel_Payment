@@ -15,7 +15,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
 import tingtel.payment.activities.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
@@ -36,7 +35,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Dashboard");
+//        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Dashboard");
 
         btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         btnHistory = view.findViewById(R.id.btn_history);
@@ -44,7 +43,7 @@ public class DashboardFragment extends Fragment {
         appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
         sessionManager = getSessionManagerInstance();
 
-        Fragment navhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
 
