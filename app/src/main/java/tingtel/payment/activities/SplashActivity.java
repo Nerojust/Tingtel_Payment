@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import tingtel.payment.R;
 import tingtel.payment.utils.SessionManager;
 
 import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;

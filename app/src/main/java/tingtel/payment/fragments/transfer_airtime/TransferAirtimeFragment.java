@@ -20,7 +20,7 @@ import java.util.Objects;
 
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
-import tingtel.payment.SignUpActivity;
+import tingtel.payment.activities.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
@@ -255,6 +255,7 @@ public class TransferAirtimeFragment extends Fragment {
         if (edAmount.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "Amount is too low. Minimum amount is 100", Toast.LENGTH_SHORT).show();
             return false;
+
         }
 
         return true;

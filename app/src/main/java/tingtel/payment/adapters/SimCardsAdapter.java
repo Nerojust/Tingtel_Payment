@@ -8,20 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Objects;
 
 import tingtel.payment.R;
-import tingtel.payment.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
 
@@ -93,22 +89,22 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             imageNetwork = itemView.findViewById(R.id.img_network);
 
 
-            Context context = itemView.getContext();
+           /* Context context = itemView.getContext();
 
             itemView.setOnClickListener(view -> {
                 SimCards SimCardsModel = (SimCards) view.getTag();
 
                 Toast.makeText(mContext, "f" + SimCardsModel.getPhoneNumber(), Toast.LENGTH_LONG).show();
             });
-            itemView.setOnLongClickListener(v -> true);
+            itemView.setOnLongClickListener(v -> true);*/
 
             imgDelete.setOnClickListener(v -> {
-                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+//                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//                navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 ViewGroup viewGroup = activity.findViewById(android.R.id.content);
-                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete_sim, viewGroup, false);
+                View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_delete_sim, viewGroup, false);
                 builder.setView(dialogView);
                 AlertDialog alertDialog = builder.create();
 
@@ -120,7 +116,10 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                     SimCards SimCardsModel = (SimCards) v.getTag();
                     int id = SimCardsModel.getId();
                     appDatabase.simCardsDao().deleteSimCard(id);
-                    navController.navigate(R.id.action_manageSimsFragment_self, null);
+                    //navController.navigate(R.id.action_manageSimsFragment_self, null);
+                    activity.startActivity(activity.getIntent());
+                    activity.finish();
+                    activity.overridePendingTransition(0, 0);
                     alertDialog.dismiss();
 
                 });

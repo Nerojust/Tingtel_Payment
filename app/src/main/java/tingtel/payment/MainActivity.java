@@ -7,6 +7,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import tingtel.payment.activities.SettingsActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

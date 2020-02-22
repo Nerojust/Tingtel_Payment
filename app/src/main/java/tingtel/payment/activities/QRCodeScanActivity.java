@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,6 +19,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 
 public class QRCodeScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {

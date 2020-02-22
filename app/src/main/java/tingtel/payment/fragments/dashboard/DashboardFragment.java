@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
-import tingtel.payment.SignUpActivity;
+import tingtel.payment.activities.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.SessionManager;
 

@@ -6,7 +6,7 @@
     android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".QRCodeDisplayActivity">
+    tools:context=".activities.QRCodeDisplayActivity">
 
     <LinearLayout
         android:id="@+id/radioGroupLayout"

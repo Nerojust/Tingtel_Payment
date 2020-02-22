@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+
+import tingtel.payment.MainActivity;
+import tingtel.payment.R;
 
 public class SignInActivity extends AppCompatActivity {
 

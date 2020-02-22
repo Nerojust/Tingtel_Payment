@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +21,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 

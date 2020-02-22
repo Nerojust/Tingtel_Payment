@@ -21,7 +21,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="yes_delete">Yes, Delete</string>
     <string name="cancel">No,Cancel</string>
-    <string name="are_you_sure_you_want_to_delete_your_account_n_nb_your_data_would_be_erased">Are you sure you want to delete your account   \n  Your Data would be erased</string>
+    <string name="are_you_sure_you_want_to_delete_your_account_n_nb_your_data_would_be_erased">Are you sure you want to delete your account? Your Data would be erased</string>
 
     <string name="change_email">Change Email</string>
 

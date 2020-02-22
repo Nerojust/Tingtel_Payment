@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".fragments.settings.ReportIssueFragment">
+    tools:context=".activities.settings.ReportIssueActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/rubik_regular"
         android:background="@drawable/textview_rounded"
+        android:fontFamily="@font/rubik_regular"
         android:textSize="17sp" />
 
     <TextView
@@ -34,8 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/rubik_regular"
         android:background="@drawable/textview_rounded"
+        android:fontFamily="@font/rubik_regular"
         android:minLines="8"
         android:textSize="17sp" />
 
@@ -45,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/rubik_regular"
         android:background="@drawable/button_round_corners"
+        android:fontFamily="@font/rubik_regular"
         android:text="@string/report_issue"
         android:textColor="@color/white"
         android:textSize="17sp" />

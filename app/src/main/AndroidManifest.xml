@@ -20,21 +20,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.settings.AboutUsActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.ReportIssueActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.TutorialActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.ManageSimActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.AddSimActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.ChangeEmailActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.settings.ChangePasswordActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
 
-        <activity android:name=".QRCodeScanActivity" />
-        <activity android:name=".QRCodeDisplayActivity" />
+        <activity android:name=".activities.QRCodeScanActivity" />
+        <activity android:name=".activities.QRCodeDisplayActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activities.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".activities.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".OnBoardActivity" />
+        <activity android:name=".activities.OnBoardActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

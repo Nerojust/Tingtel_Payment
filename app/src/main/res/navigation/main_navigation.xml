@@ -110,7 +110,7 @@
         tools:layout="@layout/fragment_get_transfer_pin_tutorial" />
     <activity
         android:id="@+id/QRCodeScanActivity"
-        android:name="tingtel.payment.QRCodeScanActivity"
+        android:name="tingtel.payment.activities.QRCodeScanActivity"
         android:label="activity_qrcode_scan"
         tools:layout="@layout/activity_qrcode_scan" />
 </navigation>

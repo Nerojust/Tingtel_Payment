@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
+import tingtel.payment.R;
 import tingtel.payment.adapters.OnBoardAdapter;
 import tingtel.payment.models.OnBoardItem;
 import tingtel.payment.utils.AppUtils;
