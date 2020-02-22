@@ -38,6 +38,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcodedisplay);
+        getSupportActionBar().setTitle("Get QR Code");
         sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews();

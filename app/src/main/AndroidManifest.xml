@@ -43,7 +43,9 @@
             android:parentActivityName=".activities.SettingsActivity" />
 
         <activity android:name=".activities.QRCodeScanActivity" />
-        <activity android:name=".activities.QRCodeDisplayActivity" />
+        <activity
+            android:name=".activities.QRCodeDisplayActivity"
+            android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -63,8 +65,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

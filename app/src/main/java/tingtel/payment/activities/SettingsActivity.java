@@ -26,7 +26,7 @@ import tingtel.payment.activities.settings.TutorialActivity;
 public class SettingsActivity extends AppCompatActivity {
 
     LinearLayout changePasswordLayout, changeEmailAddressLayout, addSimLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+            reportIssueLayout, qrCodeLayout,shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     Button logoutButton;
 
     @Override
@@ -40,6 +40,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initViews() {
         backArrowLayout = findViewById(R.id.backArrowLayout);
+        qrCodeLayout = findViewById(R.id.qrCodeLayout);
+
         changePasswordLayout = findViewById(R.id.changePasswordLayout);
         changeEmailAddressLayout = findViewById(R.id.changeEmailLayout);
         addSimLayout = findViewById(R.id.addNewSimLayout);
@@ -55,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initListeners() {
         backArrowLayout.setOnClickListener(v -> finish());
+        qrCodeLayout.setOnClickListener(v->startActivity(new Intent(this,QRCodeDisplayActivity.class)));
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         addSimLayout.setOnClickListener(v -> startActivity(new Intent(this, AddSimActivity.class)));

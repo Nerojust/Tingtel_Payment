@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.util.Objects;
 
 import tingtel.payment.R;
+import tingtel.payment.activities.SettingsActivity;
 import tingtel.payment.activities.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.SessionManager;
@@ -36,6 +38,8 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 //        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Dashboard");
+        ImageView settingsImagview = view.findViewById(R.id.settingsImageview);
+        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         btnHistory = view.findViewById(R.id.btn_history);

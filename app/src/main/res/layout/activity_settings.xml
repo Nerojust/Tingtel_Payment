@@ -3,36 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".activities.SettingsActivity">
 
     <LinearLayout
-        android:id="@+id/backArrowLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="18dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="25dp"
-        android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/back_arrow" />
 
-        <TextView
-            android:id="@+id/backArrow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/rubik_medium"
-            android:gravity="center"
-            android:text="Back"
-            android:textColor="@color/black"
-            android:textSize="18sp"/>
+        <LinearLayout
+            android:id="@+id/backArrowLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:id="@+id/backArrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="start|center"
+                android:text="Back"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qrCodeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="My QR Code" />
+
+            <ImageView
+                android:id="@+id/settingsImageview"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:src="@drawable/code" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -61,9 +96,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
+                        android:text="Account"
                         android:textColor="@color/tingtel_red_color"
-                        android:textSize="17sp"
-                        android:text="Account" />
+                        android:textSize="17sp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -212,9 +247,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
+                        android:text="Help/Support"
                         android:textColor="@color/tingtel_red_color"
-                        android:textSize="17sp"
-                        android:text="Help/Support" />
+                        android:textSize="17sp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -298,9 +333,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
+                        android:text="More Options"
                         android:textColor="@color/tingtel_red_color"
-                        android:textSize="17sp"
-                        android:text="More Options" />
+                        android:textSize="17sp" />
 
                     <View
                         android:layout_width="match_parent"
