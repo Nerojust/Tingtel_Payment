@@ -2,6 +2,8 @@ package tingtel.payment.fragments.transfer_airtime;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 import tingtel.payment.MainActivity;
@@ -49,6 +52,7 @@ public class TransferAirtimeFragment extends Fragment {
     private LinearLayout backButtonLayout;
     private RadioButton rdSimButton;
     private RadioButton rdSim1, rdSim2;
+    private String finalamount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +81,40 @@ public class TransferAirtimeFragment extends Fragment {
         btnCheckBalance = view.findViewById(R.id.btn_check_balance);
         btnNext = view.findViewById(R.id.btn_next);
         edAmount = view.findViewById(R.id.ed_amount);
+        edAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String input = s.toString();
+
+                if (!input.isEmpty()) {
+
+                    input = input.replace(",", "");
+
+                    DecimalFormat format = new DecimalFormat("#,###,###");
+                    String newPrice = format.format(Double.parseDouble(input));
+
+
+                    edAmount.removeTextChangedListener(this); //To Prevent from Infinite Loop
+
+                    edAmount.setText(newPrice);
+                    edAmount.setSelection(newPrice.length()); //Move Cursor to end of String
+
+                    edAmount.addTextChangedListener(this);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+            }
+        });
+
+
         rdSim1 = view.findViewById(R.id.radioSim1);
         rdSim2 = view.findViewById(R.id.radioSim2);
 
@@ -91,7 +129,7 @@ public class TransferAirtimeFragment extends Fragment {
 
         homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
 
-        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
+        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         rdSimGroup.setOnCheckedChangeListener((group, checkedId) -> {
             //  Toast.makeText(getContext(), "testing for checked", Toast.LENGTH_LONG).show();
@@ -150,9 +188,11 @@ public class TransferAirtimeFragment extends Fragment {
                     (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
                 UssdCode = "*232#";
             } else {
-                Toast.makeText(getActivity(), "Cant Check Ussd Balance", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
                 return;
             }
+
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
         });
@@ -164,11 +204,14 @@ public class TransferAirtimeFragment extends Fragment {
             }
             //if all fields and conditions are satisfied proceed.
             if (isValidAllFields()) {
+                String input = edAmount.getText().toString().trim();
+                finalamount = input.replace(",", "");
+
                 Bundle bundle = new Bundle();
                 bundle.putString("simNetwork", SimNetwork);
                 bundle.putString("simSerial", "" + SimSerial);
                 bundle.putInt("simNo", SimNo);
-                bundle.putString("amount", edAmount.getText().toString());
+                bundle.putString("amount", finalamount);
                 navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
             }
         });

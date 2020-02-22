@@ -205,7 +205,7 @@
                             android:fontFamily="@font/rubik_regular"
                             android:hint="@string/confirmation_amount_is_displayed_here"
                             android:inputType="number"
-                            android:maxLength="7"
+                            android:maxLength="8"
                             android:textColor="@color/black"
                             android:maxLines="1"
                             android:textSize="20sp" />

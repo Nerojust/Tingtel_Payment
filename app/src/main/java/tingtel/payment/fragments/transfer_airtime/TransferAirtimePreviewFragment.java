@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -88,7 +89,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
 
-        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
+        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
     }
@@ -140,9 +141,15 @@ public class TransferAirtimePreviewFragment extends Fragment {
         double dividedAmount = Integer.parseInt(Amount) / 10;
         double balanceAmount = Integer.parseInt(Amount) - dividedAmount;
 
-        tvAmount.setText(String.valueOf(Integer.parseInt(Amount)));
-        tvServiceFee.setText(String.valueOf(dividedAmount));
-        tvCreditedAmount.setText(String.valueOf(balanceAmount));
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String finalDividedAmount = formatter.format(dividedAmount);
+        String finalAmount = formatter.format(Double.parseDouble(Amount));
+        String finalBalanceAmount = formatter.format(balanceAmount);
+
+        tvAmount.setText(finalAmount);
+        tvServiceFee.setText(finalDividedAmount);
+        tvCreditedAmount.setText(finalBalanceAmount);
+
         setNetworkLogo();
     }
 

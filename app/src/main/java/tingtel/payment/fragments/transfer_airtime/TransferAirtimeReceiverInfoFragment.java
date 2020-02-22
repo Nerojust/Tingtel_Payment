@@ -23,6 +23,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 import tingtel.payment.MainActivity;
@@ -148,7 +149,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
-        edAmount.setText(getResources().getString(R.string.naira) + Amount);
+
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String finalAmount = formatter.format(Double.parseDouble(Amount));
+        edAmount.setText(getResources().getString(R.string.naira) + finalAmount);
+
+
         return mSpinner;
     }
 
