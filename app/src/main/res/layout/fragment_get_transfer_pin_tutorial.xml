@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="20dp"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.GetTransferPinTutorialFragment">
 
@@ -53,10 +55,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="Dial *600#" />
         </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/tingtel_light_red" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,6 +117,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/tingtel_light_red" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -160,6 +173,11 @@
         </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/tingtel_light_red" />
 
     <LinearLayout
         android:layout_width="match_parent"
