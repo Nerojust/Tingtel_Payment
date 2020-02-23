@@ -2,19 +2,15 @@ package tingtel.payment;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
 
 public class MainActivity extends AppCompatActivity {
-    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     @Override
@@ -23,23 +19,25 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+   /* @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.do_you_want_to_logout))
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    MainActivity.this.onSuperBackPressed();
+                })
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-      /*  //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.action_home) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }*/
-
-        return super.onOptionsItemSelected(item);
     }
+
+    private void onSuperBackPressed() {
+        super.onBackPressed();
+    }*/
 }

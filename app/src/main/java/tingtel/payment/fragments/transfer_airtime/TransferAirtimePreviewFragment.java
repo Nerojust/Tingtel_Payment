@@ -120,10 +120,17 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
-        homeImageview.setOnClickListener(v -> startActivity(new Intent(getContext(), MainActivity.class)));
+        homeImageview.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+
+        });
 
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
+
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
+
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         btnSendMessage.setOnClickListener(v -> {

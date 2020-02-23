@@ -41,7 +41,7 @@
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="start|center"
                 android:text="Back"
-                android:textColor="@color/black"
+                android:textColor="@color/tingtel_white"
                 android:textSize="17sp" />
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Objects;
 
+import tingtel.payment.MainActivity;
 import tingtel.payment.R;
 
 /**
@@ -58,4 +59,13 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (isRemoving()) {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        }
+    }
 }

@@ -68,7 +68,6 @@
                             android:id="@+id/tv_email_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_mail"
                             android:drawablePadding="6dp"
                             android:fontFamily="@font/raleway_regular"
                             android:hint="@string/enter_your_username"
