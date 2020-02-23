@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.utils.TingtelObserver;
 
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
@@ -53,15 +55,22 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private ImageView imgReceiver;
     private Button btnTransfer;
     private Button btnBack;
+    private Button btnSendMessage;
+    private Button btnCancel;
+    private EditText edMessage;
     private NavController navController;
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
+    private LinearLayout layoutSuccess;
+    Boolean buttonClicked;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transfer_airtime_preview, container, false);
+
+        getLifecycle().addObserver(new TingtelObserver());
 
         getExtrasFromIntent();
         initViews(view);
@@ -74,10 +83,34 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SimSerial = sessionManager.getSimSerialICCID1();
         }
 
+        layoutSuccess.setVisibility(View.GONE);
+
         populateDetailsTextViews();
         initListeners();
 
         return view;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        buttonClicked = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (buttonClicked) {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
+//            bundle.putString("amount", Amount);
+//            navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
+
+            layoutSuccess.setVisibility(View.VISIBLE);
+            edMessage.setText("Hello, I Just transferred #"+ Amount +" airtime to you using\n" +
+                    "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
+        }
     }
 
     /**
@@ -92,6 +125,20 @@ public class TransferAirtimePreviewFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
+        btnSendMessage.setOnClickListener(v -> {
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.putExtra("sms_body", "Hello, I just Sent " + Amount + " Using" + " the Tingtel App");
+            sendIntent.putExtra("address", ReceiverPhoneNumber);
+            sendIntent.setType("vnd.android-dir/mms-sms");
+            Objects.requireNonNull(getActivity()).startActivity(sendIntent);
+
+        });
+
+        btnCancel.setOnClickListener(v -> {
+
+            layoutSuccess.setVisibility(View.GONE);
+        });
     }
 
     /**
@@ -114,6 +161,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
         btnBack = view.findViewById(R.id.btn_back);
+        btnCancel = view.findViewById(R.id.btn_cancel);
+        btnSendMessage = view.findViewById(R.id.btn_send_message);
+
+        edMessage = view.findViewById(R.id.ed_message);
+
+        layoutSuccess = view.findViewById(R.id.layout_success);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
@@ -229,10 +282,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         saveHistory();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
-        bundle.putString("amount", Amount);
-        navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
+        buttonClicked = true;
+
+
     }
 
     /**

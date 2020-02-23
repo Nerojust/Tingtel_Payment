@@ -343,8 +343,10 @@ public class TransferAirtimeFragment extends Fragment {
             SimNetwork = "9mobile";
             return true;
         } else {
-            Toast.makeText(getContext(), "Selected Sim Not Recognized", Toast.LENGTH_LONG).show();
-            return false;
+//            Toast.makeText(getContext(), "Selected Sim Not Recognized", Toast.LENGTH_LONG).show();
+//            return false;
+            SimNetwork = "9mobile";
+            return true;
         }
     }
 }
