@@ -8,6 +8,7 @@ import android.os.Build;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -26,29 +27,27 @@ public class NetworkCarrierUtils {
 
                 List<CharSequence> carrierNameList = new ArrayList<>();
                 int numberOfSimsOnTheDevice = 0;
-                for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfoList) {
-                    final CharSequence carrierName = subscriptionInfo.getCarrierName();
-                    final CharSequence displayName = subscriptionInfo.getDisplayName();
-                    final int mcc = subscriptionInfo.getMcc();
-                    final int mnc = subscriptionInfo.getMnc();
-                    final String iccid = subscriptionInfo.getIccId();
-                    final String subscriptionInfoNumber = subscriptionInfo.getNumber();
-                    // Toast.makeText(activity, "" + mnc + mcc, Toast.LENGTH_SHORT).show();
+                if (activeSubscriptionInfoList != null) {
+                    for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfoList) {
+                        final CharSequence carrierName = subscriptionInfo.getCarrierName();
+                        final CharSequence displayName = subscriptionInfo.getDisplayName();
+                        final String iccid = subscriptionInfo.getIccId();
 //todo: check
+                        carrierNameList.add(carrierName);
+                        numberOfSimsOnTheDevice += 1;
+                        if (numberOfSimsOnTheDevice == 1) {
+                            sessionManager.setNetworkName(displayName.toString());
+                            sessionManager.setSimSerialICCID(iccid);
+                        } else if (numberOfSimsOnTheDevice == 2) {
+                            sessionManager.setNetworkName1(displayName.toString());
+                            sessionManager.setSimSerialICCID1(iccid);
+                        }
 
-                    carrierNameList.add(carrierName);
-                    numberOfSimsOnTheDevice += 1;
-                    if (numberOfSimsOnTheDevice == 1) {
-                        sessionManager.setNetworkName(displayName.toString());
-                        sessionManager.setNumberOfSimsOnTheDevice(numberOfSimsOnTheDevice);
-                        sessionManager.setSimSerialICCID(iccid);
-                    } else if (numberOfSimsOnTheDevice == 2) {
-                        sessionManager.setNetworkName1(displayName.toString());
-                        sessionManager.setNumberOfSimsOnTheDevice1(numberOfSimsOnTheDevice);
-                        sessionManager.setSimSerialICCID1(iccid);
                     }
+                }else Toast.makeText(context, "No Sim card detected", Toast.LENGTH_SHORT).show();
+                //detect number of detected sims and save it
+                sessionManager.setTotalNumberOfSimsDetectedOnDevice(numberOfSimsOnTheDevice);
 
-                }
                 if (numberOfSimsOnTheDevice == 0) {
                     sessionManager.setSimStatus("NO SIM");
                 } else if (numberOfSimsOnTheDevice == 1) {

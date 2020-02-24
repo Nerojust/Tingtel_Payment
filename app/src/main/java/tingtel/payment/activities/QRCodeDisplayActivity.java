@@ -1,11 +1,7 @@
 package tingtel.payment.activities;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -57,14 +53,16 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         qr1Layout = findViewById(R.id.qr1Layout);
         qr2Layout = findViewById(R.id.qr2Layout);
 
-        if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 1) {
-            radioGroupLayout.setVisibility(View.GONE);
+        radioGroupLayout.setVisibility(View.GONE);
+        qr2Layout.setVisibility(View.GONE);
+        qr1Layout.setVisibility(View.GONE);
 
+        if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 1) {
             if (sessionManager.getSimPhoneNumber() != null) {
                 try {
                     convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber(), qrSim1Imageview);
-                    qr2Layout.setVisibility(View.GONE);
                     qr1Layout.setVisibility(View.VISIBLE);
+
                     /*Bitmap bm = ((BitmapDrawable) qrSim1Imageview.getDrawable()).getBitmap();
                     shareQR1.setOnClickListener(v1 -> {
                         String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bm, "title", "lets go there");
@@ -79,11 +77,13 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
+            } else {
+                Toast.makeText(this, "Sim 1 phone number is empty. Add sim to profile", Toast.LENGTH_SHORT).show();
+                finish();
             }
         } else if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 2) {
             radioGroupLayout.setVisibility(View.VISIBLE);
-
-            if (sessionManager.getSimPhoneNumber() != null) {
+            /*if (sessionManager.getSimPhoneNumber() != null) {
                 if (sessionManager.getSimPhoneNumber1() != null) {
                     try {
                         convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber1(), qrSim2Imageview);
@@ -101,7 +101,13 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                 }
             } else {
                 Toast.makeText(this, "Please register sim 1 first", Toast.LENGTH_SHORT).show();
-            }
+            }*/
+        } else if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 0) {
+            radioGroupLayout.setVisibility(View.GONE);
+            qr1Layout.setVisibility(View.GONE);
+            qr2Layout.setVisibility(View.GONE);
+            Toast.makeText(this, "No sim card detected. Insert a sim", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
@@ -117,7 +123,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                                 convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber(), qrSim1Imageview);
                                 qr2Layout.setVisibility(View.GONE);
                                 qr1Layout.setVisibility(View.VISIBLE);
-                                Bitmap bm = ((BitmapDrawable) qrSim1Imageview.getDrawable()).getBitmap();
+                                /*Bitmap bm = ((BitmapDrawable) qrSim1Imageview.getDrawable()).getBitmap();
                                 shareQR1.setOnClickListener(v1 -> {
                                     String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bm, "title", "lets go there");
                                     Uri bitmapUri = Uri.parse(bitmapPath);
@@ -127,7 +133,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                                     intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
                                     startActivity(Intent.createChooser(intent, "Share"));
 
-                                });
+                                });*/
                             } catch (WriterException e) {
                                 e.printStackTrace();
                             }
@@ -172,6 +178,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         BitMatrix bitMatrix = multiFormatWriter.encode(phoneNumber, BarcodeFormat.QR_CODE, 600, 600);
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         bitmapSim1 = barcodeEncoder.createBitmap(bitMatrix);
+
         imageView.setImageBitmap(bitmapSim1);
     }
 }

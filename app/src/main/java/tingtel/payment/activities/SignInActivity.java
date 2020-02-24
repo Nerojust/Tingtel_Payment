@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 
 import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.utils.NetworkCarrierUtils;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        NetworkCarrierUtils.getCarrierOfSim(this,this);
         initViews();
         initListeners();
     }
