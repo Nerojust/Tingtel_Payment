@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/logo"
                 android:padding="16dp"
-                android:text="Title"
+                android:text="Pin Change"
                 android:textColor="#333"
                 android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dial *600#" />
+                android:text="Dial *600*0000*new pin*new pin#    to set/change your pin \n Default pin is 0000" />
         </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 
     </LinearLayout>
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/logo2"
                 android:padding="16dp"
-                android:text="Title"
+                android:text="Pin Change"
                 android:textColor="#333"
                 android:textStyle="bold" />
 
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/logo3"
                 android:padding="16dp"
-                android:text="Title"
+                android:text="Pin Change"
                 android:textColor="#333"
                 android:textStyle="bold" />
 
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/logo4"
                 android:padding="16dp"
-                android:text="Title"
+                android:text="Pin Change"
                 android:textColor="#333"
                 android:textStyle="bold" />
 

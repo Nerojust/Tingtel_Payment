@@ -7,6 +7,7 @@
     android:background="@drawable/tingtel_bg8"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimePreviewFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,8 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="25dp"
-            >
+            android:paddingHorizontal="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,58 +99,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible"
-              >
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Notify Your Friend about this transaction"/>
+                    android:text="Notify Your Friend about this transaction"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/ed_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minLines="5"
-                    android:enabled="false"
-                    android:textColor="@color/black"
                     android:background="@drawable/button_round_corners_transparent"
+                    android:enabled="false"
+                    android:minLines="5"
                     android:text="Hello, I Just transferred #300 airtime to you using
-Tingtelpay. You can download the Tingtelpay app using the link \n https://play.google.com/store/apps/details?id=tingtel.payments"/>
+Tingtelpay. You can download the Tingtelpay app using the link \n https://play.google.com/store/apps/details?id=tingtel.payments"
+                    android:textColor="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_round_corners_transparent"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Cancel"
-                    android:textSize="17sp" />
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_round_corners_transparent"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="Cancel"
+                        android:textSize="17sp" />
+
                     <Button
                         android:id="@+id/btn_send_message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="2"
                         android:layout_marginLeft="4dp"
-                        android:textColor="@color/white"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
+                        android:layout_weight="2"
                         android:background="@drawable/button_round_corners"
                         android:text="Send Notification"
-                        android:textSize="17sp"
-                        android:textAllCaps="false"/>
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
             </LinearLayout>
-
 
 
             <androidx.cardview.widget.CardView
@@ -167,6 +168,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -191,9 +193,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                     <ImageView
                         android:id="@+id/senderImage"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.15"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:scaleType="fitCenter"
@@ -217,6 +219,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -241,9 +244,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                     <ImageView
                         android:id="@+id/receiverImage"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.15"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:scaleType="fitCenter"

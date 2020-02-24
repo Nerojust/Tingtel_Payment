@@ -84,7 +84,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/tingtel_lighter_gray"
                 app:cardCornerRadius="22dp">
 
                 <LinearLayout
@@ -114,6 +114,8 @@
                     <Spinner
                         android:id="@+id/network_spinner"
                         android:layout_width="match_parent"
+                        android:backgroundTintMode="src_atop"
+                        android:popupBackground="@color/tingtel_light_gray"
                         android:layout_height="wrap_content" />
 
 

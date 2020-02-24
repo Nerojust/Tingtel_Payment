@@ -35,6 +35,7 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
 
+    Boolean buttonClicked;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -44,7 +45,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private String Amount;
     private String SimSerial;
     private SessionManager sessionManager;
-
     private String TingtelNumber;
     private TextView tvSenderPhoneNumber;
     private TextView tvReceiverPhoneNumber;
@@ -62,8 +62,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
     private LinearLayout layoutSuccess;
-    Boolean buttonClicked;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,7 +106,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 //            navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
 
             layoutSuccess.setVisibility(View.VISIBLE);
-            edMessage.setText("Hello, I Just transferred #"+ Amount +" airtime to you using\n" +
+            edMessage.setText("Hello, I Just transferred #" + Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
         }
     }
@@ -260,7 +258,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
             TingtelNumber = "08";
+
             sendSms();
+
             UssdCode = "";
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
 
@@ -290,8 +290,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         saveHistory();
 
         buttonClicked = true;
-
-
     }
 
     /**

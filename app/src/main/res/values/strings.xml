@@ -79,7 +79,7 @@
     <string name="transfer">Transfer</string>
     <string name="preview">preview</string>
     <string name="confirm_amount">Confirm Amount</string>
-    <string name="network">Network</string>
+    <string name="network">Select Network</string>
     <string name="enter_receiver_s_phone_number">Enter receiver\'s phone number</string>
     <string name="what_is_pin">What is my Pin?</string>
     <string name="mtn_sim_detected">Mtn Sim Detected</string>

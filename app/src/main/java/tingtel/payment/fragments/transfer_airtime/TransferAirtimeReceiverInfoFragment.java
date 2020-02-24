@@ -120,13 +120,13 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             bundle.putString("amount", Amount);
             bundle.putString("receiverPhoneNumber", edReceiverPhoneNumber.getText().toString());
             bundle.putString("pin", edPin.getText().toString());
-            navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment, bundle);
+            navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_transferAirtimePreviewFragment2, bundle);
 
         });
 
-        whatIsPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_getTransferPinTutorialFragment, null));
+        whatIsPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, null));
 
-        qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_QRCodeScanActivity, null));
+        qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
     }
 
     private void getExtrasFromIntent() {

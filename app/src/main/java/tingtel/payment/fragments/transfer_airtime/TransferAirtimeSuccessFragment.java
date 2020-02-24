@@ -52,9 +52,9 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         });
 
-        btnMakeAnotherTransfer.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_mainFragment, null));
+        //btnMakeAnotherTransfer.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_mainFragment, null));
 
-        btnViewHistory.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_transactionHistoryFragment, null));
+//        btnViewHistory.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_transactionHistoryFragment, null));
 
         return view;
     }

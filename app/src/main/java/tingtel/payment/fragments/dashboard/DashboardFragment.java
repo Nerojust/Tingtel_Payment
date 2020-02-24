@@ -98,7 +98,7 @@ public class DashboardFragment extends Fragment {
             }
 
 
-            navController.navigate(R.id.action_mainFragment_to_transferAirtimeFragment, null);
+            navController.navigate(R.id.action_mainFragment_to_transferAirtimeActivity, null);
 
         });
 

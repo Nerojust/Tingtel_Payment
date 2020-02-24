@@ -216,7 +216,7 @@ public class TransferAirtimeFragment extends Fragment {
                 bundle.putString("simSerial", "" + SimSerial);
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", finalamount);
-                navController.navigate(R.id.action_transferAirtimeFragment_to_transferAirtimeReceiverInfoFragment, bundle);
+                navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
             }
         });
     }
