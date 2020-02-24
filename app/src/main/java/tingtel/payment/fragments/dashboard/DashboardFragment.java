@@ -102,7 +102,7 @@ public class DashboardFragment extends Fragment {
 
         });
 
-        btnHistory.setOnClickListener(v -> navController.navigate(R.id.action_mainFragment_to_transactionHistoryFragment, null));
+        btnHistory.setOnClickListener(v -> navController.navigate(R.id.action_mainFragment_to_historyActivity, null));
 
 
         return view;

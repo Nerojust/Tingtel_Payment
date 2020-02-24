@@ -128,7 +128,7 @@ public class TransferAirtimeFragment extends Fragment {
         backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(),MainActivity.class);
+            Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         });

@@ -11,20 +11,20 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_transactionHistoryFragment"
-            app:destination="@id/transactionHistoryFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_transferAirtimeActivity"
             app:destination="@id/transferAirtimeActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_historyActivity"
+            app:destination="@id/historyActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/transactionHistoryFragment"
-        android:name="tingtel.payment.fragments.history.TransactionHistoryFragment"
-        android:label="fragment_transaction_history"
-        tools:layout="@layout/fragment_transaction_history" />
     <activity
         android:id="@+id/transferAirtimeActivity"
         android:name="tingtel.payment.activities.transfer_airtime.TransferAirtimeActivity"
         android:label="activity_transfer_airtime"
         tools:layout="@layout/activity_transfer_airtime" />
+    <activity
+        android:id="@+id/historyActivity"
+        android:name="tingtel.payment.activities.HistoryActivity"
+        android:label="activity_history"
+        tools:layout="@layout/activity_history" />
 </navigation>

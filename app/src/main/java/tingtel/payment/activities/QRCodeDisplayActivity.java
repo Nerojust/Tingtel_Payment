@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
     MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
     LinearLayout radioGroupLayout, qr1Layout, qr2Layout;
     RadioGroup radioGroup;
+    private RadioButton rbSim1,rbSim2;
     ImageView qrSim1Imageview, qrSim2Imageview, shareQR1, shareQR2;
     Button getCodeButton;
     SessionManager sessionManager;
@@ -46,6 +48,8 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         qrSim2Imageview = findViewById(R.id.simTwoQRCodeImageview);
         getCodeButton = findViewById(R.id.getCodeButton);
         radioGroup = findViewById(R.id.radioGroup);
+        rbSim1 =findViewById(R.id.radioSim1);
+        rbSim2 =findViewById(R.id.radioSim2);
         shareQR1 = findViewById(R.id.shareSim1);
         shareQR2 = findViewById(R.id.shareSim2);
 
@@ -83,6 +87,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
             }
         } else if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 2) {
             radioGroupLayout.setVisibility(View.VISIBLE);
+            populateSimRadioButtons();
             /*if (sessionManager.getSimPhoneNumber() != null) {
                 if (sessionManager.getSimPhoneNumber1() != null) {
                     try {
@@ -142,21 +147,24 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.radioSim2:
-                        if (sessionManager.getSimPhoneNumber1() != null) {
-                            try {
-                                convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber1(), qrSim2Imageview);
-                                qr2Layout.setVisibility(View.VISIBLE);
-                                qr1Layout.setVisibility(View.GONE);
-                            } catch (WriterException e) {
-                                e.printStackTrace();
+                        if (!sessionManager.getNetworkName1().equalsIgnoreCase("ntel")) {
+                            if (sessionManager.getSimPhoneNumber1() != null) {
+                                try {
+                                    convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber1(), qrSim2Imageview);
+                                    qr2Layout.setVisibility(View.VISIBLE);
+                                    qr1Layout.setVisibility(View.GONE);
+                                } catch (WriterException e) {
+                                    e.printStackTrace();
+                                }
+
+                                shareQR2.setOnClickListener(v1 -> {
+
+                                });
+                            } else {
+                                Toast.makeText(this, "Please register a sim first", Toast.LENGTH_SHORT).show();
                             }
-
-                            shareQR2.setOnClickListener(v1 -> {
-
-                            });
-                        } else {
-                            Toast.makeText(this, "Please register a sim first", Toast.LENGTH_SHORT).show();
-                        }
+                        }else
+                            Toast.makeText(this, "Network not supported", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         qr2Layout.setVisibility(View.GONE);
@@ -171,7 +179,24 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
 
 
     }
+    private void populateSimRadioButtons() {
+        String NoOfSIm = sessionManager.getSimStatus();
 
+        switch (NoOfSIm) {
+            case "SIM1":
+                rbSim1.setVisibility(View.VISIBLE);
+                rbSim1.setVisibility(View.GONE);
+                rbSim1.setText(sessionManager.getNetworkName());
+                break;
+
+            case "SIM1 SIM2":
+                rbSim1.setVisibility(View.VISIBLE);
+                rbSim2.setVisibility(View.VISIBLE);
+                rbSim1.setText(sessionManager.getNetworkName() + " (" + sessionManager.getSimPhoneNumber() + ")");
+                rbSim2.setText(sessionManager.getNetworkName1() + " (" + sessionManager.getSimPhoneNumber1() + ")");
+                break;
+        }
+    }
 
     private void convertToQRcode(String phoneNumber, ImageView imageView) throws WriterException {
 

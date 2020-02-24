@@ -20,9 +20,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.ForgotPasswordActivity"
+        <activity
+            android:name=".activities.HistoryActivity"
+            android:label="History"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
             android:label="Reset Password"
-            android:parentActivityName=".activities.SignInActivity"/>
+            android:parentActivityName=".activities.SignInActivity" />
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -37,15 +42,19 @@
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.settings.ManageSimActivity"
+            android:label="@string/manage_sims"
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.settings.AddSimActivity"
+            android:label="Add Sim"
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.settings.ChangeEmailActivity"
+            android:label="@string/change_email"
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.settings.ChangePasswordActivity"
+            android:label="@string/change_password"
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
             android:name=".activities.QRCodeScanActivity"
@@ -59,7 +68,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SignUpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Register"
+            android:parentActivityName=".activities.SignInActivity" />
         <activity
             android:name=".activities.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
