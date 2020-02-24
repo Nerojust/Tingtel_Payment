@@ -116,7 +116,6 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                     SimCards SimCardsModel = (SimCards) v.getTag();
                     int id = SimCardsModel.getId();
                     appDatabase.simCardsDao().deleteSimCard(id);
-                    //navController.navigate(R.id.action_manageSimsFragment_self, null);
                     activity.startActivity(activity.getIntent());
                     activity.finish();
                     activity.overridePendingTransition(0, 0);

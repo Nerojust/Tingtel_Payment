@@ -19,14 +19,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
+                android:gravity="center|top"
                 android:background="@drawable/fragment_header">
 
-                <ImageView
-                    android:layout_width="62dp"
-                    android:layout_height="53dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/tingtel_one"
-                    android:textStyle="bold" />
+
             </RelativeLayout>
 
 
@@ -34,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="18dp"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="22dp">

@@ -59,7 +59,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
     private ImageView qrCodeImageview;
-    private EditText edAmount;
+    private TextView edAmount;
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
 

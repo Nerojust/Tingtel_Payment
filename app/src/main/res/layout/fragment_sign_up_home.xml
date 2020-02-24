@@ -13,19 +13,22 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="93dp"
-                android:background="@drawable/fragment_header"/>
+                android:layout_height="130dp"
+                android:background="@drawable/fragment_header"
+                android:gravity="center|top">
+
+            </RelativeLayout>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="18dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="22dp">
@@ -44,7 +47,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/create_an_account"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
 
@@ -137,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="40dp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/have_an_account_login" />

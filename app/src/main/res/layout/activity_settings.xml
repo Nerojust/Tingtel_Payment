@@ -62,7 +62,7 @@
 
             <ImageView
                 android:id="@+id/settingsImageview"
-                android:layout_width="25dp"
+                android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.1"

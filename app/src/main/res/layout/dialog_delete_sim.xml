@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_weight="5"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/dashboard_buttons"
                 android:text="@string/yes_delete"
                 android:textColor="#FFF" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="5"
-                android:background="@color/corner"
+                android:background="@drawable/success_buttons"
                 android:text="@string/cancel"
                 android:textColor="#FFF" />
 

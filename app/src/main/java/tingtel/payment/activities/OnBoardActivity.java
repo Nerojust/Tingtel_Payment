@@ -31,29 +31,19 @@ import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
 public class OnBoardActivity extends AppCompatActivity {
 
-    private LinearLayout pager_indicator;
-    private int dotsCount;
-    private ImageView[] dots;
-
-
-
-    private ViewPager onboard_pager;
-
-    private OnBoardAdapter mAdapter;
-
-    private Button btn_get_started;
-
-    int previous_pos=0;
-
     final String[] permissions = new String[]{
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.RECEIVE_SMS,
             Manifest.permission.CALL_PHONE
     };
-
+    int previous_pos = 0;
     SessionManager sessionManager = AppUtils.getSessionManagerInstance();
-
-    ArrayList<OnBoardItem> onBoardItems=new ArrayList<>();
+    ArrayList<OnBoardItem> onBoardItems = new ArrayList<>();
+    private LinearLayout pager_indicator;
+    private int dotsCount;
+    private ImageView[] dots;
+    private OnBoardAdapter mAdapter;
+    private Button btn_get_started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +51,12 @@ public class OnBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_on_board);
 
         btn_get_started = findViewById(R.id.btn_get_started);
-        onboard_pager = findViewById(R.id.pager_introduction);
+        ViewPager onboard_pager = findViewById(R.id.pager_introduction);
         pager_indicator = findViewById(R.id.viewPagerCountDots);
 
         loadData();
 
-        mAdapter = new OnBoardAdapter(this,onBoardItems);
+        mAdapter = new OnBoardAdapter(this, onBoardItems);
         onboard_pager.setAdapter(mAdapter);
         onboard_pager.setCurrentItem(0);
         onboard_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -87,14 +77,14 @@ public class OnBoardActivity extends AppCompatActivity {
                 dots[position].setImageDrawable(ContextCompat.getDrawable(OnBoardActivity.this, R.drawable.selected_item_dot));
 
 
-                int pos=position+1;
+                int pos = position + 1;
 
-                if(pos==dotsCount&&previous_pos==(dotsCount-1))
+                if (pos == dotsCount && previous_pos == (dotsCount - 1))
                     show_animation();
-                else if(pos==(dotsCount-1)&&previous_pos==dotsCount)
+                else if (pos == (dotsCount - 1) && previous_pos == dotsCount)
                     hide_animation();
 
-                previous_pos=pos;
+                previous_pos = pos;
             }
 
             @Override
@@ -103,19 +93,11 @@ public class OnBoardActivity extends AppCompatActivity {
             }
         });
 
-        btn_get_started.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //   Toast.makeText(OnBoardActivity.this,"Redirect to wherever you want",Toast.LENGTH_LONG).show();
-
-                requestPermissions();
-            }
+        btn_get_started.setOnClickListener(v -> {
+            requestPermissions();
         });
 
         setUiPageViewController();
-
-
     }
 
     private void requestPermissions() {
@@ -150,17 +132,15 @@ public class OnBoardActivity extends AppCompatActivity {
 
     // Load data into the viewpager
 
-    public void loadData()
-    {
+    public void loadData() {
 
         int[] header = {R.string.ob_header1, R.string.ob_header2, R.string.ob_header3};
         int[] desc = {R.string.ob_desc1, R.string.ob_desc2, R.string.ob_desc3};
         int[] imageId = {R.drawable.ic_journey, R.drawable.ic_celebration, R.drawable.ic_security};
 
 
-        for(int i=0;i<imageId.length;i++)
-        {
-            OnBoardItem item=new OnBoardItem();
+        for (int i = 0; i < imageId.length; i++) {
+            OnBoardItem item = new OnBoardItem();
             item.setImageID(imageId[i]);
             item.setTitle(getResources().getString(header[i]));
             item.setDescription(getResources().getString(desc[i]));
@@ -171,8 +151,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
     // Button bottomUp animation
 
-    public void show_animation()
-    {
+    public void show_animation() {
         Animation show = AnimationUtils.loadAnimation(this, R.anim.slide_up_anim);
 
         btn_get_started.startAnimation(show);
@@ -192,7 +171,6 @@ public class OnBoardActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
 
                 btn_get_started.clearAnimation();
-
             }
 
         });
@@ -202,8 +180,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
     // Button Topdown animation
 
-    public void hide_animation()
-    {
+    public void hide_animation() {
         Animation hide = AnimationUtils.loadAnimation(this, R.anim.slide_down_anim);
 
         btn_get_started.startAnimation(hide);
@@ -256,8 +233,6 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 101) {
@@ -278,5 +253,4 @@ public class OnBoardActivity extends AppCompatActivity {
             }
         }
     }
-
 }

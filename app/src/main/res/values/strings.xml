@@ -33,7 +33,7 @@
     <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">Tingtel helps you transfer airtime of any network to other networks. \n In order to transfer airtime, please click on the transfer airtime button</string>
     <string name="transfer_airtime">Transfer Airtime</string>
     <string name="history">History</string>
-    <string name="welcome_martins">Welcome Martins Becca</string>
+    <string name="welcome_martins">Hi, Martins Becca</string>
     <string name="transfer_amount">Now enter the Transfer Amount</string>
     <string name="enter_amount_to_transfer">Enter amount to transfer</string>
     <string name="currently_active_sim_1">Currently Active SIM 1:</string>
