@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.onboard.SplashActivity">
 
 
     <LinearLayout
@@ -13,7 +13,7 @@
         android:background="@color/tingtel_red_color"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".activities.SplashActivity">
+        tools:context=".activities.onboard.SplashActivity">
 
         <ImageView
             android:id="@+id/splashimage"

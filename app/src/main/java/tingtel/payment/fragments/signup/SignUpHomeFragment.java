@@ -16,7 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.util.Objects;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.SignInActivity;
+import tingtel.payment.activities.sign_in.SignInActivity;
 
 /**
  * A simple {@link Fragment} subclass.

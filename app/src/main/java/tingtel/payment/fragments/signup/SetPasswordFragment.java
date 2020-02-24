@@ -13,8 +13,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 

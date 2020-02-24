@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_transfer_airtime_preview" />
     <activity
         android:id="@+id/QRCodeScanActivity2"
-        android:name="tingtel.payment.activities.QRCodeScanActivity"
+        android:name="tingtel.payment.activities.qr_code.QRCodeScanActivity"
         android:label="activity_qrcode_scan"
         tools:layout="@layout/activity_qrcode_scan" />
 </navigation>

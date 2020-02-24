@@ -24,7 +24,7 @@
         tools:layout="@layout/activity_transfer_airtime" />
     <activity
         android:id="@+id/historyActivity"
-        android:name="tingtel.payment.activities.HistoryActivity"
+        android:name="tingtel.payment.activities.history.HistoryActivity"
         android:label="activity_history"
         tools:layout="@layout/activity_history" />
 </navigation>

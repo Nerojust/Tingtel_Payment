@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.settings;
 
 import android.os.Bundle;
 import android.widget.Button;

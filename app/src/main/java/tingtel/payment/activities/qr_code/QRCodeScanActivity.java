@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.qr_code;
 
 import android.Manifest;
 import android.content.Context;

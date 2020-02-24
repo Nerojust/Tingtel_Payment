@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.history;
 
 import android.os.Bundle;
 

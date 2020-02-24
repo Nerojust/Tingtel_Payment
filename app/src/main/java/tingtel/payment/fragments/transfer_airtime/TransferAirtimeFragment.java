@@ -23,10 +23,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
-import tingtel.payment.activities.SettingsActivity;
-import tingtel.payment.activities.SignUpActivity;
+import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.SettingsActivity;
+import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;

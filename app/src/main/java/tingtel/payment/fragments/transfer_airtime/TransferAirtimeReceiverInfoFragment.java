@@ -26,9 +26,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
-import tingtel.payment.activities.SettingsActivity;
+import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.utils.AppUtils;
 

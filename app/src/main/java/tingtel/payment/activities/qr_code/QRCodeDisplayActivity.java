@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.qr_code;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;

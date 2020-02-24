@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.settings;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -16,12 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
-import tingtel.payment.activities.settings.AddSimActivity;
-import tingtel.payment.activities.settings.ChangeEmailActivity;
-import tingtel.payment.activities.settings.ChangePasswordActivity;
-import tingtel.payment.activities.settings.ManageSimActivity;
-import tingtel.payment.activities.settings.ReportIssueActivity;
-import tingtel.payment.activities.settings.TutorialActivity;
+import tingtel.payment.activities.qr_code.QRCodeDisplayActivity;
+import tingtel.payment.activities.sign_in.SignInActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 

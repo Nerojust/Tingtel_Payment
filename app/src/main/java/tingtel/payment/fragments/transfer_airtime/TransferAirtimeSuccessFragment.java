@@ -14,8 +14,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.

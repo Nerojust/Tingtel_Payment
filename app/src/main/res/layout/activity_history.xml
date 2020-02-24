@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
-    tools:context=".activities.HistoryActivity">
+    tools:context=".activities.history.HistoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"

@@ -6,7 +6,7 @@
     android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".activities.QRCodeDisplayActivity">
+    tools:context=".activities.qr_code.QRCodeDisplayActivity">
 
     <ScrollView
         android:layout_width="match_parent"

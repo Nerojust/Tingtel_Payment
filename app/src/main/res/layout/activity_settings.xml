@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
-    tools:context=".activities.SettingsActivity">
+    tools:context=".activities.settings.SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.sign_up;
 
 import android.content.Intent;
 import android.os.Bundle;

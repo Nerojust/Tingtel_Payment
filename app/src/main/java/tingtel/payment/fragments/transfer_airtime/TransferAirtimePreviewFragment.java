@@ -22,9 +22,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
-import tingtel.payment.activities.SettingsActivity;
+import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;

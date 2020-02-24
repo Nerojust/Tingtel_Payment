@@ -17,8 +17,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.util.Objects;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.SettingsActivity;
-import tingtel.payment.activities.SignUpActivity;
+import tingtel.payment.activities.settings.SettingsActivity;
+import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.SessionManager;
 

@@ -1,4 +1,4 @@
-package tingtel.payment;
+package tingtel.payment.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -7,7 +7,8 @@ import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import tingtel.payment.activities.SignInActivity;
+import tingtel.payment.R;
+import tingtel.payment.activities.sign_in.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
 

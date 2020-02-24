@@ -1,4 +1,4 @@
-package tingtel.payment.activities;
+package tingtel.payment.activities.sign_in;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 
-import tingtel.payment.MainActivity;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.ForgotPasswordActivity;
+import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.utils.NetworkCarrierUtils;
 
 public class SignInActivity extends AppCompatActivity {

@@ -21,61 +21,61 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.HistoryActivity"
+            android:name=".activities.history.HistoryActivity"
             android:label="History"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name=".activities.settings.ForgotPasswordActivity"
             android:label="Reset Password"
-            android:parentActivityName=".activities.SignInActivity" />
+            android:parentActivityName=".activities.sign_in.SignInActivity" />
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.settings.AboutUsActivity"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ReportIssueActivity"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.TutorialActivity"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ManageSimActivity"
             android:label="@string/manage_sims"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.AddSimActivity"
             android:label="Add Sim"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ChangeEmailActivity"
             android:label="@string/change_email"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ChangePasswordActivity"
             android:label="@string/change_password"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
-            android:name=".activities.QRCodeScanActivity"
+            android:name=".activities.qr_code.QRCodeScanActivity"
             android:label="QR Code Scan" />
         <activity
-            android:name=".activities.QRCodeDisplayActivity"
+            android:name=".activities.qr_code.QRCodeDisplayActivity"
             android:label="QR Image"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activities.settings.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.sign_up.SignUpActivity"
             android:label="Register"
-            android:parentActivityName=".activities.SignInActivity" />
+            android:parentActivityName=".activities.sign_in.SignInActivity" />
         <activity
-            android:name=".activities.SignInActivity"
+            android:name=".activities.sign_in.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.OnBoardActivity" />
+        <activity android:name=".activities.onboard.OnBoardActivity" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".activities.onboard.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,7 +84,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
