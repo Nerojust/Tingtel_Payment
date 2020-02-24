@@ -110,6 +110,8 @@
     <string name="tutorial_how_to_use">Tutorial (How to use)</string>
     <string name="report_an_issue">Report an Issue</string>
     <string name="do_you_want_to_logout">Do you want to logout?</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="invalid_characters">Invalid Character/s</string>
 
 
     <string-array name="sim">

@@ -16,13 +16,13 @@ public class SignInActivity extends AppCompatActivity {
 
     private NavController navController;
     private Button btnSingIn;
-    private TextView tvSignUp;
+    private TextView tvSignUp, forgotPasswordTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        NetworkCarrierUtils.getCarrierOfSim(this,this);
+        NetworkCarrierUtils.getCarrierOfSim(this, this);
         initViews();
         initListeners();
     }
@@ -39,10 +39,15 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        forgotPasswordTextView.setOnClickListener(v -> {
+            startActivity(new Intent(this, ForgotPasswordActivity.class));
+        });
     }
 
     private void initViews() {
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
+        forgotPasswordTextView = findViewById(R.id.forgotPassword);
     }
 }

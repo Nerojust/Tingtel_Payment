@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.ForgotPasswordActivity"
+            android:label="Reset Password"
+            android:parentActivityName=".activities.SignInActivity"/>
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -44,8 +47,9 @@
         <activity
             android:name=".activities.settings.ChangePasswordActivity"
             android:parentActivityName=".activities.SettingsActivity" />
-        <activity android:name=".activities.QRCodeScanActivity"
-            android:label="QR Code Scan"/>
+        <activity
+            android:name=".activities.QRCodeScanActivity"
+            android:label="QR Code Scan" />
         <activity
             android:name=".activities.QRCodeDisplayActivity"
             android:label="QR Image"

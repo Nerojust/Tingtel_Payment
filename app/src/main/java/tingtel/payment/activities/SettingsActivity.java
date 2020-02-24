@@ -26,7 +26,7 @@ import tingtel.payment.activities.settings.TutorialActivity;
 public class SettingsActivity extends AppCompatActivity {
 
     LinearLayout changePasswordLayout, changeEmailAddressLayout, addSimLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, qrCodeLayout,shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+            reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     Button logoutButton;
 
     @Override
@@ -57,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initListeners() {
         backArrowLayout.setOnClickListener(v -> finish());
-        qrCodeLayout.setOnClickListener(v->startActivity(new Intent(this,QRCodeDisplayActivity.class)));
+        qrCodeLayout.setOnClickListener(v -> startActivity(new Intent(this, QRCodeDisplayActivity.class)));
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         addSimLayout.setOnClickListener(v -> startActivity(new Intent(this, AddSimActivity.class)));
@@ -86,26 +86,18 @@ public class SettingsActivity extends AppCompatActivity {
             builder.setView(dialogView);
             AlertDialog alertDialog = builder.create();
 
-            Button btnYes = (Button) dialogView.findViewById(R.id.btn_yes);
-            Button btnNo = (Button) dialogView.findViewById(R.id.btn_no);
+            Button btnYes = dialogView.findViewById(R.id.btn_yes);
+            Button btnNo = dialogView.findViewById(R.id.btn_no);
 
-            btnYes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            btnYes.setOnClickListener(v12 -> {
 
-                    Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
-                }
             });
 
-            btnNo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    alertDialog.dismiss();
-                }
-            });
+            btnNo.setOnClickListener(v1 -> alertDialog.dismiss());
 
             alertDialog.show();
 
@@ -127,7 +119,8 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, SignInActivity.class));
+            finishAffinity();
         });
     }
 }

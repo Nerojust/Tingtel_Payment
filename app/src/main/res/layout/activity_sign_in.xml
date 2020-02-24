@@ -143,6 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:id="@+id/forgotPassword"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="40dp"
                         android:fontFamily="@font/raleway_regular"
