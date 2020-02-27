@@ -3,231 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="20dp"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.GetTransferPinTutorialFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_network_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/mtn_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingHorizontal="20dp">
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/mtn_logo" />
-
-            <TextView
-                android:id="@+id/mtn_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/logo"
-                android:padding="16dp"
-                android:text="Pin Change"
-                android:textColor="#333"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
-        <com.github.aakira.expandablelayout.ExpandableLinearLayout
-            android:id="@+id/mtn_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            app:ael_duration="500"
-            app:ael_expanded="false"
-            app:ael_orientation="vertical">
-            <!--add your content here -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dial *600*0000*new pin*new pin#    to set/change your pin \n Default pin is 0000" />
-        </com.github.aakira.expandablelayout.ExpandableLinearLayout>
-
-    </LinearLayout>
-
-    <View
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:layout_marginVertical="15dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Network"
+        />
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/tingtel_light_red" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/airtel_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingHorizontal="20dp">
-
-            <ImageView
-                android:id="@+id/logo2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/airtel_logo" />
-
-            <TextView
-                android:id="@+id/accordian_title2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/logo2"
-                android:padding="16dp"
-                android:text="Pin Change"
-                android:textColor="#333"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
-        <com.github.aakira.expandablelayout.ExpandableLinearLayout
-            android:id="@+id/airtel_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            app:ael_duration="500"
-            app:ael_expanded="false"
-            app:ael_orientation="vertical">
-            <!--add your content here -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
-        </com.github.aakira.expandablelayout.ExpandableLinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/tingtel_light_red" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/nmobile_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingHorizontal="20dp">
-
-            <ImageView
-                android:id="@+id/logo3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/nmobile_logo" />
-
-            <TextView
-                android:id="@+id/accordian_title3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/logo3"
-                android:padding="16dp"
-                android:text="Pin Change"
-                android:textColor="#333"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
-        <com.github.aakira.expandablelayout.ExpandableLinearLayout
-            android:id="@+id/nmobile_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            app:ael_duration="500"
-            app:ael_expanded="false"
-            app:ael_orientation="vertical">
-            <!--add your content here -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
-        </com.github.aakira.expandablelayout.ExpandableLinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/tingtel_light_red" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/glo_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingHorizontal="20dp">
-
-            <ImageView
-                android:id="@+id/logo4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/glo_logo" />
-
-            <TextView
-                android:id="@+id/accordian_title4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/logo4"
-                android:padding="16dp"
-                android:text="Pin Change"
-                android:textColor="#333"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
-        <com.github.aakira.expandablelayout.ExpandableLinearLayout
-            android:id="@+id/glo_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            app:ael_duration="500"
-            app:ael_expanded="false"
-            app:ael_orientation="vertical">
-            <!--add your content here -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
-        </com.github.aakira.expandablelayout.ExpandableLinearLayout>
-
-    </LinearLayout>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
