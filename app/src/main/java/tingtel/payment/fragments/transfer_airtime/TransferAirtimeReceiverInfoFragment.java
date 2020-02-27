@@ -124,7 +124,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         });
 
-        whatIsPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, null));
+        whatIsPin.setOnClickListener(v ->
+        {
+            Bundle bundle = new Bundle();
+            bundle.putString("network", SenderSimNetwork);
+            navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
+        });
 
         qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
     }
