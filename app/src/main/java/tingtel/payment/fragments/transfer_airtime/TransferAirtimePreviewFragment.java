@@ -1,6 +1,8 @@
 package tingtel.payment.fragments.transfer_airtime;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -132,12 +134,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
         btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         btnSendMessage.setOnClickListener(v -> {
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.putExtra("sms_body", "Hello, I just Sent " + Amount + " Using" + " the Tingtel App");
-            sendIntent.putExtra("address", ReceiverPhoneNumber);
-            sendIntent.setType("vnd.android-dir/mms-sms");
-            Objects.requireNonNull(getActivity()).startActivity(sendIntent);
 
+            Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+            smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            smsIntent.setType("vnd.android-dir/mms-sms");
+            smsIntent.setData(Uri.parse("sms:" + ReceiverPhoneNumber));
+            smsIntent.putExtra("sms_body", edMessage.getText().toString());
+
+            try {
+                startActivity(smsIntent);
+            } catch (ActivityNotFoundException e) {
+                // Display some sort of error message here.
+                Toast.makeText(getActivity(), "App not found", Toast.LENGTH_LONG).show();
+            }
         });
 
         btnCancel.setOnClickListener(v -> {
@@ -337,10 +346,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * send the sms to user
      */
     private void sendSms() {
-        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-        sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " " + Amount + " " + Pin);
-        sendIntent.putExtra("address", "432");
+        Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+        sendIntent.addCategory(Intent.CATEGORY_DEFAULT);
         sendIntent.setType("vnd.android-dir/mms-sms");
+        sendIntent.setData(Uri.parse("sms:" + "432"));
+        sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " " + Amount + " " + Pin);
+
         startActivity(sendIntent);
+
     }
 }
