@@ -2,11 +2,14 @@ package tingtel.payment.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,6 +82,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         final TextView tvPhoneNumber;
         final TextView tvNetworkName;
         final ImageView imgDelete;
+        final Switch on_off_switch;
         private final ImageView imageNetwork;
 
         MyViewHolder(View itemView) {
@@ -87,16 +91,23 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             tvNetworkName = itemView.findViewById(R.id.tv_network_name);
             imgDelete = itemView.findViewById(R.id.btn_delete);
             imageNetwork = itemView.findViewById(R.id.img_network);
+            on_off_switch = itemView.findViewById(R.id.switchbutton);
+            on_off_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.v("Switch State=", "" + isChecked);
+                    if (isChecked) {
+                        on_off_switch.setText("Active");
+                        // do something when check is selected
+                    } else {
+                        //do something when unchecked
+                        on_off_switch.setText("Inactive");
+                    }
+                }
 
-           /* Context context = itemView.getContext();
-
-            itemView.setOnClickListener(view -> {
-                SimCards SimCardsModel = (SimCards) view.getTag();
-
-                Toast.makeText(mContext, "f" + SimCardsModel.getPhoneNumber(), Toast.LENGTH_LONG).show();
             });
-            itemView.setOnLongClickListener(v -> true);*/
+
 
             imgDelete.setOnClickListener(v -> {
 //                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);

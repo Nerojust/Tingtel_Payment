@@ -43,6 +43,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
     private String Amount;
+    private String SimSerial;
+    private Button btnPreview;
+    private NavController navController;
+    private TextView whatIsPin;
+    private EditText edPin;
+    private EditText edReceiverPhoneNumber;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
@@ -52,13 +58,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             }
         }
     };
-    private String SimSerial;
-    private Button btnPreview;
-    private NavController navController;
-    private TextView whatIsPin;
-    private EditText edPin;
-    private EditText edReceiverPhoneNumber;
-    private ImageView qrCodeImageview;
+    private ImageView qrCodeImageview, contactsImageview;
     private TextView edAmount;
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
@@ -91,11 +91,11 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(),MainActivity.class);
+            Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         });
-        settingsImagview.setOnClickListener(v->startActivity(new Intent(getContext(), SettingsActivity.class)));
+        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         //todo: uncomment later
       /*  btnPreview.setOnClickListener(v -> {
@@ -126,6 +126,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         whatIsPin.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, null));
 
+        contactsImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_contactListActivity));
+
         qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
     }
 
@@ -144,6 +146,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         mSpinner = view.findViewById(R.id.network_spinner);
         btnPreview = view.findViewById(R.id.btn_preview);
         qrCodeImageview = view.findViewById(R.id.codeImageView);
+        contactsImageview = view.findViewById(R.id.contactsImageview);
         edPin = view.findViewById(R.id.pinEditext);
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);
@@ -172,7 +175,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
 
                 switch (spinnerTitles[i]) {
 

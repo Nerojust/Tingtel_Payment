@@ -44,17 +44,14 @@ public class SessionManager {
     private static final String PHONE_NUMBER = "PHONE_NUMBER";
     private static final String PHONE_NUMBER1 = "PHONE_NUMBER1";
     private static final String SCANNED_CODE = "SCANNED_CODE";
-
-    private final SharedPreferences pref = getSharedPreferencesCustomer();
-
-
+    private static final String QRIMAGE = "QRIMAGE";
     private static final String OnBoardStatus = "ONBOARD_STATUS";
     private static final String COUNTRY = "COUNTRY";
     private static final String COUNTRYSIM1 = "COUNTRY_SIM1";
     private static final String COUNTRYSIM2 = "COUNTRY_SIM2";
     private static final String APPSTATE = "APP_STATE";
     private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
-
+    private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
         SharedPreferences.Editor editor = pref.edit();
@@ -229,22 +226,21 @@ public class SessionManager {
         return getBooleanPreference(IS_SIM2_DATA_CLICKED);
     }
 
-    public void setIntroStatus(boolean b) {
-        setBooleanPreference(INTRO_STATUS, b);
-    }
-
     public boolean getIntroStatus() {
         return getBooleanPreference(INTRO_STATUS);
     }
 
-    public void setLoginStatus(boolean b) {
-        setBooleanPreference(LOGIN_STATUS, b);
+    public void setIntroStatus(boolean b) {
+        setBooleanPreference(INTRO_STATUS, b);
     }
 
     public boolean getLoginStatus() {
         return getBooleanPreference(LOGIN_STATUS);
     }
 
+    public void setLoginStatus(boolean b) {
+        setBooleanPreference(LOGIN_STATUS, b);
+    }
 
     public String getClickedNetworkSerial() {
         return getStringPreference(CLICKED_NETWORK_SERIAL);
@@ -304,6 +300,9 @@ public class SessionManager {
         setBooleanPreference(HAS_AIRTIME_SIM2_COME_YET, hasDataResultComeYet);
     }
 
+    public String getBankName() {
+        return getStringPreference(BANK_NAME);
+    }
 
     public void setBankName(String bankName) {
 
@@ -311,22 +310,19 @@ public class SessionManager {
 
     }
 
-
-    public String getBankName() {
+    public String getBankName1() {
         return getStringPreference(BANK_NAME);
     }
-
 
     public void setBankName1(String bankName) {
 
         setStringPreference(BANK_NAME1, bankName);
 
     }
-    public String getBankName1() {
-        return getStringPreference(BANK_NAME);
+
+    public String getBankAcc() {
+        return getStringPreference(BANK_ACC);
     }
-
-
 
     public void setBankAcc(String bankAcc) {
 
@@ -334,11 +330,9 @@ public class SessionManager {
 
     }
 
-
-    public String getBankAcc() {
-        return getStringPreference(BANK_ACC);
+    public String getBankAcc1() {
+        return getStringPreference(BANK_ACC1);
     }
-
 
     public void setBankAcc1(String bankAcc) {
 
@@ -346,13 +340,9 @@ public class SessionManager {
 
     }
 
-
-    public String getBankAcc1() {
-        return getStringPreference(BANK_ACC1);
+    public String getBankAccName() {
+        return getStringPreference(BANK_ACC_NAME);
     }
-
-
-
 
     public void setBankAccName(String bankAccName) {
 
@@ -360,11 +350,9 @@ public class SessionManager {
 
     }
 
-
-    public String getBankAccName() {
-        return getStringPreference(BANK_ACC_NAME);
+    public String getBankAccName1() {
+        return getStringPreference(BANK_ACC_NAME1);
     }
-
 
     public void setBankAccName1(String bankAcc) {
 
@@ -372,33 +360,28 @@ public class SessionManager {
 
     }
 
-
-    public String getBankAccName1() {
-        return getStringPreference(BANK_ACC_NAME1);
-    }
-
-    public int getTotalNumberOfSimsDetectedOnDevice(){
+    public int getTotalNumberOfSimsDetectedOnDevice() {
         return getIntPreference(NUM_OF_SIMS_FOUND);
     }
 
     public void setTotalNumberOfSimsDetectedOnDevice(int numberOfSimsOnTheDevice) {
-        setIntPreference(NUM_OF_SIMS_FOUND,numberOfSimsOnTheDevice);
+        setIntPreference(NUM_OF_SIMS_FOUND, numberOfSimsOnTheDevice);
     }
 
-    public boolean getIsRequestFromTransferActivity(){
+    public boolean getIsRequestFromTransferActivity() {
         return getBooleanPreference(IS_IT_FROM_TRANSFER_ACTIVITY);
     }
 
     public void setIsRequestFromTransferActivity(boolean b) {
-        setBooleanPreference(IS_IT_FROM_TRANSFER_ACTIVITY,b);
+        setBooleanPreference(IS_IT_FROM_TRANSFER_ACTIVITY, b);
     }
-
 
 
     public String getAppState() {
 
         return getStringPreference(APPSTATE);
     }
+
     public void setAppstate(String AppState) {
         setStringPreference(APPSTATE, AppState);
     }
@@ -423,15 +406,24 @@ public class SessionManager {
 
         return getStringPreference(NO_OF_REGISTERED_SIM);
     }
+
     public void setNoOfRegisteredSim(String NoOfRegisteredSim) {
         setStringPreference(NO_OF_REGISTERED_SIM, NoOfRegisteredSim);
     }
-    public String getScannedCodeResult(){
+
+    public String getScannedCodeResult() {
         return getStringPreference(SCANNED_CODE);
     }
 
     public void setScannedCodeResult(String code) {
-        setStringPreference(SCANNED_CODE,code);
+        setStringPreference(SCANNED_CODE, code);
     }
 
+    public String getImageStoragePath() {
+        return getStringPreference(QRIMAGE);
+    }
+
+    public void setImageStoragePath(String barcodeImage) {
+        setStringPreference(QRIMAGE, barcodeImage);
+    }
 }

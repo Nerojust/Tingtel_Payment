@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/tingtel_bg4"
+    android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimeReceiverInfoFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,25 +105,28 @@
                         android:textAlignment="center"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="22sp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/tingtel_light_gray"
-                    android:orientation="vertical">
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway_regular"
-                        android:text="@string/network" />
+                        android:background="@color/tingtel_light_gray"
+                        android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/network_spinner"
-                        android:layout_width="match_parent"
-                        android:backgroundTintMode="src_atop"
-                        android:popupBackground="@color/tingtel_light_gray"
-                        android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="@string/network" />
 
-                </LinearLayout>
+                        <Spinner
+                            android:id="@+id/network_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTintMode="src_atop"
+                            android:popupBackground="@color/tingtel_light_gray" />
+
+                    </LinearLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -146,6 +150,15 @@
                                 android:maxLength="11"
                                 android:maxLines="1"
                                 android:textSize="17sp" />
+
+                            <ImageView
+                                android:id="@+id/contactsImageview"
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.5"
+                                android:src="@drawable/ic_contacts" />
 
                             <ImageView
                                 android:id="@+id/codeImageView"
@@ -207,6 +220,7 @@
                         android:text="Amount to be sent"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="13sp" />
+
                     <TextView
                         android:id="@+id/confirmAmount_id"
                         android:layout_width="match_parent"
@@ -216,6 +230,7 @@
                         android:text="Amount to be sent"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="18sp" />
+
                     <Button
                         android:id="@+id/btn_preview"
                         android:layout_width="match_parent"

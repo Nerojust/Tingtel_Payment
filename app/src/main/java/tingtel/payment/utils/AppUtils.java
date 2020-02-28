@@ -5,21 +5,31 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 import tingtel.payment.R;
@@ -117,5 +127,67 @@ public class AppUtils {
         btnOk.setOnClickListener(v -> alertDialog.dismiss());
         alertDialog.show();
 
+    }
+
+    public static void deleteFile(Context context, String filepath) {
+        File file = new File(filepath);
+        file.delete();
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+    }
+
+    public static void deleteFiles(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            String deleteCmd = "rm -r " + path;
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec(deleteCmd);
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public static boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable) drawable).getBitmap() != null;
+        }
+
+        return hasImage;
+    }
+
+    //left
+    public static void saveCustomerLeftThumbToGallery(Context context, String filename, Bitmap bitmap) {
+        String barcodeImage = null;
+        try {
+            barcodeImage = Environment.getExternalStorageDirectory() + "//VPOS_DETAILS//FINGERPRINT_DATA";
+            File file = new File(barcodeImage);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            barcodeImage = barcodeImage + "//" + filename;
+
+            AppUtils.getSessionManagerInstance().setImageStoragePath(barcodeImage);
+            file = new File(barcodeImage);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(barcodeImage));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, dos);
+            dos.flush();
+            dos.close();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file = null;
+        if (barcodeImage != null) {
+            file = new File(barcodeImage);
+        }
+        Uri contentUri = Uri.fromFile(file);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
     }
 }

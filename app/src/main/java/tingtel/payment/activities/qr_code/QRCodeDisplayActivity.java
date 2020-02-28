@@ -1,7 +1,12 @@
 package tingtel.payment.activities.qr_code;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +23,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.io.File;
+
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
@@ -26,11 +33,17 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
     MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
     LinearLayout radioGroupLayout, qr1Layout, qr2Layout;
     RadioGroup radioGroup;
-    private RadioButton rbSim1,rbSim2;
     ImageView qrSim1Imageview, qrSim2Imageview, shareQR1, shareQR2;
     Button getCodeButton;
     SessionManager sessionManager;
+    private RadioButton rbSim1, rbSim2;
     private Bitmap bitmapSim1;
+    private String path;
+    private String tingtelPath;
+    private File directoryForTingtel;
+    private String timeStamp;
+    private String fileName;
+    private String mCurrentQRImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +61,8 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         qrSim2Imageview = findViewById(R.id.simTwoQRCodeImageview);
         getCodeButton = findViewById(R.id.getCodeButton);
         radioGroup = findViewById(R.id.radioGroup);
-        rbSim1 =findViewById(R.id.radioSim1);
-        rbSim2 =findViewById(R.id.radioSim2);
+        rbSim1 = findViewById(R.id.radioSim1);
+        rbSim2 = findViewById(R.id.radioSim2);
         shareQR1 = findViewById(R.id.shareSim1);
         shareQR2 = findViewById(R.id.shareSim2);
 
@@ -67,17 +80,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                     convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber(), qrSim1Imageview);
                     qr1Layout.setVisibility(View.VISIBLE);
 
-                    /*Bitmap bm = ((BitmapDrawable) qrSim1Imageview.getDrawable()).getBitmap();
-                    shareQR1.setOnClickListener(v1 -> {
-                        String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bm, "title", "lets go there");
-                        Uri bitmapUri = Uri.parse(bitmapPath);
 
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("image/png");
-                        intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
-                        startActivity(Intent.createChooser(intent, "Share"));
-
-                    });*/
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
@@ -163,7 +166,7 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(this, "Please register a sim first", Toast.LENGTH_SHORT).show();
                             }
-                        }else
+                        } else
                             Toast.makeText(this, "Network not supported", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -177,8 +180,48 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
             }
         });
 
+        shareQR1.setOnClickListener(v -> {
+            if (AppUtils.hasImage(qrSim1Imageview)) {
 
+                Drawable mDrawable = qrSim1Imageview.getDrawable();
+                Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
+
+                path = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap, "TingtelQRCode", null);
+
+                Uri uri = Uri.parse(path);
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey please scan to pay at " + "https://play.google.com/store/apps/details?id=" + getPackageName());
+                startActivity(Intent.createChooser(intent, "Share Tingtel QR Code with"));
+
+
+            } else Toast.makeText(this, "Get a qr code first", Toast.LENGTH_SHORT).show();
+        });
+        shareQR2.setOnClickListener(v -> {
+            if (AppUtils.hasImage(qrSim2Imageview)) {
+
+                Drawable mDrawable = qrSim2Imageview.getDrawable();
+                Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
+
+                path = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap, "TingtelQRCode", null);
+
+                Uri uri = Uri.parse(path);
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey please scan to pay at " + "https://play.google.com/store/apps/details?id=" + getPackageName());
+                startActivity(Intent.createChooser(intent, "Share Tingtel QR Code with"));
+
+
+            } else Toast.makeText(this, "Get a qr code first", Toast.LENGTH_SHORT).show();
+
+        });
     }
+
+
     private void populateSimRadioButtons() {
         String NoOfSIm = sessionManager.getSimStatus();
 
