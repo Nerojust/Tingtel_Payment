@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.transfer_airtime;
 
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,9 @@ import tingtel.payment.utils.AppUtils;
 
 
 public class TransferAirtimeReceiverInfoFragment extends Fragment {
+    final String[] permissions = new String[]{
+            Manifest.permission.READ_CONTACTS
+    };
     String[] spinnerPopulation;
     private String[] spinnerTitles;
     private int[] spinnerImages;
@@ -131,7 +135,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
         });
 
-        contactsImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_contactListActivity));
 
         qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
     }
@@ -151,7 +154,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         mSpinner = view.findViewById(R.id.network_spinner);
         btnPreview = view.findViewById(R.id.btn_preview);
         qrCodeImageview = view.findViewById(R.id.codeImageView);
-        contactsImageview = view.findViewById(R.id.contactsImageview);
         edPin = view.findViewById(R.id.pinEditext);
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);

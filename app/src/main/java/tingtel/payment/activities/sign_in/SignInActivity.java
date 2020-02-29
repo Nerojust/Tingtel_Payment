@@ -2,8 +2,10 @@ package tingtel.payment.activities.sign_in;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -27,6 +29,13 @@ public class SignInActivity extends AppCompatActivity {
         NetworkCarrierUtils.getCarrierOfSim(this, this);
         initViews();
         initListeners();
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        Toast.makeText(this, "Height is : "+height +"\n"+"width is : "+width, Toast.LENGTH_SHORT).show();
     }
 
     private void initListeners() {

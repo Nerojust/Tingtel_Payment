@@ -12,19 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="25dp"
-        android:orientation="horizontal">
+        android:background="@color/tingtel_red_color"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp">
 
 
         <LinearLayout
             android:id="@+id/backArrowLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-
+            android:layout_marginLeft="13dp"
+            android:layout_weight="0.7"
             android:orientation="horizontal">
 
             <ImageView
@@ -57,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:gravity="center"
             android:text="" />
 
@@ -66,7 +65,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_weight="0.1"
+            android:layout_weight="0.3"
             android:src="@drawable/ic_settings_black_24dp" />
 
     </LinearLayout>
@@ -99,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-                        android:layout_marginBottom="40dp"
+                        android:layout_marginBottom="25dp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="Receiver information"
                         android:textAlignment="center"
@@ -115,6 +114,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="13sp"
                             android:fontFamily="@font/raleway_regular"
                             android:text="@string/network" />
 
@@ -152,15 +154,6 @@
                                 android:textSize="17sp" />
 
                             <ImageView
-                                android:id="@+id/contactsImageview"
-                                android:layout_width="0dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="0.5"
-                                android:src="@drawable/ic_contacts" />
-
-                            <ImageView
                                 android:id="@+id/codeImageView"
                                 android:layout_width="0dp"
                                 android:layout_height="50dp"
@@ -192,7 +185,7 @@
                             android:drawableLeft="@drawable/ic_lock"
                             android:drawablePadding="8dp"
                             android:fontFamily="@font/raleway_regular"
-                            android:hint="Enter transfer pin"
+                            android:hint="@string/enter_transfer_pin"
                             android:inputType="numberPassword"
                             android:maxLength="7"
                             android:maxLines="1"
@@ -208,7 +201,7 @@
                         android:gravity="right"
                         android:text="@string/what_is_pin"
                         android:textColor="@color/tingtel_light_red"
-                        android:textSize="12sp" />
+                        android:textSize="10sp"  />
 
 
                     <TextView
@@ -217,7 +210,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:gravity="start"
-                        android:text="Amount to be sent"
+                        android:text="AMOUNT TO BE SENT"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="13sp" />
 
@@ -227,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="start"
-                        android:text="Amount to be sent"
+                        android:text=""
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="18sp" />
 
