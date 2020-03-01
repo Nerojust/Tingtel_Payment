@@ -35,6 +35,7 @@ public class OnBoardActivity extends AppCompatActivity {
     final String[] permissions = new String[]{
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.RECEIVE_SMS,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CALL_PHONE
     };
     int previous_pos = 0;
@@ -106,6 +107,7 @@ public class OnBoardActivity extends AppCompatActivity {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.RECEIVE_SMS)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.CALL_PHONE)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 Log.e(Constants.TAG, "Permission is granted");
 

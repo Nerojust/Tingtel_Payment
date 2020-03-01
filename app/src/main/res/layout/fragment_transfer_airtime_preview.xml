@@ -12,19 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="25dp"
-        android:orientation="horizontal">
+        android:background="@color/tingtel_red_color"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp">
 
 
         <LinearLayout
             android:id="@+id/backArrowLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-
+            android:layout_marginLeft="13dp"
+            android:layout_weight="0.7"
             android:orientation="horizontal">
 
             <ImageView
@@ -57,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:gravity="center"
             android:text="" />
 
@@ -66,7 +65,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_weight="0.1"
+            android:layout_weight="0.3"
             android:src="@drawable/ic_settings_black_24dp" />
 
     </LinearLayout>
