@@ -3,34 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tingtel_bg2"
     android:orientation="vertical"
     tools:context=".fragments.dashboard.DashboardFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
 
         <ImageView
             android:id="@+id/settingsImageview"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_gravity="end"
-            android:layout_weight="0.2"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/ic_settings_black_24dp" />
 
-    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +25,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +42,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:text="@string/welcome_martins"
                     android:textAlignment="center"
-                    android:textColor="@color/tingtel_white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -72,7 +60,7 @@
                     android:fontFamily="@font/rubik_light"
                     android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
                     android:textAlignment="center"
-                    android:textColor="@color/tingtel_white"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <Button

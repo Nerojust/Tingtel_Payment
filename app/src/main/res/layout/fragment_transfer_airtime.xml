@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tingtel_bg2"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimeFragment">
 
@@ -41,7 +41,7 @@
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="start|center"
                 android:text="Back"
-                android:textColor="@color/tingtel_white"
+                android:textColor="@color/black"
                 android:textSize="17sp" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_transfer_money" />
+                    android:src="@drawable/mobile_pay" />
 
                 <TextView
                     android:layout_width="match_parent"
