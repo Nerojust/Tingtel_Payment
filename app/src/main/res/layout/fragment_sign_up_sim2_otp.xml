@@ -50,7 +50,7 @@
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/otp_verification"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_18ssp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="8dp"
+                        android:textSize="@dimen/_10ssp"
                         android:fontFamily="@font/raleway_regular"
                         android:paddingHorizontal="50dp"
                         android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
@@ -82,7 +83,7 @@
                         android:layout_marginBottom="8dp"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/_15ssp"
                         app:itemCount="4"
                         app:itemHeight="48dp"
                         app:itemRadius="10dp"
@@ -99,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
+                        android:textSize="@dimen/_10ssp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/didn_t_get_the_otp_resend_otp"
                         android:textStyle="bold"
@@ -121,7 +123,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/verify"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

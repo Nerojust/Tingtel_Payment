@@ -47,7 +47,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/create_an_account"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/_17ssp"
                         android:textStyle="bold" />
 
 
@@ -66,7 +66,7 @@
                             android:maxLines="1"
                             android:inputType="text"
                             android:singleLine="true"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
                             android:fontFamily="@font/raleway_regular"
                             android:inputType="text"
                             android:hint="@string/etner_your_last_name"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -101,7 +101,7 @@
                             android:fontFamily="@font/raleway_regular"
                             android:inputType="textEmailAddress"
                             android:hint="@string/enter_your_email_address"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -120,7 +120,7 @@
                             android:inputType="text"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +136,7 @@
                         android:paddingHorizontal="60dp"
                         android:text="@string/sign_up"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:id="@+id/tv_login"
@@ -145,6 +145,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_marginBottom="40dp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/have_an_account_login" />

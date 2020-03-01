@@ -47,10 +47,6 @@
             android:label="@string/manage_sims"
             android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
-            android:name=".activities.settings.AddSimActivity"
-            android:label="Add Sim"
-            android:parentActivityName=".activities.settings.SettingsActivity" />
-        <activity
             android:name=".activities.settings.ChangeEmailActivity"
             android:label="@string/change_email"
             android:parentActivityName=".activities.settings.SettingsActivity" />

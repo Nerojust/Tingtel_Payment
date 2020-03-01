@@ -19,8 +19,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:gravity="center|top"
-                android:background="@drawable/fragment_header">
+                android:background="@drawable/fragment_header"
+                android:gravity="center|top">
 
             </RelativeLayout>
 
@@ -49,7 +49,7 @@
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/otp_verification"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_18ssp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -62,6 +62,7 @@
                         android:paddingHorizontal="50dp"
                         android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
                         android:textAlignment="center"
+                        android:textSize="@dimen/_11ssp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -81,7 +82,7 @@
                         android:layout_marginBottom="8dp"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/_15ssp"
                         app:itemCount="4"
                         app:itemHeight="48dp"
                         app:itemRadius="10dp"
@@ -100,6 +101,7 @@
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/didn_t_get_the_otp_resend_otp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/pinView"
@@ -120,7 +122,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/verify"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

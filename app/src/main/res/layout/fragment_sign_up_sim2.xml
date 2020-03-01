@@ -18,8 +18,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:gravity="center|top"
-                android:background="@drawable/fragment_header">
+                android:background="@drawable/fragment_header"
+                android:gravity="center|top">
 
             </RelativeLayout>
 
@@ -48,7 +48,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/enter_sim_2_details"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_18ssp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -58,7 +58,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginHorizontal="16dp"
                         android:gravity="right"
-                        android:textSize="10sp"
+                        android:textSize="@dimen/_8ssp"
                         tools:text="Airtel detected" />
 
                     <LinearLayout
@@ -72,11 +72,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/raleway_regular"
                             android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/raleway_regular"
                             android:text="@string/select_sim_2_network"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/_9ssp" />
 
                         <Spinner
                             android:id="@+id/sp_network"
@@ -99,7 +99,7 @@
                             android:inputType="number"
                             android:maxLength="11"
                             android:maxLines="1"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_13ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +117,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/next"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

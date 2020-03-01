@@ -46,7 +46,7 @@
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@string/phone_number"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -75,7 +75,7 @@
                 android:fontFamily="@font/rubik_regular"
                 android:gravity="center"
                 android:text="Inactive"
-                android:textSize="11sp" />
+                android:textSize="@dimen/_8ssp" />
 
             <View
                 android:layout_width="0.5dp"

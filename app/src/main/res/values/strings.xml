@@ -14,7 +14,7 @@
     <string name="ob_desc1">Tingtel is a unified app for airtime transfer to all networks in Nigeria</string>
     <string name="ob_desc2">Conveniently transfer airtime between Networks in Nigeria</string>
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, click on "Get Started"</string>
-    <string name="set_your_password">Set Your Password</string>
+    <string name="set_your_password">SET YOUR PASSWORD</string>
     <string name="delete">Delete</string>
     <string name="choose_sim_to_transfer_from">Choose a sim to transfer from</string>
     <string name="message">MESSAGE</string>
@@ -42,7 +42,7 @@
     <string name="change">Change</string>
     <string name="select_sim_1_network">SELECT SIM 1 NETWORK</string>
     <string name="enter_your_phone_number">ENTER PHONE NUMBER</string>
-    <string name="enter_your_first_name">ENTER FIRT NAME</string>
+    <string name="enter_your_first_name">ENTER FIRST NAME</string>
     <string name="etner_your_last_name">ENTER LAST NAME</string>
     <string name="enter_your_email_address">ENTER EMAIL ADDRESS</string>
     <string name="enter_your_username">ENTER USERNAME</string>
@@ -73,7 +73,7 @@
     <string name="no_thanks_later">NO THANKS, LATER</string>
     <string name="check_balance">CHECK BALANCE</string>
     <string name="service_fee">SERVICE FEE (10%):</string>
-    <string name="amount">Amount:</string>
+    <string name="amount">AMOUNT:</string>
     <string name="amount_to_be_credited">AMOUNT TO BE CREDITED:</string>
     <string name="review">SUMMARY</string>
     <string name="transfer">TRANSFER</string>
@@ -115,6 +115,7 @@
     <string name="enter_sim_1_details">ENTER SIM 1 DETAILS</string>
     <string name="enter_transfer_pin">ENTER TRANSFER PIN</string>
     <string name="do_you_want_to_exit">DO YOU WANT TO EXIT?</string>
+    <string name="receiver_s_details">RECEIVER\'S DETAILS</string>
 
 
     <string-array name="sim">

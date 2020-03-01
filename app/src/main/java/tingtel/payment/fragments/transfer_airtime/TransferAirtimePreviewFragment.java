@@ -28,7 +28,6 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
-import tingtel.payment.models.Beneficiary;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
@@ -133,8 +132,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
 
-        btnBack.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
-
         btnSendMessage.setOnClickListener(v -> {
 
             Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
@@ -188,7 +185,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
-        btnBack = view.findViewById(R.id.btn_back);
         btnCancel = view.findViewById(R.id.btn_cancel);
         btnSendMessage = view.findViewById(R.id.btn_send_message);
         btnSaveBeneficiary = view.findViewById(R.id.btn_save_beneficiary);
