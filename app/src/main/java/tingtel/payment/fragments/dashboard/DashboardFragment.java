@@ -118,7 +118,7 @@ public class DashboardFragment extends Fragment {
         } else {
             return false;
         }
-  
+
     }
 
     private boolean sim2ExistsCheck() {
