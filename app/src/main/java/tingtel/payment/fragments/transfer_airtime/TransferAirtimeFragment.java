@@ -53,6 +53,7 @@ public class TransferAirtimeFragment extends Fragment {
     private RadioButton rdSimButton;
     private RadioButton rdSim1, rdSim2;
     private String finalamount;
+    private Boolean balanceChecked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -199,24 +200,33 @@ public class TransferAirtimeFragment extends Fragment {
 
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
+            balanceChecked = true;
         });
 
 
         btnNext.setOnClickListener(v -> {
+
+
             if (!checkSelectedSim(view)) {
                 return;
             }
             //if all fields and conditions are satisfied proceed.
             if (isValidAllFields()) {
-                String input = edAmount.getText().toString().trim();
-                finalamount = input.replace(",", "");
 
-                Bundle bundle = new Bundle();
-                bundle.putString("simNetwork", SimNetwork);
-                bundle.putString("simSerial", "" + SimSerial);
-                bundle.putInt("simNo", SimNo);
-                bundle.putString("amount", finalamount);
-                navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
+                //TODO: replace with not
+                if (balanceChecked) { //should be not
+                    AppUtils.showDialog("Kindly Check Account Balance First", getActivity());
+                } else {
+                    String input = edAmount.getText().toString().trim();
+                    finalamount = input.replace(",", "");
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("simNetwork", SimNetwork);
+                    bundle.putString("simSerial", "" + SimSerial);
+                    bundle.putInt("simNo", SimNo);
+                    bundle.putString("amount", finalamount);
+                    navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
+                }
             }
         });
     }

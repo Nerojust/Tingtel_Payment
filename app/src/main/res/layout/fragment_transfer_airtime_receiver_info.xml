@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp"
         android:background="@color/tingtel_red_color"
         android:orientation="horizontal"
         android:paddingVertical="15dp">
@@ -46,10 +45,9 @@
 
         <ImageView
             android:id="@+id/homeImageview"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:src="@drawable/ic_home" />
 
         <TextView
@@ -66,7 +64,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_weight="0.3"
-            android:src="@drawable/ic_settings_black_24dp" />
+            android:src="@drawable/ic_settings_white_24dp" />
 
     </LinearLayout>
 
@@ -82,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="18dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="@color/tingtel_lighter_gray"
                 app:cardCornerRadius="22dp">

@@ -28,6 +28,7 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
+import tingtel.payment.models.Beneficiary;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
@@ -59,6 +60,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private Button btnBack;
     private Button btnSendMessage;
     private Button btnCancel;
+    private Button btnSaveBeneficiary;
     private EditText edMessage;
     private NavController navController;
     private ImageView homeImageview, settingsImagview;
@@ -153,7 +155,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
             layoutSuccess.setVisibility(View.GONE);
         });
+
+        btnSaveBeneficiary.setOnClickListener(v -> {
+            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
+            bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
+            bottomSheetFragment.setArguments(bundle);
+            bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+
+        });
     }
+
 
     /**
      * instantiate all necessary views
@@ -177,6 +191,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         btnBack = view.findViewById(R.id.btn_back);
         btnCancel = view.findViewById(R.id.btn_cancel);
         btnSendMessage = view.findViewById(R.id.btn_send_message);
+        btnSaveBeneficiary = view.findViewById(R.id.btn_save_beneficiary);
 
         edMessage = view.findViewById(R.id.ed_message);
 

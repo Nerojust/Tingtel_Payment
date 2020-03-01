@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class SignUpHomeFragment extends Fragment {
     private NavController navController;
     private TextView tvLogin;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_home, container, false);
@@ -36,6 +38,8 @@ public class SignUpHomeFragment extends Fragment {
         return view;
 
     }
+
+
 
     private void initListeners(View view) {
         tvLogin.setOnClickListener(v -> {
@@ -54,4 +58,7 @@ public class SignUpHomeFragment extends Fragment {
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
+
+
+
 }
