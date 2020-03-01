@@ -44,6 +44,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private String ReceiverPhoneNumber;
     private String Pin;
     private int SimNo;
+    private String finalAmount;
     private String Amount;
     private String SimSerial;
     private SessionManager sessionManager;
@@ -65,6 +66,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
     private LinearLayout layoutSuccess;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,7 +111,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 //            navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
 
             layoutSuccess.setVisibility(View.VISIBLE);
-            edMessage.setText("Hello, I Just transferred #" + Amount + " airtime to you using\n" +
+            edMessage.setText("Hello, I Just transferred #" + finalAmount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
         }
     }
@@ -227,6 +229,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvAmount.setText(finalAmount);
         tvServiceFee.setText(finalDividedAmount);
         tvCreditedAmount.setText(finalBalanceAmount);
+
+        finalAmount = finalBalanceAmount;
 
         setNetworkLogo();
     }
