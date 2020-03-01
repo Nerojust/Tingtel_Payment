@@ -2,6 +2,7 @@ package tingtel.payment.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,16 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.List;
 
@@ -24,7 +29,7 @@ import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.Beneficiary;
 
-public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.MyViewHolder>  {
+public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.MyViewHolder> {
 
     private final Context mContext;
     private final Activity activity;
@@ -99,10 +104,14 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //
+                    Toast.makeText(activity, "kjjkk", Toast.LENGTH_LONG).show();
+                    Beneficiary BeneficiaryModel = (Beneficiary) v.getTag();
+                    Intent intent = new Intent("selectedbeneficiary");
+                    intent.putExtra("phoneNumber", BeneficiaryModel.getPhoneNumber());
+                    LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+
                 }
             });
-
 
 
             imgDelete.setOnClickListener(v -> {
@@ -132,5 +141,5 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
             });
         }
     }
-    
+
 }

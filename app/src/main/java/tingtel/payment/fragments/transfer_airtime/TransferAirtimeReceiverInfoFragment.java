@@ -54,11 +54,21 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private TextView tvSelectBeneficiary;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
+    SelectBeneficiarySheetFragment bottomSheetFragment;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
                 if (intent.getAction().equalsIgnoreCase("barcodeSerialcaptured")) {
                     edReceiverPhoneNumber.setText(AppUtils.getSessionManagerInstance().getScannedCodeResult());
+                }
+            }
+
+            if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
+                if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
+                    Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
+                    edReceiverPhoneNumber.setText(intent.getStringExtra("phoneNumber"));
+                    bottomSheetFragment.dismiss();
+
                 }
             }
         }
@@ -72,6 +82,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         super.onResume();
         //  Log.e(TAG, "onResume()");
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("barcodeSerialcaptured"));
+        LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("selectedbeneficiary"));
     }
 
     public void onDestroy() {
@@ -104,7 +115,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         tvSelectBeneficiary.setOnClickListener(v -> {
 
-            SelectBeneficiarySheetFragment bottomSheetFragment = new SelectBeneficiarySheetFragment();
+            bottomSheetFragment = new SelectBeneficiarySheetFragment();
             bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
 
         });

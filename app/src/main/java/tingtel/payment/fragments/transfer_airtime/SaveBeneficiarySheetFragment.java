@@ -100,6 +100,8 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
         }
         SaveTask st = new SaveTask();
         st.execute();
+
+
         dismiss();
 
 
