@@ -40,7 +40,7 @@
                 android:gravity="start|center"
                 android:text="Back"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="@dimen/_13ssp" />
         </LinearLayout>
 
         <ImageView
@@ -98,10 +98,10 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="25dp"
                         android:fontFamily="@font/rubik_medium"
-                        android:text="Receiver information"
+                        android:text="@string/receiver_s_details"
                         android:textAlignment="center"
                         android:textColor="@color/tingtel_red_color"
-                        android:textSize="22sp" />
+                        android:textSize="@dimen/_16ssp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/_9ssp"
                             android:fontFamily="@font/raleway_regular"
                             android:text="@string/network" />
 
@@ -149,7 +149,7 @@
                                 android:inputType="phone"
                                 android:maxLength="11"
                                 android:maxLines="1"
-                                android:textSize="17sp" />
+                                android:textSize="@dimen/_14ssp" />
 
                             <ImageView
                                 android:id="@+id/codeImageView"
@@ -167,7 +167,7 @@
                             android:gravity="right"
                             android:text="@string/or_scan_qr_code"
                             android:textColor="@color/tingtel_light_red"
-                            android:textSize="10sp" />
+                            android:textSize="@dimen/_7ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,7 +187,7 @@
                             android:inputType="numberPassword"
                             android:maxLength="7"
                             android:maxLines="1"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -199,7 +199,7 @@
                         android:gravity="right"
                         android:text="@string/what_is_pin"
                         android:textColor="@color/tingtel_light_red"
-                        android:textSize="10sp"  />
+                        android:textSize="@dimen/_7ssp"  />
 
 
                     <TextView
@@ -210,7 +210,7 @@
                         android:gravity="start"
                         android:text="AMOUNT TO BE SENT"
                         android:textColor="@color/tingtel_gray_color"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/confirmAmount_id"
@@ -220,7 +220,7 @@
                         android:gravity="start"
                         android:text=""
                         android:textColor="@color/tingtel_light_red"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/_15ssp" />
 
                     <Button
                         android:id="@+id/btn_preview"
@@ -233,7 +233,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/preview"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_15ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

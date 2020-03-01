@@ -41,7 +41,7 @@
                 android:gravity="start|center"
                 android:text="Back"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="@dimen/_13ssp" />
         </LinearLayout>
 
         <ImageView
@@ -89,7 +89,7 @@
                 android:fontFamily="@font/rubik_medium"
                 android:text="@string/review"
                 android:textColor="@color/tingtel_red_color"
-                android:textSize="23sp"
+                android:textSize="@dimen/_18ssp"
                 android:textStyle="bold" />
 
 
@@ -104,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Notify Your Friend about this transaction"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -115,7 +116,8 @@
                     android:minLines="5"
                     android:text="Hello, I Just transferred #300 airtime to you using
 Tingtelpay. You can download the Tingtelpay app using the link \n https://play.google.com/store/apps/details?id=tingtel.payments"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -133,7 +135,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:background="@drawable/button_round_corners_transparent"
                         android:fontFamily="@font/raleway_regular"
                         android:text="Cancel"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <Button
                         android:id="@+id/btn_send_message"
@@ -147,7 +149,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:text="Send Notification"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_13ssp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -177,7 +179,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/from"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_sender_phone_number"
@@ -185,7 +187,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:fontFamily="@font/rubik_medium"
-                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textColor="@color/tingtel_light_red"
+                        android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
                         tools:text="080623467463" />
 
@@ -228,7 +232,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/to"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_receiver_phone_number"
@@ -236,7 +240,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:fontFamily="@font/rubik_medium"
-                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textColor="@color/tingtel_light_red"
+                        android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
                         tools:text="080233467463" />
 
@@ -277,7 +283,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_weight="0.5"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/amount"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_amount"
@@ -285,7 +291,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:fontFamily="@font/rubik_medium"
-                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textColor="@color/tingtel_light_red"
+                        android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
                         tools:text="2000" />
 
@@ -326,7 +334,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_weight="0.5"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/service_fee"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_service_fee"
@@ -334,7 +342,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:fontFamily="@font/rubik_medium"
-                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textColor="@color/tingtel_light_red"
+                        android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
                         tools:text="200" />
 
@@ -376,7 +386,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_weight="0.5"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/amount_to_be_credited"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_credited_amount"
@@ -384,7 +394,9 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:fontFamily="@font/rubik_medium"
-                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textColor="@color/tingtel_light_red"
+                        android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
                         tools:text="1800" />
 
@@ -412,18 +424,8 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                 android:fontFamily="@font/raleway_regular"
                 android:text="@string/transfer"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="@dimen/_14ssp" />
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/success_buttons"
-                android:fontFamily="@font/raleway_regular"
-                android:text="Back"
-                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/btn_save_beneficiary"
@@ -434,9 +436,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                 android:background="@drawable/success_buttons"
                 android:fontFamily="@font/raleway_regular"
                 android:text="Save Beneficiary"
-                android:textSize="17sp" />
-
-
+                android:textSize="@dimen/_14ssp" />
 
 
         </LinearLayout>

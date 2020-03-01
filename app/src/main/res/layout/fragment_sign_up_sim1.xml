@@ -48,7 +48,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/enter_sim_1_details"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_18ssp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -76,7 +76,7 @@
                             android:fontFamily="@font/raleway_regular"
                             android:text="@string/select_sim_1_network"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/_10ssp" />
 
                         <Spinner
                             android:id="@+id/sp_network"
@@ -99,7 +99,7 @@
                             android:inputType="number"
                             android:maxLength="11"
                             android:maxLines="1"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_14ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +117,7 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/next"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

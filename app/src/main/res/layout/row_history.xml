@@ -13,7 +13,7 @@
         android:gravity="start"
         android:text=""
         android:textColor="@color/tingtel_light_red"
-        android:textSize="16sp"
+        android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
         tools:text="Airtime Transfer" />
 
@@ -48,7 +48,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/from"
                     android:textColor="@color/tingtel_gray_color"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:maxLines="1"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     tools:text="08023456789" />
 
@@ -96,7 +96,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/to"
                     android:textColor="@color/tingtel_gray_color"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,7 +109,7 @@
                     android:gravity="start"
                     android:text=""
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     tools:text="08023456789" />
 
@@ -144,7 +144,7 @@
                 android:fontFamily="@font/rubik_light"
                 android:maxLines="1"
                 android:text="Date"
-                android:textSize="12sp"
+                android:textSize="@dimen/_8ssp"
                 tools:text="Fri. 23rd Aug., 2020" />
 
             <TextView
@@ -155,7 +155,7 @@
                 android:fontFamily="@font/rubik_light"
                 android:text=""
                 android:textColor="@color/tingtel_light_red"
-                android:textSize="17sp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 tools:text="N450.00" />
 
