@@ -23,6 +23,8 @@ import java.util.List;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyViewHolder> {
     private final Context mContext;
@@ -31,6 +33,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     private AppDatabase appDatabase;
     private Fragment navhost;
     private NavController navController;
+    SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
     public SimCardsAdapter(Context mContext, List lst, Activity activity) {
 
@@ -57,6 +60,14 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         holder.imgDelete.setTag(mData.get(position));
         holder.tvPhoneNumber.setText(mData.get(position).getPhoneNumber());
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
+
+
+        if (mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber()) ||
+                mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber1())) {
+            holder.on_off_switch.setChecked(true);
+        } else {
+            holder.on_off_switch.setChecked(false);
+        }
 
         if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
             holder.imageNetwork.setBackgroundResource(R.drawable.mtn_logo);
