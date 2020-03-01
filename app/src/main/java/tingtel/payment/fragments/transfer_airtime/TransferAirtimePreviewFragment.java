@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,13 +39,14 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 public class TransferAirtimePreviewFragment extends Fragment {
 
     Boolean buttonClicked;
+    int buttonClickedInt = 0;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
     private String ReceiverPhoneNumber;
     private String Pin;
     private int SimNo;
-    private String finalAmount;
+    private String final_Amount;
     private String Amount;
     private String SimSerial;
     private SessionManager sessionManager;
@@ -104,15 +106,14 @@ public class TransferAirtimePreviewFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (buttonClicked) {
-//            Bundle bundle = new Bundle();
-//            bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
-//            bundle.putString("amount", Amount);
-//            navController.navigate(R.id.action_transferAirtimePreviewFragment_to_transferAirtimeSuccessFragment, null);
+        buttonClickedInt += 1;
 
+        Log.e("tingteltest", "i am here");
+        if (buttonClickedInt > 2) {
             layoutSuccess.setVisibility(View.VISIBLE);
-            edMessage.setText("Hello, I Just transferred #" + finalAmount + " airtime to you using\n" +
+            edMessage.setText("Hello, I Just transferred #" + final_Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
+            Log.e("tingteltest", "finallyi am here");
         }
     }
 
@@ -136,18 +137,23 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         btnSendMessage.setOnClickListener(v -> {
 
-            Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
-            smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
-            smsIntent.setType("vnd.android-dir/mms-sms");
-            smsIntent.setData(Uri.parse("sms:" + ReceiverPhoneNumber));
-            smsIntent.putExtra("sms_body", edMessage.getText().toString());
 
-            try {
-                startActivity(smsIntent);
-            } catch (ActivityNotFoundException e) {
-                // Display some sort of error message here.
-                Toast.makeText(getActivity(), "App not found", Toast.LENGTH_LONG).show();
-            }
+            shareViaSocial(edMessage.getText().toString());
+
+
+
+//            Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+//            smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+//            smsIntent.setType("vnd.android-dir/mms-sms");
+//            smsIntent.setData(Uri.parse("sms:" + ReceiverPhoneNumber));
+//            smsIntent.putExtra("sms_body", edMessage.getText().toString());
+//
+//            try {
+//                startActivity(smsIntent);
+//            } catch (ActivityNotFoundException e) {
+//                // Display some sort of error message here.
+//                Toast.makeText(getActivity(), "App not found", Toast.LENGTH_LONG).show();
+//            }
         });
 
         btnCancel.setOnClickListener(v -> {
@@ -230,7 +236,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee.setText(finalDividedAmount);
         tvCreditedAmount.setText(finalBalanceAmount);
 
-        finalAmount = finalBalanceAmount;
+        final_Amount = finalBalanceAmount;
 
         setNetworkLogo();
     }
@@ -369,5 +375,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         startActivity(sendIntent);
 
+    }
+
+    public void shareViaSocial(String body) {
+        Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+        txtIntent.setType("text/plain");
+        txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Airtime Transfer Notification");
+        txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+        startActivity(Intent.createChooser(txtIntent ,"Share"));
     }
 }
