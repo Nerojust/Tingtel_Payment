@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -24,7 +26,12 @@ import tingtel.payment.models.Beneficiary;
  */
 public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
-
+    EditText edName;
+    EditText edPhoneNumber;
+    EditText edNetworkName;
+    Button btnSave;
+    String ReceiverPhoneNumber;
+    String Receivernetwork;
 
 
     @Override
@@ -33,46 +40,66 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_save_beneficiary_sheet, container, false);
 
-        String ReceiverPhoneNumber = getArguments().getString("ReceiverPhoneNumber");
-        String Receivernetwork = getArguments().getString("ReceiverNetwork");
+        ReceiverPhoneNumber = getArguments().getString("ReceiverPhoneNumber");
+        Receivernetwork = getArguments().getString("ReceiverNetwork");
 
+        initViews(view);
+        initValues();
+        initListeners();
 
 
         return view;
 
     }
 
-
-
-    private void saveBeneficiary() {
-
-
-        class SaveTask extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-/*
-  in the background, save the data to roomdb using the balance model
- */
-                Date currentDate = Calendar.getInstance().getTime();
-                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
-
-                //creating a task
-                Beneficiary beneficiary = new Beneficiary();
-                beneficiary.setName();
-                beneficiary.setPhoneNumber(ReceiverPhoneNumber);
-                beneficiary.setNetwork(ReceiverSimNetwork);
-
-
-                //adding to database
-                appdatabase.beneficiaryDao().insert(beneficiary);
-
-                return null;
-            }
-        }
-
-
-
+    private void initListeners() {
+        btnSave.setOnClickListener(v -> {
+       //     saveBeneficiary();
+        });
     }
+
+    private void initValues() {
+        edPhoneNumber.setText(ReceiverPhoneNumber);
+        edNetworkName.setText(Receivernetwork);
+    }
+
+    private void initViews(View view) {
+        edName = view.findViewById(R.id.ed_name);
+        edPhoneNumber = view.findViewById(R.id.ed_phone_number);
+        edNetworkName = view.findViewById(R.id.ed_network_name);
+        btnSave = view.findViewById(R.id.btn_save);
+    }
+
+
+//    private void saveBeneficiary() {
+//
+//
+//        class SaveTask extends AsyncTask<Void, Void, Void> {
+//
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+///*
+//  in the background, save the data to roomdb using the balance model
+// */
+//                Date currentDate = Calendar.getInstance().getTime();
+//                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
+//
+//                //creating a task
+//                Beneficiary beneficiary = new Beneficiary();
+//                beneficiary.setName(edName.getText().toString());
+//                beneficiary.setPhoneNumber(ReceiverPhoneNumber);
+//                beneficiary.setNetwork(ReceiverSimNetwork);
+//
+//
+//                //adding to database
+//                appdatabase.beneficiaryDao().insert(beneficiary);
+//
+//                return null;
+//            }
+//        }
+//
+//
+//
+//    }
 
 }

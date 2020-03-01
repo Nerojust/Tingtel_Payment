@@ -13,11 +13,6 @@ public class Beneficiary {
     private String network;
 
 
-    public Beneficiary(String name, String phoneNumber, String network) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.network = network;
-    }
 
     public int getId() {
         return id;
