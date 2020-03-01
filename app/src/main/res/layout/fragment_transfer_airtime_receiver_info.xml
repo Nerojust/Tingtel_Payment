@@ -114,9 +114,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/_9ssp"
                             android:fontFamily="@font/raleway_regular"
-                            android:text="@string/network" />
+                            android:text="@string/network"
+                            android:textSize="@dimen/_9ssp" />
 
                         <Spinner
                             android:id="@+id/network_spinner"
@@ -159,15 +159,31 @@
                                 android:src="@drawable/code" />
                         </LinearLayout>
 
-                        <TextView
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/rubik_medium_italic"
-                            android:gravity="right"
-                            android:text="@string/or_scan_qr_code"
-                            android:textColor="@color/tingtel_light_red"
-                            android:textSize="@dimen/_7ssp" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_select_beneficiary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:fontFamily="@font/rubik_medium_italic"
+                                android:text="SELECT BENEFICIARY"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_7ssp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/rubik_medium_italic"
+                                android:text="@string/or_scan_qr_code"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_7ssp" />
+
+                        </RelativeLayout>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -199,7 +215,7 @@
                         android:gravity="right"
                         android:text="@string/what_is_pin"
                         android:textColor="@color/tingtel_light_red"
-                        android:textSize="@dimen/_7ssp"  />
+                        android:textSize="@dimen/_7ssp" />
 
 
                     <TextView

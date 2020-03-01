@@ -32,6 +32,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
     Button btnSave;
     String ReceiverPhoneNumber;
     String Receivernetwork;
+    String ReceiverName;
 
 
     @Override
@@ -54,7 +55,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
     private void initListeners() {
         btnSave.setOnClickListener(v -> {
-       //     saveBeneficiary();
+         saveBeneficiary();
         });
     }
 
@@ -71,35 +72,37 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
     }
 
 
-//    private void saveBeneficiary() {
-//
-//
-//        class SaveTask extends AsyncTask<Void, Void, Void> {
-//
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-///*
-//  in the background, save the data to roomdb using the balance model
-// */
-//                Date currentDate = Calendar.getInstance().getTime();
-//                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
-//
-//                //creating a task
-//                Beneficiary beneficiary = new Beneficiary();
-//                beneficiary.setName(edName.getText().toString());
-//                beneficiary.setPhoneNumber(ReceiverPhoneNumber);
-//                beneficiary.setNetwork(ReceiverSimNetwork);
-//
-//
-//                //adding to database
-//                appdatabase.beneficiaryDao().insert(beneficiary);
-//
-//                return null;
-//            }
-//        }
-//
-//
-//
-//    }
+    private void saveBeneficiary() {
+
+        ReceiverName = edName.getText().toString();
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+/*
+  in the background, save the data to roomdb using the balance model
+ */
+
+                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
+
+                //creating a task
+                Beneficiary beneficiary = new Beneficiary();
+                beneficiary.setName(ReceiverName);
+                beneficiary.setPhoneNumber(ReceiverPhoneNumber);
+                beneficiary.setNetwork(Receivernetwork);
+
+                //adding to database
+                appdatabase.beneficiaryDao().insert(beneficiary);
+
+                return null;
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
+        dismiss();
+
+
+    }
 
 }

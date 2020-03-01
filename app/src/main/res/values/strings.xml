@@ -116,6 +116,7 @@
     <string name="enter_transfer_pin">ENTER TRANSFER PIN</string>
     <string name="do_you_want_to_exit">DO YOU WANT TO EXIT?</string>
     <string name="receiver_s_details">RECEIVER\'S DETAILS</string>
+    <string name="do_you_want_to_delete_this_beneficiary">DO YOU WANT TO DELETE THIS BENEFICIARY?</string>
 
 
     <string-array name="sim">

@@ -51,6 +51,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private Button btnPreview;
     private NavController navController;
     private TextView whatIsPin;
+    private TextView tvSelectBeneficiary;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
@@ -100,6 +101,13 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             Objects.requireNonNull(getActivity()).finish();
         });
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
+
+        tvSelectBeneficiary.setOnClickListener(v -> {
+
+            SelectBeneficiarySheetFragment bottomSheetFragment = new SelectBeneficiarySheetFragment();
+            bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+        });
 
         //todo: uncomment later
       /*  btnPreview.setOnClickListener(v -> {
@@ -157,6 +165,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         edPin = view.findViewById(R.id.pinEditext);
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);
+        tvSelectBeneficiary = view.findViewById(R.id.tv_select_beneficiary);
         edAmount = view.findViewById(R.id.confirmAmount_id);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);

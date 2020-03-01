@@ -35,7 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        Toast.makeText(this, "Height is : "+height +"\n"+"width is : "+width, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "Height is : "+height +"\n"+"width is : "+width, Toast.LENGTH_SHORT).show();
     }
 
     private void initListeners() {
