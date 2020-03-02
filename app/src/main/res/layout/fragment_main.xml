@@ -29,7 +29,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_14ssp"
+                android:layout_marginTop="@dimen/_12ssp"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/_40ssp">
 
@@ -45,10 +45,9 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:layout_width="178dp"
-                    android:layout_height="133dp"
+                    android:layout_width="191dp"
+                    android:layout_height="113dp"
                     android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/celebration" />
 
@@ -59,16 +58,16 @@
                     android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <Button
                     android:id="@+id/btn_transfer_airtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="@dimen/_23ssp"
                     android:background="@drawable/dashboard_buttons"
                     android:fontFamily="@font/rubik_light"
-                    android:paddingVertical="30dp"
+                    android:paddingVertical="@dimen/_20ssp"
                     android:text="@string/transfer_airtime"
                     android:textColor="@color/tingtel_white"
                     android:textSize="@dimen/_15ssp" />
@@ -77,10 +76,11 @@
                     android:id="@+id/btn_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/_20ssp"
+                    android:layout_marginBottom="@dimen/_15ssp"
                     android:background="@drawable/dashboard_buttons"
                     android:fontFamily="@font/rubik_light"
-                    android:paddingVertical="30dp"
+                    android:paddingVertical="@dimen/_20ssp"
                     android:text="@string/history"
                     android:textColor="@color/tingtel_white"
                     android:textSize="@dimen/_15ssp" />

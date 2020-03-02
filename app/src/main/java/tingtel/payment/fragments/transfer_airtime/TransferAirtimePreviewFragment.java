@@ -1,6 +1,5 @@
 package tingtel.payment.fragments.transfer_airtime;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -113,7 +112,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             layoutSuccess.setVisibility(View.VISIBLE);
             edMessage.setText("Hello, I Just transferred #" + final_Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
-            Log.e("tingteltest", "finallyi am here");
+            Log.e("tingteltest", "finally i am here");
         }
     }
 
@@ -168,8 +167,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
             bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
             bottomSheetFragment.setArguments(bundle);
             bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
-
-
         });
     }
 
@@ -267,7 +264,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
                 || (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
             imgReceiver.setBackgroundResource(R.drawable.nmobile_logo);
         }
-
     }
 
     /**
@@ -279,7 +275,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             TingtelNumber = "08145995531";
             UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
             dialUssdCode(
                     getActivity(),
                     UssdCode,
@@ -359,8 +355,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
  */
         SaveTask st = new SaveTask();
         st.execute();
-
-
     }
 
     /**

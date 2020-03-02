@@ -101,7 +101,7 @@
     <string name="explain_in_details">EXPLAIN IN DETAIL</string>
     <string name="report_issue">REPORT ISSUE</string>
     <string name="enter_sim_2_details">ENTER SIM 2 DETAILS</string>
-    <string name="select_sim_2_network">SELECT SIM 2 NETWORI</string>
+    <string name="select_sim_2_network">SELECT SIM 2 NETWORK</string>
     <string name="from">FROM:</string>
     <string name="to">TO:</string>
     <string name="confirmation_amount_is_displayed_here">CONFIRMATION AMOUNT</string>
@@ -126,6 +126,7 @@
     <string name="airtel_sim_detected">AIRTEL SIM DETECTED</string>
     <string name="nine_mobile_sim_detected">9MOBILE SIM DETECTED</string>
     <string name="glo_sim_detected">GLO SIM DETECTED</string>
+    <string name="notify_your_friend_about_this_transaction">Notify Your Friend about this transaction</string>
 
 
     <string-array name="sim">

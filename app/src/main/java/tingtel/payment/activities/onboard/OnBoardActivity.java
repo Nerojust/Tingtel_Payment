@@ -122,6 +122,10 @@ public class OnBoardActivity extends AppCompatActivity {
             }
         } else { //permission is automatically granted on sdk<23 upon installation
             Log.e(Constants.TAG, "Permission is granted");
+            getCarrierOfSim(getApplicationContext(), OnBoardActivity.this);
+
+            goToMainActivity();
+            sessionManager.setOnBoardStatus(true);
         }
 
     }
@@ -139,7 +143,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
         int[] header = {R.string.ob_header1, R.string.ob_header2, R.string.ob_header3};
         int[] desc = {R.string.ob_desc1, R.string.ob_desc2, R.string.ob_desc3};
-        int[] imageId = {R.drawable.welcomeperson, R.drawable.transfer, R.drawable.enter};
+        int[] imageId = {R.drawable.ic_mobile_application, R.drawable.ic_order_confirmed, R.drawable.ic_security};
 
 
         for (int i = 0; i < imageId.length; i++) {

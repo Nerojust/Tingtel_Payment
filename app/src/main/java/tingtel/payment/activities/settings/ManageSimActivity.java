@@ -32,7 +32,7 @@ public class ManageSimActivity extends AppCompatActivity {
         appDatabase = AppDatabase.getDatabaseInstance(this);
 
         simCards = appDatabase.simCardsDao().getAllItems();
-        adapter = new SimCardsAdapter(this, simCards,this);
+        adapter = new SimCardsAdapter(this, simCards, this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);

@@ -33,35 +33,35 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="18dp"
-                android:layout_marginTop="130dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_95ssp"
+                android:layout_marginBottom="@dimen/_15ssp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="22dp">
+                app:cardCornerRadius="@dimen/_16ssp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingHorizontal="20dp">
+                    android:paddingHorizontal="@dimen/_15ssp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="@dimen/_20ssp"
+                        android:layout_marginBottom="@dimen/_14ssp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/sign_in"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_17ssp"
                         android:textStyle="bold" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/activity_horizontal_margin">
+                        android:layout_margin="@dimen/_13ssp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_email_address"
@@ -72,7 +72,7 @@
                             android:hint="@string/enter_your_username"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_13ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginHorizontal="@dimen/_13ssp"
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -92,7 +92,7 @@
                             android:hint="@string/enter_password"
                             android:inputType="textPassword"
                             android:maxLines="1"
-                            android:textSize="17sp" />
+                            android:textSize="@dimen/_13ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -106,7 +106,8 @@
                             android:layout_height="wrap_content"
                             android:checked="false"
                             android:text="@string/remember_me"
-                            android:textColor="@color/tingtel_red_color" />
+                            android:textColor="@color/tingtel_red_color"
+                            android:textSize="@dimen/_10ssp" />
 
 
                     </RelativeLayout>
@@ -117,32 +118,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginHorizontal="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_20ssp"
                         android:background="@drawable/rounded_button_corners"
                         android:drawableRight="@drawable/ic_keyboard_arrow_right"
                         android:text="@string/sign_in"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:id="@+id/tv_signup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginTop="@dimen/_20ssp"
+                        android:layout_marginBottom="@dimen/_20ssp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/not_registered_sign_up"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/forgotPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:id="@+id/forgotPassword"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="40dp"
+                        android:layout_marginBottom="@dimen/_24ssp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/forgot_password_retrieve"
                         android:textStyle="bold" />

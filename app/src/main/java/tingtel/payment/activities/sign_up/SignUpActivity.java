@@ -26,8 +26,6 @@ public class SignUpActivity extends AppCompatActivity {
         if (intent.getStringExtra("task") == null) {
 
         } else {
-
-
             if (intent.getStringExtra("task").equalsIgnoreCase("registerSim1")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
                 AppUtils.showDialog("You Need To Register Your Sim 1 Network Before You Can Make Any Transactions", SignUpActivity.this);

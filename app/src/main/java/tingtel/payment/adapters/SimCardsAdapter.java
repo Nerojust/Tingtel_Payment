@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -65,8 +64,10 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         if (mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber()) ||
                 mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber1())) {
             holder.on_off_switch.setChecked(true);
+
         } else {
             holder.on_off_switch.setChecked(false);
+            holder.on_off_switch.setEnabled(false);
         }
 
         if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
@@ -89,7 +90,6 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-
         final TextView tvPhoneNumber;
         final TextView tvNetworkName;
         final ImageView imgDelete;
@@ -103,27 +103,19 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             imgDelete = itemView.findViewById(R.id.btn_delete);
             imageNetwork = itemView.findViewById(R.id.img_network);
             on_off_switch = itemView.findViewById(R.id.switchbutton);
-            on_off_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Log.v("Switch State=", "" + isChecked);
-                    if (isChecked) {
-                        on_off_switch.setText("Active");
-                        // do something when check is selected
-                    } else {
-                        //do something when unchecked
-                        on_off_switch.setText("Inactive");
-                    }
+            on_off_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                Log.v("Switch State=", "" + isChecked);
+                if (isChecked) {
+                    on_off_switch.setText("Active");
+                    // do something when check is selected
+                } else {
+                    //do something when unchecked
+                    on_off_switch.setText("Inactive");
                 }
-
             });
 
 
             imgDelete.setOnClickListener(v -> {
-//                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-//                navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 ViewGroup viewGroup = activity.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_delete_sim, viewGroup, false);

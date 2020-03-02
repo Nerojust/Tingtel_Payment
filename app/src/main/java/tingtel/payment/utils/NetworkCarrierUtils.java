@@ -10,6 +10,7 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class NetworkCarrierUtils {
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static void getCarrierOfSim(Context context, Activity activity) {
         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -44,7 +46,7 @@ public class NetworkCarrierUtils {
                         }
 
                     }
-                }else Toast.makeText(context, "No Sim card detected", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(context, "No Sim card detected", Toast.LENGTH_SHORT).show();
                 //detect number of detected sims and save it
                 sessionManager.setTotalNumberOfSimsDetectedOnDevice(numberOfSimsOnTheDevice);
 
@@ -64,6 +66,15 @@ public class NetworkCarrierUtils {
             }
         } else {
 
+            /*List<String> carrierNames = new ArrayList<>();
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            // Get carrier name (Network Operator Name)
+            carrierNames.add(telephonyManager.getNetworkOperatorName());
+            String name = telephonyManager.getNetworkOperatorName();
+            String dd = telephonyManager.getSimSerialNumber();
+
+            Toast.makeText(context, name + "_____"+dd, Toast.LENGTH_SHORT).show();
+*/
         }
     }
 
