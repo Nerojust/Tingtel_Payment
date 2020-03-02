@@ -7,16 +7,14 @@
     tools:context=".fragments.dashboard.DashboardFragment">
 
 
-
-        <ImageView
-            android:id="@+id/settingsImageview"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_settings_black_24dp" />
-
+    <ImageView
+        android:id="@+id/settingsImageview"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/_14ssp"
+        android:layout_marginRight="@dimen/_14ssp"
+        android:src="@drawable/ic_settings_black_24dp" />
 
 
     <ScrollView
@@ -26,14 +24,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="@dimen/_14ssp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_14ssp"
                 android:orientation="vertical"
-                android:paddingHorizontal="60dp">
+                android:paddingHorizontal="@dimen/_40ssp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -43,7 +41,7 @@
                     android:text="@string/welcome_martins"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -61,7 +59,7 @@
                     android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <Button
                     android:id="@+id/btn_transfer_airtime"
@@ -73,7 +71,7 @@
                     android:paddingVertical="30dp"
                     android:text="@string/transfer_airtime"
                     android:textColor="@color/tingtel_white"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_15ssp" />
 
                 <Button
                     android:id="@+id/btn_history"
@@ -85,7 +83,7 @@
                     android:paddingVertical="30dp"
                     android:text="@string/history"
                     android:textColor="@color/tingtel_white"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_15ssp" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_7ssp"
             android:fontFamily="@font/raleway_regular"
             android:text="@string/do_you_want_to_delete_this_sim"
             android:textAlignment="center"
@@ -30,29 +30,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_12ssp"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:paddingHorizontal="@dimen/_15ssp">
 
             <Button
                 android:id="@+id/btn_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="@dimen/_7ssp"
                 android:layout_weight="5"
                 android:background="@drawable/dashboard_buttons"
                 android:text="@string/yes_delete"
-                android:textColor="#FFF" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/_7ssp"
                 android:layout_weight="5"
                 android:background="@drawable/success_buttons"
                 android:text="@string/cancel"
-                android:textColor="#FFF" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

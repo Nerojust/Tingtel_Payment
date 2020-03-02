@@ -68,7 +68,7 @@ public class SignUpSim1Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
                 selectedSpinnerNetwork = spinnerTitles[i];
             }
 
@@ -81,7 +81,7 @@ public class SignUpSim1Fragment extends Fragment {
 
     private void initListeners(View view) {
         btnSaveSim1NetworkDetails.setOnClickListener(v -> {
-           //todo: add validations
+            //todo: add validations
 
             if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().equalsIgnoreCase("")) {
                 //TODO: correct phone number validation
@@ -123,20 +123,20 @@ public class SignUpSim1Fragment extends Fragment {
 
         if (Sim1Network.substring(0, 3).equalsIgnoreCase("mtn")) {
             mSpinner.setSelection(0);
-            tvSimInfo.setText("Mtn Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.mtn_sim_detected));
 
         } else if (Sim1Network.substring(0, 3).equalsIgnoreCase("air")) {
             mSpinner.setSelection(1);
-            tvSimInfo.setText("Airtel Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.airtel_sim_detected));
 
         } else if (Sim1Network.substring(0, 3).equalsIgnoreCase("9mo") ||
                 Sim1Network.substring(0, 3).equalsIgnoreCase("eti")) {
             mSpinner.setSelection(2);
-            tvSimInfo.setText("9Mobile Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.nine_mobile_sim_detected));
 
         } else if (Sim1Network.substring(0, 3).equalsIgnoreCase("glo")) {
             mSpinner.setSelection(3);
-            tvSimInfo.setText("Glo Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.glo_sim_detected));
         }
     }
 }

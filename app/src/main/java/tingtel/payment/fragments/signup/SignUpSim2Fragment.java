@@ -116,25 +116,21 @@ public class SignUpSim2Fragment extends Fragment {
         Log.e("getDefaultCarrier", "No of sim is " + NoOfSIm);
 
         if (Sim2Network.substring(0, 3).equalsIgnoreCase("mtn")) {
-
             mSpinner.setSelection(0);
-            tvSimInfo.setText("Mtn Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.mtn_sim_detected));
 
         } else if (Sim2Network.substring(0, 3).equalsIgnoreCase("air")) {
-
             mSpinner.setSelection(1);
-            tvSimInfo.setText("Airtel Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.airtel_sim_detected));
 
         } else if (Sim2Network.substring(0, 3).equalsIgnoreCase("9mo") ||
                 Sim2Network.substring(0, 3).equalsIgnoreCase("eti")) {
-
             mSpinner.setSelection(2);
-            tvSimInfo.setText("9Mobile Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.nine_mobile_sim_detected));
 
         } else if (Sim2Network.substring(0, 3).equalsIgnoreCase("glo")) {
-
             mSpinner.setSelection(3);
-            tvSimInfo.setText("Glo Sim Detected");
+            tvSimInfo.setText(getResources().getString(R.string.glo_sim_detected));
         }
     }
 }

@@ -82,7 +82,6 @@
     <string name="network">SELECT NETWORK</string>
     <string name="enter_receiver_s_phone_number">RECEIVER\'s NUMBER</string>
     <string name="what_is_pin">WHAT IS MY PIN?</string>
-    <string name="mtn_sim_detected">MTN SIM DETECTED</string>
     <string name="enter_your_current_password">CURRENT PASSWORD</string>
     <string name="set_your_new_password">NEW PASSWORD</string>
     <string name="re_enter_your_new_password">RE-ENTER NEW PASSWORD</string>
@@ -117,6 +116,16 @@
     <string name="do_you_want_to_exit">DO YOU WANT TO EXIT?</string>
     <string name="receiver_s_details">RECEIVER\'S DETAILS</string>
     <string name="do_you_want_to_delete_this_beneficiary">DO YOU WANT TO DELETE THIS BENEFICIARY?</string>
+    <string name="beneficiary_network">BENEFICIARY NETWORK</string>
+    <string name="beneficiary_phone_number">BENEFICIARY PHONE NUMBER</string>
+    <string name="network_name">NETWORK NAME</string>
+    <string name="beneficiary_name">BENEFICIARY NAME</string>
+    <string name="enter_name">ENTER NAME</string>
+    <string name="save">SAVE</string>
+    <string name="mtn_sim_detected">MTN SIM DETECTED</string>
+    <string name="airtel_sim_detected">AIRTEL SIM DETECTED</string>
+    <string name="nine_mobile_sim_detected">9MOBILE SIM DETECTED</string>
+    <string name="glo_sim_detected">GLO SIM DETECTED</string>
 
 
     <string-array name="sim">

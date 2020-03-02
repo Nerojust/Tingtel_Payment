@@ -1,6 +1,5 @@
 package tingtel.payment.activities.sign_up;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -39,28 +38,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
 
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        if (navController.getCurrentDestination().getId() == R.id.signUpHomeFragment) {
-
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-            builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", (dialog, id) -> {
-                        finish();
-                    })
-                    .setNegativeButton("No", (dialog, id) -> dialog.cancel());
-            AlertDialog alert = builder.create();
-            alert.show();
-
-        } else {
-
-            super.onBackPressed();
         }
     }
 }

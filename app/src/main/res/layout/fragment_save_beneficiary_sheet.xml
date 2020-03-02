@@ -12,70 +12,91 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beneficial Details"
             android:layout_gravity="center_horizontal"
+            android:paddingVertical="10dp"
+            android:text="Beneficial Details"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:paddingVertical="10dp"/>
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_below="@+id/ly1"
         android:layout_marginTop="30dp"
-        android:paddingHorizontal="@dimen/_20sdp">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_20ssp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beneficial Phone Number"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/rubik_regular"
+            android:text="@string/beneficiary_phone_number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />
+
         <EditText
             android:id="@+id/ed_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
             android:layout_marginBottom="15dp"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:fontFamily="@font/rubik_regular"
+            android:hint="@string/phone_number"
+            android:textSize="@dimen/_14ssp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beneficial Network"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/rubik_regular"
+            android:text="@string/beneficiary_network"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />
+
         <EditText
             android:id="@+id/ed_network_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Network Name"
+            android:layout_marginBottom="15dp"
+
             android:enabled="false"
-            android:layout_marginBottom="15dp"/>
+            android:fontFamily="@font/rubik_regular"
+            android:hint="@string/network_name"
+            android:textSize="@dimen/_14ssp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beneficial Name"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/rubik_regular"
+            android:text="@string/beneficiary_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />
+
         <EditText
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Beneficial Name"/>
+            android:fontFamily="@font/rubik_regular"
+            android:hint="@string/enter_name"
+            android:textSize="@dimen/_14ssp" />
+
         <Button
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_round_corners"
-            android:textColor="#ffffff"
             android:layout_marginTop="30dp"
-            android:text="Save"/>
+            android:background="@drawable/button_round_corners"
+            android:fontFamily="@font/rubik_regular"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp" />
 
 
     </LinearLayout>
-
 </RelativeLayout>

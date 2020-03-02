@@ -3,19 +3,15 @@ package tingtel.payment.fragments.transfer_airtime;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.fragment.app.Fragment;
 
-import java.util.Calendar;
-import java.util.Date;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
@@ -55,7 +51,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
     private void initListeners() {
         btnSave.setOnClickListener(v -> {
-         saveBeneficiary();
+            saveBeneficiary();
         });
     }
 
