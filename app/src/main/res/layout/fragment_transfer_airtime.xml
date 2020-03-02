@@ -16,13 +16,16 @@
         android:orientation="horizontal"
         android:paddingVertical="15dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/backArrowLayout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"
-            android:layout_weight="0.7"
+            android:layout_alignParentLeft="true"
             android:orientation="horizontal">
 
             <ImageView
@@ -32,7 +35,7 @@
 
             <TextView
                 android:id="@+id/backArrow"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:layout_marginLeft="10dp"
@@ -48,25 +51,22 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/ic_home" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:text="" />
 
         <ImageView
             android:id="@+id/settingsImageview"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_10sdp"
             android:layout_gravity="center"
-            android:layout_weight="0.3"
             android:src="@drawable/ic_settings_white_24dp" />
 
+        </RelativeLayout>
     </LinearLayout>
+
 
 
     <ScrollView

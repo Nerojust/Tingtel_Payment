@@ -113,7 +113,7 @@
                     android:enabled="false"
                     android:minLines="5"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     tools:text="Hello, I Just transferred #300 airtime to you using
 Tingtelpay. You can download the Tingtelpay app using the link \n https://play.google.com/store/apps/details?id=tingtel.payments" />
 
@@ -155,20 +155,24 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardPreventCornerOverlap="false">
 
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/senderImage"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
 
                     <TextView
@@ -176,52 +180,61 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
+                        android:layout_gravity="center_vertical"
                         android:text="@string/from"
                         android:textSize="@dimen/_10ssp" />
+
+
 
                     <TextView
                         android:id="@+id/tv_sender_phone_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/rubik_medium"
-                        android:gravity="center"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_15ssp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
                         android:textStyle="bold"
                         tools:text="080623467463" />
 
-                    <ImageView
-                        android:id="@+id/senderImage"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.15"
-                        android:fontFamily="@font/raleway_regular"
-                        android:gravity="center"
-                        android:scaleType="fitCenter"
-                        android:textSize="17sp"
-                        tools:src="@drawable/mtn_logo" />
-
                 </LinearLayout>
+
+                   <ImageView
+
+                       android:id="@+id/senderImage"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_gravity="right"
+                       android:fontFamily="@font/raleway_regular"
+                       android:layout_alignParentRight="true"
+                       android:gravity="center"
+                       android:scaleType="fitCenter"
+                       android:textSize="17sp"
+                       tools:src="@drawable/mtn_logo" />
+               </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardPreventCornerOverlap="false">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/receiverImage"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
 
                     <TextView
@@ -236,69 +249,78 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:id="@+id/tv_receiver_phone_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/rubik_medium"
-                        android:gravity="center"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_15ssp"
+                        android:layout_marginLeft="5dp"
                         android:textStyle="bold"
                         tools:text="080233467463" />
+                </LinearLayout>
 
                     <ImageView
                         android:id="@+id/receiverImage"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.15"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:scaleType="fitCenter"
                         android:textSize="17sp"
                         tools:src="@drawable/airtel_logo" />
-                </LinearLayout>
+                </RelativeLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardPreventCornerOverlap="false">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/tv1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/amount"
+                        android:layout_gravity="center_vertical"
                         android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/tv_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/rubik_medium"
                         android:gravity="start"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
                         tools:text="2000" />
+                </LinearLayout>
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:id="@+id/tv1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
@@ -306,31 +328,37 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardPreventCornerOverlap="false">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/tv2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
 
-                    <TextView
+
+                <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
+                    android:layout_gravity="center_vertical"
                         android:text="@string/service_fee"
                         android:textSize="@dimen/_10ssp" />
 
@@ -338,50 +366,56 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:id="@+id/tv_service_fee"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/rubik_medium"
                         android:gravity="start"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
                         tools:text="200" />
+                </LinearLayout>
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/tv2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0.2"
+                        android:layout_alignParentRight="true"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="center"
                         android:text="@string/naira"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+                </RelativeLayout>
 
-                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardPreventCornerOverlap="false">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/tv3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
 
                     <TextView
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.25"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/amount_to_be_credited"
                         android:textSize="@dimen/_10ssp" />
@@ -390,26 +424,27 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                         android:id="@+id/tv_credited_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/rubik_medium"
                         android:gravity="start"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_15ssp"
                         android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
                         tools:text="1800" />
-
+                </LinearLayout>
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
+                        android:id="@+id/tv3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
                         android:fontFamily="@font/raleway_regular"
                         android:gravity="start"
                         android:text="@string/naira"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+                </RelativeLayout>
 
-                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
@@ -431,7 +466,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:enabled="false"
+                android:textColor="@color/white"
                 android:background="@drawable/success_buttons"
                 android:fontFamily="@font/raleway_regular"
                 android:text="Save Beneficiary"

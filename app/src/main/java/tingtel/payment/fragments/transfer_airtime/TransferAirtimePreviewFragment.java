@@ -110,12 +110,37 @@ public class TransferAirtimePreviewFragment extends Fragment {
         Log.e("tingteltest", "i am here");
         if (buttonClickedInt > 2) {
             layoutSuccess.setVisibility(View.VISIBLE);
-            btnSaveBeneficiary.setEnabled(true);
+            //btnSaveBeneficiary.setEnabled(true);
             edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
-            Log.e("tingteltest", "finally i am here");
+
+
         }
 
+        if (buttonClickedInt == 2 ) {
+            checkBalance();
+        }
+
+    }
+
+    private void checkBalance() {
+        String UssdCode;
+        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
+            UssdCode = "*556#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
+            UssdCode = "*123#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
+            UssdCode = "*124*1#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo") ||
+                (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
+            UssdCode = "*232#";
+        } else {
+
+            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
     }
 
     /**
@@ -140,13 +165,16 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         btnCancel.setOnClickListener(v -> layoutSuccess.setVisibility(View.GONE));
 
-        btnSaveBeneficiary.setOnClickListener(v -> {
-            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
-            bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
-            bottomSheetFragment.setArguments(bundle);
-            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+        btnSaveBeneficiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
+                bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
+                bottomSheetFragment.setArguments(bundle);
+                bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+            }
         });
     }
 
