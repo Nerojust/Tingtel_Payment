@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -47,6 +48,7 @@ public class OnBoardActivity extends AppCompatActivity {
     private OnBoardAdapter mAdapter;
     private Button btn_get_started;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,7 @@ public class OnBoardActivity extends AppCompatActivity {
         setUiPageViewController();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
@@ -143,7 +146,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
         int[] header = {R.string.ob_header1, R.string.ob_header2, R.string.ob_header3};
         int[] desc = {R.string.ob_desc1, R.string.ob_desc2, R.string.ob_desc3};
-        int[] imageId = {R.drawable.ic_mobile_application, R.drawable.ic_order_confirmed, R.drawable.ic_security};
+        int[] imageId = {R.drawable.ic_notifications, R.drawable.ic_order_confirmed, R.drawable.ic_security};
 
 
         for (int i = 0; i < imageId.length; i++) {
