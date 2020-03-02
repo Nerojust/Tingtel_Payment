@@ -16,7 +16,7 @@
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, click on "Get Started"</string>
     <string name="set_your_password">SET YOUR PASSWORD</string>
     <string name="delete">Delete</string>
-    <string name="choose_sim_to_transfer_from">Choose a sim to transfer from</string>
+    <string name="choose_sim_to_transfer_from">CHOOSE A SIM TO TRANSFER FROM</string>
     <string name="message">MESSAGE</string>
     <string name="dismiss">DISMISS</string>
     <string name="yes_delete">YES, DELETE</string>
@@ -35,7 +35,7 @@
     <string name="history">HISTORY</string>
     <string name="welcome_martins">Hi, TOM CRUISE</string>
     <string name="transfer_amount">NOW ENTER THE TRANSFER AMOUNT</string>
-    <string name="enter_amount_to_transfer">Amount to transfer</string>
+    <string name="enter_amount_to_transfer">AMOUNT TO TRANSFER</string>
     <string name="currently_active_sim_1">CURRENTLY ACTIVE SIM 1</string>
     <string name="mtn_ng">MTN NG</string>
     <string name="naira">"\u20A6"</string>
@@ -47,7 +47,7 @@
     <string name="enter_your_email_address">ENTER EMAIL ADDRESS</string>
     <string name="enter_your_username">ENTER USERNAME</string>
     <string name="sign_up">SIGN UP</string>
-    <string name="have_an_account_login">Already Have An Account? Log In</string>
+    <string name="have_an_account_login">ALREADY HAVE AN ACCOUNT? LOG IN</string>
     <string name="make_another_transfer">MAKE ANOTHER TRANSFER</string>
     <string name="view_history">VIEW HISTORY</string>
     <string name="send_notification_to_recipient">SEND NOTIFICATION TO RECIPIENT</string>
@@ -84,7 +84,7 @@
     <string name="what_is_pin">WHAT IS MY PIN?</string>
     <string name="enter_your_current_password">CURRENT PASSWORD</string>
     <string name="set_your_new_password">NEW PASSWORD</string>
-    <string name="re_enter_your_new_password">RE-ENTER NEW PASSWORD</string>
+    <string name="re_enter_your_new_password">RE-ENTER PASSWORD</string>
     <string name="change_password">CHANGE PASSWORD</string>
     <string name="change_your_email_address">CHANGE YOUR EMAIL ADDRESS</string>
     <string name="enter_your_current_email_address">CURRENT EMAIL ADDRESS</string>
@@ -126,7 +126,8 @@
     <string name="airtel_sim_detected">AIRTEL SIM DETECTED</string>
     <string name="nine_mobile_sim_detected">9MOBILE SIM DETECTED</string>
     <string name="glo_sim_detected">GLO SIM DETECTED</string>
-    <string name="notify_your_friend_about_this_transaction">Notify Your Friend about this transaction</string>
+    <string name="notify_your_friend_about_this_transaction">NOTIFY RECEIVER ABOUT THIS TRANSACTION</string>
+    <string name="select_beneficiary">SELECT BENEFICIARY</string>
 
 
     <string-array name="sim">

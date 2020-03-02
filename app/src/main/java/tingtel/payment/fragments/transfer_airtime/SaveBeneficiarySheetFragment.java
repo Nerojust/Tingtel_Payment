@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.Beneficiary;
@@ -80,7 +82,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
   in the background, save the data to roomdb using the balance model
  */
 
-                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(getContext());
+                AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
 
                 //creating a task
                 Beneficiary beneficiary = new Beneficiary();

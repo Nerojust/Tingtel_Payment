@@ -39,6 +39,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             Manifest.permission.READ_CONTACTS
     };
     String[] spinnerPopulation;
+    SelectBeneficiarySheetFragment bottomSheetFragment;
     private String[] spinnerTitles;
     private int[] spinnerImages;
     private String SenderSimNetwork;
@@ -51,10 +52,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private Button btnPreview;
     private NavController navController;
     private TextView whatIsPin;
-    private TextView tvSelectBeneficiary;
+    private TextView tvSelectBeneficiary, scanCodeTextview;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
-    SelectBeneficiarySheetFragment bottomSheetFragment;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
@@ -120,20 +120,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         });
 
-        //todo: uncomment later
-      /*  btnPreview.setOnClickListener(v -> {
-            if (isValidFields()) {
-                Bundle bundle = new Bundle();
-                bundle.putString("senderSimNetwork", SenderSimNetwork);
-                bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
-                bundle.putString("simSerial", SimSerial);
-                bundle.putInt("simNo", SimNo);
-                bundle.putString("amount", Amount);
-                bundle.putString("receiverPhoneNumber", edReceiverPhoneNumber.getText().toString());
-                bundle.putString("pin", edPin.getText().toString());
-                navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment_to_transferAirtimePreviewFragment, bundle);
-            }
-        });*/
         btnPreview.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
@@ -147,8 +133,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         });
 
-        whatIsPin.setOnClickListener(v ->
-        {
+        whatIsPin.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("network", SenderSimNetwork);
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
@@ -156,6 +141,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
 
         qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
+
+        scanCodeTextview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
     }
 
     private void getExtrasFromIntent() {
@@ -173,6 +160,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         mSpinner = view.findViewById(R.id.network_spinner);
         btnPreview = view.findViewById(R.id.btn_preview);
         qrCodeImageview = view.findViewById(R.id.codeImageView);
+        scanCodeTextview = view.findViewById(R.id.scanCodeTextview);
         edPin = view.findViewById(R.id.pinEditext);
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);

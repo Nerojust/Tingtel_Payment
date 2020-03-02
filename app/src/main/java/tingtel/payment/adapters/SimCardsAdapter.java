@@ -132,7 +132,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                     appDatabase.simCardsDao().deleteSimCard(id);
                     activity.startActivity(activity.getIntent());
                     activity.finish();
-                    activity.overridePendingTransition(0, 0);
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     alertDialog.dismiss();
 
                 });

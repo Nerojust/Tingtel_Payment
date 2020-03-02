@@ -6,16 +6,16 @@
     android:layout_height="wrap_content"
     android:background="@color/tingtel_light_gray"
     android:orientation="horizontal"
-    android:paddingHorizontal="10dp"
-    android:paddingTop="15dp">
+    android:paddingHorizontal="@dimen/_6ssp"
+    android:paddingTop="@dimen/_10ssp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        app:cardMaxElevation="2dp"
+        android:layout_marginBottom="@dimen/_4ssp"
+        app:cardCornerRadius="@dimen/_4ssp"
+        app:cardElevation="@dimen/_4ssp"
+        app:cardMaxElevation="@dimen/_4ssp"
         app:cardPreventCornerOverlap="false">
 
         <LinearLayout
@@ -29,7 +29,6 @@
                 android:id="@+id/img_network"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-
                 tools:src="@drawable/mtn_logo" />
 
             <LinearLayout
@@ -37,46 +36,44 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_network_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/img_network"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/raleway_regular"
-                    android:text="mtn"
+                    tools:text="mtn"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/img_network"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/raleway_regular"
-                    android:textSize="@dimen/_13ssp"
                     android:textColor="@color/black"
                     android:textAllCaps="true"
-                    android:text="NAME"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="NAME"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
-                    android:text="@string/phone_number"
+                    tools:text="@string/phone_number"
                     android:textSize="@dimen/_12ssp"
-
                     android:textStyle="bold" />
-
-
             </LinearLayout>
-
-
 
             <View
                 android:layout_width="0.5dp"

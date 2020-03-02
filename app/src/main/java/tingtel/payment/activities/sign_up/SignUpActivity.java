@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 
@@ -26,11 +28,11 @@ public class SignUpActivity extends AppCompatActivity {
         if (intent.getStringExtra("task") == null) {
 
         } else {
-            if (intent.getStringExtra("task").equalsIgnoreCase("registerSim1")) {
+            if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim1")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
                 AppUtils.showDialog("You Need To Register Your Sim 1 Network Before You Can Make Any Transactions", SignUpActivity.this);
 
-            } else if (intent.getStringExtra("task").equalsIgnoreCase("registerSim2")) {
+            } else if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim2")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim2Fragment, null);
                 AppUtils.showDialog("You Need To Register Your Sim 2 Network Before You Can Make Any Transactions", SignUpActivity.this);
 

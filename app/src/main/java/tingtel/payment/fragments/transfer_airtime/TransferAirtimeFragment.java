@@ -198,7 +198,6 @@ public class TransferAirtimeFragment extends Fragment {
                 return;
             }
 
-
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
         });
@@ -212,21 +211,16 @@ public class TransferAirtimeFragment extends Fragment {
             }
             //if all fields and conditions are satisfied proceed.
             if (isValidAllFields()) {
+                String input = edAmount.getText().toString().trim();
+                finalamount = input.replace(",", "");
 
-                //TODO: replace with not
-                if (balanceChecked) { //should be not
-                    AppUtils.showDialog("Kindly Check Account Balance First", getActivity());
-                } else {
-                    String input = edAmount.getText().toString().trim();
-                    finalamount = input.replace(",", "");
+                Bundle bundle = new Bundle();
+                bundle.putString("simNetwork", SimNetwork);
+                bundle.putString("simSerial", "" + SimSerial);
+                bundle.putInt("simNo", SimNo);
+                bundle.putString("amount", finalamount);
+                navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("simNetwork", SimNetwork);
-                    bundle.putString("simSerial", "" + SimSerial);
-                    bundle.putInt("simNo", SimNo);
-                    bundle.putString("amount", finalamount);
-                    navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
-                }
             }
         });
     }
@@ -327,6 +321,10 @@ public class TransferAirtimeFragment extends Fragment {
             Toast.makeText(getContext(), "Amount is too low. Minimum amount is 100", Toast.LENGTH_SHORT).show();
             return false;
 
+        }
+        if (!balanceChecked) {
+            AppUtils.showDialog("Please Check Account Balance First", getActivity());
+            return false;
         }
 
         return true;

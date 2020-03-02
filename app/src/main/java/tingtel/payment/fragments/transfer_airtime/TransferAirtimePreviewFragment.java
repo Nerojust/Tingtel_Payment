@@ -108,12 +108,14 @@ public class TransferAirtimePreviewFragment extends Fragment {
         buttonClickedInt += 1;
 
         Log.e("tingteltest", "i am here");
-        if (buttonClickedInt > 2) { 
+        if (buttonClickedInt > 2) {
             layoutSuccess.setVisibility(View.VISIBLE);
-            edMessage.setText("Hello, I Just transferred #" + final_Amount + " airtime to you using\n" +
+            btnSaveBeneficiary.setEnabled(true);
+            edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
             Log.e("tingteltest", "finally i am here");
         }
+
     }
 
     /**
@@ -134,31 +136,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
 
-        btnSendMessage.setOnClickListener(v -> {
+        btnSendMessage.setOnClickListener(v -> shareViaSocial(edMessage.getText().toString()));
 
-
-            shareViaSocial(edMessage.getText().toString());
-
-
-
-//            Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
-//            smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
-//            smsIntent.setType("vnd.android-dir/mms-sms");
-//            smsIntent.setData(Uri.parse("sms:" + ReceiverPhoneNumber));
-//            smsIntent.putExtra("sms_body", edMessage.getText().toString());
-//
-//            try {
-//                startActivity(smsIntent);
-//            } catch (ActivityNotFoundException e) {
-//                // Display some sort of error message here.
-//                Toast.makeText(getActivity(), "App not found", Toast.LENGTH_LONG).show();
-//            }
-        });
-
-        btnCancel.setOnClickListener(v -> {
-
-            layoutSuccess.setVisibility(View.GONE);
-        });
+        btnCancel.setOnClickListener(v -> layoutSuccess.setVisibility(View.GONE));
 
         btnSaveBeneficiary.setOnClickListener(v -> {
             SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
@@ -166,7 +146,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
             bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
             bottomSheetFragment.setArguments(bundle);
-            bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
         });
     }
 
@@ -376,6 +356,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         txtIntent.setType("text/plain");
         txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Airtime Transfer Notification");
         txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
-        startActivity(Intent.createChooser(txtIntent ,"Share"));
+        startActivity(Intent.createChooser(txtIntent, "Share"));
     }
 }

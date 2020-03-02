@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15dp"
+        android:background="@color/tingtel_red_color"
+        android:paddingHorizontal="@dimen/_10ssp"
+        android:paddingVertical="@dimen/_12ssp"
         android:layout_marginBottom="25dp"
         android:orientation="horizontal">
-
 
         <LinearLayout
             android:id="@+id/backArrowLayout"
@@ -40,7 +39,7 @@
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="start|center"
                 android:text="Back"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -56,6 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="@color/white"
                 android:layout_weight="0.5"
                 android:gravity="right|center"
                 android:text="My QR Code" />
@@ -442,7 +442,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:background="@color/tingtel_light_red"
+            android:background="@color/tingtel_red_color"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
             android:text="Logout"

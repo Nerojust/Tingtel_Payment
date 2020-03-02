@@ -431,6 +431,7 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:enabled="false"
                 android:background="@drawable/success_buttons"
                 android:fontFamily="@font/raleway_regular"
                 android:text="Save Beneficiary"
