@@ -59,6 +59,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:gravity="right"
                         android:textSize="@dimen/_8ssp"
+                        android:textColor="@color/colorPrimary"
                         tools:text="Airtel detected" />
 
                     <LinearLayout

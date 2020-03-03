@@ -91,7 +91,7 @@
     <string name="enter_new_email_address">NEW EMAIL ADDRESS</string>
     <string name="re_enter_your_email_address">RE-ENTER YOUR EMAIL ADDRESS</string>
     <string name="user">USER</string>
-    <string name="or_scan_qr_code">OR SCAN QR CODE</string>
+    <string name="or_scan_qr_code">SCAN QR CODE</string>
     <string name="select_a_sim_to_get_qr_code">SELECT A SIM TO GET QR CODE</string>
     <string name="get_qr_code">GET QR CODE</string>
     <string name="share_your_code_with_friends">SHARE CODE WITH FRIENDS</string>

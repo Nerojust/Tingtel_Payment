@@ -59,6 +59,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:gravity="right"
                         android:textSize="10sp"
+                        android:textColor="@color/colorPrimary"
                         tools:text="" />
 
                     <LinearLayout
