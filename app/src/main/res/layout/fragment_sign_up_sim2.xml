@@ -96,7 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_phone"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_phone_number"
                             android:inputType="number"
                             android:maxLength="11"

@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import tingtel.payment.R;
+import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.activities.sign_in.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +27,18 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-   @Override
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.action_home) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else if (item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.do_you_want_to_logout))

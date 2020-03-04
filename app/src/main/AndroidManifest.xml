@@ -27,23 +27,23 @@
             android:name=".activities.history.HistoryActivity"
             android:label="History"
             android:parentActivityName=".activities.MainActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.ForgotPasswordActivity"
             android:label="Reset Password"
             android:parentActivityName=".activities.sign_in.SignInActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:parentActivityName=".activities.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.AboutUsActivity"
             android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ReportIssueActivity"
             android:parentActivityName=".activities.settings.SettingsActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.TutorialActivity"
             android:parentActivityName=".activities.settings.SettingsActivity" />
@@ -55,12 +55,12 @@
             android:name=".activities.settings.ChangeEmailActivity"
             android:label="@string/change_email"
             android:parentActivityName=".activities.settings.SettingsActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.ChangePasswordActivity"
             android:label="@string/change_password"
             android:parentActivityName=".activities.settings.SettingsActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.qr_code.QRCodeScanActivity"
             android:label="QR Code Scan" />
@@ -75,11 +75,11 @@
             android:name=".activities.sign_up.SignUpActivity"
             android:label="Register"
             android:parentActivityName=".activities.sign_in.SignInActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.sign_in.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".activities.onboard.OnBoardActivity" />
         <activity

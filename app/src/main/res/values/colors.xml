@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FE4537</color>
+    <color name="colorPrimary">#F11808</color>
     <color name="colorPrimaryDark">#D9392D</color>
     <color name="colorAccent">#FE4537</color>
     <color name="black">#000000</color>
 
-    <color name="tingtel_red_color">#FE4537</color>
+    <color name="tingtel_red_color">#F11808</color>
 
     <color name="selected_dot">#2D9CDB</color>
     <color name="idle_dot">#662D9CDB</color>
     <color name="ob_header">#4A4A4A</color>
     <color name="ob_desc">#4A4A4A</color>
-    <color name="tingtel_light_gray">#EAEAEE</color>
-    <color name="tingtel_lighter_gray">#F9F9FD</color>
+    <color name="tingtel_light_gray">#D4D4D6</color>
+    <color name="tingtel_lighter_gray">#ECECF0</color>
     <color name="colorSplash">#E83F07</color>
 
-    <color name="tingtel_gray_color">#afaeae</color>
+    <color name="tingtel_gray_color">#A39F9F</color>
     <color name="tingtel_white">#ffffff</color>
     <color name="tingtel_light_red">#F37171</color>
     <color name="tingtel_black">#000000</color>

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activities.MainActivity">
-    <!--<item
+    <item
         android:id="@+id/action_home"
-        android:orderInCategory="300"
-        android:title="HOME"
         android:icon="@drawable/home"
-        app:showAsAction="always"/>
+        android:orderInCategory="300"
+        android:title="Home"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="300"
-        android:title="User"
         android:icon="@drawable/ic_settings_black_24dp"
-        app:showAsAction="always"/>
--->
+        android:orderInCategory="300"
+        android:title="Settings"
+        app:showAsAction="always" />
 </menu>
