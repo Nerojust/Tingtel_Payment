@@ -19,64 +19,65 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/backArrowLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_alignParentLeft="true"
-            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/backArrowLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="13dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/back_arrow" />
+
+                <TextView
+                    android:id="@+id/backArrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="start|center"
+                    android:text="Back"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/back_arrow" />
-
-            <TextView
-                android:id="@+id/backArrow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/rubik_medium"
-                android:gravity="start|center"
-                android:text="Back"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13ssp" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/homeImageview"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-           android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_home" />
+                android:id="@+id/homeImageview"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_home" />
 
 
-
-        <ImageView
-            android:id="@+id/settingsImageview"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:src="@drawable/ic_settings_white_24dp" />
+            <ImageView
+                android:id="@+id/settingsImageview"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/ic_settings_white_24dp" />
         </RelativeLayout>
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="18dp"
+                android:layout_marginHorizontal="@dimen/_13ssp"
                 android:layout_marginTop="@dimen/_30ssp"
                 android:layout_marginBottom="@dimen/_18ssp"
                 app:cardBackgroundColor="@color/tingtel_lighter_gray"
@@ -172,10 +173,10 @@
                                 android:textSize="@dimen/_8ssp" />
 
                             <TextView
+                                android:id="@+id/scanCodeTextview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:id="@+id/scanCodeTextview"
                                 android:fontFamily="@font/rubik_medium_italic"
                                 android:text="@string/or_scan_qr_code"
                                 android:textColor="@color/tingtel_light_red"
@@ -222,7 +223,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_15ssp"
                         android:gravity="start"
-                        android:text="AMOUNT TO BE SENT"
+                        android:text="@string/amount_to_be_sent"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_10ssp" />
 

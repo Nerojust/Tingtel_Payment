@@ -112,7 +112,7 @@
     <string name="email_is_required">EMAIL IS REQUIRED</string>
     <string name="invalid_characters">Invalid Character/s</string>
     <string name="enter_sim_1_details">ENTER SIM 1 DETAILS</string>
-    <string name="enter_transfer_pin">ENTER TRANSFER PIN</string>
+    <string name="enter_transfer_pin">ENTER NETWORK PIN</string>
     <string name="do_you_want_to_exit">DO YOU WANT TO EXIT?</string>
     <string name="receiver_s_details">RECEIVER\'S DETAILS</string>
     <string name="do_you_want_to_delete_this_beneficiary">DO YOU WANT TO DELETE THIS BENEFICIARY?</string>
@@ -128,6 +128,11 @@
     <string name="glo_sim_detected">GLO SIM DETECTED</string>
     <string name="notify_your_friend_about_this_transaction">NOTIFY RECEIVER ABOUT THIS TRANSACTION</string>
     <string name="select_beneficiary">SELECT BENEFICIARY</string>
+    <string name="seems_you_forgot_your_password">Seems you forgot your password</string>
+    <string name="thats_ok_n_n_just_enter_your_email_and_you_will_receive_a_reset_link">Thats Ok..   Just enter your email and you will receive a reset link</string>
+    <string name="submit">Submit</string>
+    <string name="add_beneficiary">ADD BENEFICIARY</string>
+    <string name="amount_to_be_sent">AMOUNT TO BE SENT</string>
 
 
     <string-array name="sim">

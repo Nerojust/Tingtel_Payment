@@ -108,16 +108,16 @@ public class TransferAirtimePreviewFragment extends Fragment {
         buttonClickedInt += 1;
 
         Log.e("tingteltest", "i am here");
-        if (buttonClickedInt > 2) {
+        if (buttonClickedInt > 3) {
             layoutSuccess.setVisibility(View.VISIBLE);
             //btnSaveBeneficiary.setEnabled(true);
             edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
                     "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
 
-
+            buttonClickedInt = 1;
         }
 
-        if (buttonClickedInt == 2 ) {
+        if (buttonClickedInt == 3) {
             checkBalance();
         }
 

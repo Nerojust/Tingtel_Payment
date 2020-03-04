@@ -36,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/_8ssp"
             android:layout_marginTop="@dimen/_15ssp"
             android:background="@drawable/button_round_corners"
             android:fontFamily="@font/raleway_regular"
