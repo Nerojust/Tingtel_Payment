@@ -175,10 +175,6 @@ public class TransferAirtimeFragment extends Fragment {
 
 
         btnNext.setOnClickListener(v -> {
-
-            if (!checkSelectedSim(view)) {
-                return;
-            }
             //if all fields and conditions are satisfied proceed.
             if (isValidAllFields()) {
                 String input = edAmount.getText().toString().trim();
@@ -247,7 +243,7 @@ public class TransferAirtimeFragment extends Fragment {
             balanceChecked = true;
 
         } else {
-            Toast.makeText(getContext(), "Click on a number to transfer from", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Click on a number first", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -339,6 +335,7 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
     private boolean isValidAllFields() {
+if (!isSim1TextviewClicked||!isSim2TextviewClicked)
 
         if (edAmount.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "Amount is required", Toast.LENGTH_SHORT).show();
