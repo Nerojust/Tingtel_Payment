@@ -1,84 +1,430 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/tingtel_light_gray">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        tools:context=".fragments.signup.SIgnUpSim1SuccessFragment">
+        android:layout_gravity="center"
+        android:background="@color/tingtel_red_color"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp">
 
-        <ImageView
-            android:id="@+id/img_good"
-            android:layout_width="89dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/ic_thumb_up_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_simreg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/your_request_is_processing"
-            android:textAlignment="center"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_good"
-            tools:layout_editor_absoluteY="204dp" />
+            <ImageView
+                android:id="@+id/homeImageview"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_home" />
 
-        <Button
-            android:id="@+id/btn_send_notification"
+
+
+            <ImageView
+                android:id="@+id/settingsImageview"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/ic_settings_white_24dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/rounded_button_corners"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/send_notification_to_recipient"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_simreg" />
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp">
 
-        <Button
-            android:id="@+id/btn_make_another_transfer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/success_buttons"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/make_another_transfer"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_send_notification" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/review"
+                android:textColor="@color/tingtel_red_color"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_view_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/history_buttons"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/view_history"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_make_another_transfer" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A09D9D"
+                android:layout_marginBottom="20dp"
+                android:padding="1dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    android:background="@drawable/button_round_corners"
+                    app:cardMaxElevation="2dp"
+                    app:cardPreventCornerOverlap="false">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toLeftOf="@+id/senderImage"
+                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/from"
+                                android:textSize="@dimen/_10ssp" />
+
+
+
+                            <TextView
+                                android:id="@+id/tv_sender_phone_number"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_15ssp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:textStyle="bold"
+                                tools:text="080623467463" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/senderImage"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="0dp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:scaleType="fitCenter"
+                            android:textSize="17sp"
+                            tools:src="@drawable/mtn_logo" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A09D9D"
+                android:layout_marginBottom="20dp"
+                android:padding="1dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="2dp"
+                    app:cardPreventCornerOverlap="false">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toLeftOf="@+id/receiverImage"
+                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/to"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tv_receiver_phone_number"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/rubik_medium"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_15ssp"
+                                android:layout_marginLeft="5dp"
+                                android:textStyle="bold"
+                                tools:text="080233467463" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/receiverImage"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="0dp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:scaleType="fitCenter"
+                            android:gravity="center"
+                            tools:src="@drawable/airtel_logo" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A09D9D"
+                android:layout_marginBottom="20dp"
+                android:padding="1dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="2dp"
+                    app:cardPreventCornerOverlap="false">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toLeftOf="@+id/tv1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/amount"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tv_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_15ssp"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="5dp"
+                                tools:text="2000" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv1"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="0.2"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:text="@string/naira"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A09D9D"
+                android:layout_marginBottom="20dp"
+                android:padding="1dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="2dp"
+                    app:cardPreventCornerOverlap="false">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toLeftOf="@+id/tv2"
+                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/service_fee"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tv_service_fee"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_15ssp"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="5dp"
+                                tools:text="200" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:text="@string/naira"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A09D9D"
+                android:layout_marginBottom="20dp"
+                android:padding="1dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="2dp"
+                    app:cardPreventCornerOverlap="false">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/tv3"
+                            android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/amount_to_be_credited"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tv_credited_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/tingtel_light_red"
+                                android:textSize="@dimen/_15ssp"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="5dp"
+                                tools:text="1800" />
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="@string/naira"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_transfer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/dashboard_buttons"
+                android:fontFamily="@font/raleway_regular"
+                android:text="Make Another Transfer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+
+            <Button
+                android:id="@+id/btn_save_beneficiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/success_buttons"
+                android:fontFamily="@font/raleway_regular"
+                android:text="Save Beneficiary"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
