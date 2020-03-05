@@ -23,14 +23,21 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
+import tingtel.payment.adapters.NetworkSelectAdapter;
 import tingtel.payment.adapters.SpinnerAdapter;
+import tingtel.payment.models.NetworkSelect;
 import tingtel.payment.utils.AppUtils;
 
 
@@ -52,9 +59,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private Button btnPreview;
     private NavController navController;
     private TextView whatIsPin;
-    private TextView tvSelectBeneficiary, scanCodeTextview;
+    private ImageView imgSelectBeneficiary;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
+    private List<NetworkSelect> networkList = new ArrayList<>();
+    NetworkSelectAdapter adapter;
+    RecyclerView recyclerView;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
@@ -73,8 +83,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             }
         }
     };
-    private ImageView qrCodeImageview, contactsImageview;
-    private TextView edAmount;
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
 
@@ -97,10 +105,39 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         getExtrasFromIntent();
         initViews(view);
-        initSpinner();
         initListeners();
+        initRv();
 
         return view;
+    }
+
+    private void initRv() {
+
+
+
+        adapter = new NetworkSelectAdapter(getContext(), networkList, getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        prepareNetworkData();
+    }
+
+    private void prepareNetworkData() {
+        NetworkSelect networkSelect = new NetworkSelect(R.drawable.mtn_logo, "MTN");
+        networkList.add(networkSelect);
+
+        networkSelect = new NetworkSelect(R.drawable.nmobile_logo, "9MOBILE");
+        networkList.add(networkSelect);
+
+        networkSelect = new NetworkSelect(R.drawable.airtel_logo, "AIRTEL");
+        networkList.add(networkSelect);
+
+        networkSelect = new NetworkSelect(R.drawable.glo_logo, "GLO");
+        networkList.add(networkSelect);
+
+        adapter.notifyDataSetChanged();
     }
 
     private void initListeners() {
@@ -113,7 +150,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         });
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
-        tvSelectBeneficiary.setOnClickListener(v -> {
+        imgSelectBeneficiary.setOnClickListener(v -> {
 
             bottomSheetFragment = new SelectBeneficiarySheetFragment();
             bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
@@ -121,6 +158,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         });
 
         btnPreview.setOnClickListener(v -> {
+            ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
+
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
             bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
@@ -139,11 +178,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
         });
 
-
-        qrCodeImageview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
-
-        scanCodeTextview.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2, null));
-    }
+ }
 
     private void getExtrasFromIntent() {
         SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("simNetwork");
@@ -152,71 +187,29 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         SimSerial = getArguments().getString("simSerial");
     }
 
-    private Spinner initViews(View view) {
+    private void initViews(View view) {
         backButtonLayout = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
 
-        mSpinner = view.findViewById(R.id.network_spinner);
+
         btnPreview = view.findViewById(R.id.btn_preview);
-        qrCodeImageview = view.findViewById(R.id.codeImageView);
-        scanCodeTextview = view.findViewById(R.id.scanCodeTextview);
+
         edPin = view.findViewById(R.id.pinEditext);
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);
-        tvSelectBeneficiary = view.findViewById(R.id.tv_select_beneficiary);
-        edAmount = view.findViewById(R.id.confirmAmount_id);
+        imgSelectBeneficiary = view.findViewById(R.id.img_beneficiary);
+
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
 
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
-        String finalAmount = formatter.format(Double.parseDouble(Amount));
-        edAmount.setText(getResources().getString(R.string.naira) + finalAmount);
-
-
-        return mSpinner;
     }
 
-    private void initSpinner() {
-        spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
-        spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo};
 
-        mCustomAdapter = new SpinnerAdapter(Objects.requireNonNull(getActivity()), spinnerTitles, spinnerImages);
-        mSpinner.setAdapter(mCustomAdapter);
-
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
-
-                switch (spinnerTitles[i]) {
-
-                    case "Mtn":
-                        ReceiverSimNetwork = "Mtn";
-                        break;
-                    case "Airtel":
-                        ReceiverSimNetwork = "Airtel";
-                        break;
-                    case "9Mobile":
-                        ReceiverSimNetwork = "9Mobile";
-                        break;
-                    case "Glo":
-                        ReceiverSimNetwork = "Glo";
-                        break;
-                    default:
-                        ReceiverSimNetwork = spinnerTitles[i];
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
 
     private boolean isValidFields() {
         if (edReceiverPhoneNumber.getText().toString().isEmpty()) {

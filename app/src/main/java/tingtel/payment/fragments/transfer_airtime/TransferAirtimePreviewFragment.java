@@ -57,12 +57,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private TextView tvCreditedAmount;
     private ImageView imgSender;
     private ImageView imgReceiver;
-    private Button btnTransfer;
-    private Button btnBack;
-    private Button btnSendMessage;
-    private Button btnCancel;
-    private Button btnSaveBeneficiary;
-    private EditText edMessage;
     private NavController navController;
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
@@ -118,7 +112,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         }
 
         if (buttonClickedInt == 3) {
-            checkBalance();
+         //   checkBalance();
         }
 
     }

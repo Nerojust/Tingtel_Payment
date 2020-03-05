@@ -51,6 +51,7 @@ public class SessionManager {
     private static final String COUNTRYSIM2 = "COUNTRY_SIM2";
     private static final String APPSTATE = "APP_STATE";
     private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
+    private static final String SELECTED_RV_NETWORK = "SELECTED_RV_NETWORK";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -425,5 +426,14 @@ public class SessionManager {
 
     public void setImageStoragePath(String barcodeImage) {
         setStringPreference(QRIMAGE, barcodeImage);
+    }
+
+
+    public String getSelectedRvNetwork() {
+        return getStringPreference(SELECTED_RV_NETWORK);
+    }
+
+    public void setSelectedRvNetwork(String network) {
+        setStringPreference(SELECTED_RV_NETWORK, NETWORK_NAME);
     }
 }
