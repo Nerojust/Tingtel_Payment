@@ -291,13 +291,11 @@ public class TransferAirtimePreviewFragment extends Fragment {
             //08117636062
             TingtelNumber = "09058815819";
             UssdCode = "*131*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            Toast.makeText(getActivity(), "Glo "+ UssdCode, Toast.LENGTH_LONG).show();
-
-//            dialUssdCode(
-//                    getActivity(),
-//                    UssdCode,
-//                    SimNo
-//            );
+            dialUssdCode(
+                    getActivity(),
+                    UssdCode,
+                    SimNo
+            );
 
 
         } else {
