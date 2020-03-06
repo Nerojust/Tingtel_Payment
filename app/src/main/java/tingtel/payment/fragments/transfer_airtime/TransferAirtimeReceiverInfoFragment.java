@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +44,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private String SenderSimNetwork;
     private String ReceiverSimNetwork;
     private int SimNo;
-    private ImageView homeImageview, settingsImagview;
-    private LinearLayout backButtonLayout;
+    private ImageView homeImageview, settingsImagview,backButtonImageview;
     private String Amount;
     private String SimSerial;
     private Button btnPreview;
@@ -104,7 +102,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initListeners() {
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -153,7 +151,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private Spinner initViews(View view) {
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
 

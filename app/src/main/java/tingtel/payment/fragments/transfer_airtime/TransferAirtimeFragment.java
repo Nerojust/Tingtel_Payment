@@ -1,21 +1,25 @@
 package tingtel.payment.fragments.transfer_airtime;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -24,6 +28,8 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
@@ -34,31 +40,29 @@ import static tingtel.payment.utils.AppUtils.dialUssdCode;
 
 public class TransferAirtimeFragment extends Fragment {
 
-    Button btnCheckBalance;
     TextView tvGetTransferPin;
-    EditText edAmount;
-    Button btnNext;
-    NavController navController;
-    String UssdCode;
-    String SimNetwork;
-    int SimNo;
-    String SimSerial;
-    SessionManager sessionManager;
-    AppDatabase appDatabase;
-    private ImageView homeImageview, settingsImagview;
-    private RadioGroup rdSimGroup;
-    private LinearLayout backButtonLayout;
+    private Button btnCheckBalance;
+    private EditText edAmount;
+    private Button btnNext;
+    private NavController navController;
+    private String UssdCode;
+    private String SimNetwork;
+    private int SimNo;
+    private String SimSerial;
+    private SessionManager sessionManager;
+    private AppDatabase appDatabase;
+    private ImageView homeImageview, settingsImagview, backButtonImageview;
     private TextView sim1Textview, sim2Textview;
     private String finalamount;
     private Boolean balanceChecked = false;
     private boolean isSim1TextviewClicked = false;
     private boolean isSim2TextviewClicked = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         initViews(view);
         initListeners(view);
 
@@ -68,7 +72,38 @@ public class TransferAirtimeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    //For handling item selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                Toast.makeText(getContext(), "home Fragment item", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
+
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
+        homeImageview = view.findViewById(R.id.homeImageview);
+        settingsImagview = view.findViewById(R.id.settingsImageview);
         sessionManager = AppUtils.getSessionManagerInstance();
         sim1Textview = view.findViewById(R.id.sim_one_textview);
         sim2Textview = view.findViewById(R.id.sim_two_textview);
@@ -122,6 +157,16 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
     private void initListeners(View view) {
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
+        homeImageview.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+
+        });
+
+        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         sim1Textview.setOnClickListener(v -> {
             isSim1TextviewClicked = true;
@@ -145,32 +190,13 @@ public class TransferAirtimeFragment extends Fragment {
 
 
         btnCheckBalance.setOnClickListener(v -> {
-            String NoOfSIm = sessionManager.getSimStatus();
 
-            switch (NoOfSIm) {
-                case "NO SIM":
-                    sim1Textview.setVisibility(View.GONE);
-                    sim2Textview.setVisibility(View.GONE);
-
-                    Toast.makeText(getContext(), "Insert a sim ", Toast.LENGTH_SHORT).show();
-                    break;
-
-                case "SIM1":
-                    sim1Textview.setVisibility(View.VISIBLE);
-                    sim2Textview.setVisibility(View.GONE);
-                    sim1Textview.setText(sessionManager.getNetworkName());
-
-                    performCheckBeforeDialing();
-
-                case "SIM1 SIM2":
-                    sim1Textview.setVisibility(View.VISIBLE);
-                    sim2Textview.setVisibility(View.VISIBLE);
-                    sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
-                    sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + sessionManager.getSimPhoneNumber1());
-
-                    performCheckBeforeDialing();
-                    break;
+            if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
+                Toast.makeText(getContext(), "Select a number and check balance", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            performCheckBeforeDialing();
         });
 
 
@@ -191,21 +217,44 @@ public class TransferAirtimeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (isSim1TextviewClicked) {
+            if (sessionManager.getClickedNetwork() != null) {
+                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
+                sim1Textview.setTextColor(getResources().getColor(R.color.white));
+            }
+        }else if (isSim2TextviewClicked){
+            sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right));
+            sim2Textview.setTextColor(getResources().getColor(R.color.white));
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     private void performCheckBeforeDialing() {
         if (isSim1TextviewClicked) {
             if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
                 SimNetwork = "Mtn";
                 UssdCode = "*556#";
+                sessionManager.setClickedNetwork("mtn");
             } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
                 SimNetwork = "Airtel";
                 UssdCode = "*123#";
+                sessionManager.setClickedNetwork("airtel");
             } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
                 SimNetwork = "Glo";
                 UssdCode = "*124*1#";
+                sessionManager.setClickedNetwork("glo");
             } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
                     (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
                 SimNetwork = "9mobile";
                 UssdCode = "*232#";
+                sessionManager.setClickedNetwork("eti");
             } else {
                 Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
                 return;
@@ -318,11 +367,12 @@ public class TransferAirtimeFragment extends Fragment {
             case "NO SIM":
                 sim1Textview.setVisibility(View.GONE);
                 sim2Textview.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Insert a sim card", Toast.LENGTH_SHORT).show();
                 break;
             case "SIM1":
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.GONE);
-                sim1Textview.setText(sessionManager.getNetworkName());
+                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
                 break;
 
             case "SIM1 SIM2":
@@ -335,7 +385,10 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
     private boolean isValidAllFields() {
-if (!isSim1TextviewClicked||!isSim2TextviewClicked)
+        if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
+            Toast.makeText(getContext(), "Select a number and check balance.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         if (edAmount.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "Amount is required", Toast.LENGTH_SHORT).show();
@@ -354,33 +407,5 @@ if (!isSim1TextviewClicked||!isSim2TextviewClicked)
         }
 
         return true;
-    }
-
-
-    private boolean checkSelectedSim(View v) {
-
-//        // find the radiobutton by returned id
-//        rdSimButton = v.findViewById(selectedId);
-//
-//
-//        if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-//            SimNetwork = "Mtn";
-//            return true;
-//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-//            SimNetwork = "Airtel";
-//            return true;
-//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-//            SimNetwork = "Glo";
-//            return true;
-//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-//                (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-//            SimNetwork = "9mobile";
-//            return true;
-//        } else {
-////            Toast.makeText(getContext(), "Selected Sim Not Recognized", Toast.LENGTH_LONG).show();
-////            return false;
-//            SimNetwork = "9mobile";
-        return true;
-//        }
     }
 }

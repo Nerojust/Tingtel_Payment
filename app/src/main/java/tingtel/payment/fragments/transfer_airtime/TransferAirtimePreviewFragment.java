@@ -64,8 +64,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private Button btnSaveBeneficiary;
     private EditText edMessage;
     private NavController navController;
-    private ImageView homeImageview, settingsImagview;
-    private LinearLayout backButtonLayout;
+    private ImageView homeImageview, settingsImagview,backButtonImageview;
     private LinearLayout layoutSuccess;
 
 
@@ -148,7 +147,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      */
     private void initListeners() {
 
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -186,7 +185,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      */
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
         imgSender = view.findViewById(R.id.senderImage);

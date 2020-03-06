@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,10 +8,10 @@
     tools:context=".fragments.transfer_airtime.TransferAirtimeFragment">
 
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,15 +22,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/appbar_layout"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10ssp"
+                android:paddingVertical="@dimen/_10ssp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+
+                    <ImageView
+                        android:id="@+id/backArrowLayout"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="@dimen/_5ssp"
+                        android:src="@drawable/back_arrow" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+
+                        android:background="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/homeImageview"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_home" />
+
+
+                    <ImageView
+                        android:id="@+id/settingsImageview"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/ic_settings_white_24dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@color/tingtel_lighter_gray"
                 android:orientation="vertical"
-                android:paddingVertical="@dimen/_7ssp">
+                android:paddingBottom="@dimen/_7ssp">
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginVertical="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_8ssp"
+                    android:layout_marginBottom="@dimen/_5ssp"
                     android:fontFamily="@font/rubik_regular"
                     android:text="TRANSFER FROM"
                     android:textColor="@color/tingtel_gray_color"
@@ -41,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/_20ssp"
+                    android:layout_marginBottom="@dimen/_10ssp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -53,7 +104,7 @@
                         android:background="@drawable/sim_corners_left"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
-                        android:paddingVertical="7dp"
+                        android:paddingVertical="@dimen/_4ssp"
                         android:text="@string/sim_1"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="@dimen/_12ssp" />
@@ -68,7 +119,7 @@
                         android:background="@drawable/sim_corners_right"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
-                        android:paddingVertical="7dp"
+                        android:paddingVertical="@dimen/_4ssp"
                         android:text="@string/sim_2"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp" />
@@ -80,7 +131,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginVertical="@dimen/_10ssp"
+                android:layout_marginVertical="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_10ssp"
                 android:background="@color/tingtel_lighter_gray"
                 android:orientation="vertical"
                 android:paddingVertical="@dimen/_7ssp">
@@ -90,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/_5ssp"
                     android:fontFamily="@font/rubik_regular"
                     android:text="TRANSFER AMOUNT"
                     android:textColor="@color/tingtel_gray_color"
@@ -116,7 +168,7 @@
                     <EditText
                         android:id="@+id/amount_edittext"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_30ssp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@null"
@@ -138,9 +190,11 @@
                         android:gravity="center"
                         android:text="@string/check_balance"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_8ssp" />
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
             </LinearLayout>
+
+
 
             <Button
                 android:id="@+id/next_button"
@@ -155,6 +209,5 @@
 
         </LinearLayout>
 
-
-    </ScrollView>
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

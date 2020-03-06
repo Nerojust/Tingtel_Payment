@@ -5,7 +5,7 @@
     tools:context=".activities.MainActivity">
     <item
         android:id="@+id/action_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/ic_home"
         android:orderInCategory="300"
         android:title="Home"
         app:showAsAction="always" />

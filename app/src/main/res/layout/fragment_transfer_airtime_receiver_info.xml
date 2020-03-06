@@ -12,39 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/tingtel_red_color"
+        android:background="@drawable/appbar_layout"
         android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_10ssp"
         android:paddingVertical="15dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/backArrowLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="13dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/back_arrow" />
-
-                <TextView
-                    android:id="@+id/backArrow"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:gravity="start|center"
-                    android:text="Back"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13ssp" />
-            </LinearLayout>
+                android:src="@drawable/back_arrow" />
 
             <ImageView
                 android:id="@+id/homeImageview"
@@ -64,7 +46,6 @@
         </RelativeLayout>
 
     </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
