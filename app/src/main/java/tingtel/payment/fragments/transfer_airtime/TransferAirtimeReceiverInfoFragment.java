@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,13 +44,13 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     };
     String[] spinnerPopulation;
     SelectBeneficiarySheetFragment bottomSheetFragment;
+    NetworkSelectAdapter adapter;
+    RecyclerView recyclerView;
     private String[] spinnerTitles;
     private int[] spinnerImages;
     private String SenderSimNetwork;
     private String ReceiverSimNetwork;
     private int SimNo;
-    NetworkSelectAdapter adapter;
-    RecyclerView recyclerView;
     private String Amount;
     private String SimSerial;
     private Button btnPreview;
@@ -60,9 +59,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private ImageView homeImageview, settingsImagview;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
-    private LinearLayout backButtonLayout;
-    private ImageView imgSelectBeneficiary;
-    private List<NetworkSelect> networkList = new ArrayList<>();
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
@@ -81,6 +77,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             }
         }
     };
+
+    private ImageView imgSelectBeneficiary, backButtonImageview;
+    private List<NetworkSelect> networkList = new ArrayList<>();
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
 
@@ -111,7 +110,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private void initRv() {
 
 
-
         adapter = new NetworkSelectAdapter(getContext(), networkList, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -138,7 +136,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initListeners() {
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -156,8 +154,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         btnPreview.setOnClickListener(v -> {
             ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
-
-            Toast.makeText(getActivity(), "lllll"+ ReceiverSimNetwork, Toast.LENGTH_LONG).show();
 
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
@@ -177,7 +173,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
         });
 
- }
+    }
 
     private void getExtrasFromIntent() {
         SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("simNetwork");
@@ -187,7 +183,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
 
@@ -207,7 +203,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
 
     }
-
 
 
     private boolean isValidFields() {

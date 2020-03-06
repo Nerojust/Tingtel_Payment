@@ -52,6 +52,7 @@ public class SessionManager {
     private static final String APPSTATE = "APP_STATE";
     private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
     private static final String CLICKED_NETWORK = "CLICKED_NETWORK";
+    private static final String SELECTED_RV_NETWORK = "SELECTED_RV_NETWORK";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -434,5 +435,13 @@ public class SessionManager {
 
     public void setClickedNetwork(String network) {
         setStringPreference(CLICKED_NETWORK,network);
+    }
+
+    public String getSelectedRvNetwork() {
+        return getStringPreference(SELECTED_RV_NETWORK);
+    }
+
+    public void setSelectedRvNetwork(String network) {
+        setStringPreference(SELECTED_RV_NETWORK, network);
     }
 }

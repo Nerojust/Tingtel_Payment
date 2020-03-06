@@ -57,6 +57,7 @@ public class TransferAirtimeFragment extends Fragment {
     private Boolean balanceChecked = false;
     private boolean isSim1TextviewClicked = false;
     private boolean isSim2TextviewClicked = false;
+    private String noOfSIm;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -171,11 +172,17 @@ public class TransferAirtimeFragment extends Fragment {
         sim1Textview.setOnClickListener(v -> {
             isSim1TextviewClicked = true;
             isSim2TextviewClicked = false;
-            sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
-            sim1Textview.setTextColor(getResources().getColor(R.color.white));
+            if (noOfSIm.equalsIgnoreCase( "SIM1") ){
+                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_red));
+                sim1Textview.setTextColor(getResources().getColor(R.color.white));
 
-            sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
-            sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
+            } else if (noOfSIm .equalsIgnoreCase( "SIM1 SIM2")) {
+                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
+                sim1Textview.setTextColor(getResources().getColor(R.color.white));
+
+                sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+                sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
+            }
         });
 
         sim2Textview.setOnClickListener(v -> {
@@ -207,7 +214,7 @@ public class TransferAirtimeFragment extends Fragment {
                 finalamount = input.replace(",", "");
 
                 Bundle bundle = new Bundle();
-                bundle.putString("simNetwork", ""+SimNetwork);
+                bundle.putString("simNetwork", "" + SimNetwork);
                 bundle.putString("simSerial", "" + SimSerial);
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", finalamount);
@@ -225,7 +232,7 @@ public class TransferAirtimeFragment extends Fragment {
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
                 sim1Textview.setTextColor(getResources().getColor(R.color.white));
             }
-        }else if (isSim2TextviewClicked){
+        } else if (isSim2TextviewClicked) {
             sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right));
             sim2Textview.setTextColor(getResources().getColor(R.color.white));
         }
@@ -361,9 +368,9 @@ public class TransferAirtimeFragment extends Fragment {
 
 
     private void populateSimRadioButtons() {
-        String NoOfSIm = sessionManager.getSimStatus();
+        noOfSIm = sessionManager.getSimStatus();
 
-        switch (NoOfSIm) {
+        switch (noOfSIm) {
             case "NO SIM":
                 sim1Textview.setVisibility(View.GONE);
                 sim2Textview.setVisibility(View.GONE);
@@ -373,6 +380,10 @@ public class TransferAirtimeFragment extends Fragment {
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.GONE);
                 sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
+
+                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_white));
+                sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+
                 break;
 
             case "SIM1 SIM2":
@@ -380,6 +391,13 @@ public class TransferAirtimeFragment extends Fragment {
                 sim2Textview.setVisibility(View.VISIBLE);
                 sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
                 sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + sessionManager.getSimPhoneNumber1());
+
+                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
+                sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+
+                sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+                sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
+
                 break;
         }
     }

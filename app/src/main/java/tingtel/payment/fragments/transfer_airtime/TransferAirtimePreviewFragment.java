@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +35,7 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 public class TransferAirtimePreviewFragment extends Fragment {
 
     Boolean buttonClicked;
+    Button btnTransfer;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -55,9 +55,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private ImageView imgSender;
     private ImageView imgReceiver;
     private NavController navController;
-    Button btnTransfer;
-    private ImageView homeImageview, settingsImagview;
-    private LinearLayout backButtonLayout;
+    private ImageView homeImageview, settingsImagview, backButtonImageview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +74,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber1();
             SimSerial = sessionManager.getSimSerialICCID1();
         }
-
 
 
         populateDetailsTextViews();
@@ -138,7 +135,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      */
     private void initListeners() {
 
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -152,8 +149,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
 
 
-
-
     }
 
 
@@ -164,7 +159,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      */
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
         imgSender = view.findViewById(R.id.senderImage);
@@ -176,8 +171,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
-
-
 
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -281,7 +274,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
             );
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
-
 
 
             //08117636062
