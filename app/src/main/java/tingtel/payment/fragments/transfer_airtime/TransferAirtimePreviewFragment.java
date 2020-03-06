@@ -60,7 +60,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private NavController navController;
     private ImageView homeImageview, settingsImagview;
     private LinearLayout backButtonLayout;
-    private LinearLayout layoutSuccess;
+    Button btnTransfer;
+
 
 
     @Override
@@ -81,7 +82,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SimSerial = sessionManager.getSimSerialICCID1();
         }
 
-        layoutSuccess.setVisibility(View.GONE);
+
 
         populateDetailsTextViews();
         initListeners();
@@ -96,26 +97,26 @@ public class TransferAirtimePreviewFragment extends Fragment {
         buttonClicked = false;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        buttonClickedInt += 1;
-
-        Log.e("tingteltest", "i am here");
-        if (buttonClickedInt > 3) {
-            layoutSuccess.setVisibility(View.VISIBLE);
-            //btnSaveBeneficiary.setEnabled(true);
-            edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
-                    "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
-
-            buttonClickedInt = 1;
-        }
-
-        if (buttonClickedInt == 3) {
-         //   checkBalance();
-        }
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        buttonClickedInt += 1;
+//
+//        Log.e("tingteltest", "i am here");
+//        if (buttonClickedInt > 3) {
+//            layoutSuccess.setVisibility(View.VISIBLE);
+//            //btnSaveBeneficiary.setEnabled(true);
+//            edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
+//                    "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
+//
+//            buttonClickedInt = 1;
+//        }
+//
+//        if (buttonClickedInt == 3) {
+//         //   checkBalance();
+//        }
+//
+//    }
 
     private void checkBalance() {
         String UssdCode;
@@ -155,21 +156,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
 
-        btnSendMessage.setOnClickListener(v -> shareViaSocial(edMessage.getText().toString()));
 
-        btnCancel.setOnClickListener(v -> layoutSuccess.setVisibility(View.GONE));
 
-        btnSaveBeneficiary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
-                bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
-                bottomSheetFragment.setArguments(bundle);
-                bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
-            }
-        });
+
     }
 
 
@@ -192,13 +181,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
-        btnCancel = view.findViewById(R.id.btn_cancel);
-        btnSendMessage = view.findViewById(R.id.btn_send_message);
-        btnSaveBeneficiary = view.findViewById(R.id.btn_save_beneficiary);
 
-        edMessage = view.findViewById(R.id.ed_message);
 
-        layoutSuccess = view.findViewById(R.id.layout_success);
+
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
@@ -317,6 +302,16 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         saveHistory();
 
+
+        Bundle bundle = new Bundle();
+        bundle.putString("senderSimNetwork", SenderSimNetwork);
+        bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
+        bundle.putString("simSerial", SimSerial);
+        bundle.putInt("simNo", SimNo);
+        bundle.putString("amount", Amount);
+        bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
+        navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
+
         buttonClicked = true;
     }
 
@@ -373,11 +368,5 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
     }
 
-    public void shareViaSocial(String body) {
-        Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
-        txtIntent.setType("text/plain");
-        txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Airtime Transfer Notification");
-        txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
-        startActivity(Intent.createChooser(txtIntent, "Share"));
-    }
+
 }

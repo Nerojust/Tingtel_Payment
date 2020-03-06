@@ -93,8 +93,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="TRANSFER TO"
                         android:textAlignment="center"
@@ -111,11 +111,12 @@
                             android:id="@+id/receivers_phone_number_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="4dp"
                             android:layout_toRightOf="@+id/img_beneficiary"
-                            android:hint="RECEIVERS PHONE NUMBER"
-                            />
+                            android:background="@null"
+                            android:hint="RECEIVERS NUMBER"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_11ssp" />
 
                         <ImageView
                             android:id="@+id/img_beneficiary"
@@ -133,6 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
                         android:text="SELECT NETWORK"
+                        android:textSize="@dimen/_11ssp"
                         android:textColor="@color/black"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
@@ -142,23 +144,43 @@
 
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/button_round_corners_black">
+
+                        <EditText
                             android:id="@+id/pinEditext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_lock"
-                            android:drawablePadding="8dp"
                             android:fontFamily="@font/raleway_regular"
                             android:hint="@string/enter_transfer_pin"
                             android:inputType="numberPassword"
                             android:maxLength="7"
+                            android:background="@null"
                             android:maxLines="1"
-                            android:textSize="@dimen/_13ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_toRightOf="@+id/lock"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <ImageView
+                            android:id="@+id/lock"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_lock"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            />
+
+                    </RelativeLayout>
+
 
                     <TextView
                         android:id="@+id/whatIsPin_id"
@@ -178,13 +200,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_30ssp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginBottom="@dimen/_30ssp"
                         android:background="@drawable/button_round_corners"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/preview"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -434,6 +434,6 @@ public class SessionManager {
     }
 
     public void setSelectedRvNetwork(String network) {
-        setStringPreference(SELECTED_RV_NETWORK, NETWORK_NAME);
+        setStringPreference(SELECTED_RV_NETWORK, network);
     }
 }

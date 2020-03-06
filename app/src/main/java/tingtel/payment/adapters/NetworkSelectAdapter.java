@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -35,12 +36,18 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     private NavController navController;
     SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
+    private static int lastClickedPosition = -1;
+    private int selectedItem;
+
+
     public NetworkSelectAdapter(Context mContext, List lst, Activity activity) {
 
         this.mContext = mContext;
         this.mData = lst;
         this.activity = activity;
         appDatabase = AppDatabase.getDatabaseInstance(mContext);
+        selectedItem = -1;
+
     }
 
     @Override
@@ -60,8 +67,35 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
         holder.imgNetwork.setImageResource(mData.get(position).getImage());
         holder.tvNetworkName.setText(mData.get(position).getName());
 
+        holder.imgCheck.setVisibility(View.GONE);
+
+
+        if (selectedItem == position) {
+            holder.imgCheck.setVisibility(View.VISIBLE);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int previousItem = selectedItem;
+                selectedItem = position;
+
+                notifyItemChanged(previousItem);
+                notifyItemChanged(position);
+
+
+                sessionManager.setSelectedRvNetwork(mData.get(position).getName());
+
+
+
+            }
+        });
+
+
 
     }
+
 
 
     @Override
@@ -72,6 +106,7 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         final ImageView imgNetwork;
+        final ImageView imgCheck;
         final TextView tvNetworkName;
 
 
@@ -79,29 +114,9 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
         MyViewHolder(View itemView) {
             super(itemView);
             imgNetwork = itemView.findViewById(R.id.img_network);
+            imgCheck = itemView.findViewById(R.id.img_check);
            tvNetworkName = itemView.findViewById(R.id.tv_name);
 
-           itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-
-                   NetworkSelect SelectedNetwork = (NetworkSelect) v.getTag();
-                   sessionManager.setSelectedRvNetwork(SelectedNetwork.getName());
-
-                   for (int i = 0; i <4; i++) {
-
-                       if (i == getAdapterPosition()) {
-                           imgNetwork.setVisibility(View.VISIBLE);
-                       } else {
-                           imgNetwork.setVisibility(View.GONE);
-                       }
-
-                   }
-
-
-
-               }
-           });
 
 
         }

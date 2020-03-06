@@ -23,6 +23,7 @@
                 android:layout_height="70dp"
                 android:src="@drawable/mtn_logo" />
             <ImageView
+                android:id="@+id/img_check"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_alignRight="@+id/img_network"

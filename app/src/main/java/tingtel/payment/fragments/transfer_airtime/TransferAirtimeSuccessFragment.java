@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +29,7 @@ import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
@@ -46,6 +50,25 @@ public class TransferAirtimeSuccessFragment extends Fragment {
     private Button btnCancel;
     private Button btnSaveBeneficiary;
     private EditText edMessage;
+    private String SenderSimNetwork;
+    private String SenderPhoneNumber;
+    private String SimSerial;
+    private String ReceiverSimNetwork;
+    private String Pin;
+    private int SimNo;
+    private ImageView homeImageview, settingsImagview;
+    private LinearLayout backButtonLayout;
+    private LinearLayout layoutSuccess;
+    private ImageView imgSender;
+    private ImageView imgReceiver;
+    private TextView tvSenderPhoneNumber;
+    private TextView tvReceiverPhoneNumber;
+    private TextView tvAmount;
+    private TextView tvServiceFee;
+    private TextView tvCreditedAmount;
+    private String TingtelNumber;
+    private String final_Amount;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,8 +80,10 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
-        ReceiverPhoneNumber = Objects.requireNonNull(getArguments()).getString("receiverPhoneNumber");
-        Amount = getArguments().getString("amount");
+        getExtrasFromIntent();
+        initViews(view);
+
+
 
 
 
@@ -76,7 +101,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
                 "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
 
-
+        populateDetailsTextViews();
 initListeners();
 
 //        btnSendNotification.setOnClickListener(v -> {
@@ -96,7 +121,7 @@ initListeners();
     }
 
     private void initListeners() {
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -104,6 +129,8 @@ initListeners();
             Objects.requireNonNull(getActivity()).finish();
 
         });
+
+        btnSendMessage.setOnClickListener(v -> shareViaSocial(edMessage.getText().toString()));
 
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
@@ -163,6 +190,7 @@ initListeners();
         Amount = getArguments().getString("amount");
         ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
         Pin = getArguments().getString("pin");
+
     }
 
     /**
@@ -220,54 +248,7 @@ initListeners();
     /**
      * perform the ussd code run request
      */
-    private void runAirtimeTransferUssd() {
-        String UssdCode;
 
-        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
-            TingtelNumber = "08145995531";
-            UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            //Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
-            dialUssdCode(
-                    getActivity(),
-                    UssdCode,
-                    SimNo
-            );
-
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            TingtelNumber = "08";
-
-            sendSms();
-
-            UssdCode = "";
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
-
-            TingtelNumber = "08174612405";
-            UssdCode = "*223*" + Pin + "*" + Amount + "*" + TingtelNumber + "#";
-            dialUssdCode(
-                    getActivity(),
-                    UssdCode,
-                    SimNo
-            );
-
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
-
-            TingtelNumber = "08174612405";
-            UssdCode = "*131*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            dialUssdCode(
-                    getActivity(),
-                    UssdCode,
-                    SimNo
-            );
-
-        } else {
-            Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        saveHistory();
-
-        buttonClicked = true;
-    }
 
     /**
      * save the details to database.
@@ -317,5 +298,13 @@ initListeners();
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         }
+    }
+
+    public void shareViaSocial(String body) {
+        Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+        txtIntent.setType("text/plain");
+        txtIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Airtime Transfer Notification");
+        txtIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+        startActivity(Intent.createChooser(txtIntent, "Share"));
     }
 }

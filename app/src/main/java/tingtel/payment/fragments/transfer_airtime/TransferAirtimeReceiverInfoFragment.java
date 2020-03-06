@@ -160,6 +160,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         btnPreview.setOnClickListener(v -> {
             ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
 
+            Toast.makeText(getActivity(), "lllll"+ ReceiverSimNetwork, Toast.LENGTH_LONG).show();
+
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
             bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
