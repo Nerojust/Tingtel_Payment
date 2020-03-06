@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/img_network"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/mtn_logo" />
             <ImageView
                 android:id="@+id/img_check"
@@ -37,6 +37,9 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_11ssp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
         android:text="Mtn" />
 
 </LinearLayout>

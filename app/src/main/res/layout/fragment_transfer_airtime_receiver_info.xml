@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tingtel_bg4"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimeReceiverInfoFragment">
 
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/_13ssp"
-                android:layout_marginTop="@dimen/_30ssp"
+                android:layout_marginTop="@dimen/_20ssp"
                 android:layout_marginBottom="@dimen/_18ssp"
                 app:cardBackgroundColor="@color/tingtel_lighter_gray"
                 app:cardCornerRadius="@dimen/_18ssp">
@@ -93,19 +93,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/rubik_medium"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="TRANSFER TO"
-                        android:textAlignment="center"
-                        android:textColor="@color/tingtel_red_color"
-                        android:textSize="@dimen/_16ssp" />
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/button_round_corners_black">
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/input_outline">
 
                         <EditText
                             android:id="@+id/receivers_phone_number_edittext"
@@ -115,6 +115,7 @@
                             android:layout_toRightOf="@+id/img_beneficiary"
                             android:background="@null"
                             android:hint="RECEIVERS NUMBER"
+                            android:inputType="number"
                             android:layout_centerVertical="true"
                             android:textSize="@dimen/_11ssp" />
 
@@ -132,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
+                        android:layout_marginTop="11dp"
                         android:text="SELECT NETWORK"
                         android:textSize="@dimen/_11ssp"
                         android:textColor="@color/black"/>
@@ -150,8 +151,9 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/button_round_corners_black">
+                        android:layout_marginTop="11dp"
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/input_outline">
 
                         <EditText
                             android:id="@+id/pinEditext"
@@ -200,8 +202,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_30ssp"
+                        android:layout_marginTop="@dimen/_13sdp"
+                        android:layout_marginBottom="@dimen/_20ssp"
                         android:background="@drawable/button_round_corners"
                         android:fontFamily="@font/raleway_regular"
                         android:text="@string/preview"

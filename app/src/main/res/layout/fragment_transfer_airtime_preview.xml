@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tingtel_bg4"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimePreviewFragment">
 
@@ -108,7 +108,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:background="#A09D9D"
                 android:padding="1dp">
 
@@ -162,8 +162,8 @@
 
                         <ImageView
                             android:id="@+id/senderImage"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
                             android:layout_marginRight="0dp"
@@ -179,7 +179,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:background="#A09D9D"
                 android:padding="1dp">
 
@@ -230,8 +230,8 @@
 
                         <ImageView
                             android:id="@+id/receiverImage"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
                             android:layout_marginRight="0dp"
@@ -249,7 +249,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:background="#A09D9D"
                 android:padding="1dp">
 
@@ -292,7 +292,6 @@
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
                                 android:textColor="@color/tingtel_light_red"
                                 android:textSize="@dimen/_15ssp"
                                 android:textStyle="bold"
@@ -301,8 +300,8 @@
 
                         <TextView
                             android:id="@+id/tv1"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_weight="0.2"
                             android:fontFamily="@font/raleway_regular"
@@ -318,7 +317,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:background="#A09D9D"
                 android:padding="1dp">
 
@@ -362,7 +361,6 @@
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
                                 android:textColor="@color/tingtel_light_red"
                                 android:textSize="@dimen/_15ssp"
                                 android:textStyle="bold"
@@ -371,8 +369,8 @@
 
                         <TextView
                             android:id="@+id/tv2"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="center"
                             android:fontFamily="@font/raleway_regular"
@@ -388,7 +386,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:background="#A09D9D"
                 android:padding="1dp">
 
@@ -430,7 +428,6 @@
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
                                 android:textColor="@color/tingtel_light_red"
                                 android:textSize="@dimen/_15ssp"
                                 android:textStyle="bold"
@@ -439,8 +436,8 @@
 
                         <TextView
                             android:id="@+id/tv3"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:fontFamily="@font/raleway_regular"
                             android:gravity="center"

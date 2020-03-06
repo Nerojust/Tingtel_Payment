@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_contactListActivity"
             app:destination="@id/contactListActivity" />
+        <argument
+            android:name="simNetwork"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/getTransferPinTutorialFragment2"

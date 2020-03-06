@@ -38,7 +38,6 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 public class TransferAirtimePreviewFragment extends Fragment {
 
     Boolean buttonClicked;
-    int buttonClickedInt = 0;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -287,13 +286,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
 
-            TingtelNumber = "08174612405";
+
+
+            //08117636062
+            TingtelNumber = "09058815819";
             UssdCode = "*131*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            dialUssdCode(
-                    getActivity(),
-                    UssdCode,
-                    SimNo
-            );
+            Toast.makeText(getActivity(), "Glo "+ UssdCode, Toast.LENGTH_LONG).show();
+
+//            dialUssdCode(
+//                    getActivity(),
+//                    UssdCode,
+//                    SimNo
+//            );
+
 
         } else {
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();

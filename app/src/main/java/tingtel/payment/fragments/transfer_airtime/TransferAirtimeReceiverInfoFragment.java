@@ -125,16 +125,16 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void prepareNetworkData() {
-        NetworkSelect networkSelect = new NetworkSelect(R.drawable.mtn_logo, "MTN");
+        NetworkSelect networkSelect = new NetworkSelect(R.drawable.mtnlogo, "MTN");
         networkList.add(networkSelect);
 
-        networkSelect = new NetworkSelect(R.drawable.nmobile_logo, "9MOBILE");
+        networkSelect = new NetworkSelect(R.drawable.nmobilelogo, "9MOBILE");
         networkList.add(networkSelect);
 
-        networkSelect = new NetworkSelect(R.drawable.airtel_logo, "AIRTEL");
+        networkSelect = new NetworkSelect(R.drawable.airtellogo, "AIRTEL");
         networkList.add(networkSelect);
 
-        networkSelect = new NetworkSelect(R.drawable.glo_logo, "GLO");
+        networkSelect = new NetworkSelect(R.drawable.glologo, "GLO");
         networkList.add(networkSelect);
 
         adapter.notifyDataSetChanged();

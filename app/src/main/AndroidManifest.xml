@@ -36,7 +36,9 @@
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
             android:parentActivityName=".activities.MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".activities.settings.AboutUsActivity"
             android:parentActivityName=".activities.settings.SettingsActivity" />
