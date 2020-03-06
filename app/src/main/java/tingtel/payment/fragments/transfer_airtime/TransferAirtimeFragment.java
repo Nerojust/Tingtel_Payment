@@ -207,7 +207,7 @@ public class TransferAirtimeFragment extends Fragment {
                 finalamount = input.replace(",", "");
 
                 Bundle bundle = new Bundle();
-                bundle.putString("simNetwork", SimNetwork);
+                bundle.putString("simNetwork", ""+SimNetwork);
                 bundle.putString("simSerial", "" + SimSerial);
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", finalamount);
