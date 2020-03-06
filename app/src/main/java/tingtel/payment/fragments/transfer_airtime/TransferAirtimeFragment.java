@@ -7,11 +7,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +24,6 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
@@ -50,38 +48,40 @@ public class TransferAirtimeFragment extends Fragment {
     private ImageView homeImageview, settingsImagview;
     private RadioGroup rdSimGroup;
     private LinearLayout backButtonLayout;
-    private RadioButton rdSimButton;
-    private RadioButton rdSim1, rdSim2;
+    private TextView sim1Textview, sim2Textview;
     private String finalamount;
     private Boolean balanceChecked = false;
+    private boolean isSim1TextviewClicked = false;
+    private boolean isSim2TextviewClicked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime, container, false);
-
-//        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Transfer Airtime");
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initViews(view);
         initListeners(view);
 
         confirmSimRegistrations();
         populateSimRadioButtons();
 
-
         return view;
     }
 
     private void initViews(View view) {
         sessionManager = AppUtils.getSessionManagerInstance();
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
-        homeImageview = view.findViewById(R.id.homeImageview);
-        settingsImagview = view.findViewById(R.id.settingsImageview);
+        sim1Textview = view.findViewById(R.id.sim_one_textview);
+        sim2Textview = view.findViewById(R.id.sim_two_textview);
 
-        rdSimGroup = view.findViewById(R.id.radioSim);
-        btnCheckBalance = view.findViewById(R.id.btn_check_balance);
-        btnNext = view.findViewById(R.id.btn_next);
-        edAmount = view.findViewById(R.id.ed_amount);
+        sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
+        sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+
+        sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+        sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
+
+        btnCheckBalance = view.findViewById(R.id.check_balance_button);
+        btnNext = view.findViewById(R.id.next_button);
+        edAmount = view.findViewById(R.id.amount_edittext);
         edAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -115,10 +115,6 @@ public class TransferAirtimeFragment extends Fragment {
             }
         });
 
-
-        rdSim1 = view.findViewById(R.id.radioSim1);
-        rdSim2 = view.findViewById(R.id.radioSim2);
-
         appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -126,89 +122,59 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
     private void initListeners(View view) {
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
-        homeImageview.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+        sim1Textview.setOnClickListener(v -> {
+            isSim1TextviewClicked = true;
+            isSim2TextviewClicked = false;
+            sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
+            sim1Textview.setTextColor(getResources().getColor(R.color.white));
+
+            sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+            sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
         });
 
-        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
+        sim2Textview.setOnClickListener(v -> {
+            isSim2TextviewClicked = true;
+            isSim1TextviewClicked = false;
+            sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right));
+            sim2Textview.setTextColor(getResources().getColor(R.color.white));
 
-        rdSimGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            //  Toast.makeText(getContext(), "testing for checked", Toast.LENGTH_LONG).show();
-            // get selected radio button from radioGroup
-            int selectedId = rdSimGroup.getCheckedRadioButtonId();
-
-            // find the radiobutton by returned id
-            rdSimButton = view.findViewById(selectedId);
-
-            if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-                SimNetwork = "Mtn";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-                SimNetwork = "Airtel";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-                SimNetwork = "Glo";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-                    (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-                SimNetwork = "9mobile";
-            } else {
-
-                return;
-            }
-
-            switch (selectedId) {
-                case R.id.radioSim1:
-                    SimNo = 0;
-                    SimSerial = sessionManager.getSimSerialICCID();
-                    break;
-                case R.id.radioSim2:
-                    SimNo = 1;
-                    SimSerial = sessionManager.getSimSerialICCID1();
-                    break;
-                default:
-                    return;
-            }
+            sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
+            sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
         });
 
 
         btnCheckBalance.setOnClickListener(v -> {
-            // get selected radio button from radioGroup
-            int selectedId = rdSimGroup.getCheckedRadioButtonId();
-            if (selectedId == -1) {
-                Toast.makeText(getContext(), "Select a sim first", Toast.LENGTH_SHORT).show();
-                return;
+            String NoOfSIm = sessionManager.getSimStatus();
+
+            switch (NoOfSIm) {
+                case "NO SIM":
+                    sim1Textview.setVisibility(View.GONE);
+                    sim2Textview.setVisibility(View.GONE);
+
+                    Toast.makeText(getContext(), "Insert a sim ", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case "SIM1":
+                    sim1Textview.setVisibility(View.VISIBLE);
+                    sim2Textview.setVisibility(View.GONE);
+                    sim1Textview.setText(sessionManager.getNetworkName());
+
+                    performCheckBeforeDialing();
+
+                case "SIM1 SIM2":
+                    sim1Textview.setVisibility(View.VISIBLE);
+                    sim2Textview.setVisibility(View.VISIBLE);
+                    sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
+                    sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + sessionManager.getSimPhoneNumber1());
+
+                    performCheckBeforeDialing();
+                    break;
             }
-            // find the radiobutton by returned id
-            rdSimButton = view.findViewById(selectedId);
-
-            if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-                UssdCode = "*556#";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-                UssdCode = "*123#";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-                UssdCode = "*124*1#";
-            } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-                    (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-                UssdCode = "*232#";
-            } else {
-
-                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            dialUssdCode(getActivity(), UssdCode, SimNo);
-            balanceChecked = true;
         });
 
 
         btnNext.setOnClickListener(v -> {
-
-
-            if (!checkSelectedSim(view)) {
-                return;
-            }
             //if all fields and conditions are satisfied proceed.
             if (isValidAllFields()) {
                 String input = edAmount.getText().toString().trim();
@@ -223,6 +189,62 @@ public class TransferAirtimeFragment extends Fragment {
 
             }
         });
+    }
+
+    private void performCheckBeforeDialing() {
+        if (isSim1TextviewClicked) {
+            if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+                SimNetwork = "Mtn";
+                UssdCode = "*556#";
+            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+                SimNetwork = "Airtel";
+                UssdCode = "*123#";
+            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+                SimNetwork = "Glo";
+                UssdCode = "*124*1#";
+            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
+                    (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+                SimNetwork = "9mobile";
+                UssdCode = "*232#";
+            } else {
+                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            SimNo = 0;
+            SimSerial = sessionManager.getSimSerialICCID();
+
+            dialUssdCode(getActivity(), UssdCode, SimNo);
+            balanceChecked = true;
+
+        } else if (isSim2TextviewClicked) {
+            if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+                SimNetwork = "Mtn";
+                UssdCode = "*556#";
+            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+                SimNetwork = "Airtel";
+                UssdCode = "*123#";
+            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+                SimNetwork = "Glo";
+                UssdCode = "*124*1#";
+            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
+                    (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+                SimNetwork = "9mobile";
+                UssdCode = "*232#";
+            } else {
+                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            SimNo = 1;
+            SimSerial = sessionManager.getSimSerialICCID1();
+
+            dialUssdCode(getActivity(), UssdCode, SimNo);
+            balanceChecked = true;
+
+        } else {
+            Toast.makeText(getContext(), "Click on a number first", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void confirmSimRegistrations() {
@@ -293,26 +315,28 @@ public class TransferAirtimeFragment extends Fragment {
         String NoOfSIm = sessionManager.getSimStatus();
 
         switch (NoOfSIm) {
+            case "NO SIM":
+                sim1Textview.setVisibility(View.GONE);
+                sim2Textview.setVisibility(View.GONE);
+                break;
             case "SIM1":
-                rdSim1.setVisibility(View.VISIBLE);
-                rdSim2.setVisibility(View.GONE);
-                rdSim1.setText(sessionManager.getNetworkName());
+                sim1Textview.setVisibility(View.VISIBLE);
+                sim2Textview.setVisibility(View.GONE);
+                sim1Textview.setText(sessionManager.getNetworkName());
                 break;
 
             case "SIM1 SIM2":
-                rdSim1.setVisibility(View.VISIBLE);
-                rdSim2.setVisibility(View.VISIBLE);
-                rdSim1.setText(sessionManager.getNetworkName() + " (" + sessionManager.getSimPhoneNumber() + ")");
-                rdSim2.setText(sessionManager.getNetworkName1() + " (" + sessionManager.getSimPhoneNumber1() + ")");
+                sim1Textview.setVisibility(View.VISIBLE);
+                sim2Textview.setVisibility(View.VISIBLE);
+                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
+                sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + sessionManager.getSimPhoneNumber1());
                 break;
         }
     }
 
     private boolean isValidAllFields() {
-        if (rdSimGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(getContext(), "Please select a sim", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+if (!isSim1TextviewClicked||!isSim2TextviewClicked)
+
         if (edAmount.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "Amount is required", Toast.LENGTH_SHORT).show();
             return false;
@@ -334,33 +358,29 @@ public class TransferAirtimeFragment extends Fragment {
 
 
     private boolean checkSelectedSim(View v) {
-        int selectedId = rdSimGroup.getCheckedRadioButtonId();
-        if (selectedId == -1) {
-            Toast.makeText(getContext(), "Select a sim first", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        // find the radiobutton by returned id
-        rdSimButton = v.findViewById(selectedId);
 
-
-        if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-            SimNetwork = "Mtn";
-            return true;
-        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-            SimNetwork = "Airtel";
-            return true;
-        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-            SimNetwork = "Glo";
-            return true;
-        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-                (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-            SimNetwork = "9mobile";
-            return true;
-        } else {
-//            Toast.makeText(getContext(), "Selected Sim Not Recognized", Toast.LENGTH_LONG).show();
-//            return false;
-            SimNetwork = "9mobile";
-            return true;
-        }
+//        // find the radiobutton by returned id
+//        rdSimButton = v.findViewById(selectedId);
+//
+//
+//        if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+//            SimNetwork = "Mtn";
+//            return true;
+//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+//            SimNetwork = "Airtel";
+//            return true;
+//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+//            SimNetwork = "Glo";
+//            return true;
+//        } else if (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
+//                (rdSimButton.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+//            SimNetwork = "9mobile";
+//            return true;
+//        } else {
+////            Toast.makeText(getContext(), "Selected Sim Not Recognized", Toast.LENGTH_LONG).show();
+////            return false;
+//            SimNetwork = "9mobile";
+        return true;
+//        }
     }
 }
