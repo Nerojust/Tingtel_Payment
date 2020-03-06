@@ -290,7 +290,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             );
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            TingtelNumber = "08";
+            TingtelNumber = "08087000909";
 
             sendSms();
 
