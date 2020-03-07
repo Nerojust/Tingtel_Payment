@@ -150,11 +150,18 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/_20sdp">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:text="PIN"
+                        android:textColor="@color/tingtel_gray_color"
+                        android:textSize="@dimen/_11ssp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="11dp"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:background="@drawable/input_outline"
                         android:paddingVertical="4dp">
@@ -165,7 +172,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_margin="3dp"
+                            android:layout_marginLeft="5dp"
                             android:src="@drawable/ic_lock" />
 
                         <EditText
@@ -181,6 +188,7 @@
                             android:inputType="numberPassword"
                             android:maxLength="7"
                             android:maxLines="1"
+                            android:paddingLeft="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp" />
 
                         <ImageView
@@ -201,7 +209,6 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_13sdp"
-                    android:layout_marginBottom="@dimen/_20ssp"
                     android:background="@drawable/button_round_corners"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@string/preview"
