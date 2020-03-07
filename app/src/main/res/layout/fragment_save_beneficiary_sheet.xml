@@ -20,7 +20,7 @@
             android:paddingVertical="10dp"
             android:text="@string/add_beneficiary"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -31,7 +31,7 @@
         android:layout_below="@+id/ly1"
         android:layout_marginTop="30dp"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/_20ssp">
+        android:paddingHorizontal="@dimen/_20sdp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,13 +39,13 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/beneficiary_phone_number"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="@dimen/_9ssp" />
 
         <EditText
             android:id="@+id/ed_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:enabled="false"
             android:fontFamily="@font/rubik_regular"
             android:hint="@string/phone_number"
@@ -57,13 +57,13 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/beneficiary_network"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="@dimen/_9ssp" />
 
         <EditText
             android:id="@+id/ed_network_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/_10sdp"
 
             android:enabled="false"
             android:fontFamily="@font/rubik_regular"
@@ -76,7 +76,7 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/beneficiary_name"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="@dimen/_9ssp" />
 
         <EditText
             android:id="@+id/ed_name"
@@ -90,7 +90,7 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/button_round_corners"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/save"

@@ -6,12 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.github.aakira.expandablelayout.ExpandableLinearLayout;
+import java.util.Objects;
 
 import tingtel.payment.R;
 
@@ -20,19 +19,14 @@ import tingtel.payment.R;
  */
 public class GetTransferPinTutorialFragment extends Fragment {
 
-    String Network;
-    WebView webView;
-    TextView tvNetworkName;
+    private String Network;
+    private WebView webView;
+    private TextView tvNetworkName;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_get_transfer_pin_tutorial, container, false);
-
-
-
-        Network = getArguments().getString("network");
-
+        Network = Objects.requireNonNull(getArguments()).getString("network");
         webView = view.findViewById(R.id.webView);
         tvNetworkName = view.findViewById(R.id.tv_network_name);
 
@@ -44,8 +38,7 @@ public class GetTransferPinTutorialFragment extends Fragment {
 
     private void showTutorial() {
 
-        tvNetworkName.setText("Set Your Pin ("+Network+")");
-
+        tvNetworkName.setText("Set Your Pin (" + Network + ")");
 
         String mimeType = "text/html";
         String encoding = "utf-8";
@@ -104,11 +97,9 @@ public class GetTransferPinTutorialFragment extends Fragment {
                 + "<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/myfonts/Poppins-Regular_0.ttf\")}body{font-family: MyFont;color: #525252}"
                 + "</style></head>"
                 + "<body>"
-                +  htmlText
+                + htmlText
                 + "</body></html>";
 
         webView.loadDataWithBaseURL(null, text, mimeType, encoding, null);
-
-
     }
 }

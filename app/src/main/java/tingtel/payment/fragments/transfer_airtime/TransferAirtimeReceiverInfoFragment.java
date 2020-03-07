@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -55,7 +54,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private String SimSerial;
     private Button btnPreview;
     private NavController navController;
-    private TextView whatIsPin;
+    private ImageView whatIsPin;
     private ImageView homeImageview, settingsImagview;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
@@ -108,14 +107,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initRv() {
-
-
         adapter = new NetworkSelectAdapter(getContext(), networkList, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
+        networkList.clear();
         prepareNetworkData();
     }
 
@@ -148,7 +145,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         imgSelectBeneficiary.setOnClickListener(v -> {
 
             bottomSheetFragment = new SelectBeneficiarySheetFragment();
-            bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
 
         });
 

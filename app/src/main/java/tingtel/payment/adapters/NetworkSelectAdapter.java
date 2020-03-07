@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -22,14 +20,11 @@ import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
 public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdapter.MyViewHolder> {
-    private static int lastClickedPosition = -1;
     private final Context mContext;
     private final Activity activity;
     private final List<NetworkSelect> mData;
-    SessionManager sessionManager = AppUtils.getSessionManagerInstance();
+    private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
     private AppDatabase appDatabase;
-    private Fragment navhost;
-    private NavController navController;
     private int selectedItem;
 
 
@@ -43,6 +38,7 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
 
     }
 
+    @NonNull
     @Override
     public NetworkSelectAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
@@ -62,33 +58,23 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
 
         holder.imgCheck.setVisibility(View.GONE);
 
-
         if (selectedItem == position) {
             holder.imgCheck.setVisibility(View.VISIBLE);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(v -> {
 
-                int previousItem = selectedItem;
-                selectedItem = position;
+            int previousItem = selectedItem;
+            selectedItem = position;
 
-                notifyItemChanged(previousItem);
-                notifyItemChanged(position);
+            notifyItemChanged(previousItem);
+            notifyItemChanged(position);
 
-
-                sessionManager.setSelectedRvNetwork(mData.get(position).getName());
-
-
-
-            }
+            sessionManager.setSelectedRvNetwork(mData.get(position).getName());
         });
 
 
-
     }
-
 
 
     @Override
@@ -103,15 +89,11 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
         final TextView tvNetworkName;
 
 
-
         MyViewHolder(View itemView) {
             super(itemView);
             imgNetwork = itemView.findViewById(R.id.img_network);
             imgCheck = itemView.findViewById(R.id.img_check);
-           tvNetworkName = itemView.findViewById(R.id.tv_name);
-
-
-
+            tvNetworkName = itemView.findViewById(R.id.tv_name);
         }
     }
 }

@@ -1,27 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:layout_marginHorizontal="3dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         app:cardCornerRadius="3dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/img_network"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:src="@drawable/mtn_logo" />
+
             <ImageView
                 android:id="@+id/img_check"
                 android:layout_width="15dp"
@@ -29,7 +32,7 @@
                 android:layout_alignRight="@+id/img_network"
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="7dp"
-                android:src="@drawable/tick"/>
+                android:src="@drawable/tick" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -38,8 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Mtn"
         android:textColor="@color/black"
-        android:textSize="@dimen/_11ssp" />
+        android:textSize="@dimen/_11ssp"
+        tools:text="Mtn" />
 
 </LinearLayout>
