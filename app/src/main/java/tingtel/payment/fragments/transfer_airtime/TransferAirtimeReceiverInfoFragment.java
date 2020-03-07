@@ -68,7 +68,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
                 if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
-                    Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
                     edReceiverPhoneNumber.setText(intent.getStringExtra("phoneNumber"));
                     bottomSheetFragment.dismiss();
 

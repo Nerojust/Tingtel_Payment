@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,6 +50,25 @@
 
     </LinearLayout>
 
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/your_state_progress_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_checkStateCompleted="true"
+        app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
+        app:spb_currentStateNumber="two"
+        app:spb_maxStateNumber="four"
+        app:spb_stateBackgroundColor="@color/tingtel_gray_color"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_stateForegroundColor="@color/tingtel_red_color"
+        app:spb_stateLineThickness="2dp"
+        app:spb_stateNumberBackgroundColor="#808080"
+        app:spb_stateNumberForegroundColor="#eeeeee"
+        app:spb_stateTextSize="13sp" />
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +111,7 @@
                         <EditText
                             android:id="@+id/receivers_phone_number_edittext"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="35dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="4dp"
                             android:layout_toLeftOf="@+id/img_beneficiary"
@@ -138,7 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_regular" />
                 </LinearLayout>
 
@@ -172,15 +192,14 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="10dp"
                             android:src="@drawable/ic_lock" />
 
                         <EditText
                             android:id="@+id/pinEditext"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="35dp"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="4dp"
                             android:layout_toRightOf="@+id/lock"
                             android:background="@null"
                             android:fontFamily="@font/rubik_regular"
@@ -209,7 +228,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_13sdp"
-                    android:background="@drawable/button_round_corners"
+                    android:background="@drawable/dashboard_buttons"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@string/preview"
                     android:textColor="@color/white"

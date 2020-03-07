@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -60,10 +61,29 @@
 
             </LinearLayout>
 
+            <com.kofigyan.stateprogressbar.StateProgressBar
+                android:id="@+id/your_state_progress_bar_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:spb_animateToCurrentProgressState="true"
+                app:spb_checkStateCompleted="true"
+                app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
+                app:spb_currentStateNumber="one"
+                app:spb_maxStateNumber="four"
+                app:spb_stateBackgroundColor="@color/tingtel_gray_color"
+                app:spb_stateDescriptionColor="#808080"
+                app:spb_stateForegroundColor="@color/tingtel_red_color"
+                app:spb_stateLineThickness="2dp"
+                app:spb_stateNumberBackgroundColor="#808080"
+                app:spb_stateNumberForegroundColor="#eeeeee"
+                app:spb_stateTextSize="13sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/tingtel_lighter_gray"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/_7ssp">
@@ -187,7 +207,6 @@
                         android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
             </LinearLayout>
-
 
 
             <Button

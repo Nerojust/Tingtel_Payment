@@ -50,6 +50,24 @@
 
     </LinearLayout>
 
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/your_state_progress_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_checkStateCompleted="true"
+        app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
+        app:spb_currentStateNumber="three"
+        app:spb_maxStateNumber="four"
+        app:spb_stateBackgroundColor="@color/tingtel_gray_color"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_stateForegroundColor="@color/tingtel_red_color"
+        app:spb_stateLineThickness="2dp"
+        app:spb_stateNumberBackgroundColor="#808080"
+        app:spb_stateNumberForegroundColor="#eeeeee"
+        app:spb_stateTextSize="13sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,384 +78,336 @@
             android:layout_height="wrap_content">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/review"
+                    android:textColor="@color/tingtel_red_color"
+                    android:textSize="@dimen/_13ssp"/>
+
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="25dp">
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginVertical="15dp"
-                        android:fontFamily="@font/rubik_medium"
-                        android:text="@string/review"
-                        android:textColor="@color/tingtel_red_color"
-                        android:textSize="@dimen/_18ssp"
-                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toLeftOf="@+id/senderImage"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/from"
+                                android:textSize="@dimen/_10ssp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_sender_phone_number"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp"
+                                tools:text="080623467463" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/senderImage"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:scaleType="fitCenter"
+                            android:textSize="17sp"
+                            tools:src="@drawable/mtn_logo" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#A09D9D"
-                        android:padding="1dp">
+                        android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/button_round_corners"
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="2dp"
-                            app:cardMaxElevation="2dp"
-                            app:cardPreventCornerOverlap="false">
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toLeftOf="@+id/receiverImage"
+                            android:orientation="horizontal">
 
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/to"
+                                android:textSize="@dimen/_10ssp" />
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tv_receiver_phone_number"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp"
+                                tools:text="080233467463" />
+                        </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toLeftOf="@+id/senderImage"
-                                    android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/receiverImage"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:scaleType="fitCenter"
+                            tools:src="@drawable/airtel_logo" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="0.25"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:text="@string/from"
-                                        android:textSize="@dimen/_10ssp" />
-
-
-                                    <TextView
-                                        android:id="@+id/tv_sender_phone_number"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_weight="0.5"
-                                        android:fontFamily="@font/rubik_medium"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_15ssp"
-                                        android:textStyle="bold"
-                                        tools:text="080623467463" />
-
-                                </LinearLayout>
-
-                                <ImageView
-                                    android:id="@+id/senderImage"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_gravity="right"
-                                    android:layout_marginRight="0dp"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:gravity="center"
-                                    android:scaleType="fitCenter"
-                                    android:textSize="17sp"
-                                    tools:src="@drawable/mtn_logo" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
                     </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#A09D9D"
-                        android:padding="1dp">
+                </RelativeLayout>
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="2dp"
-                            app:cardMaxElevation="2dp"
-                            app:cardPreventCornerOverlap="false">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toLeftOf="@+id/receiverImage"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="0.25"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:text="@string/to"
-                                        android:textSize="@dimen/_10ssp" />
-
-                                    <TextView
-                                        android:id="@+id/tv_receiver_phone_number"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="5dp"
-
-                                        android:layout_weight="0.5"
-                                        android:fontFamily="@font/rubik_medium"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_15ssp"
-                                        android:textStyle="bold"
-                                        tools:text="080233467463" />
-                                </LinearLayout>
-
-                                <ImageView
-                                    android:id="@+id/receiverImage"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_gravity="right"
-                                    android:layout_marginRight="0dp"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:gravity="center"
-                                    android:scaleType="fitCenter"
-                                    tools:src="@drawable/airtel_logo" />
-
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
-                    </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#A09D9D"
-                        android:padding="1dp">
+                        android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="2dp"
-                            app:cardMaxElevation="2dp"
-                            app:cardPreventCornerOverlap="false">
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toLeftOf="@+id/tv1"
+                            android:orientation="horizontal">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/amount"
+                                android:textSize="@dimen/_10ssp" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toLeftOf="@+id/tv1"
-                                    android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp"
+                                tools:text="2000" />
+                        </LinearLayout>
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="0.25"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:text="@string/amount"
-                                        android:textSize="@dimen/_10ssp" />
+                        <TextView
+                            android:id="@+id/tv1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="0.2"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:text="@string/naira"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                                    <TextView
-                                        android:id="@+id/tv_amount"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_weight="0.5"
-                                        android:fontFamily="@font/rubik_medium"
-                                        android:gravity="start"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_15ssp"
-                                        android:textStyle="bold"
-                                        tools:text="2000" />
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/tv1"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_weight="0.2"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:gravity="center"
-                                    android:text="@string/naira"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
                     </RelativeLayout>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#A09D9D"
-                        android:padding="1dp">
+                        android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="2dp"
-                            app:cardMaxElevation="2dp"
-                            app:cardPreventCornerOverlap="false">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toLeftOf="@+id/tv2"
-                                    android:orientation="horizontal">
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toLeftOf="@+id/tv2"
+                            android:orientation="horizontal">
 
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="0.25"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:text="@string/service_fee"
-                                        android:textSize="@dimen/_10ssp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/service_fee"
+                                android:textSize="@dimen/_10ssp" />
 
-                                    <TextView
-                                        android:id="@+id/tv_service_fee"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_weight="0.5"
-                                        android:fontFamily="@font/rubik_medium"
-                                        android:gravity="start"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_15ssp"
-                                        android:textStyle="bold"
-                                        tools:text="200" />
-                                </LinearLayout>
+                            <TextView
+                                android:id="@+id/tv_service_fee"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp"
+                                tools:text="200" />
+                        </LinearLayout>
 
-                                <TextView
-                                    android:id="@+id/tv2"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:gravity="center"
-                                    android:text="@string/naira"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/tv2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:text="@string/naira"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
-                        android:background="#A09D9D"
-                        android:padding="1dp">
+                        android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardCornerRadius="2dp"
-                            app:cardElevation="2dp"
-                            app:cardMaxElevation="2dp"
-                            app:cardPreventCornerOverlap="false">
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toLeftOf="@+id/tv3"
+                            android:orientation="horizontal">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text="@string/amount_to_be_credited"
+                                android:textSize="@dimen/_10ssp" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_toLeftOf="@+id/tv3"
-                                    android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tv_credited_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="start"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp"
+                                tools:text="1800" />
+                        </LinearLayout>
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="0.25"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:text="@string/amount_to_be_credited"
-                                        android:textSize="@dimen/_10ssp" />
-
-                                    <TextView
-                                        android:id="@+id/tv_credited_amount"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_weight="0.5"
-                                        android:fontFamily="@font/rubik_medium"
-                                        android:gravity="start"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_15ssp"
-                                        android:textStyle="bold"
-                                        tools:text="1800" />
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/tv3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentRight="true"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:gravity="center"
-                                    android:text="@string/naira"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/tv3"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="center"
+                            android:text="@string/naira"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+                </RelativeLayout>
 
-                    <Button
-                        android:id="@+id/btn_transfer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/dashboard_buttons"
-                        android:drawableRight="@drawable/ic_keyboard_arrow_right"
-                        android:fontFamily="@font/raleway_regular"
-                        android:text="@string/transfer"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14ssp" />
+                <Button
+                    android:id="@+id/btn_transfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/dashboard_buttons"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="@string/transfer"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
 
 
-                </LinearLayout>
+            </LinearLayout>
 
 
         </RelativeLayout>

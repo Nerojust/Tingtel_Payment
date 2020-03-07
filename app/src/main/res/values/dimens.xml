@@ -16,5 +16,7 @@
 
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
-
+    <dimen name="fourteen">14dp</dimen>
+    <dimen name="line">1dp</dimen>
+    <dimen name="textSize">13dp</dimen>
 </resources>

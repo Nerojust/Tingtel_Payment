@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_15ssp"
-            android:background="@drawable/button_round_corners"
+            android:background="@drawable/dashboard_buttons"
             android:fontFamily="@font/raleway_regular"
             android:paddingHorizontal="@dimen/_35ssp"
             android:text="@string/dismiss"

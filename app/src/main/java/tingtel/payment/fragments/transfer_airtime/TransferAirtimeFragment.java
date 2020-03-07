@@ -101,6 +101,10 @@ public class TransferAirtimeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
+//        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
+//        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
+//        stateProgressBar.setStateDescriptionData(descriptionData);
+
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
@@ -172,11 +176,11 @@ public class TransferAirtimeFragment extends Fragment {
         sim1Textview.setOnClickListener(v -> {
             isSim1TextviewClicked = true;
             isSim2TextviewClicked = false;
-            if (noOfSIm.equalsIgnoreCase( "SIM1") ){
+            if (noOfSIm.equalsIgnoreCase("SIM1")) {
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_red));
                 sim1Textview.setTextColor(getResources().getColor(R.color.white));
 
-            } else if (noOfSIm .equalsIgnoreCase( "SIM1 SIM2")) {
+            } else if (noOfSIm.equalsIgnoreCase("SIM1 SIM2")) {
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
                 sim1Textview.setTextColor(getResources().getColor(R.color.white));
 

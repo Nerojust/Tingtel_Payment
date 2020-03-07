@@ -139,4 +139,10 @@
         <item>Sim 1</item>
         <item>Sim 2</item>
     </string-array>
+    <string-array name="steps">
+        <item>Sender details</item>
+        <item>Receiver details</item>
+        <item>Summary</item>
+        <item>Status</item>
+    </string-array>
 </resources>
