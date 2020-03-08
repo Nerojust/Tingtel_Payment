@@ -30,7 +30,7 @@
     <string name="sim_2">SIM 2</string>
     <string name="check_your_current_balance_before_transfer">HEY WAIT! CHECK YOUR CURRENT BALANCE BEFORE PROCEEDING OK!</string>
     <string name="next">NEXT</string>
-    <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">TINGTEL HELPS YOU TRANSFER AIRTIME OF ANY NETWORK TO OTHER NETWORKS. \n IN OTHER TO TRANSFER AIRTIME, PLEASE CLICK ON THE TRANSFER AIRTIME BUTTON.</string>
+    <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">TINGTEL HELPS YOU TRANSFER AIRTIME OF ANY NETWORK TO OTHER NETWORKS. \n TO PROCEED, CLICK ON THE TRANSFER AIRTIME BUTTON.</string>
     <string name="transfer_airtime">TRANSFER AIRTIME</string>
     <string name="history">HISTORY</string>
     <string name="welcome_martins">Hi, TOM CRUISE</string>
@@ -72,9 +72,9 @@
     <string name="register_sim_2_now">REGISTER SIM 2 NOW</string>
     <string name="no_thanks_later">NO THANKS, LATER</string>
     <string name="check_balance">CHECK BALANCE</string>
-    <string name="service_fee">SERVICE FEE (10%):</string>
-    <string name="amount">AMOUNT:</string>
-    <string name="amount_to_be_credited">AMOUNT TO BE CREDITED:</string>
+    <string name="amount">AMOUNT</string>
+    <string name="service_fee">SERVICE FEE</string>
+    <string name="amount_to_be_credited">CREDITED AMOUNT</string>
     <string name="review">SUMMARY</string>
     <string name="transfer">TRANSFER</string>
     <string name="preview">CONFIRM</string>
@@ -102,8 +102,8 @@
     <string name="report_issue">REPORT ISSUE</string>
     <string name="enter_sim_2_details">ENTER SIM 2 DETAILS</string>
     <string name="select_sim_2_network">SELECT SIM 2 NETWORK</string>
-    <string name="from">FROM:</string>
-    <string name="to">TO:</string>
+    <string name="from">FROM</string>
+    <string name="to">TO</string>
     <string name="confirmation_amount_is_displayed_here">CONFIRMATION AMOUNT</string>
     <string name="manage_sims">MANAGE SIMS</string>
     <string name="tutorial_how_to_use">TUTORIAL (HOW TO USE)</string>
@@ -138,5 +138,11 @@
     <string-array name="sim">
         <item>Sim 1</item>
         <item>Sim 2</item>
+    </string-array>
+    <string-array name="steps">
+        <item>Sender details</item>
+        <item>Receiver details</item>
+        <item>Summary</item>
+        <item>Status</item>
     </string-array>
 </resources>

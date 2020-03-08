@@ -2,20 +2,12 @@ package tingtel.payment.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -23,7 +15,6 @@ import java.util.List;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.NetworkSelect;
-import tingtel.payment.models.SimCards;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
@@ -31,12 +22,8 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     private final Context mContext;
     private final Activity activity;
     private final List<NetworkSelect> mData;
+    private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
     private AppDatabase appDatabase;
-    private Fragment navhost;
-    private NavController navController;
-    SessionManager sessionManager = AppUtils.getSessionManagerInstance();
-
-    private static int lastClickedPosition = -1;
     private int selectedItem;
 
 
@@ -50,6 +37,7 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
 
     }
 
+    @NonNull
     @Override
     public NetworkSelectAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
@@ -65,37 +53,27 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     public void onBindViewHolder(final NetworkSelectAdapter.MyViewHolder holder, final int position) {
         holder.itemView.setTag(mData.get(position));
         holder.imgNetwork.setImageResource(mData.get(position).getImage());
-        holder.tvNetworkName.setText(mData.get(position).getName());
+      //  holder.tvNetworkName.setText(mData.get(position).getName());
 
         holder.imgCheck.setVisibility(View.GONE);
-
 
         if (selectedItem == position) {
             holder.imgCheck.setVisibility(View.VISIBLE);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(v -> {
 
-                int previousItem = selectedItem;
-                selectedItem = position;
+            int previousItem = selectedItem;
+            selectedItem = position;
 
-                notifyItemChanged(previousItem);
-                notifyItemChanged(position);
+            notifyItemChanged(previousItem);
+            notifyItemChanged(position);
 
-
-                sessionManager.setSelectedRvNetwork(mData.get(position).getName());
-
-
-
-            }
+            sessionManager.setSelectedRvNetwork(mData.get(position).getName());
         });
 
 
-
     }
-
 
 
     @Override
@@ -107,18 +85,14 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     class MyViewHolder extends RecyclerView.ViewHolder {
         final ImageView imgNetwork;
         final ImageView imgCheck;
-        final TextView tvNetworkName;
-
+        //final TextView tvNetworkName;
 
 
         MyViewHolder(View itemView) {
             super(itemView);
             imgNetwork = itemView.findViewById(R.id.img_network);
             imgCheck = itemView.findViewById(R.id.img_check);
-           tvNetworkName = itemView.findViewById(R.id.tv_name);
-
-
-
+            //tvNetworkName = itemView.findViewById(R.id.tv_name);
         }
     }
 }

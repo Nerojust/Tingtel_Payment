@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".fragments.transfer_airtime.TransferAirtimePreviewFragment">
 
@@ -13,24 +14,27 @@
         android:layout_gravity="center"
         android:background="@drawable/appbar_layout"
         android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/_10ssp"
-        android:paddingVertical="15dp">
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_10sdp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
 
             <ImageView
                 android:id="@+id/backArrowLayout"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/_7sdp"
                 android:src="@drawable/back_arrow" />
 
             <ImageView
                 android:id="@+id/homeImageview"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_home" />
 
@@ -46,108 +50,49 @@
 
     </LinearLayout>
 
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/your_state_progress_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_checkStateCompleted="true"
+        app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
+        app:spb_currentStateNumber="three"
+        app:spb_enableAllStatesCompleted="true"
+        app:spb_maxStateNumber="three"
+        app:spb_stateBackgroundColor="@color/tingtel_gray_color"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_stateForegroundColor="@color/tingtel_red_color"
+        app:spb_stateLineThickness="2dp"
+        app:spb_stateNumberBackgroundColor="#808080"
+        app:spb_stateNumberForegroundColor="#eeeeee"
+        app:spb_stateTextSize="13sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
         android:fillViewport="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="25dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                android:fontFamily="@font/rubik_medium"
-                android:text="@string/review"
-                android:textColor="@color/tingtel_red_color"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+            android:layout_height="wrap_content">
 
 
             <LinearLayout
-                android:id="@+id/layout_success"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/notify_your_friend_about_this_transaction"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/ed_message"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_round_corners_transparent"
-                    android:enabled="false"
-                    android:minLines="5"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_11ssp"
-                    tools:text="Hello, I Just transferred #300 airtime to you using
-Tingtelpay. You can download the Tingtelpay app using the link \n https://play.google.com/store/apps/details?id=tingtel.payments" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_cancel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_round_corners_transparent"
-                        android:fontFamily="@font/raleway_regular"
-                        android:text="Cancel"
-                        android:textSize="@dimen/_13ssp" />
-
-                    <Button
-                        android:id="@+id/btn_send_message"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/button_round_corners"
-                        android:text="Send Notification"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_13ssp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#A09D9D"
-                android:padding="1dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/button_round_corners"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="2dp"
-                    app:cardPreventCornerOverlap="false">
-
+                    android:padding="8dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -180,43 +125,36 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
-                                android:textColor="@color/tingtel_light_red"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
-                                android:textStyle="bold"
                                 tools:text="080623467463" />
 
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/senderImage"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
-                            android:layout_marginRight="0dp"
                             android:fontFamily="@font/raleway_regular"
                             android:gravity="center"
                             android:scaleType="fitCenter"
                             android:textSize="17sp"
                             tools:src="@drawable/mtn_logo" />
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#A09D9D"
-                android:padding="1dp">
+                </RelativeLayout>
 
-                <androidx.cardview.widget.CardView
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="2dp"
-                    app:cardPreventCornerOverlap="false">
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -246,22 +184,19 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
-                                android:textColor="@color/tingtel_light_red"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
-                                android:textStyle="bold"
                                 tools:text="080233467463" />
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/receiverImage"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
-                            android:layout_marginRight="0dp"
                             android:fontFamily="@font/raleway_regular"
                             android:gravity="center"
                             android:scaleType="fitCenter"
@@ -269,24 +204,17 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
 
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
+                </RelativeLayout>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#A09D9D"
-                android:padding="1dp">
-
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="2dp"
-                    app:cardPreventCornerOverlap="false">
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -319,17 +247,15 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
-                                android:textColor="@color/tingtel_light_red"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
-                                android:textStyle="bold"
                                 tools:text="2000" />
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv1"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_weight="0.2"
                             android:fontFamily="@font/raleway_regular"
@@ -339,23 +265,16 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                             android:textStyle="bold" />
 
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#A09D9D"
-                android:padding="1dp">
 
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="2dp"
-                    app:cardPreventCornerOverlap="false">
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -389,17 +308,15 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
-                                android:textColor="@color/tingtel_light_red"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
-                                android:textStyle="bold"
                                 tools:text="200" />
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv2"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="center"
                             android:fontFamily="@font/raleway_regular"
@@ -408,24 +325,17 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                             android:textSize="20sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
+                </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#A09D9D"
-                android:padding="1dp">
-
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="2dp"
-                    app:cardPreventCornerOverlap="false">
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round_corners"
+                    android:padding="8dp">
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -457,17 +367,15 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                                 android:layout_weight="0.5"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="start"
-                                android:paddingLeft="@dimen/_15ssp"
-                                android:textColor="@color/tingtel_light_red"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
-                                android:textStyle="bold"
                                 tools:text="1800" />
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv3"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:fontFamily="@font/raleway_regular"
                             android:gravity="center"
@@ -475,36 +383,26 @@ Tingtelpay. You can download the Tingtelpay app using the link \n https://play.g
                             android:textSize="20sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
+                </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/btn_transfer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/dashboard_buttons"
-                android:drawableRight="@drawable/ic_keyboard_arrow_right"
-                android:fontFamily="@font/raleway_regular"
-                android:text="@string/transfer"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp" />
-
-
-            <Button
-                android:id="@+id/btn_save_beneficiary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/success_buttons"
-                android:fontFamily="@font/raleway_regular"
-                android:text="Save Beneficiary"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp" />
+                <Button
+                    android:id="@+id/btn_transfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/dashboard_buttons"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="@string/transfer"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
     </ScrollView>
 </LinearLayout>

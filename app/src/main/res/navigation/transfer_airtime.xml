@@ -28,9 +28,9 @@
         <action
             android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2"
             app:destination="@id/QRCodeScanActivity2" />
-        <action
-            android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_contactListActivity"
-            app:destination="@id/contactListActivity" />
+        <argument
+            android:name="simNetwork"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/getTransferPinTutorialFragment2"
@@ -45,15 +45,19 @@
         android:id="@+id/transferAirtimePreviewFragment2"
         android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimePreviewFragment"
         android:label="fragment_transfer_airtime_preview"
-        tools:layout="@layout/fragment_transfer_airtime_preview" />
+        tools:layout="@layout/fragment_transfer_airtime_preview" >
+        <action
+            android:id="@+id/action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment"
+            app:destination="@id/transferAirtimeSuccessFragment" />
+    </fragment>
     <activity
         android:id="@+id/QRCodeScanActivity2"
         android:name="tingtel.payment.activities.qr_code.QRCodeScanActivity"
         android:label="activity_qrcode_scan"
         tools:layout="@layout/activity_qrcode_scan" />
-    <activity
-        android:id="@+id/contactListActivity"
-        android:name="tingtel.payment.activities.settings.ContactListActivity"
-        android:label="activity_contact_list"
-        tools:layout="@layout/activity_contact_list" />
+    <fragment
+        android:id="@+id/transferAirtimeSuccessFragment"
+        android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimeSuccessFragment"
+        android:label="fragment_transfer_airtime_success"
+        tools:layout="@layout/fragment_transfer_airtime_success" />
 </navigation>

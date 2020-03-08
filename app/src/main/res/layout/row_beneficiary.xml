@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/tingtel_light_gray"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/_6ssp"
     android:paddingTop="@dimen/_10ssp">
@@ -46,6 +45,7 @@
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/raleway_regular"
                     tools:text="mtn"
+                    android:textAllCaps="true"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
 

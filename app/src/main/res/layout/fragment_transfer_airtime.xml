@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,8 +25,8 @@
                 android:layout_gravity="center"
                 android:background="@drawable/appbar_layout"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_10ssp"
-                android:paddingVertical="@dimen/_10ssp">
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -38,14 +39,8 @@
                         android:id="@+id/backArrowLayout"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_marginLeft="@dimen/_5ssp"
+                        android:layout_marginLeft="@dimen/_7sdp"
                         android:src="@drawable/back_arrow" />
-
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-
-                        android:background="@color/white" />
 
                     <ImageView
                         android:id="@+id/homeImageview"
@@ -66,10 +61,31 @@
 
             </LinearLayout>
 
+            <com.kofigyan.stateprogressbar.StateProgressBar
+                android:id="@+id/your_state_progress_bar_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:spb_animateToCurrentProgressState="true"
+                app:spb_checkStateCompleted="true"
+                app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
+                app:spb_currentStateNumber="one"
+                app:spb_maxStateNumber="four"
+                app:spb_stateBackgroundColor="@color/tingtel_gray_color"
+                app:spb_stateDescriptionColor="#808080"
+                app:spb_stateForegroundColor="@color/tingtel_red_color"
+                app:spb_stateLineThickness="2dp"
+                app:spb_descriptionLinesSpacing="5dp"
+                app:spb_justifyMultilineDescription="true"
+                app:spb_stateNumberBackgroundColor="#808080"
+                app:spb_stateNumberForegroundColor="#eeeeee"
+                app:spb_stateTextSize="13sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@color/tingtel_lighter_gray"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/_7ssp">
@@ -193,7 +209,6 @@
                         android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
             </LinearLayout>
-
 
 
             <Button

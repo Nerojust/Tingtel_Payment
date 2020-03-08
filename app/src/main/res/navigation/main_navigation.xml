@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_mainFragment_to_historyActivity"
             app:destination="@id/historyActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_transferAirtimeSuccessFragment2"
+            app:destination="@id/transferAirtimeSuccessFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_statusActivity"
+            app:destination="@id/statusActivity" />
     </fragment>
     <activity
         android:id="@+id/transferAirtimeActivity"
@@ -27,4 +33,14 @@
         android:name="tingtel.payment.activities.history.HistoryActivity"
         android:label="activity_history"
         tools:layout="@layout/activity_history" />
+    <fragment
+        android:id="@+id/transferAirtimeSuccessFragment2"
+        android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimeSuccessFragment"
+        android:label="fragment_transfer_airtime_success"
+        tools:layout="@layout/fragment_transfer_airtime_success" />
+    <activity
+        android:id="@+id/statusActivity"
+        android:name="tingtel.payment.activities.history.StatusActivity"
+        android:label="activity_status"
+        tools:layout="@layout/activity_status" />
 </navigation>

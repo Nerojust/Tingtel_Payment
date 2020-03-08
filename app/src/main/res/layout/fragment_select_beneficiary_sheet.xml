@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tingtel_light_gray"
     tools:context=".fragments.transfer_airtime.SelectBeneficiarySheetFragment">
 
     <TextView
         android:id="@+id/noResultFoundTextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center"
         android:text=""
         android:textSize="@dimen/_15ssp"
@@ -18,6 +19,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_beneficiary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_15sdp" />
 
 </RelativeLayout>

@@ -10,13 +10,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,7 +24,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DecimalFormat;
+import com.kofigyan.stateprogressbar.StateProgressBar;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,24 +45,21 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     };
     String[] spinnerPopulation;
     SelectBeneficiarySheetFragment bottomSheetFragment;
+    NetworkSelectAdapter adapter;
+    RecyclerView recyclerView;
     private String[] spinnerTitles;
     private int[] spinnerImages;
     private String SenderSimNetwork;
     private String ReceiverSimNetwork;
     private int SimNo;
-    private ImageView homeImageview, settingsImagview;
-    private LinearLayout backButtonLayout;
     private String Amount;
     private String SimSerial;
     private Button btnPreview;
     private NavController navController;
-    private TextView whatIsPin;
-    private ImageView imgSelectBeneficiary;
+    private ImageView whatIsPin;
+    private ImageView homeImageview, settingsImagview;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
-    private List<NetworkSelect> networkList = new ArrayList<>();
-    NetworkSelectAdapter adapter;
-    RecyclerView recyclerView;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
@@ -75,7 +70,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
                 if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
-                    Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
                     edReceiverPhoneNumber.setText(intent.getStringExtra("phoneNumber"));
                     bottomSheetFragment.dismiss();
 
@@ -83,6 +78,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             }
         }
     };
+
+    private ImageView imgSelectBeneficiary, backButtonImageview;
+    private List<NetworkSelect> networkList = new ArrayList<>();
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
 
@@ -98,7 +96,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).unregisterReceiver(this.mas);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime_receiver_info, container, false);
@@ -112,15 +109,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initRv() {
-
-
-
         adapter = new NetworkSelectAdapter(getContext(), networkList, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
+        networkList.clear();
         prepareNetworkData();
     }
 
@@ -141,7 +135,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initListeners() {
-        backButtonLayout.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
@@ -153,14 +147,12 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         imgSelectBeneficiary.setOnClickListener(v -> {
 
             bottomSheetFragment = new SelectBeneficiarySheetFragment();
-            bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
 
         });
 
         btnPreview.setOnClickListener(v -> {
             ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
-
-            Toast.makeText(getActivity(), "lllll"+ ReceiverSimNetwork, Toast.LENGTH_LONG).show();
 
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
@@ -180,7 +172,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2, bundle);
         });
 
- }
+    }
 
     private void getExtrasFromIntent() {
         SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("simNetwork");
@@ -190,7 +182,14 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        backButtonLayout = view.findViewById(R.id.backArrowLayout);
+
+        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
+        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
+        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
+
+        backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
 
@@ -210,7 +209,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
 
     }
-
 
 
     private boolean isValidFields() {

@@ -1,84 +1,80 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tingtel_light_gray">
+    android:background="@color/tingtel_light_gray"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        tools:context=".fragments.signup.SIgnUpSim1SuccessFragment">
+        android:layout_gravity="center"
+        android:background="@drawable/appbar_layout"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_10sdp">
 
-        <ImageView
-            android:id="@+id/img_good"
-            android:layout_width="89dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/ic_thumb_up_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_simreg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/your_request_is_processing"
-            android:textAlignment="center"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_good"
-            tools:layout_editor_absoluteY="204dp" />
-
-        <Button
-            android:id="@+id/btn_send_notification"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/rounded_button_corners"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/send_notification_to_recipient"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_simreg" />
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/btn_make_another_transfer"
+
+            <ImageView
+                android:id="@+id/backArrowLayout"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:src="@drawable/back_arrow" />
+
+            <ImageView
+                android:id="@+id/homeImageview"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_home" />
+
+
+            <ImageView
+                android:id="@+id/settingsImageview"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/ic_settings_white_24dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/success_buttons"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/make_another_transfer"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_send_notification" />
+            android:layout_marginTop="@dimen/_40sdp">
 
-        <Button
-            android:id="@+id/btn_view_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/history_buttons"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/view_history"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_make_another_transfer" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/tingtel_red_color"
+                android:textSize="@dimen/_20sdp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.baoyachi.stepview.VerticalStepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+
+</LinearLayout>
