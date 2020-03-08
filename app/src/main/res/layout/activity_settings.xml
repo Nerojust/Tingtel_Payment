@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tingtel_light_gray"
+    android:background="@color/tingtel_lighter_gray"
     android:orientation="vertical"
     tools:context=".activities.settings.SettingsActivity">
 
@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:background="@color/tingtel_red_color"
+        android:orientation="horizontal"
         android:paddingHorizontal="@dimen/_10ssp"
-        android:paddingVertical="@dimen/_12ssp"
-        android:layout_marginBottom="25dp"
-        android:orientation="horizontal">
+        android:paddingVertical="@dimen/_12ssp">
 
         <LinearLayout
             android:id="@+id/backArrowLayout"
@@ -55,10 +55,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
                 android:layout_weight="0.5"
                 android:gravity="right|center"
-                android:text="My QR Code " />
+                android:text="My QR Code "
+                android:textColor="@color/white" />
 
             <ImageView
                 android:id="@+id/settingsImageview"
@@ -89,15 +89,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="Account"
-                        android:layout_marginVertical="10dp"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />
 
@@ -213,15 +214,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="Help/Support"
-                        android:layout_marginVertical="10dp"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />
 
@@ -301,6 +303,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <TextView
@@ -386,9 +389,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginVertical="13dp"
                             android:layout_weight="4"
                             android:drawableRight="@drawable/ic_share"
                             android:drawablePadding="10dp"
@@ -411,9 +414,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginVertical="13dp"
                             android:layout_weight="4"
                             android:drawableRight="@drawable/ic_delete_black_24dp"
                             android:fontFamily="@font/rubik_regular"
@@ -451,7 +454,7 @@
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
             android:text="Logout"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp" />
     </LinearLayout>
 </LinearLayout>

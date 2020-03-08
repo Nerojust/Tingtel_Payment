@@ -142,7 +142,6 @@ public class TransferAirtimeFragment extends Fragment {
                     DecimalFormat format = new DecimalFormat("#,###,###");
                     String newPrice = format.format(Double.parseDouble(input));
 
-
                     edAmount.removeTextChangedListener(this); //To Prevent from Infinite Loop
 
                     edAmount.setText(newPrice);
@@ -150,7 +149,6 @@ public class TransferAirtimeFragment extends Fragment {
 
                     edAmount.addTextChangedListener(this);
                 }
-
             }
 
             @Override
@@ -226,7 +224,6 @@ public class TransferAirtimeFragment extends Fragment {
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", finalamount);
                 navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
-
             }
         });
     }
@@ -358,19 +355,13 @@ public class TransferAirtimeFragment extends Fragment {
 
 
     private boolean sim1ExistsCheck() {
-
         String Sim1Serial = sessionManager.getSimSerialICCID();
-
         return appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0;
-
     }
 
     private boolean sim2ExistsCheck() {
-
         String Sim2Serial = sessionManager.getSimSerialICCID1();
-
         return appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0;
-
     }
 
 

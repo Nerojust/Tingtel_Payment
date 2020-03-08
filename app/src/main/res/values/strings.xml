@@ -133,6 +133,7 @@
     <string name="submit">Submit</string>
     <string name="add_beneficiary">ADD BENEFICIARY</string>
     <string name="amount_to_be_sent">AMOUNT TO BE SENT</string>
+    <string name="thank_you_for_using_this_service_n_if_your_transaction_was_successful_you_can_check_the_status_by_click_the_button_below">Thank you for using this service.   \n If your transaction was successful, you can check the status by clicking the button below</string>
 
 
     <string-array name="sim">

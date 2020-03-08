@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tingtel_light_gray"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context=".fragments.transfer_airtime.TransferAirtimeSuccessFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,34 +47,73 @@
 
     </LinearLayout>
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_regular"
-                android:gravity="center"
-                android:text=""
-                android:textColor="@color/tingtel_red_color"
-                android:textSize="@dimen/_20sdp" />
-
-        </RelativeLayout>
-    </ScrollView>
-
-    <com.baoyachi.stepview.VerticalStepView
-        android:id="@+id/step_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:src="@drawable/ic_check_circle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/raleway_regular"
+            android:gravity="center"
+            android:text="@string/thank_you_for_using_this_service_n_if_your_transaction_was_successful_you_can_check_the_status_by_click_the_button_below"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal">
 
 
+            <Button
+                android:id="@+id/status_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/dashboard_buttons"
+                android:fontFamily="@font/rubik_regular"
+                android:text="Check Status"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <Button
+                android:id="@+id/makeAnotherTransferButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/proceed_button"
+                android:fontFamily="@font/rubik_regular"
+                android:text="Save Beneficiary"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/goToHomePageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:background="@drawable/success_buttons"
+            android:fontFamily="@font/rubik_regular"
+            android:text="GOTO HOME PAGE"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp" />
+
+    </LinearLayout>
 </LinearLayout>

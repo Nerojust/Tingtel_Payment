@@ -27,9 +27,6 @@ import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
 
 public class DashboardFragment extends Fragment {
 
-
-    private Button btnTransferAirtime;
-    private Button btnHistory;
     private NavController navController;
     private AppDatabase appDatabase;
     private SessionManager sessionManager;
@@ -37,19 +34,17 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-//        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Dashboard");
         ImageView settingsImagview = view.findViewById(R.id.settingsImageview);
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
-        btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
-        btnHistory = view.findViewById(R.id.btn_history);
+        Button btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
+        Button btnHistory = view.findViewById(R.id.btn_history);
 
         appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
         sessionManager = getSessionManagerInstance();
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
-
 
         btnTransferAirtime.setOnClickListener(v -> {
             //check if both sim 1 and sim 2 are in the db registered.
@@ -97,7 +92,6 @@ public class DashboardFragment extends Fragment {
                     break;
             }
 
-
             navController.navigate(R.id.action_mainFragment_to_transferAirtimeActivity, null);
             //navController.navigate(R.id.action_mainFragment_to_transferAirtimeSuccessFragment2, null);
 
@@ -108,16 +102,12 @@ public class DashboardFragment extends Fragment {
             //navController.navigate(R.id.action_mainFragment_to_statusActivity, null);
         });
 
-
         return view;
     }
 
     private boolean sim1ExistsCheck() {
-
         String Sim1Serial = sessionManager.getSimSerialICCID();
-
         if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-
             return true;
         } else {
             return false;
@@ -126,16 +116,12 @@ public class DashboardFragment extends Fragment {
     }
 
     private boolean sim2ExistsCheck() {
-
         String Sim2Serial = sessionManager.getSimSerialICCID1();
 
         if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-
             return true;
         } else {
             return false;
         }
-
     }
-
 }
