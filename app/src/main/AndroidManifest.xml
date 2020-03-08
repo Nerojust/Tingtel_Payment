@@ -23,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.history.StatusActivity"></activity>
         <activity
             android:name=".activities.history.HistoryActivity"
             android:label="History"
@@ -80,7 +81,6 @@
             android:name=".activities.sign_in.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-
         <activity android:name=".activities.onboard.OnBoardActivity" />
         <activity
             android:name=".activities.onboard.SplashActivity"

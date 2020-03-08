@@ -99,10 +99,14 @@ public class DashboardFragment extends Fragment {
 
 
             navController.navigate(R.id.action_mainFragment_to_transferAirtimeActivity, null);
+            //navController.navigate(R.id.action_mainFragment_to_transferAirtimeSuccessFragment2, null);
 
         });
 
-        btnHistory.setOnClickListener(v -> navController.navigate(R.id.action_mainFragment_to_historyActivity, null));
+        btnHistory.setOnClickListener(v -> {
+            navController.navigate(R.id.action_mainFragment_to_historyActivity, null);
+            //navController.navigate(R.id.action_mainFragment_to_statusActivity, null);
+        });
 
 
         return view;

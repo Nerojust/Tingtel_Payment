@@ -8,23 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.baoyachi.stepview.VerticalStepView;
+
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
@@ -35,7 +38,7 @@ import tingtel.payment.utils.SessionManager;
  */
 public class TransferAirtimeSuccessFragment extends Fragment {
 
-//    private Button btnSendNotification;
+    //    private Button btnSendNotification;
 //    private Button btnMakeAnotherTransfer;
 //    private Button btnViewHistory;
     private NavController navController;
@@ -43,10 +46,6 @@ public class TransferAirtimeSuccessFragment extends Fragment {
     private String Amount;
     private Button btnTransfer;
     private Button btnBack;
-    private Button btnSendMessage;
-    private Button btnCancel;
-    private Button btnSaveBeneficiary;
-    private EditText edMessage;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String SimSerial;
@@ -54,7 +53,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
     private String Pin;
     private int SimNo;
     private ImageView homeImageview, settingsImagview;
-    private LinearLayout backButtonLayout;
+    private ImageView backButtonLayout;
     private LinearLayout layoutSuccess;
     private ImageView imgSender;
     private ImageView imgReceiver;
@@ -66,23 +65,16 @@ public class TransferAirtimeSuccessFragment extends Fragment {
     private String TingtelNumber;
     private String final_Amount;
     private SessionManager sessionManager;
+    private VerticalStepView mSetpview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime_success, container, false);
-
-//        btnSendNotification = view.findViewById(R.id.btn_send_notification);
-//        btnMakeAnotherTransfer = view.findViewById(R.id.btn_make_another_transfer);
-//        btnViewHistory = view.findViewById(R.id.btn_view_history);
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
 
-        getExtrasFromIntent();
+        //getExtrasFromIntent();
         initViews(view);
-
-
-
-
 
 
         if (SimNo == 0) {
@@ -93,13 +85,13 @@ public class TransferAirtimeSuccessFragment extends Fragment {
             SimSerial = sessionManager.getSimSerialICCID1();
         }
 
-        layoutSuccess.setVisibility(View.GONE);
+//        layoutSuccess.setVisibility(View.GONE);
 
-        edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
-                "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
+//        edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
+//                "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
 
-        populateDetailsTextViews();
-initListeners();
+        //populateDetailsTextViews();
+        initListeners();
 
 //        btnSendNotification.setOnClickListener(v -> {
 //            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
@@ -118,8 +110,6 @@ initListeners();
     }
 
     private void initListeners() {
-
-
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
@@ -127,31 +117,41 @@ initListeners();
 
         });
 
-        btnSendMessage.setOnClickListener(v -> shareViaSocial(edMessage.getText().toString()));
 
-        settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
-
-        //  btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
-
-        btnSendMessage.setOnClickListener(v -> shareViaSocial(edMessage.getText().toString()));
-
-        btnCancel.setOnClickListener(v -> layoutSuccess.setVisibility(View.GONE));
-
-        btnSaveBeneficiary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
-                bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
-                bottomSheetFragment.setArguments(bundle);
-                bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
-            }
-        });
+//        btnSaveBeneficiary.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
+//                bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
+//                bottomSheetFragment.setArguments(bundle);
+//                bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+//            }
+//        });
     }
 
 
     private void initViews(View view) {
+        mSetpview = view.findViewById(R.id.step_view);
+
+        List<String> list0 = new ArrayList<>();
+        list0.add(getResources().getString(R.string.naira) + "100 from " + AppUtils.getSessionManagerInstance().getSimPhoneNumber());
+        list0.add("TO TINGTEL");
+        list0.add("From Tingtel");
+        list0.add("To 08034567898");
+        mSetpview.setStepsViewIndicatorComplectingPosition(list0.size() - 2)
+                .reverseDraw(false)//default is true
+                .setStepViewTexts(list0)
+                .setLinePaddingProportion(1f)
+                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(getActivity(), R.color.tingtel_red_color))
+                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                .setStepViewComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.tingtel_red_color))
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_check_circle))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention));
+
         sessionManager = AppUtils.getSessionManagerInstance();
         backButtonLayout = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
@@ -165,13 +165,7 @@ initListeners();
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
-        btnCancel = view.findViewById(R.id.btn_cancel);
-        btnSendMessage = view.findViewById(R.id.btn_send_message);
-        btnSaveBeneficiary = view.findViewById(R.id.btn_save_beneficiary);
 
-        edMessage = view.findViewById(R.id.ed_message);
-
-        layoutSuccess = view.findViewById(R.id.layout_success);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));

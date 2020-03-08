@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.kofigyan.stateprogressbar.StateProgressBar;
+
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -101,10 +103,11 @@ public class TransferAirtimeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
-//        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
-//        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
-//        stateProgressBar.setStateDescriptionData(descriptionData);
-
+        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
+        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
+        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);

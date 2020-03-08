@@ -59,7 +59,8 @@
         app:spb_checkStateCompleted="true"
         app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
         app:spb_currentStateNumber="three"
-        app:spb_maxStateNumber="four"
+        app:spb_enableAllStatesCompleted="true"
+        app:spb_maxStateNumber="three"
         app:spb_stateBackgroundColor="@color/tingtel_gray_color"
         app:spb_stateDescriptionColor="#808080"
         app:spb_stateForegroundColor="@color/tingtel_red_color"
@@ -83,22 +84,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="10dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="@string/review"
-                    android:textColor="@color/tingtel_red_color"
-                    android:textSize="@dimen/_13ssp"/>
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/button_round_corners"
                     android:padding="8dp">
 
