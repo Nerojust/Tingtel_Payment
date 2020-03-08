@@ -426,7 +426,7 @@ public class TransferAirtimeFragment extends Fragment {
         }
 
         //todo: add not
-        if (!balanceChecked) {
+        if (balanceChecked) {
             AppUtils.showDialog("Please Check Account Balance First", getActivity());
             return false;
         }
