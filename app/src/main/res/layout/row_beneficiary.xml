@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingHorizontal="@dimen/_6ssp"
-    android:paddingTop="@dimen/_10ssp">
+    android:paddingHorizontal="@dimen/_5ssp"
+    android:paddingTop="@dimen/_7ssp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_4ssp"
         app:cardCornerRadius="@dimen/_4ssp"
         app:cardElevation="@dimen/_4ssp"
         app:cardMaxElevation="@dimen/_4ssp"
@@ -43,10 +42,10 @@
                     android:layout_alignBottom="@id/img_network"
                     android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
-                    android:fontFamily="@font/raleway_regular"
+                    android:fontFamily="@font/rubik_regular"
                     tools:text="mtn"
                     android:textAllCaps="true"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -56,8 +55,8 @@
                     android:layout_alignBottom="@id/img_network"
                     android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
-                    android:fontFamily="@font/raleway_regular"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/rubik_regular"
+                    android:textColor="@color/tingtel_red_color"
                     android:textAllCaps="true"
                     android:textSize="@dimen/_13ssp"
                     tools:text="NAME"
@@ -71,7 +70,7 @@
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
                     tools:text="@string/phone_number"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
             </LinearLayout>
 

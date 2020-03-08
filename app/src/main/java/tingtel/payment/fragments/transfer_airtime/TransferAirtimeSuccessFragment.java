@@ -30,7 +30,12 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
     private ImageView homeImageview, settingsImagview;
     private ImageView backButtonImageview;
-
+    private String SenderSimNetwork;
+    private String SenderPhoneNumber;
+    private String ReceiverSimNetwork;
+    private String ReceiverPhoneNumber;
+    private int SimNo;
+    private String Amount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         initViews(view);
         initListeners();
+        getExtrasFromIntent();
 
         return view;
     }
@@ -58,10 +64,33 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         statusButton.setOnClickListener(v -> startActivity(new Intent(getContext(), StatusActivity.class)));
-        saveBeneficiary.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_transferAirtimeFragment2, null));
+
+        saveBeneficiary.setOnClickListener(v -> {
+
+            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
+            bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
+            bottomSheetFragment.setArguments(bundle);
+            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+            //navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_transferAirtimeFragment2, null);
+        });
+
         goToHomepageButton.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_dashboardFragment, null));
     }
 
+    /**
+     * get detail from intent
+     */
+    private void getExtrasFromIntent() {
+        SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("senderSimNetwork");
+        ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
+        SimNo = getArguments().getInt("simNo");
+        Amount = getArguments().getString("amount");
+        ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
+
+    }
 
     private void initViews(View view) {
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
@@ -75,4 +104,15 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (isRemoving()) {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        }
+    }
+
 }

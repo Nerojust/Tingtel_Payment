@@ -95,6 +95,11 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
                 return null;
             }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+            }
         }
         SaveTask st = new SaveTask();
         st.execute();

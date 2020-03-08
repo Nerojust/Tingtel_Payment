@@ -84,6 +84,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_regular"
             android:hint="@string/enter_name"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textSize="@dimen/_14ssp" />
 
         <Button
@@ -91,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/button_round_corners"
+            android:background="@drawable/dashboard_buttons"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/save"
             android:textColor="@color/white"
