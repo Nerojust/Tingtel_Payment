@@ -72,48 +72,30 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/status_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/dashboard_buttons"
-                android:fontFamily="@font/rubik_regular"
-                android:text="Check Status"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp" />
-
-            <Button
-                android:id="@+id/makeAnotherTransferButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/proceed_button"
-                android:fontFamily="@font/rubik_regular"
-                android:text="Save Beneficiary"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_11ssp" />
-        </LinearLayout>
 
         <Button
-            android:id="@+id/goToHomePageButton"
+            android:id="@+id/status_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:background="@drawable/success_buttons"
+            android:layout_marginVertical="@dimen/_20sdp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/dashboard_buttons"
             android:fontFamily="@font/rubik_regular"
-            android:text="GOTO HOME PAGE"
+            android:text="Check Status"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_12ssp" />
 
+
+        <Button
+            android:id="@+id/makeAnotherTransferButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/proceed_button"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Save Beneficiary"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
     </LinearLayout>
 </LinearLayout>

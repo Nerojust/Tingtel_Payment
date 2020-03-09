@@ -66,18 +66,13 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         statusButton.setOnClickListener(v -> startActivity(new Intent(getContext(), StatusActivity.class)));
 
         saveBeneficiary.setOnClickListener(v -> {
-
             SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
             Bundle bundle = new Bundle();
             bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
             bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
             bottomSheetFragment.setArguments(bundle);
             bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
-
-            //navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_transferAirtimeFragment2, null);
         });
-
-        goToHomepageButton.setOnClickListener(v -> navController.navigate(R.id.action_transferAirtimeSuccessFragment_to_dashboardFragment, null));
     }
 
     /**
@@ -99,7 +94,6 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         statusButton = view.findViewById(R.id.status_button);
         saveBeneficiary = view.findViewById(R.id.makeAnotherTransferButton);
-        goToHomepageButton = view.findViewById(R.id.goToHomePageButton);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
@@ -114,5 +108,4 @@ public class TransferAirtimeSuccessFragment extends Fragment {
             Objects.requireNonNull(getActivity()).finish();
         }
     }
-
 }
