@@ -51,7 +51,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_20ssp"
                         android:layout_marginBottom="@dimen/_14ssp"
-                        android:fontFamily="@font/rubik_medium"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/sign_in"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_17ssp"
@@ -68,7 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="6dp"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_username"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
@@ -88,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_lock"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_password"
                             android:inputType="textPassword"
                             android:maxLines="1"
@@ -133,7 +133,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_20ssp"
                         android:layout_marginBottom="@dimen/_20ssp"
-                        android:fontFamily="@font/raleway_regular"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/not_registered_sign_up"
                         android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="@dimen/_24ssp"
-                        android:fontFamily="@font/raleway_regular"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/forgot_password_retrieve"
                         android:textStyle="bold" />
                 </LinearLayout>

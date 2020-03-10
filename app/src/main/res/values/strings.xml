@@ -86,10 +86,10 @@
     <string name="set_your_new_password">NEW PASSWORD</string>
     <string name="re_enter_your_new_password">RE-ENTER PASSWORD</string>
     <string name="change_password">CHANGE PASSWORD</string>
-    <string name="change_your_email_address">CHANGE YOUR EMAIL ADDRESS</string>
+    <string name="change_your_email_address">EMAIL ADDRESS CHANGE</string>
     <string name="enter_your_current_email_address">CURRENT EMAIL ADDRESS</string>
     <string name="enter_new_email_address">NEW EMAIL ADDRESS</string>
-    <string name="re_enter_your_email_address">RE-ENTER YOUR EMAIL ADDRESS</string>
+    <string name="re_enter_your_email_address">RE-ENTER EMAIL ADDRESS</string>
     <string name="user">USER</string>
     <string name="or_scan_qr_code">SCAN QR CODE</string>
     <string name="select_a_sim_to_get_qr_code">SELECT A SIM TO GET QR CODE</string>

@@ -89,8 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/button_round_corners"
                     android:padding="8dp">
 
@@ -112,7 +112,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="0.25"
-                                android:fontFamily="@font/raleway_regular"
+                                android:fontFamily="@font/rubik_regular"
                                 android:text="@string/from"
                                 android:textSize="@dimen/_10ssp" />
 
@@ -124,7 +124,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
-                                android:fontFamily="@font/rubik_medium"
+                                android:fontFamily="@font/rubik_regular"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
                                 tools:text="080623467463" />
@@ -137,7 +137,6 @@
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
-                            android:fontFamily="@font/raleway_regular"
                             android:gravity="center"
                             android:scaleType="fitCenter"
                             android:textSize="17sp"
@@ -174,7 +173,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="0.25"
-                                android:fontFamily="@font/raleway_regular"
+                                android:fontFamily="@font/rubik_regular"
                                 android:text="@string/to"
                                 android:textSize="@dimen/_10ssp" />
 
@@ -185,7 +184,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
-                                android:fontFamily="@font/rubik_medium"
+                                android:fontFamily="@font/rubik_regular"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
                                 tools:text="080233467463" />
@@ -197,7 +196,6 @@
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
-                            android:fontFamily="@font/raleway_regular"
                             android:gravity="center"
                             android:scaleType="fitCenter"
                             tools:src="@drawable/airtel_logo" />
@@ -234,7 +232,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="0.25"
-                                android:fontFamily="@font/raleway_regular"
+                                android:fontFamily="@font/rubik_regular"
                                 android:text="@string/amount"
                                 android:textSize="@dimen/_10ssp" />
 
@@ -245,7 +243,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
-                                android:fontFamily="@font/rubik_medium"
+                                android:fontFamily="@font/rubik_regular"
                                 android:gravity="start"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
@@ -258,7 +256,7 @@
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_weight="0.2"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
                             android:text="@string/naira"
                             android:textSize="20sp"
@@ -295,7 +293,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="0.25"
-                                android:fontFamily="@font/raleway_regular"
+                                android:fontFamily="@font/rubik_regular"
                                 android:text="@string/service_fee"
                                 android:textSize="@dimen/_10ssp" />
 
@@ -306,7 +304,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
-                                android:fontFamily="@font/rubik_medium"
+                                android:fontFamily="@font/rubik_regular"
                                 android:gravity="start"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
@@ -319,7 +317,7 @@
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
                             android:text="@string/naira"
                             android:textSize="20sp"
@@ -354,7 +352,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="0.25"
-                                android:fontFamily="@font/raleway_regular"
+                                android:fontFamily="@font/rubik_regular"
                                 android:text="@string/amount_to_be_credited"
                                 android:textSize="@dimen/_10ssp" />
 
@@ -365,7 +363,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="0.5"
-                                android:fontFamily="@font/rubik_medium"
+                                android:fontFamily="@font/rubik_regular"
                                 android:gravity="start"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_15ssp"
@@ -377,7 +375,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
                             android:text="@string/naira"
                             android:textSize="20sp"
@@ -393,7 +391,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/dashboard_buttons"
-                    android:fontFamily="@font/raleway_regular"
+                    android:fontFamily="@font/rubik_regular"
                     android:text="@string/transfer"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />

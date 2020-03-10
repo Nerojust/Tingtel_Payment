@@ -45,7 +45,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="50dp"
-                        android:fontFamily="@font/rubik_medium"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/enter_sim_2_details"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_18ssp"
@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5ssp"
                             android:layout_marginTop="@dimen/_5ssp"
-                            android:fontFamily="@font/raleway_regular"
+                            android:fontFamily="@font/rubik_regular"
                             android:text="@string/select_sim_2_network"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_9ssp" />
@@ -116,7 +116,7 @@
                         android:layout_marginBottom="50dp"
                         android:background="@drawable/rounded_button_corners"
                         android:drawableRight="@drawable/ic_keyboard_arrow_right"
-                        android:fontFamily="@font/raleway_regular"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/next"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14ssp" />

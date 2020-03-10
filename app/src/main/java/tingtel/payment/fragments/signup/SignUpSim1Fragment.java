@@ -89,7 +89,7 @@ public class SignUpSim1Fragment extends Fragment {
                 tvPhoneNumber.setFocusable(true);
                 return;
             }
-
+            sessionManager.setSenderPhoneNumber(tvPhoneNumber.getText().toString());
             Bundle bundle = new Bundle();
             bundle.putString("Sim1Serial", Sim1Serial);
 //                bundle.putString("Sim1Network", Sim1Network);

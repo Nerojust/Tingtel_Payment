@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/raleway_regular"
+                        android:fontFamily="@font/rubik_regular"
                         android:paddingHorizontal="50dp"
                         android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
                         android:textAlignment="center"
@@ -119,7 +119,7 @@
                         android:layout_marginBottom="50dp"
                         android:background="@drawable/rounded_button_corners"
                         android:drawableRight="@drawable/ic_keyboard_arrow_right"
-                        android:fontFamily="@font/raleway_regular"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/verify"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14ssp" />

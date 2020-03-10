@@ -59,7 +59,7 @@
         app:spb_checkStateCompleted="true"
         app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
         app:spb_currentStateNumber="two"
-        app:spb_maxStateNumber="four"
+        app:spb_maxStateNumber="three"
         app:spb_stateBackgroundColor="@color/tingtel_gray_color"
         app:spb_stateDescriptionColor="#808080"
         app:spb_stateForegroundColor="@color/tingtel_red_color"

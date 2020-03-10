@@ -153,14 +153,14 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         btnPreview.setOnClickListener(v -> {
             ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
-
+            String number = edReceiverPhoneNumber.getText().toString().trim();
             Bundle bundle = new Bundle();
             bundle.putString("senderSimNetwork", SenderSimNetwork);
             bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
             bundle.putString("simSerial", SimSerial);
             bundle.putInt("simNo", SimNo);
             bundle.putString("amount", Amount);
-            bundle.putString("receiverPhoneNumber", edReceiverPhoneNumber.getText().toString());
+            bundle.putString("receiverPhoneNumber", number);
             bundle.putString("pin", edPin.getText().toString());
             navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_transferAirtimePreviewFragment2, bundle);
 

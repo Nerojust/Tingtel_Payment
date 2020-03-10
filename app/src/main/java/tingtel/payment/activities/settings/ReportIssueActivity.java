@@ -19,7 +19,6 @@ public class ReportIssueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_issue);
 
-        edTitle = findViewById(R.id.ed_title);
         edDetails = findViewById(R.id.ed_details);
         btnReport = findViewById(R.id.btn_report);
 

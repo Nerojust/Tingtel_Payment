@@ -3,24 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="25dp"
     tools:context=".activities.settings.ReportIssueActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/rubik_regular"
-        android:text="@string/title_of_issue" />
-
-    <EditText
-        android:id="@+id/ed_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/textview_rounded"
-        android:fontFamily="@font/rubik_regular"
-        android:textSize="17sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,12 +16,12 @@
     <EditText
         android:id="@+id/ed_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="4dp"
+        android:inputType="textMultiLine"
         android:background="@drawable/textview_rounded"
         android:fontFamily="@font/rubik_regular"
-        android:minLines="8"
-        android:textSize="17sp" />
+        android:textSize="15sp" />
 
 
     <Button
@@ -45,11 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_round_corners"
+        android:background="@drawable/dashboard_buttons"
         android:fontFamily="@font/rubik_regular"
         android:text="@string/report_issue"
         android:textColor="@color/white"
-        android:textSize="17sp" />
+        android:textSize="15sp" />
 
 
 </LinearLayout>

@@ -53,6 +53,9 @@ public class SessionManager {
     private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
     private static final String CLICKED_NETWORK = "CLICKED_NETWORK";
     private static final String SELECTED_RV_NETWORK = "SELECTED_RV_NETWORK";
+    private static final String RECEIVER_PHONE_NUMBER = "RECEIVER_PHONE_NUMBER";
+    private static final String SENDER_PHONE_NUMBER = "SENDER_PHONE_NUMBER";
+    private static final String AMOUNT = "AMOUNT";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -429,12 +432,12 @@ public class SessionManager {
         setStringPreference(QRIMAGE, barcodeImage);
     }
 
-    public String getClickedNetwork(){
+    public String getClickedNetwork() {
         return getStringPreference(CLICKED_NETWORK);
     }
 
     public void setClickedNetwork(String network) {
-        setStringPreference(CLICKED_NETWORK,network);
+        setStringPreference(CLICKED_NETWORK, network);
     }
 
     public String getSelectedRvNetwork() {
@@ -443,5 +446,29 @@ public class SessionManager {
 
     public void setSelectedRvNetwork(String network) {
         setStringPreference(SELECTED_RV_NETWORK, network);
+    }
+
+    public String getReceiverPhoneNumber() {
+        return getStringPreference(RECEIVER_PHONE_NUMBER);
+    }
+
+    public void setReceiverPhoneNumber(String receiverPhoneNumber) {
+        setStringPreference(RECEIVER_PHONE_NUMBER, receiverPhoneNumber);
+    }
+
+    public void setSenderPhoneNumber(String senderPhoneNumber) {
+        setStringPreference(SENDER_PHONE_NUMBER, senderPhoneNumber);
+    }
+
+    public String getSenderPhonerNumber() {
+        return getStringPreference(SENDER_PHONE_NUMBER);
+    }
+
+    public String getAmount() {
+        return getStringPreference(AMOUNT);
+    }
+
+    public void setAmount(String amount) {
+        setStringPreference(AMOUNT, amount);
     }
 }

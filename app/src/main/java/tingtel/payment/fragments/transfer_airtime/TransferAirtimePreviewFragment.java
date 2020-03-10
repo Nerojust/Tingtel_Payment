@@ -66,8 +66,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         getLifecycle().addObserver(new TingtelObserver());
 
-        getExtrasFromIntent();
         initViews(view);
+        getExtrasFromIntent();
 
         if (SimNo == 0) {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber();
@@ -195,6 +195,9 @@ public class TransferAirtimePreviewFragment extends Fragment {
         Amount = getArguments().getString("amount");
         ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
         Pin = getArguments().getString("pin");
+
+        sessionManager.setReceiverPhoneNumber(ReceiverPhoneNumber);
+        sessionManager.setAmount(Amount);
     }
 
     /**

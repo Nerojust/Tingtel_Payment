@@ -1,5 +1,6 @@
 package tingtel.payment.activities.sign_in;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,5 +55,27 @@ public class SignInActivity extends AppCompatActivity {
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
         forgotPasswordTextView = findViewById(R.id.forgotPassword);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    SignInActivity.this.onSuperBackPressed();
+                })
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+    private void onSuperBackPressed() {
+        super.onBackPressed();
     }
 }

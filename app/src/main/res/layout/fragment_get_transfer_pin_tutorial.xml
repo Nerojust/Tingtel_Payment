@@ -15,6 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="15dp"
         android:text="Network"
+        android:fontFamily="@font/rubik_regular"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold" />
