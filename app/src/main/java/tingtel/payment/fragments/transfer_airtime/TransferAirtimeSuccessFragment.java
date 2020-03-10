@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -19,13 +20,14 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.history.StatusActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
+import tingtel.payment.utils.AppUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TransferAirtimeSuccessFragment extends Fragment {
 
-    private Button statusButton, saveBeneficiary, goToHomepageButton;
+    private Button statusButton, saveBeneficiary, checkBalanceButton;
     private NavController navController;
 
     private ImageView homeImageview, settingsImagview;
@@ -63,6 +65,8 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
+        checkBalanceButton.setOnClickListener(v -> checkBalance());
+
         statusButton.setOnClickListener(v -> startActivity(new Intent(getContext(), StatusActivity.class)));
 
         saveBeneficiary.setOnClickListener(v -> {
@@ -87,11 +91,33 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
     }
 
+    private void checkBalance() {
+        String UssdCode;
+        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
+            UssdCode = "*556#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
+            UssdCode = "*123#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
+            UssdCode = "*124*1#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo") ||
+                (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
+            UssdCode = "*232#";
+        } else {
+
+            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+            return;
+        }
+        statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
+        statusButton.setEnabled(true);
+        AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
+    }
+
     private void initViews(View view) {
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
         settingsImagview = view.findViewById(R.id.settingsImageview);
 
+        checkBalanceButton = view.findViewById(R.id.check_balance_button);
         statusButton = view.findViewById(R.id.status_button);
         saveBeneficiary = view.findViewById(R.id.makeAnotherTransferButton);
 

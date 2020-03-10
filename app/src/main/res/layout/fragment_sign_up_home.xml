@@ -82,6 +82,7 @@
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_person"
                             android:fontFamily="@font/rubik_regular"
+                            android:singleLine="true"
                             android:hint="@string/etner_your_last_name"
                             android:inputType="text"
                             android:textSize="@dimen/_14ssp" />
@@ -97,6 +98,7 @@
                             android:id="@+id/tv_email_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:drawableRight="@drawable/ic_mail"
                             android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_email_address"
@@ -106,7 +108,6 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tv_username"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_13ssp">
@@ -115,6 +116,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_person"
+                            android:id="@+id/tv_username"
                             android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_username"
                             android:inputType="text"
@@ -147,7 +149,7 @@
                         android:layout_marginBottom="@dimen/_24ssp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/have_an_account_login"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

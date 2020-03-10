@@ -91,46 +91,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         buttonClicked = false;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        buttonClickedInt += 1;
-//
-//        Log.e("tingteltest", "i am here");
-//        if (buttonClickedInt > 3) {
-//            layoutSuccess.setVisibility(View.VISIBLE);
-//            //btnSaveBeneficiary.setEnabled(true);
-//            edMessage.setText("Hello, I Just transferred " + getResources().getString(R.string.naira) + final_Amount + " airtime to you using\n" +
-//                    "Tingtelpay. You can download the Tingtelpay app using the link\n https://play.google.com/store/apps/details?id=tingtel.payments");
-//
-//            buttonClickedInt = 1;
-//        }
-//
-//        if (buttonClickedInt == 3) {
-//         //   checkBalance();
-//        }
-//
-//    }
 
-    private void checkBalance() {
-        String UssdCode;
-        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
-            UssdCode = "*556#";
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            UssdCode = "*123#";
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
-            UssdCode = "*124*1#";
-        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo") ||
-                (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
-            UssdCode = "*232#";
-        } else {
-
-            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
-    }
 
     /**
      * instantiate listeners for click events.

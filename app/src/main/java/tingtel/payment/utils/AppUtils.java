@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tingtel.payment.R;
@@ -48,7 +49,11 @@ public class AppUtils {
         vibrator.vibrate(Constants.VIBRATOR_INTEGER);
         mySnackbar.show();
     }
-
+    public static boolean isValidFieldsNumbersAndLetters(String inputtext) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9.,\\s]{3,40}$");
+        Matcher matcher = pattern.matcher(inputtext);
+        return matcher.matches();
+    }
     public static boolean isValidEmailAddress(String email) {
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                 + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
