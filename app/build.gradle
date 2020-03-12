@@ -52,4 +52,5 @@ dependencies {
     implementation 'com.github.baoyachi:StepView:1.9'
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
 
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

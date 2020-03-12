@@ -29,6 +29,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btnChangePassword.setOnClickListener(v -> {
             if (isValidFields()) {
                 AppUtils.showDialog("Password Successfully Changed", this);
+                finish();
                 //Todo: perform operation
             }
         });
@@ -44,43 +45,53 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private boolean isValidFields() {
         if (edCurrentPassword.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Current Password is required", Toast.LENGTH_SHORT).show();
+            edCurrentPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edCurrentPassword.getText().toString().trim())) {
             Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            edCurrentPassword.requestFocus();
             return false;
         }
         if (edCurrentPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
             AppUtils.showSnackBar("Password is too short", edCurrentPassword);
+            edCurrentPassword.requestFocus();
             return false;
         }
 
         if (edNewPassword.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "New Password is required", Toast.LENGTH_SHORT).show();
+            edNewPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edNewPassword.getText().toString().trim())) {
             Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            edNewPassword.requestFocus();
             return false;
         }
         if (edNewPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
             AppUtils.showSnackBar("Password is too short", edNewPassword);
+            edNewPassword.requestFocus();
             return false;
         }
         if (edRenterNewPassword.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Field is required", Toast.LENGTH_SHORT).show();
+            edRenterNewPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edRenterNewPassword.getText().toString().trim())) {
             Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            edRenterNewPassword.requestFocus();
             return false;
         }
         if (edRenterNewPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
             AppUtils.showSnackBar("Password is too short", edRenterNewPassword);
+            edRenterNewPassword.requestFocus();
             return false;
         }
         if (!edNewPassword.getText().toString().trim().equals(edRenterNewPassword.getText().toString().trim())) {
             AppUtils.showSnackBar("New passwords do not match", edRenterNewPassword);
+            edRenterNewPassword.requestFocus();
             return false;
         }
 

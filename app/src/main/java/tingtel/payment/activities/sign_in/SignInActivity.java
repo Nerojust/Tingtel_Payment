@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.ForgotPasswordActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
+import tingtel.payment.utils.GPSutils;
 import tingtel.payment.utils.NetworkCarrierUtils;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends GPSutils {
 
     private NavController navController;
     private Button btnSingIn;
@@ -63,10 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, id) -> {
-                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    finishAffinity();
                     SignInActivity.this.onSuperBackPressed();
                 })
                 .setNegativeButton("No", (dialog, id) -> dialog.cancel());

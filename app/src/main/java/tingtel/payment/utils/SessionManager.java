@@ -56,6 +56,8 @@ public class SessionManager {
     private static final String RECEIVER_PHONE_NUMBER = "RECEIVER_PHONE_NUMBER";
     private static final String SENDER_PHONE_NUMBER = "SENDER_PHONE_NUMBER";
     private static final String AMOUNT = "AMOUNT";
+    private static final String LONG = "LONG";
+    private static final String LAT = "LAT";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -471,4 +473,22 @@ public class SessionManager {
     public void setAmount(String amount) {
         setStringPreference(AMOUNT, amount);
     }
+
+    public String getLongitude(){
+        return getStringPreference(LONG);
+    }
+
+    public void setLongitude(String longitude) {
+        setStringPreference(LONG,longitude);
+    }
+
+    public String getLatitude(){
+        return getStringPreference(LAT);
+    }
+
+    public void setLatitude(String latitude) {
+        setStringPreference(LAT,latitude);
+    }
+
+
 }

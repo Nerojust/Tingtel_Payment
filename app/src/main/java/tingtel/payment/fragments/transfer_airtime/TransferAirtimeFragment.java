@@ -60,6 +60,7 @@ public class TransferAirtimeFragment extends Fragment {
     private boolean isSim1TextviewClicked = false;
     private boolean isSim2TextviewClicked = false;
     private String noOfSIm;
+    // private SoftInputAssist softInputAssist;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -103,6 +104,8 @@ public class TransferAirtimeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
+        //softInputAssist = new SoftInputAssist(getActivity());
+
         String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
         StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
         stateProgressBar.setStateDescriptionData(descriptionData);
@@ -244,6 +247,7 @@ public class TransferAirtimeFragment extends Fragment {
 
     @Override
     public void onResume() {
+//        softInputAssist.onResume();
         super.onResume();
     }
 
@@ -402,23 +406,24 @@ public class TransferAirtimeFragment extends Fragment {
 
     private boolean isValidAllFields() {
         if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
-            Toast.makeText(getContext(), "Select a number and check balance.", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Select a number", sim1Textview);
             return false;
         }
 
         if (edAmount.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Amount is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Amount is required", edAmount);
+            edAmount.requestFocus();
             return false;
         }
         if (edAmount.getText().toString().trim().length() < 3) {
-            Toast.makeText(getContext(), "Amount is too low. Minimum amount is 100", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Amount is too low. Minimum is " + getResources().getString(R.string.naira) + "100", edAmount);
+            edAmount.requestFocus();
             return false;
-
         }
 
         //todo: add not
         if (!balanceChecked) {
-            AppUtils.showDialog("Please Check Account Balance First", getActivity());
+            AppUtils.showSnackBar("Please Check Account Balance First", btnCheckBalance);
             return false;
         }
 

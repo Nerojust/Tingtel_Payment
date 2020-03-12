@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -83,15 +82,18 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private List<NetworkSelect> networkList = new ArrayList<>();
     private SpinnerAdapter mCustomAdapter;
     private Spinner mSpinner;
+    //private SoftInputAssist softInputAssist;
 
     public void onResume() {
         super.onResume();
+       // softInputAssist.onResume();
         //  Log.e(TAG, "onResume()");
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("barcodeSerialcaptured"));
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("selectedbeneficiary"));
     }
 
     public void onDestroy() {
+        //softInputAssist.onDestroy();
         super.onDestroy();
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).unregisterReceiver(this.mas);
     }
@@ -152,18 +154,19 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         });
 
         btnPreview.setOnClickListener(v -> {
-            ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
-            String number = edReceiverPhoneNumber.getText().toString().trim();
-            Bundle bundle = new Bundle();
-            bundle.putString("senderSimNetwork", SenderSimNetwork);
-            bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
-            bundle.putString("simSerial", SimSerial);
-            bundle.putInt("simNo", SimNo);
-            bundle.putString("amount", Amount);
-            bundle.putString("receiverPhoneNumber", number);
-            bundle.putString("pin", edPin.getText().toString());
-            navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_transferAirtimePreviewFragment2, bundle);
-
+            if (isValidFields()) {
+                ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
+                String number = edReceiverPhoneNumber.getText().toString().trim();
+                Bundle bundle = new Bundle();
+                bundle.putString("senderSimNetwork", SenderSimNetwork);
+                bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
+                bundle.putString("simSerial", SimSerial);
+                bundle.putInt("simNo", SimNo);
+                bundle.putString("amount", Amount);
+                bundle.putString("receiverPhoneNumber", number);
+                bundle.putString("pin", edPin.getText().toString());
+                navController.navigate(R.id.action_transferAirtimeReceiverInfoFragment2_to_transferAirtimePreviewFragment2, bundle);
+            }
         });
 
         whatIsPin.setOnClickListener(v -> {
@@ -182,7 +185,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initViews(View view) {
-
+        //softInputAssist = new SoftInputAssist(Objects.requireNonNull(getActivity()));
         String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
         StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
         stateProgressBar.setStateDescriptionData(descriptionData);
@@ -213,19 +216,27 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
     private boolean isValidFields() {
         if (edReceiverPhoneNumber.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Enter the receivers number", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Enter receivers number", edReceiverPhoneNumber);
+            edReceiverPhoneNumber.requestFocus();
             return false;
         }
         if (edPin.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Enter the receivers number", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Enter network pin", edPin);
+            edPin.requestFocus();
             return false;
         }
         if (edReceiverPhoneNumber.getText().toString().length() < 11) {
-            Toast.makeText(getContext(), "Phone number is too short", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Number is too short", edReceiverPhoneNumber);
+            edReceiverPhoneNumber.requestFocus();
+            return false;
+        }
+        if (AppUtils.getSessionManagerInstance().getSelectedRvNetwork() == null){
+            AppUtils.showSnackBar("Select a network",edPin);
             return false;
         }
         if (edPin.getText().toString().length() < 4) {
-            Toast.makeText(getContext(), "Pin is too short", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Pin is too short", edPin);
+            edPin.requestFocus();
             return false;
         }
         return true;
