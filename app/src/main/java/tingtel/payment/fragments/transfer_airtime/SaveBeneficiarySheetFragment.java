@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.transfer_airtime;
 
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -18,19 +20,25 @@ import java.util.Objects;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.Beneficiary;
+import tingtel.payment.utils.AppUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
-    EditText edName;
-    EditText edPhoneNumber;
-    EditText edNetworkName;
-    Button btnSave;
-    String ReceiverPhoneNumber;
-    String Receivernetwork;
-    String ReceiverName;
+    private EditText edName;
+    private EditText edPhoneNumber;
+    private EditText edNetworkName;
+    private Button btnSave;
+    private String ReceiverPhoneNumber;
+    private String Receivernetwork;
+    private String ReceiverName;
+    private Activity activity;
+
+    SaveBeneficiarySheetFragment(Activity activity) {
+        this.activity = activity;
+    }
 
 
     @Override
@@ -46,14 +54,16 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
         initValues();
         initListeners();
 
-
         return view;
-
     }
 
     private void initListeners() {
         btnSave.setOnClickListener(v -> {
-            saveBeneficiary();
+            if (!edName.getText().toString().isEmpty()) {
+                saveBeneficiary();
+            } else {
+                AppUtils.showSnackBar("Fill in a name", edName);
+            }
         });
     }
 
@@ -99,6 +109,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                Toast.makeText(activity, "Saved beneficiary", Toast.LENGTH_SHORT).show();
             }
         }
         SaveTask st = new SaveTask();

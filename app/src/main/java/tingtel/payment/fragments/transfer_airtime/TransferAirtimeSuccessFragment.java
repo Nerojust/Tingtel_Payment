@@ -70,7 +70,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         statusButton.setOnClickListener(v -> startActivity(new Intent(getContext(), StatusActivity.class)));
 
         saveBeneficiary.setOnClickListener(v -> {
-            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment();
+            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment(getActivity());
             Bundle bundle = new Bundle();
             bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
             bundle.putString("ReceiverNetwork", ReceiverSimNetwork);

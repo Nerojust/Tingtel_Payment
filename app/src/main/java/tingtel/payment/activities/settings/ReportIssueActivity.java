@@ -23,14 +23,14 @@ public class ReportIssueActivity extends AppCompatActivity {
         edDetails = findViewById(R.id.ed_details);
         btnReport = findViewById(R.id.btn_report);
 
-        if (!edDetails.getText().toString().trim().isEmpty()) {
+        btnReport.setOnClickListener(v -> {
+            if (!edDetails.getText().toString().trim().isEmpty()) {
+                AppUtils.showDialog("Thank you, we would look into it", this);
 
-            btnReport.setOnClickListener(v -> AppUtils.showDialog("Thank you, we would look into it", this));
-
-        } else {
-            AppUtils.showSnackBar("Message box must not be empty", edDetails);
-            edDetails.requestFocus();
-        }
-
+            } else {
+                AppUtils.showSnackBar("Message box must not be empty", edDetails);
+                edDetails.requestFocus();
+            }
+        });
     }
 }
