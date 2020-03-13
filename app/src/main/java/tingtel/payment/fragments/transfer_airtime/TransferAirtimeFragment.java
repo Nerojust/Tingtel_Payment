@@ -106,7 +106,7 @@ public class TransferAirtimeFragment extends Fragment {
     private void initViews(View view) {
         //softInputAssist = new SoftInputAssist(getActivity());
 
-        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
+        String[] descriptionData = {"Sender", "Receiver", "Summary"};
         StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
@@ -207,7 +207,7 @@ public class TransferAirtimeFragment extends Fragment {
         btnCheckBalance.setOnClickListener(v -> {
 
             if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
-                Toast.makeText(getContext(), "Select a number and check balance", Toast.LENGTH_SHORT).show();
+                AppUtils.showSnackBar("Select a number and check balance", sim1Textview);
                 return;
             }
 

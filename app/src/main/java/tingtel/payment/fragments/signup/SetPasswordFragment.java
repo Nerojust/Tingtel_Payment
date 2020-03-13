@@ -16,6 +16,7 @@ import java.util.Objects;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
 
 
@@ -38,12 +39,14 @@ public class SetPasswordFragment extends Fragment {
 
     private void initListeners(View view) {
         btnSetPassword.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Objects.requireNonNull(getActivity()).startActivity(intent);
+            if (isValidFields()) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Objects.requireNonNull(getActivity()).startActivity(intent);
 
-            sessionManager.setIsRegistered(true);
-            getActivity().finish();
+                sessionManager.setIsRegistered(true);
+                getActivity().finish();
+            }
         });
 
     }
@@ -55,4 +58,37 @@ public class SetPasswordFragment extends Fragment {
 
         sessionManager = AppUtils.getSessionManagerInstance();
     }
+
+    private boolean isValidFields() {
+        if (tvPassword1.getText().toString().trim().isEmpty()) {
+            AppUtils.showSnackBar("New Password is required", tvPassword1);
+            tvPassword1.requestFocus();
+            return false;
+        }
+        if (tvPassword1.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
+            AppUtils.showSnackBar("Password is too short", tvPassword1);
+            tvPassword1.requestFocus();
+            return false;
+        }
+
+        if (tvPassword2.getText().toString().trim().isEmpty()) {
+            AppUtils.showSnackBar("This is required", tvPassword2);
+            tvPassword2.requestFocus();
+            return false;
+        }
+
+        if (tvPassword2.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
+            AppUtils.showSnackBar("Password is too short", tvPassword2);
+            tvPassword2.requestFocus();
+            return false;
+        }
+        if (!tvPassword1.getText().toString().trim().equals(tvPassword2.getText().toString().trim())) {
+            AppUtils.showSnackBar("Passwords do not match", tvPassword1);
+            tvPassword1.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
 }

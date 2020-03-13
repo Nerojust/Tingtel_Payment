@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,17 +44,32 @@ public class AppUtils {
         return sessionManager;
     }
 
+    public static String generateRandomString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
+
     public static void showSnackBar(String msg, View view) {
         Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
         Vibrator vibrator = (Vibrator) view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(Constants.VIBRATOR_INTEGER);
         mySnackbar.show();
     }
+
     public static boolean isValidFieldsNumbersAndLetters(String inputtext) {
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9.,\\s]{3,40}$");
         Matcher matcher = pattern.matcher(inputtext);
         return matcher.matches();
     }
+
     public static boolean isValidEmailAddress(String email) {
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                 + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"

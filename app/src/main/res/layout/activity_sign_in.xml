@@ -64,7 +64,7 @@
                         android:layout_margin="@dimen/_13ssp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_email_address"
+                            android:id="@+id/tv_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="6dp"
@@ -106,6 +106,7 @@
                             android:layout_height="wrap_content"
                             android:checked="false"
                             android:text="@string/remember_me"
+                            android:id="@+id/rememberMeCheckbox"
                             android:textColor="@color/tingtel_red_color"
                             android:textSize="@dimen/_10ssp" />
 

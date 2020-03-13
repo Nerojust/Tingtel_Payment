@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="25dp"
     tools:context=".activities.settings.ReportIssueActivity">
@@ -16,11 +16,13 @@
     <EditText
         android:id="@+id/ed_details"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="4dp"
-        android:inputType="textMultiLine"
+        android:layout_height="150dp"
         android:background="@drawable/textview_rounded"
+        android:ems="10"
         android:fontFamily="@font/rubik_regular"
+        android:gravity="top"
+        android:hint="Write a message"
+        android:inputType="textMultiLine"
         android:textSize="15sp" />
 
 

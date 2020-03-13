@@ -3,6 +3,7 @@ package tingtel.payment.activities.history;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.ReportIssueActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
@@ -23,6 +25,7 @@ import tingtel.payment.utils.SessionManager;
 public class StatusActivity extends AppCompatActivity {
     private VerticalStepView stepView;
     private ImageView backButtonImageview, homeImageview, settingsImageview;
+    private TextView complaintTextview, referenceIdTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,21 @@ public class StatusActivity extends AppCompatActivity {
         });
 
         settingsImageview.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
+
+        complaintTextview.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
     }
 
     private void initViews() {
         backButtonImageview = findViewById(R.id.backArrowLayout);
         homeImageview = findViewById(R.id.homeImageview);
         settingsImageview = findViewById(R.id.settingsImageview);
+        complaintTextview = findViewById(R.id.complaintTextview);
+        referenceIdTextview = findViewById(R.id.referenceIdTextview);
+        //generate random string for transaction.
+
+        String randomString = AppUtils.generateRandomString();
+        referenceIdTextview.setText(randomString);
+
         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
@@ -57,7 +69,7 @@ public class StatusActivity extends AppCompatActivity {
         List<String> list0 = new ArrayList<>();
         list0.add(getResources().getString(R.string.naira) + sessionManager.getAmount() + " from " + sessionManager.getSimPhoneNumber() + "(You)");
         list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
-        list0.add("From TINGTEL PAY");
+        list0.add("From TINGTEL");
         list0.add("To " + sessionManager.getReceiverPhoneNumber());
         stepView.setStepsViewIndicatorComplectingPosition(list0.size() - 2)
                 .reverseDraw(false)//default is true

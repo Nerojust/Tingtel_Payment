@@ -36,6 +36,7 @@ import tingtel.payment.adapters.NetworkSelectAdapter;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.models.NetworkSelect;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.Constants;
 
 
 public class TransferAirtimeReceiverInfoFragment extends Fragment {
@@ -185,7 +186,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        //softInputAssist = new SoftInputAssist(Objects.requireNonNull(getActivity()));
+        AppUtils.getSessionManagerInstance().setSelectedRvNetwork("");
+
         String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
         StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
         stateProgressBar.setStateDescriptionData(descriptionData);
@@ -205,7 +207,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         imgSelectBeneficiary = view.findViewById(R.id.img_beneficiary);
 
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
@@ -215,23 +217,25 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
 
     private boolean isValidFields() {
+        String network = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
         if (edReceiverPhoneNumber.getText().toString().isEmpty()) {
             AppUtils.showSnackBar("Enter receivers number", edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
-        if (edPin.getText().toString().isEmpty()) {
-            AppUtils.showSnackBar("Enter network pin", edPin);
-            edPin.requestFocus();
-            return false;
-        }
-        if (edReceiverPhoneNumber.getText().toString().length() < 11) {
-            AppUtils.showSnackBar("Number is too short", edReceiverPhoneNumber);
+        if (edReceiverPhoneNumber.getText().toString().length()< Constants.MINIMUM_PHONE_NUMBER_DIGITS){
+            AppUtils.showSnackBar("Number is too short. Must be 11 digits", edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
-        if (AppUtils.getSessionManagerInstance().getSelectedRvNetwork() == null){
+
+        if (network == ""){
             AppUtils.showSnackBar("Select a network",edPin);
+            return false;
+        }
+        if (edPin.getText().toString().isEmpty()) {
+            AppUtils.showSnackBar("Enter network pin", edPin);
+            edPin.requestFocus();
             return false;
         }
         if (edPin.getText().toString().length() < 4) {

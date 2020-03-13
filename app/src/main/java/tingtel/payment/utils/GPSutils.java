@@ -33,8 +33,7 @@ import java.util.List;
 import tingtel.payment.R;
 
 public class GPSutils extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
     private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
     private Location mylocation;
@@ -50,7 +49,7 @@ public class GPSutils extends AppCompatActivity implements GoogleApiClient.Conne
 
     private synchronized void setUpGClient() {
         googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, 0, this)
+                .enableAutoManage(GPSutils.this, 0, this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -67,6 +66,7 @@ public class GPSutils extends AppCompatActivity implements GoogleApiClient.Conne
 
             AppUtils.getSessionManagerInstance().setLongitude(String.valueOf(longitude));
             AppUtils.getSessionManagerInstance().setLatitude(String.valueOf(latitude));
+            //Toast.makeText(this, latitude.toString() +"----" + longitude.toString(), Toast.LENGTH_SHORT).show();
 
         } else {
             getMyLocation();

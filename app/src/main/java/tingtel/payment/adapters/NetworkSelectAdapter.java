@@ -69,6 +69,7 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
             notifyItemChanged(previousItem);
             notifyItemChanged(position);
 
+            sessionManager.setSelectedRvNetwork("");
             sessionManager.setSelectedRvNetwork(mData.get(position).getName());
         });
 

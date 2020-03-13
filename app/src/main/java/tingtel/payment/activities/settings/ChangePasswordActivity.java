@@ -49,7 +49,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edCurrentPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             edCurrentPassword.requestFocus();
             return false;
         }
@@ -65,7 +65,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edNewPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             edNewPassword.requestFocus();
             return false;
         }
@@ -80,7 +80,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edRenterNewPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             edRenterNewPassword.requestFocus();
             return false;
         }

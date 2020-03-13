@@ -37,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
                 AppUtils.showDialog("You Need To Register Your Sim 2 Network Before You Can Make Any Transactions", SignUpActivity.this);
 
             }
-
         }
     }
 }

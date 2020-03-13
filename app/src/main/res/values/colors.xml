@@ -22,5 +22,6 @@
 
     <color name="corner">#B4B2B2</color>
     <color name="white">#FFFFFF</color>
+    <color name="tingtel_logo_color">#e93e06</color>
 
 </resources>
