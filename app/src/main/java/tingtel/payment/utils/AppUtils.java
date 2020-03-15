@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +46,36 @@ public class AppUtils {
             sessionManager = new SessionManager();
         }
         return sessionManager;
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
     }
 
     public static String generateRandomString() {

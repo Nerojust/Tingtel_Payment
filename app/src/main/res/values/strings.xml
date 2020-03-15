@@ -135,6 +135,7 @@
     <string name="amount_to_be_sent">AMOUNT TO BE SENT</string>
     <string name="thank_you_for_using_this_service_n_if_your_transaction_was_successful_you_can_check_the_status_by_click_the_button_below">Thank you for using this service.   \n If your transaction was successful, check your balance first and then check the status of the transaction</string>
     <string name="Location_needed">Location is needed</string>
+    <string name="put_on_your_gps">Put on your gps</string>
 
 
     <string-array name="sim">

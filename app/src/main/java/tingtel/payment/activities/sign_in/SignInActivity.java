@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -52,15 +54,34 @@ public class SignInActivity extends GPSutils {
         });
 
         btnSingIn.setOnClickListener(v -> {
-           //todo:uncomment later before making network call
-            // if (isValidFields()) {
+
+            if (AppUtils.isLocationEnabled(this)) {
+                // if (isValidFields()) {
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            //}
+                //}
+            } else {
+                showDialogMessage(getString(R.string.put_on_your_gps), () -> {
+                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    this.startActivity(myIntent);
+                });
+            }
+            //todo:uncomment later before making network call
+
         });
 
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
+    }
+
+    private void showDialogMessage(String msg, MessageDialogInterface messageDialogInterface) {
+        new MaterialDialog.Builder(this)
+                .content(msg)
+                .positiveText("Ok")
+                .cancelable(false)
+                .canceledOnTouchOutside(false)
+                .onPositive((dialog, which) -> messageDialogInterface.onClick())
+                .show();
     }
 
     private void initViews() {
@@ -79,7 +100,7 @@ public class SignInActivity extends GPSutils {
             usernameEditext.requestFocus();
             return false;
         }
-        if (!AppUtils.isValidFieldsNumbersAndLetters(usernameEditext.getText().toString().trim())){
+        if (!AppUtils.isValidFieldsNumbersAndLetters(usernameEditext.getText().toString().trim())) {
             AppUtils.showSnackBar("Invalid character/s detected", usernameEditext);
             usernameEditext.requestFocus();
             return false;
@@ -117,5 +138,9 @@ public class SignInActivity extends GPSutils {
 
     private void onSuperBackPressed() {
         super.onBackPressed();
+    }
+
+    interface MessageDialogInterface {
+        void onClick();
     }
 }
