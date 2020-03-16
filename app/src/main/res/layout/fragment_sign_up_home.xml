@@ -28,22 +28,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/_14ssp"
-                android:layout_marginTop="@dimen/_35ssp"
+                android:layout_marginTop="@dimen/_30ssp"
                 android:layout_marginBottom="@dimen/_19ssp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_18ssp">
+                app:cardCornerRadius="15dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_14ssp">
+                    android:paddingHorizontal="@dimen/_20sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/create_an_account"
                         android:textColor="@color/colorPrimary"
@@ -54,7 +57,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_13ssp">
+                        android:layout_marginTop="@dimen/_15sdp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_first_name"
@@ -74,7 +77,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_13ssp">
+                        android:layout_marginVertical="@dimen/_10sdp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_last_name"
@@ -82,27 +85,26 @@
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_person"
                             android:fontFamily="@font/rubik_regular"
-                            android:singleLine="true"
                             android:hint="@string/etner_your_last_name"
                             android:inputType="text"
+                            android:singleLine="true"
                             android:textSize="@dimen/_14ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_13ssp">
+                        android:layout_height="match_parent">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_email_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:singleLine="true"
                             android:drawableRight="@drawable/ic_mail"
                             android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_email_address"
                             android:inputType="textEmailAddress"
+                            android:singleLine="true"
                             android:textSize="@dimen/_14ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,13 +112,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_13ssp">
+                        android:layout_marginVertical="@dimen/_10sdp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tv_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_person"
-                            android:id="@+id/tv_username"
                             android:fontFamily="@font/rubik_regular"
                             android:hint="@string/enter_your_username"
                             android:inputType="text"
@@ -132,10 +134,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_margin="16dp"
                         android:background="@drawable/rounded_button_corners"
                         android:fontFamily="@font/rubik_regular"
-                        android:paddingHorizontal="@dimen/_40sdp"
                         android:text="@string/sign_up"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14ssp" />
@@ -149,7 +149,7 @@
                         android:layout_marginBottom="@dimen/_24ssp"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/have_an_account_login"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -9,15 +9,20 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LifecycleObserver;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyApplication extends Application implements LifecycleObserver {
 
     private static final String CUSTOMER_SESSION = "Tingtelpref";
     private static MyApplication myApplication;
     private String LOG_TAG = "ApplicationObserver";
+    private Retrofit retrofit;
 
     public static SharedPreferences getSharedPreferencesCustomer() {
         return myApplication.getSharedPreferences(CUSTOMER_SESSION, Context.MODE_PRIVATE);
@@ -33,37 +38,37 @@ public class MyApplication extends Application implements LifecycleObserver {
         myApplication = this;
 
 
-        /*OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
-                .addInterceptor(chain -> {
-                    Request request = chain.request();
-                    Request.Builder newRequest = request.newBuilder().header("authToken", "Bearer "
-                            + sessionManagerAgent.getUserToken());
-                    Response exp = chain.proceed(newRequest.build());
-                    // 3. check the response: have we got a 401?
-                    expired = exp.code() == HttpURLConnection.HTTP_UNAUTHORIZED;
-                    unauthorized = exp.code() == HttpURLConnection.HTTP_FORBIDDEN;
-                    //save the status for use
-                    sessionManagerAgent.setIsTokenExpired(expired);
-                    sessionManagerAgent.setIsForbidden(unauthorized);
-                    return exp;
-                })
-                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+//        OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
+//                .addInterceptor(chain -> {
+//                    Request request = chain.request();
+//                    Request.Builder newRequest = request.newBuilder().header("authToken", "Bearer "
+//                            + sessionManagerAgent.getUserToken());
+//                    Response exp = chain.proceed(newRequest.build());
+//                    // 3. check the response: have we got a 401?
+//                    expired = exp.code() == HttpURLConnection.HTTP_UNAUTHORIZED;
+//                    unauthorized = exp.code() == HttpURLConnection.HTTP_FORBIDDEN;
+//                    //save the status for use
+//                    sessionManagerAgent.setIsTokenExpired(expired);
+//                    sessionManagerAgent.setIsForbidden(unauthorized);
+//                    return exp;
+//                })
+//                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+//                .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
+//                .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
+//                .build();
 
         retrofit = new Retrofit.Builder()
-                .client(okHttpClientNetwork)
-                .baseUrl(Constants.BASE_URL_VPOS)
+                //.client(okHttpClientNetwork)
+                .baseUrl(Constants.BASE_URL_TINGTEL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();*/
+                .build();
 
     }
 
     //using retrofit
-//    public Retrofit getRetrofit() {
-//        return retrofit;
-//    }
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
 
 
     //inactivity logout settings
@@ -126,7 +131,7 @@ public class MyApplication extends Application implements LifecycleObserver {
 
             private boolean isAppOnForeground(Context context) {
                 ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-                List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+                List<ActivityManager.RunningAppProcessInfo> appProcesses = Objects.requireNonNull(activityManager).getRunningAppProcesses();
                 if (appProcesses == null) {
                     return false;
                 }

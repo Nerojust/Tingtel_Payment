@@ -65,7 +65,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/tingtel_light_gray"
-                android:padding="@dimen/_13ssp"
+                android:padding="@dimen/_5ssp"
                 android:text="Your request is being processed"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
@@ -93,7 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1.5"
                     android:gravity="start"
                     android:text=""
@@ -109,7 +109,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:background="@color/tingtel_light_gray"
                 android:orientation="vertical"
-                android:padding="@dimen/_15sdp">
+                android:padding="@dimen/_10sdp">
 
 
                 <com.baoyachi.stepview.VerticalStepView
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/tingtel_light_gray"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/_25sdp"
@@ -137,7 +137,6 @@
                     android:background="@color/tingtel_light_gray"
                     android:text="What does above mean?"
                     android:textSize="@dimen/_12ssp"
-
                     android:textStyle="bold" />
 
                 <LinearLayout

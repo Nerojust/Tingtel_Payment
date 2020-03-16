@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -70,159 +70,168 @@
                 app:spb_checkStateCompleted="true"
                 app:spb_currentStateDescriptionColor="@color/tingtel_red_color"
                 app:spb_currentStateNumber="one"
+                app:spb_descriptionLinesSpacing="5dp"
+                app:spb_justifyMultilineDescription="true"
                 app:spb_maxStateNumber="three"
                 app:spb_stateBackgroundColor="@color/tingtel_gray_color"
                 app:spb_stateDescriptionColor="#808080"
                 app:spb_stateForegroundColor="@color/tingtel_red_color"
                 app:spb_stateLineThickness="2dp"
-                app:spb_descriptionLinesSpacing="5dp"
-                app:spb_justifyMultilineDescription="true"
                 app:spb_stateNumberBackgroundColor="#808080"
                 app:spb_stateNumberForegroundColor="#eeeeee"
                 app:spb_stateTextSize="13sp" />
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="@color/tingtel_lighter_gray"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/_7ssp">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginTop="@dimen/_8ssp"
-                    android:layout_marginBottom="@dimen/_5ssp"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="TRANSFER FROM"
-                    android:textColor="@color/tingtel_gray_color"
-                    android:textSize="@dimen/_10ssp" />
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginBottom="@dimen/_10ssp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/sim_one_textview"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/sim_corners_left"
-                        android:fontFamily="@font/rubik_regular"
-                        android:gravity="center"
-                        android:paddingVertical="@dimen/_4ssp"
-                        android:text="@string/sim_1"
-                        android:textColor="@color/tingtel_red_color"
-                        android:textSize="@dimen/_12ssp" />
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@color/tingtel_lighter_gray"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_7ssp">
 
 
-                    <TextView
-                        android:id="@+id/sim_two_textview"
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_20ssp"
+                            android:layout_marginTop="@dimen/_8ssp"
+                            android:layout_marginBottom="@dimen/_5ssp"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="TRANSFER FROM"
+                            android:textColor="@color/tingtel_gray_color"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/_20ssp"
+                            android:layout_marginBottom="@dimen/_10ssp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/sim_one_textview"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@drawable/sim_corners_left"
+                                android:fontFamily="@font/rubik_regular"
+                                android:gravity="center"
+                                android:paddingVertical="@dimen/_4ssp"
+                                android:text="@string/sim_1"
+                                android:textColor="@color/tingtel_red_color"
+                                android:textSize="@dimen/_12ssp" />
+
+
+                            <TextView
+                                android:id="@+id/sim_two_textview"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@drawable/sim_corners_right"
+                                android:fontFamily="@font/rubik_regular"
+                                android:gravity="center"
+                                android:paddingVertical="@dimen/_4ssp"
+                                android:text="@string/sim_2"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/sim_corners_right"
-                        android:fontFamily="@font/rubik_regular"
-                        android:gravity="center"
-                        android:paddingVertical="@dimen/_4ssp"
-                        android:text="@string/sim_2"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginVertical="@dimen/_12ssp"
-                android:layout_marginTop="@dimen/_10ssp"
-                android:background="@color/tingtel_lighter_gray"
-                android:orientation="vertical"
-                android:paddingVertical="@dimen/_7ssp">
+                        android:layout_marginVertical="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:background="@color/tingtel_lighter_gray"
+                        android:orientation="vertical"
+                        android:paddingVertical="@dimen/_7ssp">
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginBottom="@dimen/_5ssp"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="TRANSFER AMOUNT"
-                    android:textColor="@color/tingtel_gray_color"
-                    android:textSize="@dimen/_10ssp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_20ssp"
+                            android:layout_marginBottom="@dimen/_5ssp"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="TRANSFER AMOUNT"
+                            android:textColor="@color/tingtel_gray_color"
+                            android:textSize="@dimen/_10ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_20ssp"
-                    android:layout_marginBottom="@dimen/_10ssp"
-                    android:background="@drawable/input_outline"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/_10ssp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_20ssp"
+                            android:layout_marginBottom="@dimen/_10ssp"
+                            android:background="@drawable/input_outline"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/_10ssp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/rubik_regular"
-                        android:text="@string/naira"
-                        android:textSize="@dimen/_15ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@string/naira"
+                                android:textSize="@dimen/_15ssp" />
 
-                    <EditText
-                        android:id="@+id/amount_edittext"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30ssp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:fontFamily="@font/rubik_regular"
-                        android:inputType="number"
-                        android:maxLength="7"
-                        android:paddingLeft="@dimen/_10ssp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                            <EditText
+                                android:id="@+id/amount_edittext"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_30ssp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:fontFamily="@font/rubik_regular"
+                                android:inputType="number"
+                                android:maxLength="7"
+                                android:paddingLeft="@dimen/_10ssp"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_15ssp" />
+
+                            <Button
+                                android:id="@+id/check_balance_button"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.5"
+                                android:background="@color/tingtel_gray_color"
+                                android:fontFamily="@font/rubik_regular"
+                                android:gravity="center"
+                                android:text="@string/check_balance"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <Button
-                        android:id="@+id/check_balance_button"
-                        android:layout_width="0dp"
+                        android:id="@+id/next_button"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.5"
-                        android:background="@color/tingtel_gray_color"
+                        android:layout_marginHorizontal="@dimen/_20ssp"
+                        android:background="@drawable/dashboard_buttons"
                         android:fontFamily="@font/rubik_regular"
-                        android:gravity="center"
-                        android:text="@string/check_balance"
+                        android:text="@string/next"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_13ssp" />
                 </LinearLayout>
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/next_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20ssp"
-                android:background="@drawable/dashboard_buttons"
-                android:fontFamily="@font/rubik_regular"
-                android:text="@string/next"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13ssp" />
-
+            </ScrollView>
         </LinearLayout>
 
     </RelativeLayout>
-</ScrollView>
+</LinearLayout>

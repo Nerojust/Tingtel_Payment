@@ -84,157 +84,167 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/tingtel_lighter_gray"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_20sdp">
+                    android:layout_height="wrap_content">
 
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_regular"
-                        android:paddingVertical="@dimen/_5sdp"
-                        android:text="TRANSFER TO"
-                        android:textColor="@color/tingtel_gray_color"
-                        android:textSize="@dimen/_10ssp" />
+                        android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@drawable/input_outline"
-                        android:paddingVertical="4dp">
-
-                        <EditText
-                            android:id="@+id/receivers_phone_number_edittext"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="4dp"
-                            android:layout_toLeftOf="@+id/img_beneficiary"
-                            android:background="@null"
-                            android:fontFamily="@font/rubik_regular"
-                            android:gravity="center|start"
-                            android:hint="RECEIVERS NUMBER"
-                            android:inputType="number"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <ImageView
-                            android:id="@+id/img_beneficiary"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/tingtel_lighter_gray"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_20sdp">
 
-                    </RelativeLayout>
 
-                </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingVertical="@dimen/_5sdp"
+                                android:text="TRANSFER TO"
+                                android:textColor="@color/tingtel_gray_color"
+                                android:textSize="@dimen/_10ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/tingtel_lighter_gray"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_20sdp">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:background="@drawable/input_outline"
+                                android:paddingVertical="4dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_regular"
-                        android:paddingVertical="@dimen/_5sdp"
-                        android:text="SELECT NETWORK"
-                        android:textColor="@color/tingtel_gray_color"
-                        android:textSize="@dimen/_11ssp" />
+                                <EditText
+                                    android:id="@+id/receivers_phone_number_edittext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_toLeftOf="@+id/img_beneficiary"
+                                    android:background="@null"
+                                    android:fontFamily="@font/rubik_regular"
+                                    android:gravity="center|start"
+                                    android:hint="RECEIVERS NUMBER"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/_10sdp"
+                                    android:textSize="@dimen/_13ssp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:fontFamily="@font/rubik_regular" />
-                </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/img_beneficiary"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:src="@drawable/ic_arrow_drop_down_black_24dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/tingtel_lighter_gray"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_20sdp">
+                            </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_regular"
-                        android:paddingVertical="@dimen/_5sdp"
-                        android:text="PIN"
-                        android:textColor="@color/tingtel_gray_color"
-                        android:textSize="@dimen/_11ssp" />
+                        </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@drawable/input_outline"
-                        android:paddingVertical="4dp">
-
-                        <ImageView
-                            android:id="@+id/lock"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/ic_lock" />
-
-                        <EditText
-                            android:id="@+id/pinEditext"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/lock"
-                            android:background="@null"
-                            android:fontFamily="@font/rubik_regular"
-                            android:hint="@string/enter_transfer_pin"
-                            android:inputType="numberPassword"
-                            android:maxLength="4"
-                            android:maxLines="1"
-                            android:paddingLeft="@dimen/_5sdp"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <ImageView
-                            android:id="@+id/whatIsPin_id"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:src="@drawable/ic_info" />
-                    </RelativeLayout>
-                </LinearLayout>
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/tingtel_lighter_gray"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_20sdp">
 
-                <Button
-                    android:id="@+id/btn_preview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_13sdp"
-                    android:background="@drawable/dashboard_buttons"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/preview"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingVertical="@dimen/_5sdp"
+                                android:text="SELECT NETWORK"
+                                android:textColor="@color/tingtel_gray_color"
+                                android:textSize="@dimen/_11ssp" />
 
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:fontFamily="@font/rubik_regular" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/tingtel_lighter_gray"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_20sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingVertical="@dimen/_5sdp"
+                                android:text="PIN"
+                                android:textColor="@color/tingtel_gray_color"
+                                android:textSize="@dimen/_11ssp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:background="@drawable/input_outline"
+                                android:paddingVertical="4dp">
+
+                                <ImageView
+                                    android:id="@+id/lock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/ic_lock" />
+
+                                <EditText
+                                    android:id="@+id/pinEditext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toRightOf="@+id/lock"
+                                    android:background="@null"
+                                    android:fontFamily="@font/rubik_regular"
+                                    android:hint="@string/enter_transfer_pin"
+                                    android:inputType="numberPassword"
+                                    android:maxLength="4"
+                                    android:maxLines="1"
+                                    android:paddingLeft="@dimen/_5sdp"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <ImageView
+                                    android:id="@+id/whatIsPin_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:src="@drawable/ic_info" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_preview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_13sdp"
+                            android:background="@drawable/dashboard_buttons"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/preview"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15ssp" />
+                    </LinearLayout>
+                </ScrollView>
             </LinearLayout>
 
         </RelativeLayout>

@@ -85,7 +85,7 @@ public class SetPasswordFragment extends Fragment {
         }
         if (!tvPassword1.getText().toString().trim().equals(tvPassword2.getText().toString().trim())) {
             AppUtils.showSnackBar("Passwords do not match", tvPassword1);
-            tvPassword1.requestFocus();
+            tvPassword2.requestFocus();
             return false;
         }
         Toast.makeText(getContext(), "Password set successfully", Toast.LENGTH_SHORT).show();
