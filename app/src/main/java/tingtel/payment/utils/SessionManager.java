@@ -15,26 +15,7 @@ public class SessionManager {
     private static final String NETWORK_NAME1 = "NETWORK_NAME1";
     private static final String NUMBER_OF_SIMS_ON_DEVICE1 = "NUMBER_OF_SIMS_ON_DEVICE1";
     private static final String SIM_SERIAL1 = "SIM_SERIAL1";
-    private static final String WHICH_CLICKED = "WHICH_CLICKED";
-    private static final String IS_SIM1_AIRTIME_CLICKED = "IS_SIM1_AIRTIME_CLICKED";
-    private static final String IS_SIM1_DATA_CLICKED = "IS_SIM1_DATA_CLICKED";
-    private static final String IS_SIM2_AIRTIME_CLICKED = "IS_SIM2_AIRTIME_CLICKED";
-    private static final String IS_SIM2_DATA_CLICKED = "IS_SIM2_DATA_CLICKED";
-    private static final String CLICKED_NETWORK_SERIAL = "CLICKED_NETWORK_SERIAL";
-    private static final String CLICKED_BALANCE_TYPE = "CLICKED_BALANCE_TYPE";
-    private static final String HAS_DATA_SIM1_COME_YET = "HAS_DATA_SIM1_COME_YET";
-    private static final String HAS_DATA_SIM2_COME_YET = "HAS_DATA_SIM2_COME_YET";
-    private static final String HAS_AIRTIME_SIM1_COME_YET = "HAS_AIRTIME_SIM1_COME_YET";
-    private static final String HAS_AIRTIME_SIM2_COME_YET = "HAS_AIRTIME_SIM2_COME_YET";
 
-    private static final String BANK_NAME = "BANK_NAME";
-    private static final String BANK_NAME1 = "BANK_NAME1";
-
-    private static final String BANK_ACC = "BANK_ACC";
-    private static final String BANK_ACC1 = "BANK_ACC1";
-
-    private static final String BANK_ACC_NAME = "BANK_ACC_NAME";
-    private static final String BANK_ACC_NAME1 = "BANK_ACC_NAME1";
     private static final String NUM_OF_SIMS_FOUND = "NUM_OF_SIMS_FOUND";
     private static final String IS_IT_FROM_TRANSFER_ACTIVITY = "IS_IT_FROM_TRANSFER_ACTIVITY";
 
@@ -46,9 +27,6 @@ public class SessionManager {
     private static final String SCANNED_CODE = "SCANNED_CODE";
     private static final String QRIMAGE = "QRIMAGE";
     private static final String OnBoardStatus = "ONBOARD_STATUS";
-    private static final String COUNTRY = "COUNTRY";
-    private static final String COUNTRYSIM1 = "COUNTRY_SIM1";
-    private static final String COUNTRYSIM2 = "COUNTRY_SIM2";
     private static final String APPSTATE = "APP_STATE";
     private static final String NO_OF_REGISTERED_SIM = "NO_OF_REGISTERED_SIM";
     private static final String CLICKED_NETWORK = "CLICKED_NETWORK";
@@ -67,6 +45,15 @@ public class SessionManager {
     private static final String LOGIN_OBJECT = "LOGIN_OBJECT";
     private static final String CHECKED = "CHECKED";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
+
+    public void clearSharedPreferences(){
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(FIRST_NAME);
+        editor.remove(LAST_NAME);
+        editor.remove(EMAIL_ADDRESS);
+        editor.remove(USERNAME);
+        editor.apply();
+    }
 
     private void setIntPreference(String name, int value) {
         SharedPreferences.Editor editor = pref.edit();

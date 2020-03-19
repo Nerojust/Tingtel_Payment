@@ -73,7 +73,7 @@ public class WebSeviceRequestMaker {
                         }
                     }
                 } else {
-                    loginResponseInterface.onError(response.message());
+                    loginResponseInterface.onError("Network error, please try again.");
                     Log.d(TAG, String.valueOf(response.code()));
                 }
             }

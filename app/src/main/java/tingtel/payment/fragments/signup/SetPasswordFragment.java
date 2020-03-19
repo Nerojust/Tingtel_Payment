@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -89,8 +88,7 @@ public class SetPasswordFragment extends Fragment {
             @Override
             public void onSuccess(CustomerRegistrationResponse newUser) {
                 AppUtils.dismissLoadingDialog();
-                Toast.makeText(getContext(), "description ===" + newUser.getDescription() + "====" + newUser.getCode(), Toast.LENGTH_SHORT).show();
-
+                sessionManager.clearSharedPreferences();
                 goToMainActivity();
             }
 
@@ -153,7 +151,6 @@ public class SetPasswordFragment extends Fragment {
             tvPassword2.requestFocus();
             return false;
         }
-        //Toast.makeText(getContext(), "Password set successfully", Toast.LENGTH_SHORT).show();
         return true;
     }
 
