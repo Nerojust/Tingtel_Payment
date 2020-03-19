@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.GPSutils;
 import tingtel.payment.utils.NetworkCarrierUtils;
+import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
@@ -39,6 +41,7 @@ public class SignInActivity extends GPSutils {
     private TextView tvSignUp, forgotPasswordTextView;
     private TextInputEditText usernameEditext, passwordEditext;
     private CheckBox rememberMeCheckbox;
+    private SessionManager sessionManager;
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -46,11 +49,12 @@ public class SignInActivity extends GPSutils {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        sessionManager = AppUtils.getSessionManagerInstance();
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
         initViews();
         initListeners();
-
+        checkBoxRememberSettings();
 
     }
 
@@ -62,23 +66,26 @@ public class SignInActivity extends GPSutils {
         });
 
         btnSingIn.setOnClickListener(v -> {
-
-            if (AppUtils.isLocationEnabled(this)) {
-                if (isValidFields()) {
-
-                    loginUser();
-
-
+            if (AppUtils.isNetworkAvailable(this)) {
+                if (AppUtils.isLocationEnabled(this)) {
+                    if (isValidFields()) {
+                        boolean checked = rememberMeCheckbox.isChecked();
+                        sessionManager.setRememberLoginCheck(checked);
+                        sessionManager.setUsername(usernameEditext.getText().toString().trim());
+                        loginUser();
+                    }
+                } else {
+                    showDialogMessage(getString(R.string.put_on_your_gps), () -> {
+                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        this.startActivity(myIntent);
+                    });
                 }
+                //todo:uncomment later before making network call
             } else {
-                showDialogMessage(getString(R.string.put_on_your_gps), () -> {
-                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    this.startActivity(myIntent);
-                });
+                AppUtils.showSnackBar("No network available", usernameEditext);
             }
-            //todo:uncomment later before making network call
-
         });
+
 
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
     }
@@ -144,12 +151,32 @@ public class SignInActivity extends GPSutils {
     private void initViews() {
         usernameEditext = findViewById(R.id.tv_username);
         passwordEditext = findViewById(R.id.tv_password);
+
+        passwordEditext.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (isValidFields()) {
+                    loginUser();
+                }
+            }
+            return false;
+        });
         rememberMeCheckbox = findViewById(R.id.rememberMeCheckbox);
 
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
         forgotPasswordTextView = findViewById(R.id.forgotPassword);
 
+    }
+
+    private void checkBoxRememberSettings() {
+        if (sessionManager.getRememberLoginCheck()) {
+            String username = sessionManager.getUserame();
+            rememberMeCheckbox.setChecked(true);
+            usernameEditext.setText(username);
+        } else {
+            usernameEditext.setText("");
+            rememberMeCheckbox.setChecked(false);
+        }
     }
 
     private boolean isValidFields() {

@@ -5,8 +5,9 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -25,6 +26,7 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/do_you_want_to_delete_this_sim"
             android:textAlignment="center"
+            android:textSize="@dimen/_13ssp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <LinearLayout
@@ -40,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_7ssp"
                 android:layout_weight="5"
+                android:textSize="@dimen/_11ssp"
                 android:background="@drawable/dashboard_buttons"
                 android:text="@string/yes_delete"
                 android:textColor="@color/white" />
@@ -50,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_7ssp"
                 android:layout_weight="5"
+                android:textSize="@dimen/_11ssp"
                 android:background="@drawable/success_buttons"
                 android:text="@string/cancel"
                 android:textColor="@color/white" />

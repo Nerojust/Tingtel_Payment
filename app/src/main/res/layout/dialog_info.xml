@@ -5,8 +5,9 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="@dimen/_12ssp"
         android:orientation="vertical">
 
@@ -17,7 +18,7 @@
             android:text="@string/tingtel"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textSize="@dimen/_14ssp" />
+            />
 
         <TextView
             android:id="@+id/tv_message"
@@ -42,7 +43,7 @@
             android:paddingHorizontal="@dimen/_35ssp"
             android:text="@string/dismiss"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_11ssp" />
 
 
     </LinearLayout>

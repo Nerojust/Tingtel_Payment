@@ -65,6 +65,7 @@ public class SessionManager {
     private static final String USER_NETWORK = "USER_NETWORK";
     private static final String REG_JSON = "REG_JSON";
     private static final String LOGIN_OBJECT = "LOGIN_OBJECT";
+    private static final String CHECKED = "CHECKED";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -394,5 +395,13 @@ public class SessionManager {
 
     public void setLoginJsonObject(String login) {
         setStringPreference(LOGIN_OBJECT, login);
+    }
+
+    public boolean getRememberLoginCheck(){
+        return getBooleanPreference(CHECKED);
+    }
+
+    public void setRememberLoginCheck(boolean checked) {
+        setBooleanPreference(CHECKED, checked);
     }
 }

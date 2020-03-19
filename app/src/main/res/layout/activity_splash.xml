@@ -15,23 +15,13 @@
         android:orientation="vertical"
         tools:context=".activities.onboard.SplashActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/tingtel_red_color"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/splashimage"
-                android:layout_width="116dp"
-                android:layout_height="93dp"
-                android:src="@drawable/tingtellogo"
-                android:text="Tingtel" />
-
-        </LinearLayout>
-
+        <ImageView
+            android:id="@+id/splashimage"
+            android:layout_width="116dp"
+            android:layout_height="93dp"
+            android:src="@drawable/tingtellogo"
+            android:text="Tingtel" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,7 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ImageView settingsImagview = view.findViewById(R.id.settingsImageview);
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
+        TextView customerName = view.findViewById(R.id.customerName);
 
         Button btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         Button btnHistory = view.findViewById(R.id.btn_history);
@@ -62,7 +64,7 @@ public class DashboardFragment extends Fragment {
                 case "SIM1":
 
                     if (!sim1ExistsCheck()) {
-                        Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
                         // navigateToSim1Register();
                         Intent intent2 = new Intent(getActivity(), SignUpActivity.class);
                         intent2.putExtra("task", "registerSim1");
@@ -73,7 +75,7 @@ public class DashboardFragment extends Fragment {
                 case "SIM1 SIM2":
 
                     if (!sim1ExistsCheck()) {
-                        Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
                         // navigateToSim1Register();
                         Intent intent3 = new Intent(getActivity(), SignUpActivity.class);
                         intent3.putExtra("task", "registerSim1");
@@ -82,7 +84,7 @@ public class DashboardFragment extends Fragment {
                     }
 
                     if (!sim2ExistsCheck()) {
-                        Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
                         // navigateToSim2Register();
                         Intent intent4 = new Intent(getActivity(), SignUpActivity.class);
                         intent4.putExtra("task", "registerSim2");
@@ -98,8 +100,8 @@ public class DashboardFragment extends Fragment {
         });
 
         btnHistory.setOnClickListener(v -> {
-            //navController.navigate(R.id.action_mainFragment_to_historyActivity, null);
-            navController.navigate(R.id.action_mainFragment_to_statusActivity, null);
+            navController.navigate(R.id.action_mainFragment_to_historyActivity, null);
+            //navController.navigate(R.id.action_mainFragment_to_statusActivity, null);
         });
 
         return view;

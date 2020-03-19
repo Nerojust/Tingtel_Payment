@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/_16ssp"
-                android:layout_marginTop="@dimen/_95ssp"
+                android:layout_marginTop="@dimen/_85ssp"
                 android:layout_marginBottom="@dimen/_15ssp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_16ssp">
@@ -102,11 +102,11 @@
                         android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
 
                         <CheckBox
+                            android:id="@+id/rememberMeCheckbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
                             android:text="@string/remember_me"
-                            android:id="@+id/rememberMeCheckbox"
                             android:textColor="@color/tingtel_red_color"
                             android:textSize="@dimen/_10ssp" />
 

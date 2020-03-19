@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
@@ -25,7 +25,7 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/are_you_sure_you_want_to_delete_your_account_n_nb_your_data_would_be_erased"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textSize="@dimen/_13ssp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_weight="5"
+                android:textSize="@dimen/_11ssp"
                 android:background="@drawable/dashboard_buttons"
                 android:text="@string/yes_delete"
                 android:textColor="#FFF" />
@@ -49,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:textSize="@dimen/_11ssp"
                 android:layout_weight="5"
                 android:background="@drawable/success_buttons"
                 android:text="@string/cancel"

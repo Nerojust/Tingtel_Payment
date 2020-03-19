@@ -142,6 +142,7 @@ public class MyApplication extends Application implements LifecycleObserver {
         }
     }
 
+    //create an intercepter to add multiple headers to chain
     public class AddHeaderInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
