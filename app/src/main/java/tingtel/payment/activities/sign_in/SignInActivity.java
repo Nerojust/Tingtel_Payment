@@ -83,6 +83,9 @@ public class SignInActivity extends GPSutils {
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
     }
 
+    /**
+     * this method handles the logging in of the user.
+     */
     private void loginUser() {
         AppUtils.initLoadingDialog(this);
 
@@ -112,7 +115,10 @@ public class SignInActivity extends GPSutils {
 
             @Override
             public void onError(String error) {
-                AppUtils.showDialog(error, SignInActivity.this);
+                if (error.equalsIgnoreCase("Invalid Hash Key"))
+                    AppUtils.showSnackBar("Invalid credentials", usernameEditext);
+                else AppUtils.showSnackBar(error, usernameEditext);
+
                 AppUtils.dismissLoadingDialog();
             }
 

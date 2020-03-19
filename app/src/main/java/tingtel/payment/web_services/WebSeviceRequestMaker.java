@@ -8,6 +8,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import tingtel.payment.models.CustomerInfo.CustomerInfoResponse;
+import tingtel.payment.models.CustomerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.Login.CustomerLoginResponse;
 import tingtel.payment.models.Login.CustomerLoginSendObject;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
@@ -15,6 +17,7 @@ import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
+import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
 public class WebSeviceRequestMaker {
@@ -53,6 +56,7 @@ public class WebSeviceRequestMaker {
             }
         });
     }
+
     public void loginInUser(CustomerLoginSendObject customerLoginSendObject, LoginResponseInterface loginResponseInterface) {
         Call<CustomerLoginResponse> call = postInterfaceService.loginUser(customerLoginSendObject);
         call.enqueue(new Callback<CustomerLoginResponse>() {
@@ -77,6 +81,35 @@ public class WebSeviceRequestMaker {
             @Override
             public void onFailure(@NonNull Call<CustomerLoginResponse> call, @NonNull Throwable t) {
                 loginResponseInterface.onError(t.getMessage());
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void getCustomerDetails(CustomerInfoSendObject customerInfoSendObject, GetUserProfileInterface getUserProfileInterface) {
+        Call<CustomerInfoResponse> call = postInterfaceService.getCustomerInfo(customerInfoSendObject);
+        call.enqueue(new Callback<CustomerInfoResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CustomerInfoResponse> call, @NonNull Response<CustomerInfoResponse> response) {
+                if (response.isSuccessful()) {
+                    CustomerInfoResponse customerInfoResponse = response.body();
+
+                    if (customerInfoResponse != null) {
+                        getUserProfileInterface.onSuccess(customerInfoResponse);
+                    } else {
+                        getUserProfileInterface.onError("No record found");
+
+                    }
+                } else {
+                    getUserProfileInterface.onError(response.message());
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CustomerInfoResponse> call, @NonNull Throwable t) {
+                getUserProfileInterface.onError(t.getMessage());
                 String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
                 Log.e("Login error", error);
             }
