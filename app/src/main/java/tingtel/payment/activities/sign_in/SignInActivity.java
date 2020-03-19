@@ -14,17 +14,23 @@ import androidx.navigation.NavController;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.ForgotPasswordActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
+import tingtel.payment.models.Login.CustomerLoginResponse;
+import tingtel.payment.models.Login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.GPSutils;
 import tingtel.payment.utils.NetworkCarrierUtils;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
 public class SignInActivity extends GPSutils {
 
@@ -58,11 +64,12 @@ public class SignInActivity extends GPSutils {
         btnSingIn.setOnClickListener(v -> {
 
             if (AppUtils.isLocationEnabled(this)) {
-                // if (isValidFields()) {
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-                //}
+                if (isValidFields()) {
+
+                    loginUser();
+
+
+                }
             } else {
                 showDialogMessage(getString(R.string.put_on_your_gps), () -> {
                     Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -74,6 +81,48 @@ public class SignInActivity extends GPSutils {
         });
 
         forgotPasswordTextView.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
+    }
+
+    private void loginUser() {
+        AppUtils.initLoadingDialog(this);
+
+        String username = Objects.requireNonNull(usernameEditext.getText()).toString().trim();
+        String password = Objects.requireNonNull(passwordEditext.getText()).toString().trim();
+
+        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
+        loginSendObject.setUsername(username);
+        loginSendObject.setPassword(password);
+        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(loginSendObject);
+        AppUtils.getSessionManagerInstance().setLoginJsonObject(jsonObject);
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
+            @Override
+            public void onSuccess(CustomerLoginResponse loginResponses) {
+                AppUtils.dismissLoadingDialog();
+
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, SignInActivity.this);
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.dismissLoadingDialog();
+                AppUtils.showSnackBar(String.valueOf(errorCode), usernameEditext);
+            }
+        });
+
     }
 
     private void showDialogMessage(String msg, MessageDialogInterface messageDialogInterface) {
@@ -94,6 +143,7 @@ public class SignInActivity extends GPSutils {
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
         forgotPasswordTextView = findViewById(R.id.forgotPassword);
+
     }
 
     private boolean isValidFields() {

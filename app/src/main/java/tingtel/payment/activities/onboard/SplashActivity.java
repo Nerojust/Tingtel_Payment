@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         String reg = sessionManager.getRegistrationJsonObject();
+        String login = sessionManager.getLoginJsonObject();
         new Handler().postDelayed(() -> {
             if (sessionManager.getOnboardStatus()) {
                 if (sessionManager.getIsRegistered()) {

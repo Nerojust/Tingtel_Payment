@@ -64,6 +64,7 @@ public class SessionManager {
     private static final String USERNAME = "USERNAME";
     private static final String USER_NETWORK = "USER_NETWORK";
     private static final String REG_JSON = "REG_JSON";
+    private static final String LOGIN_OBJECT = "LOGIN_OBJECT";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -385,5 +386,13 @@ public class SessionManager {
 
     public void setRegistrationJsonObject(String regObject) {
         setStringPreference(REG_JSON, regObject);
+    }
+
+    public String getLoginJsonObject() {
+        return getStringPreference(LOGIN_OBJECT);
+    }
+
+    public void setLoginJsonObject(String login) {
+        setStringPreference(LOGIN_OBJECT, login);
     }
 }

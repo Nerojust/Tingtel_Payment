@@ -120,12 +120,9 @@ public class SetPasswordFragment extends Fragment {
 
         String email = sessionManager.getEmailAddress();
         String phone = sessionManager.getSimPhoneNumber();
-        String key = BuildConfig.HASH_KEY;
 
         //get the hash
-        hash = AppUtils.getSHA512(email + phone + key);
-
-        Toast.makeText(getContext(), hash, Toast.LENGTH_SHORT).show();
+        hash = AppUtils.getSHA512(email + phone + BuildConfig.HASH_KEY);
     }
 
     private boolean isValidFields() {
@@ -156,7 +153,7 @@ public class SetPasswordFragment extends Fragment {
             tvPassword2.requestFocus();
             return false;
         }
-        Toast.makeText(getContext(), "Password set successfully", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Password set successfully", Toast.LENGTH_SHORT).show();
         return true;
     }
 
