@@ -67,9 +67,8 @@ public class SignUpSim1Fragment extends Fragment {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                // Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
                 selectedSpinnerNetwork = spinnerTitles[i];
+                sessionManager.setUserNetwork(selectedSpinnerNetwork);
             }
 
             @Override
@@ -98,6 +97,9 @@ public class SignUpSim1Fragment extends Fragment {
             navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
         });
     }
+
+
+
 
     private void initViews(View view) {
         btnSaveSim1NetworkDetails = view.findViewById(R.id.btn_next);

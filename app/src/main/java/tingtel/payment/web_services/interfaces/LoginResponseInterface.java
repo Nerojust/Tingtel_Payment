@@ -1,10 +1,10 @@
 package tingtel.payment.web_services.interfaces;
 
 
-import retrofit2.Response;
+import tingtel.payment.models.Login.CustomerLoginResponse;
 
 public interface LoginResponseInterface {
-    void onSuccess(Response loginResponses);
+    void onSuccess(CustomerLoginResponse loginResponses);
 
     void onError(String error);
 

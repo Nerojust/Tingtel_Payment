@@ -2,10 +2,12 @@ package tingtel.payment.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -30,9 +31,8 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +45,7 @@ import tingtel.payment.R;
 public class AppUtils {
 
     private static SessionManager sessionManager;
+    private static ProgressDialog progress;
 
     public static SessionManager getSessionManagerInstance() {
         if (sessionManager == null) {
@@ -192,9 +193,21 @@ public class AppUtils {
 
         return hasImage;
     }
+    public static void initLoadingDialog(Context context) {
+        progress = ProgressDialog.show(context, null, null, true);
+        progress.setContentView(R.layout.progress_dialog_element);
+        progress.setCancelable(true);
+        progress.setCanceledOnTouchOutside(false);
+        Objects.requireNonNull(progress.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progress.show();
+    }
+
+    public static void dismissLoadingDialog() {
+        progress.dismiss();
+    }
+
 
     public static String getSHA512(String input) {
-
         String toReturn = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");
@@ -208,21 +221,43 @@ public class AppUtils {
         return toReturn;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String get_SHA_512_SecurePassword(String passwordToHash, String salt) {
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(salt.getBytes(StandardCharsets.UTF_8));
-            byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+/*
+    public static void errorCodeSwitch(Context context, int errorCode) {
+        switch (errorCode) {
+            case (401):
+                SessionManager sessionManagerCustomer = new SessionManager();
+                AppUtils.sessionExpiredDialog(context, sessionManagerCustomer, context.getResources().getString(R.string.session_expired));
+                AppUtils.dismissLoadingDialog();
+                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
+                break;
+            case (403):
+                AppUtils.showDialogWarning(context, context.getResources().getString(R.string.forbidden_by_network_));
+                AppUtils.dismissLoadingDialog();
+                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
+                break;
+            case (500):
+                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
+                AppUtils.showSweetDialogWarning(context, context.getResources().getString(R.string.server_might_not_be_available_));
+                AppUtils.dismissLoadingDialog();
+                break;
+            default:
+                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
+                AppUtils.dismissLoadingDialog();
+                AppUtils.showDialogWarning(context, String.valueOf(errorCode));
+                break;
         }
-        return generatedPassword;
     }
+
+    private static void showDialogWarning(Context context, String string) {
+
+    }
+
+    private static void goToLoginActivity(Context context, SessionManagerAgent sessionManagerAgent) {
+        Intent intent = new Intent(context, loginActivity.class);
+        sessionManagerAgent.clearSharedPreferences();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }*/
+
 }

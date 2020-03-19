@@ -21,6 +21,7 @@ import java.util.Objects;
 import tingtel.payment.R;
 import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,12 +32,12 @@ public class SignUpHomeFragment extends Fragment {
     private NavController navController;
     private TextView tvLogin;
     private TextInputEditText firstName, lastName, emailAddress, username;
-
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_home, container, false);
-
+        sessionManager = AppUtils.getSessionManagerInstance();
         initViews(view);
         initListeners(view);
         return view;
@@ -51,7 +52,20 @@ public class SignUpHomeFragment extends Fragment {
         });
 
 
-        btnSignUp.setOnClickListener(v -> navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null));
+        btnSignUp.setOnClickListener(v -> {
+            if (isValidFields()) {
+                saveDatatoPrefs();
+
+                navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
+            }
+        });
+    }
+
+    private void saveDatatoPrefs() {
+        sessionManager.setFirstName(firstName.getText().toString().trim());
+        sessionManager.setLastName(lastName.getText().toString().trim());
+        sessionManager.setEmailAddress(emailAddress.getText().toString().trim());
+        sessionManager.setUsername(username.getText().toString().trim());
     }
 
     private void initViews(View view) {
@@ -67,37 +81,38 @@ public class SignUpHomeFragment extends Fragment {
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
+
     private boolean isValidFields() {
-        if (firstName.getText().toString().trim().isEmpty()){
+        if (firstName.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "First name is required", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (firstName.getText().toString().trim().length() <3){
+        if (firstName.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "First name is too short", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (lastName.getText().toString().trim().isEmpty()){
+        if (lastName.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Last name is required", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (lastName.getText().toString().trim().length() <3){
+        if (lastName.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "Last name is too short", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (emailAddress.getText().toString().trim().isEmpty()){
+        if (emailAddress.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Email is required", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!AppUtils.isValidEmailAddress(emailAddress.getText().toString().trim())){
+        if (!AppUtils.isValidEmailAddress(emailAddress.getText().toString().trim())) {
             Toast.makeText(getContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (username.getText().toString().trim().isEmpty()){
+        if (username.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Username is required", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (username.getText().toString().trim().length() <3){
+        if (username.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "Username is too short", Toast.LENGTH_SHORT).show();
             return false;
         }

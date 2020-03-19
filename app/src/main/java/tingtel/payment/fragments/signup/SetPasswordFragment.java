@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.models.Registration.CustomerRegistrationResponse;
+import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 
 
 public class SetPasswordFragment extends Fragment {
@@ -27,7 +35,9 @@ public class SetPasswordFragment extends Fragment {
     private TextInputEditText tvPassword2;
     private Button btnSetPassword;
     private SessionManager sessionManager;
+    private String hash;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_set_password, container, false);
@@ -41,23 +51,81 @@ public class SetPasswordFragment extends Fragment {
     private void initListeners(View view) {
         btnSetPassword.setOnClickListener(v -> {
             if (isValidFields()) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Objects.requireNonNull(getActivity()).startActivity(intent);
-
-                sessionManager.setIsRegistered(true);
-                getActivity().finish();
+                registerUser();
             }
         });
 
     }
 
+    private void goToMainActivity() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Objects.requireNonNull(getActivity()).startActivity(intent);
+
+        sessionManager.setIsRegistered(true);
+        getActivity().finish();
+    }
+
+    private void registerUser() {
+        AppUtils.initLoadingDialog(getContext());
+
+        CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject();
+        customerRegistrationSendObject.setFirstName(sessionManager.getFirstName());
+        customerRegistrationSendObject.setLastName(sessionManager.getLastName());
+        customerRegistrationSendObject.setEmail(sessionManager.getEmailAddress());
+        customerRegistrationSendObject.setUsername(sessionManager.getUserame());
+        customerRegistrationSendObject.setPhone(sessionManager.getSenderPhonerNumber());
+        customerRegistrationSendObject.setUserNetwork(sessionManager.getUserNetwork());
+        customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
+        customerRegistrationSendObject.setHash(hash);
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(customerRegistrationSendObject);
+        sessionManager.setRegistrationJsonObject(jsonObject);
+
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.createANewUser(customerRegistrationSendObject, new CreateNewUserInterface() {
+            @Override
+            public void onSuccess(CustomerRegistrationResponse newUser) {
+                AppUtils.dismissLoadingDialog();
+                Toast.makeText(getContext(), "description ===" + newUser.getDescription() + "====" + newUser.getCode(), Toast.LENGTH_SHORT).show();
+
+                goToMainActivity();
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, getActivity());
+
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showDialog(String.valueOf(errorCode), getActivity());
+
+                AppUtils.dismissLoadingDialog();
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initViews(View view) {
+        sessionManager = AppUtils.getSessionManagerInstance();
+
         tvPassword1 = view.findViewById(R.id.tv_password1);
         tvPassword2 = view.findViewById(R.id.tv_password2);
         btnSetPassword = view.findViewById(R.id.btn_set_password);
 
-        sessionManager = AppUtils.getSessionManagerInstance();
+        String email = sessionManager.getEmailAddress();
+        String phone = sessionManager.getSimPhoneNumber();
+        String key = BuildConfig.HASH_KEY;
+
+        //get the hash
+        hash = AppUtils.getSHA512(email + phone + key);
+
+        Toast.makeText(getContext(), hash, Toast.LENGTH_SHORT).show();
     }
 
     private boolean isValidFields() {

@@ -8,12 +8,18 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LifecycleObserver;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,6 +29,7 @@ public class MyApplication extends Application implements LifecycleObserver {
     private static MyApplication myApplication;
     private String LOG_TAG = "ApplicationObserver";
     private Retrofit retrofit;
+
 
     public static SharedPreferences getSharedPreferencesCustomer() {
         return myApplication.getSharedPreferences(CUSTOMER_SESSION, Context.MODE_PRIVATE);
@@ -38,27 +45,17 @@ public class MyApplication extends Application implements LifecycleObserver {
         myApplication = this;
 
 
-//        OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
-//                .addInterceptor(chain -> {
-//                    Request request = chain.request();
-//                    Request.Builder newRequest = request.newBuilder().header("authToken", "Bearer "
-//                            + sessionManagerAgent.getUserToken());
-//                    Response exp = chain.proceed(newRequest.build());
-//                    // 3. check the response: have we got a 401?
-//                    expired = exp.code() == HttpURLConnection.HTTP_UNAUTHORIZED;
-//                    unauthorized = exp.code() == HttpURLConnection.HTTP_FORBIDDEN;
-//                    //save the status for use
-//                    sessionManagerAgent.setIsTokenExpired(expired);
-//                    sessionManagerAgent.setIsForbidden(unauthorized);
-//                    return exp;
-//                })
-//                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-//                .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
-//                .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
-//                .build();
+        OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
+                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
+                .build();
 
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addNetworkInterceptor(new AddHeaderInterceptor());
         retrofit = new Retrofit.Builder()
-                //.client(okHttpClientNetwork)
+                .client(okHttpClientNetwork)
+                .client(httpClient.build())
                 .baseUrl(Constants.BASE_URL_TINGTEL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -69,7 +66,6 @@ public class MyApplication extends Application implements LifecycleObserver {
     public Retrofit getRetrofit() {
         return retrofit;
     }
-
 
     //inactivity logout settings
     public static class LogOutTimerUtil {
@@ -143,6 +139,18 @@ public class MyApplication extends Application implements LifecycleObserver {
                 }
                 return false;
             }
+        }
+    }
+
+    public class AddHeaderInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            Request.Builder builder = chain.request().newBuilder();
+            builder.addHeader("Username", Constants.USERNAME);
+            builder.addHeader("Password", Constants.PASSWORD);
+
+            return chain.proceed(builder.build());
         }
     }
 

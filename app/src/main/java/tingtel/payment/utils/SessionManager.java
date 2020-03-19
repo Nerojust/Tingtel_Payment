@@ -58,6 +58,12 @@ public class SessionManager {
     private static final String AMOUNT = "AMOUNT";
     private static final String LONG = "LONG";
     private static final String LAT = "LAT";
+    private static final String FIRST_NAME = "FIRST_NAME";
+    private static final String LAST_NAME = "LAST_NAME";
+    private static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
+    private static final String USERNAME = "USERNAME";
+    private static final String USER_NETWORK = "USER_NETWORK";
+    private static final String REG_JSON = "REG_JSON";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     private void setIntPreference(String name, int value) {
@@ -201,87 +207,6 @@ public class SessionManager {
         setStringPreference(SIM_STATUS, simstatus);
     }
 
-    public void isSim1AirtimeClicked(boolean isClicked) {
-        setBooleanPreference(IS_SIM1_AIRTIME_CLICKED, isClicked);
-    }
-
-    public boolean getIsSim1AirtimeClicked() {
-        return getBooleanPreference(IS_SIM1_AIRTIME_CLICKED);
-    }
-
-    public void isSim1DataClicked(boolean isClicked) {
-        setBooleanPreference(IS_SIM1_DATA_CLICKED, isClicked);
-    }
-
-    public boolean getIsSim1DataClicked() {
-        return getBooleanPreference(IS_SIM1_DATA_CLICKED);
-    }
-
-    public void isSim2AirtimeClicked(boolean isClicked) {
-        setBooleanPreference(IS_SIM2_AIRTIME_CLICKED, isClicked);
-    }
-
-    public boolean getIsSim2AirtimeClicked() {
-        return getBooleanPreference(IS_SIM2_AIRTIME_CLICKED);
-    }
-
-    public void isSim2DataClicked(boolean isClicked) {
-        setBooleanPreference(IS_SIM2_DATA_CLICKED, isClicked);
-    }
-
-    public boolean getIsSim2DataClicked() {
-        return getBooleanPreference(IS_SIM2_DATA_CLICKED);
-    }
-
-    public boolean getIntroStatus() {
-        return getBooleanPreference(INTRO_STATUS);
-    }
-
-    public void setIntroStatus(boolean b) {
-        setBooleanPreference(INTRO_STATUS, b);
-    }
-
-    public boolean getLoginStatus() {
-        return getBooleanPreference(LOGIN_STATUS);
-    }
-
-    public void setLoginStatus(boolean b) {
-        setBooleanPreference(LOGIN_STATUS, b);
-    }
-
-    public String getClickedNetworkSerial() {
-        return getStringPreference(CLICKED_NETWORK_SERIAL);
-    }
-
-    public void setClickedNetworkSerial(String serial) {
-        setStringPreference(CLICKED_NETWORK_SERIAL, serial);
-    }
-
-    public String getClickedBalanceType() {
-        return getStringPreference(CLICKED_BALANCE_TYPE);
-    }
-
-    public void setClickedBalanceType(String balance) {
-        setStringPreference(CLICKED_BALANCE_TYPE, balance);
-    }
-
-    public boolean getHasDataResultSIM1ComeYet() {
-        return getBooleanPreference(HAS_DATA_SIM1_COME_YET);
-    }
-
-    public void setHasDataResultSIM1ComeYet(boolean hasDataResultComeYet) {
-        setBooleanPreference(HAS_DATA_SIM1_COME_YET, hasDataResultComeYet);
-    }
-
-    public boolean getHasDataResultSIM2ComeYet() {
-        return getBooleanPreference(HAS_DATA_SIM2_COME_YET);
-    }
-
-    public void setHasDataResultSIM2ComeYet(boolean hasDataResultComeYet) {
-        setBooleanPreference(HAS_DATA_SIM2_COME_YET, hasDataResultComeYet);
-    }
-
-
     public boolean getOnboardStatus() {
 
         return getBooleanPreference(OnBoardStatus);
@@ -289,82 +214,6 @@ public class SessionManager {
 
     public void setOnBoardStatus(Boolean status) {
         setBooleanPreference(OnBoardStatus, status);
-    }
-
-    public boolean getHasAirtimeResultSIM1ComeYet() {
-        return getBooleanPreference(HAS_AIRTIME_SIM1_COME_YET);
-    }
-
-    public void setHasAirtimeResultSIM1ComeYet(boolean hasDataResultComeYet) {
-        setBooleanPreference(HAS_AIRTIME_SIM1_COME_YET, hasDataResultComeYet);
-    }
-
-    public boolean getHasAirtimeResultSIM2ComeYet() {
-        return getBooleanPreference(HAS_AIRTIME_SIM2_COME_YET);
-    }
-
-    public void setHasAirtimeResultSIM2ComeYet(boolean hasDataResultComeYet) {
-        setBooleanPreference(HAS_AIRTIME_SIM2_COME_YET, hasDataResultComeYet);
-    }
-
-    public String getBankName() {
-        return getStringPreference(BANK_NAME);
-    }
-
-    public void setBankName(String bankName) {
-
-        setStringPreference(BANK_NAME, bankName);
-
-    }
-
-    public String getBankName1() {
-        return getStringPreference(BANK_NAME);
-    }
-
-    public void setBankName1(String bankName) {
-
-        setStringPreference(BANK_NAME1, bankName);
-
-    }
-
-    public String getBankAcc() {
-        return getStringPreference(BANK_ACC);
-    }
-
-    public void setBankAcc(String bankAcc) {
-
-        setStringPreference(BANK_ACC, bankAcc);
-
-    }
-
-    public String getBankAcc1() {
-        return getStringPreference(BANK_ACC1);
-    }
-
-    public void setBankAcc1(String bankAcc) {
-
-        setStringPreference(BANK_ACC1, bankAcc);
-
-    }
-
-    public String getBankAccName() {
-        return getStringPreference(BANK_ACC_NAME);
-    }
-
-    public void setBankAccName(String bankAccName) {
-
-        setStringPreference(BANK_ACC_NAME, bankAccName);
-
-    }
-
-    public String getBankAccName1() {
-        return getStringPreference(BANK_ACC_NAME1);
-    }
-
-    public void setBankAccName1(String bankAcc) {
-
-        setStringPreference(BANK_ACC_NAME1, bankAcc);
-
     }
 
     public int getTotalNumberOfSimsDetectedOnDevice() {
@@ -474,21 +323,67 @@ public class SessionManager {
         setStringPreference(AMOUNT, amount);
     }
 
-    public String getLongitude(){
+    public String getLongitude() {
         return getStringPreference(LONG);
     }
 
     public void setLongitude(String longitude) {
-        setStringPreference(LONG,longitude);
+        setStringPreference(LONG, longitude);
     }
 
-    public String getLatitude(){
+    public String getLatitude() {
         return getStringPreference(LAT);
     }
 
     public void setLatitude(String latitude) {
-        setStringPreference(LAT,latitude);
+        setStringPreference(LAT, latitude);
     }
 
+    public String getFirstName() {
+        return getStringPreference(FIRST_NAME);
+    }
 
+    public void setFirstName(String firstname) {
+        setStringPreference(FIRST_NAME, firstname);
+    }
+
+    public String getLastName() {
+        return getStringPreference(LAST_NAME);
+    }
+
+    public void setLastName(String lastName) {
+        setStringPreference(LAST_NAME, lastName);
+    }
+
+    public void setUsername(String username) {
+        setStringPreference(USERNAME, username);
+    }
+
+    public String getUserame() {
+        return getStringPreference(USERNAME);
+    }
+
+    public String getEmailAddress() {
+        return getStringPreference(EMAIL_ADDRESS);
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        setStringPreference(EMAIL_ADDRESS, emailAddress);
+    }
+
+    public String getUserNetwork() {
+        return getStringPreference(USER_NETWORK);
+    }
+
+    public void setUserNetwork(String selectedSpinnerNetwork) {
+        setStringPreference(USER_NETWORK, selectedSpinnerNetwork);
+    }
+
+    public String getRegistrationJsonObject() {
+        return getStringPreference(REG_JSON);
+    }
+
+    public void setRegistrationJsonObject(String regObject) {
+        setStringPreference(REG_JSON, regObject);
+    }
 }

@@ -44,6 +44,8 @@ public class SignInActivity extends GPSutils {
 
         initViews();
         initListeners();
+
+
     }
 
     private void initListeners() {
