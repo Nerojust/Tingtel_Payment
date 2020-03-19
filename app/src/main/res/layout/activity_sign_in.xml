@@ -121,7 +121,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginHorizontal="@dimen/_12ssp"
                         android:layout_marginTop="@dimen/_20ssp"
-                        android:background="@drawable/rounded_button_corners"
+                        android:background="@drawable/dashboard_buttons"
                         android:drawableRight="@drawable/ic_keyboard_arrow_right"
                         android:text="@string/sign_in"
                         android:textColor="@color/white"
