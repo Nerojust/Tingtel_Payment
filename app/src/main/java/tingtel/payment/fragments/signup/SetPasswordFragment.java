@@ -21,6 +21,8 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
 import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
+import tingtel.payment.models.Registration.Sim1;
+import tingtel.payment.models.Registration.Sim2;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
@@ -67,14 +69,23 @@ public class SetPasswordFragment extends Fragment {
 
     private void registerUser() {
         AppUtils.initLoadingDialog(getContext());
+        Sim1 sim1 = new Sim1();
+        sim1.setPhone(sessionManager.getSimPhoneNumber());
+        sim1.setUserNetwork(sessionManager.getUserNetwork());
+        sim1.setSerialNumber(sessionManager.getSimSerialICCID());
+
+        Sim2 sim2 = new Sim2();
+        sim2.setPhone(sessionManager.getSimPhoneNumber1());
+        sim2.setUserNetwork(sessionManager.getNetworkName1());
+        sim2.setSerialNumber(sessionManager.getSimSerialICCID1());
 
         CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject();
         customerRegistrationSendObject.setFirstName(sessionManager.getFirstName());
         customerRegistrationSendObject.setLastName(sessionManager.getLastName());
         customerRegistrationSendObject.setEmail(sessionManager.getEmailAddress());
         customerRegistrationSendObject.setUsername(sessionManager.getUserame());
-        customerRegistrationSendObject.setPhone(sessionManager.getSenderPhonerNumber());
-        customerRegistrationSendObject.setUserNetwork(sessionManager.getUserNetwork());
+        customerRegistrationSendObject.setSim1(sim1);
+        customerRegistrationSendObject.setSim2(sim2);
         customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
         customerRegistrationSendObject.setHash(hash);
 

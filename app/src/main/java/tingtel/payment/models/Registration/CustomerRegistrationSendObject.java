@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class CustomerRegistrationSendObject {
 
-    @SerializedName("phone")
-    @Expose
-    private String phone;
     @SerializedName("email")
     @Expose
     private String email;
@@ -23,20 +20,15 @@ public class CustomerRegistrationSendObject {
     @SerializedName("username")
     @Expose
     private String username;
-    @SerializedName("user_network")
-    @Expose
-    private String userNetwork;
     @SerializedName("hash")
     @Expose
     private String hash;
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    @SerializedName("sim1")
+    @Expose
+    private Sim1 sim1;
+    @SerializedName("sim2")
+    @Expose
+    private Sim2 sim2;
 
     public String getEmail() {
         return email;
@@ -78,14 +70,6 @@ public class CustomerRegistrationSendObject {
         this.username = username;
     }
 
-    public String getUserNetwork() {
-        return userNetwork;
-    }
-
-    public void setUserNetwork(String userNetwork) {
-        this.userNetwork = userNetwork;
-    }
-
     public String getHash() {
         return hash;
     }
@@ -94,4 +78,22 @@ public class CustomerRegistrationSendObject {
         this.hash = hash;
     }
 
+    public Sim1 getSim1() {
+        return sim1;
+    }
+
+    public void setSim1(Sim1 sim1) {
+        this.sim1 = sim1;
+    }
+
+    public Sim2 getSim2() {
+        return sim2;
+    }
+
+    public void setSim2(Sim2 sim2) {
+        this.sim2 = sim2;
+    }
+
 }
+
+

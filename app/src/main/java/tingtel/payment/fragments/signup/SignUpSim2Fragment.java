@@ -67,7 +67,7 @@ public class SignUpSim2Fragment extends Fragment {
 
                 //Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
                 selectedSpinnerNetwork = spinnerTitles[i];
-
+                sessionManager.setUserNetwork1(selectedSpinnerNetwork);
             }
 
             @Override

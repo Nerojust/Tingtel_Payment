@@ -44,6 +44,7 @@ public class SessionManager {
     private static final String REG_JSON = "REG_JSON";
     private static final String LOGIN_OBJECT = "LOGIN_OBJECT";
     private static final String CHECKED = "CHECKED";
+    private static final String USER_NETWORK1 = "USER_NETWORK1";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -367,6 +368,15 @@ public class SessionManager {
     public void setUserNetwork(String selectedSpinnerNetwork) {
         setStringPreference(USER_NETWORK, selectedSpinnerNetwork);
     }
+
+    public String getUserNetwork1() {
+        return getStringPreference(USER_NETWORK1);
+    }
+
+    public void setUserNetwork1(String selectedSpinnerNetwork) {
+        setStringPreference(USER_NETWORK1, selectedSpinnerNetwork);
+    }
+
 
     public String getRegistrationJsonObject() {
         return getStringPreference(REG_JSON);

@@ -85,35 +85,43 @@ public class SignUpHomeFragment extends Fragment {
     private boolean isValidFields() {
         if (firstName.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "First name is required", Toast.LENGTH_SHORT).show();
+            firstName.requestFocus();
             return false;
         }
         if (firstName.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "First name is too short", Toast.LENGTH_SHORT).show();
+            firstName.requestFocus();
             return false;
         }
         if (lastName.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Last name is required", Toast.LENGTH_SHORT).show();
+            lastName.requestFocus();
             return false;
         }
         if (lastName.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "Last name is too short", Toast.LENGTH_SHORT).show();
+            lastName.requestFocus();
             return false;
         }
         if (emailAddress.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Email is required", Toast.LENGTH_SHORT).show();
+            emailAddress.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(emailAddress.getText().toString().trim())) {
             Toast.makeText(getContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+            emailAddress.requestFocus();
             return false;
         }
 
         if (username.getText().toString().trim().isEmpty()) {
             Toast.makeText(getContext(), "Username is required", Toast.LENGTH_SHORT).show();
+            username.requestFocus();
             return false;
         }
         if (username.getText().toString().trim().length() < 3) {
             Toast.makeText(getContext(), "Username is too short", Toast.LENGTH_SHORT).show();
+            username.requestFocus();
             return false;
         }
 
