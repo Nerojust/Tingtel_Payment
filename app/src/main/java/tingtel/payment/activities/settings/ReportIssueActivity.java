@@ -63,6 +63,8 @@ public class ReportIssueActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ReportIssueResponse reportIssueResponse) {
                 AppUtils.dismissLoadingDialog();
+                edDetails.setText("");
+                edDetails.clearFocus();
                 AppUtils.showDialog("Thank you, we would look into it", ReportIssueActivity.this);
             }
 

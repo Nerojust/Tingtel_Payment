@@ -66,6 +66,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ChangeEmailResponse changeEmailResponse) {
                 AppUtils.showDialog("Email Successfully Changed", ChangeEmailActivity.this);
+                clearViews();
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -82,6 +83,15 @@ public class ChangeEmailActivity extends AppCompatActivity {
                 AppUtils.dismissLoadingDialog();
             }
         });
+    }
+
+    private void clearViews() {
+        edCurrentEmail.setText("");
+        edNewEmail.setText("");
+        edRenterNewEmail.setText("");
+        edCurrentEmail.clearFocus();
+        edNewEmail.clearFocus();
+        edRenterNewEmail.clearFocus();
     }
 
     private boolean isValidFields() {

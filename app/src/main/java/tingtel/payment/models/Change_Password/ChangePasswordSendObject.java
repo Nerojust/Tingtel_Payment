@@ -8,6 +8,7 @@ public class ChangePasswordSendObject {
     @SerializedName("email")
     @Expose
     private String email;
+
     @SerializedName("phone")
     @Expose
     private String phone;

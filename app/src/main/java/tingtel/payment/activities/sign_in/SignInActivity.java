@@ -114,7 +114,7 @@ public class SignInActivity extends GPSutils {
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
                 sessionManager.setFirstName(loginResponses.getUserInfo().get(0).getFirstName());
-                sessionManager.setEmailAddress(loginResponses.getUserInfo().get(0).getEmail());
+                sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
                 sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);

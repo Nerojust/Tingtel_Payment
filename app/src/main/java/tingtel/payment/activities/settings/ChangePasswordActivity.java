@@ -66,8 +66,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         webSeviceRequestMaker.changePassword(changePasswordSendObject, new ChangePasswordInterface() {
             @Override
             public void onSuccess(ChangePasswordResponse changePasswordResponse) {
-                AppUtils.showDialog("Password Successfully Changed", ChangePasswordActivity.this);
-
+                //AppUtils.showSnackBar("Password Successfully Changed", edRenterNewPassword);
+                AppUtils.showDialog("Password changed successfully", ChangePasswordActivity.this);
+                clearViews();
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -83,6 +84,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 AppUtils.dismissLoadingDialog();
             }
         });
+    }
+
+    private void clearViews() {
+        edCurrentPassword.setText("");
+        edNewPassword.setText("");
+        edRenterNewPassword.setText("");
+        edCurrentPassword.clearFocus();
+        edNewPassword.clearFocus();
+        edRenterNewPassword.clearFocus();
     }
 
 
