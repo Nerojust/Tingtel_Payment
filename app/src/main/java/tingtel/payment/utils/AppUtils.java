@@ -37,6 +37,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 
 /**
@@ -84,6 +85,10 @@ public class AppUtils {
         }
     }
 
+    public static String generateHash(String input1, String input2) {
+        return getSHA512(input1 + input2 + BuildConfig.HASH_KEY);
+    }
+
     public static String generateRandomString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -98,7 +103,7 @@ public class AppUtils {
     }
 
     public static void showSnackBar(String msg, View view) {
-        Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+        Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
         Vibrator vibrator = (Vibrator) view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(Constants.VIBRATOR_INTEGER);
         mySnackbar.show();
@@ -193,6 +198,7 @@ public class AppUtils {
 
         return hasImage;
     }
+
     public static void initLoadingDialog(Context context) {
         progress = ProgressDialog.show(context, null, null, true);
         progress.setContentView(R.layout.progress_dialog_element);

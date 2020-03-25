@@ -7,20 +7,28 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import tingtel.payment.R;
+import tingtel.payment.models.Change_Password.ChangePasswordResponse;
+import tingtel.payment.models.Change_Password.ChangePasswordSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
+import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
     private EditText edCurrentPassword, edNewPassword, edRenterNewPassword;
     private Button btnChangePassword;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-
+        sessionManager = AppUtils.getSessionManagerInstance();
         initViews();
         initListeners();
     }
@@ -28,9 +36,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void initListeners() {
         btnChangePassword.setOnClickListener(v -> {
             if (isValidFields()) {
-                AppUtils.showDialog("Password Successfully Changed", this);
-                finish();
-                //Todo: perform operation
+                changePasswordForUser();
             }
         });
     }
@@ -41,6 +47,44 @@ public class ChangePasswordActivity extends AppCompatActivity {
         edRenterNewPassword = findViewById(R.id.re_entered_password);
         btnChangePassword = findViewById(R.id.btn_set_password);
     }
+
+    private void changePasswordForUser() {
+        AppUtils.initLoadingDialog(this);
+
+        ChangePasswordSendObject changePasswordSendObject = new ChangePasswordSendObject();
+        changePasswordSendObject.setEmail(sessionManager.getEmailAddress());
+        //todo: get from login
+        changePasswordSendObject.setPhone(sessionManager.getSimPhoneNumber());
+        changePasswordSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
+        changePasswordSendObject.setPassword(edRenterNewPassword.getText().toString().trim());
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(changePasswordSendObject);
+        sessionManager.setPasswordJsonObject(jsonObject);
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.changePassword(changePasswordSendObject, new ChangePasswordInterface() {
+            @Override
+            public void onSuccess(ChangePasswordResponse changePasswordResponse) {
+                AppUtils.showDialog("Password Successfully Changed", ChangePasswordActivity.this);
+
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showSnackBar(error, edRenterNewPassword);
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showSnackBar(String.valueOf(errorCode), edRenterNewPassword);
+                AppUtils.dismissLoadingDialog();
+            }
+        });
+    }
+
 
     private boolean isValidFields() {
         if (edCurrentPassword.getText().toString().trim().isEmpty()) {

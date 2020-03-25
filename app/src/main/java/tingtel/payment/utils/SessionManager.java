@@ -45,6 +45,8 @@ public class SessionManager {
     private static final String LOGIN_OBJECT = "LOGIN_OBJECT";
     private static final String CHECKED = "CHECKED";
     private static final String USER_NETWORK1 = "USER_NETWORK1";
+    private static final String PASSWORD_JSON = "PASSWORD_JSON";
+    private static final String EMAIL_JSON = "EMAIL_JSON";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -400,5 +402,21 @@ public class SessionManager {
 
     public void setRememberLoginCheck(boolean checked) {
         setBooleanPreference(CHECKED, checked);
+    }
+
+    public String getPasswordJsonObject(){
+        return getStringPreference(PASSWORD_JSON);
+    }
+
+    public void setPasswordJsonObject(String jsonObject) {
+        setStringPreference(PASSWORD_JSON,jsonObject);
+    }
+
+    public String getEmailJsonObject(){
+        return getStringPreference(EMAIL_JSON);
+    }
+
+    public void setEmailJsonObject(String jsonObject) {
+        setStringPreference(EMAIL_JSON, jsonObject);
     }
 }

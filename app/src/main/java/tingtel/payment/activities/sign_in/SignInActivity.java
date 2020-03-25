@@ -113,6 +113,7 @@ public class SignInActivity extends GPSutils {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
+                sessionManager.setFirstName(loginResponses.getUserInfo().get(0).getFirstName());
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -124,7 +125,9 @@ public class SignInActivity extends GPSutils {
             public void onError(String error) {
                 if (error.equalsIgnoreCase("Invalid Hash Key"))
                     AppUtils.showSnackBar("Invalid credentials", usernameEditext);
-                else AppUtils.showSnackBar(error, usernameEditext);
+                else {
+                    AppUtils.showSnackBar("Server error: --"+error+"-- Please try again", usernameEditext);
+                }
 
                 AppUtils.dismissLoadingDialog();
             }

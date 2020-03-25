@@ -8,6 +8,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import tingtel.payment.models.Change_Email.ChangeEmailResponse;
+import tingtel.payment.models.Change_Email.ChangeEmailSendObject;
+import tingtel.payment.models.Change_Password.ChangePasswordResponse;
+import tingtel.payment.models.Change_Password.ChangePasswordSendObject;
 import tingtel.payment.models.CustomerInfo.CustomerInfoResponse;
 import tingtel.payment.models.CustomerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.Login.CustomerLoginResponse;
@@ -16,6 +20,8 @@ import tingtel.payment.models.Registration.CustomerRegistrationResponse;
 import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
+import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
+import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
@@ -25,7 +31,7 @@ public class WebSeviceRequestMaker {
 
     private final String TAG = "WebserviceRequestMaker";
     private final Retrofit retrofit = MyApplication.getInstance().getRetrofit();
-    private final PostServiceIinteface postInterfaceService = retrofit.create(PostServiceIinteface.class);
+    private final PostServiceInterface postInterfaceService = retrofit.create(PostServiceInterface.class);
 
     public void createANewUser(CustomerRegistrationSendObject customerRegistrationSendObject, CreateNewUserInterface createNewUserInterface) {
         Call<CustomerRegistrationResponse> call = postInterfaceService.createNewUser(customerRegistrationSendObject);
@@ -110,6 +116,66 @@ public class WebSeviceRequestMaker {
             @Override
             public void onFailure(@NonNull Call<CustomerInfoResponse> call, @NonNull Throwable t) {
                 getUserProfileInterface.onError(t.getMessage());
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void changeEmailAddress(ChangeEmailSendObject changeEmailSendObject, ChangeEmailInterface changeEmailInterface) {
+        Call<ChangeEmailResponse> call = postInterfaceService.changeEmailAddress(changeEmailSendObject);
+        call.enqueue(new Callback<ChangeEmailResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ChangeEmailResponse> call, @NonNull Response<ChangeEmailResponse> response) {
+                if (response.isSuccessful()) {
+                    ChangeEmailResponse changeEmailResponse = response.body();
+
+                    if (changeEmailResponse != null) {
+                        if (changeEmailResponse.getCode().equals(Constants.SUCCESS)) {
+                            changeEmailInterface.onSuccess(changeEmailResponse);
+                        } else {
+                            changeEmailInterface.onError(changeEmailResponse.getDescription());
+                        }
+                    }
+                } else {
+                    changeEmailInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChangeEmailResponse> call, @NonNull Throwable t) {
+                changeEmailInterface.onError(t.getMessage());
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void changePassword(ChangePasswordSendObject changePasswordSendObject, ChangePasswordInterface changePasswordInterface) {
+        Call<ChangePasswordResponse> call = postInterfaceService.changePassword(changePasswordSendObject);
+        call.enqueue(new Callback<ChangePasswordResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ChangePasswordResponse> call, @NonNull Response<ChangePasswordResponse> response) {
+                if (response.isSuccessful()) {
+                    ChangePasswordResponse changePasswordResponse = response.body();
+
+                    if (changePasswordResponse != null) {
+                        if (changePasswordResponse.getCode().equals(Constants.SUCCESS)) {
+                            changePasswordInterface.onSuccess(changePasswordResponse);
+                        } else {
+                            changePasswordInterface.onError(changePasswordResponse.getDescription());
+                        }
+                    }
+                } else {
+                    changePasswordInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChangePasswordResponse> call, @NonNull Throwable t) {
+                changePasswordInterface.onError(t.getMessage());
                 String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
                 Log.e("Login error", error);
             }

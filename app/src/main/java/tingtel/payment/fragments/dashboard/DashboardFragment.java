@@ -21,9 +21,8 @@ import tingtel.payment.R;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
+import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
-
-import static tingtel.payment.utils.AppUtils.getSessionManagerInstance;
 
 
 public class DashboardFragment extends Fragment {
@@ -35,15 +34,22 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        sessionManager = AppUtils.getSessionManagerInstance();
+
         ImageView settingsImagview = view.findViewById(R.id.settingsImageview);
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
         TextView customerName = view.findViewById(R.id.customerName);
-
+        //setting the retrieved customer name
+        if (sessionManager.getFirstName() != null) {
+            customerName.setText("Hi "+sessionManager.getFirstName());
+        } else {
+            customerName.setText("Welcome Customer");
+        }
         Button btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         Button btnHistory = view.findViewById(R.id.btn_history);
 
         appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
-        sessionManager = getSessionManagerInstance();
+
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));

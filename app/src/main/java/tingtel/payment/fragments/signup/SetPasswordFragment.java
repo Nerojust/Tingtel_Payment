@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 import java.util.Objects;
 
-import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
@@ -69,6 +68,7 @@ public class SetPasswordFragment extends Fragment {
 
     private void registerUser() {
         AppUtils.initLoadingDialog(getContext());
+
         Sim1 sim1 = new Sim1();
         sim1.setPhone(sessionManager.getSimPhoneNumber());
         sim1.setUserNetwork(sessionManager.getUserNetwork());
@@ -87,7 +87,7 @@ public class SetPasswordFragment extends Fragment {
         customerRegistrationSendObject.setSim1(sim1);
         customerRegistrationSendObject.setSim2(sim2);
         customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
-        customerRegistrationSendObject.setHash(hash);
+        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(),sessionManager.getSimPhoneNumber()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(customerRegistrationSendObject);
@@ -129,12 +129,6 @@ public class SetPasswordFragment extends Fragment {
         tvPassword1 = view.findViewById(R.id.tv_password1);
         tvPassword2 = view.findViewById(R.id.tv_password2);
         btnSetPassword = view.findViewById(R.id.btn_set_password);
-
-        String email = sessionManager.getEmailAddress();
-        String phone = sessionManager.getSimPhoneNumber();
-
-        //get the hash
-        hash = AppUtils.getSHA512(email + phone + BuildConfig.HASH_KEY);
     }
 
     private boolean isValidFields() {

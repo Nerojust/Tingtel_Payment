@@ -20,7 +20,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_18sdp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="@color/white"
@@ -33,13 +33,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_10sdp">
+                    android:paddingHorizontal="@dimen/_5sdp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="20dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/current_email"
@@ -99,7 +99,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="35dp"
-                        android:layout_marginBottom="45dp"
+                        android:layout_marginBottom="30dp"
                         android:background="@drawable/dashboard_buttons"
                         android:fontFamily="@font/rubik_regular"
                         android:text="@string/change_email"
