@@ -52,9 +52,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         AppUtils.initLoadingDialog(this);
 
         ChangePasswordSendObject changePasswordSendObject = new ChangePasswordSendObject();
-        changePasswordSendObject.setEmail(sessionManager.getEmailAddress());
+        changePasswordSendObject.setEmail(sessionManager.getEmailFromLogin());
         //todo: get from login
-        changePasswordSendObject.setPhone(sessionManager.getSimPhoneNumber());
+        changePasswordSendObject.setPhone(sessionManager.getNumberFromLogin());
         changePasswordSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
         changePasswordSendObject.setPassword(edRenterNewPassword.getText().toString().trim());
 

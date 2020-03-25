@@ -49,10 +49,10 @@ public class ReportIssueActivity extends AppCompatActivity {
         AppUtils.initLoadingDialog(this);
 
         ReportIssueSendObject reportIssueSendObject = new ReportIssueSendObject();
-        reportIssueSendObject.setEmail(sessionManager.getEmailAddress());
-        reportIssueSendObject.setPhone(sessionManager.getSimPhoneNumber());
+        reportIssueSendObject.setEmail(sessionManager.getEmailFromLogin());
+        reportIssueSendObject.setPhone(sessionManager.getNumberFromLogin());
         reportIssueSendObject.setMessage(edDetails.getText().toString().trim());
-        reportIssueSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
+        reportIssueSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailFromLogin(), sessionManager.getNumberFromLogin()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(reportIssueSendObject);

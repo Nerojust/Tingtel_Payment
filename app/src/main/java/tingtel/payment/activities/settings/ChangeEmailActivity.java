@@ -54,8 +54,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
         ChangeEmailSendObject changeEmailSendObject = new ChangeEmailSendObject();
         changeEmailSendObject.setEmail(edRenterNewEmail.getText().toString().trim());
         //todo: get from login
-        changeEmailSendObject.setPhone(sessionManager.getSimPhoneNumber());
-        changeEmailSendObject.setHash(AppUtils.generateHash(edRenterNewEmail.getText().toString().trim(), sessionManager.getSimPhoneNumber()));
+        changeEmailSendObject.setPhone(sessionManager.getNumberFromLogin());
+        changeEmailSendObject.setHash(AppUtils.generateHash(edRenterNewEmail.getText().toString().trim(), sessionManager.getNumberFromLogin()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(changeEmailSendObject);
