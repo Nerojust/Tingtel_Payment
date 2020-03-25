@@ -21,9 +21,9 @@ import tingtel.payment.activities.sign_in.SignInActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     Button logoutButton;
+    private LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
+            reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
             Button btnNo = dialogView.findViewById(R.id.btn_no);
 
             btnYes.setOnClickListener(v12 -> {
-
+//todo: make network call
                 Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -92,10 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
             btnNo.setOnClickListener(v1 -> alertDialog.dismiss());
-
             alertDialog.show();
-
-
         });
 
         privacyPolicyLayout.setOnClickListener(v -> {
@@ -113,8 +110,17 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignInActivity.class));
-            finishAffinity();
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+            builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        startActivity(new Intent(this, SignInActivity.class));
+                        finishAffinity();
+                    })
+                    .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+            android.app.AlertDialog alert = builder.create();
+            alert.show();
+
         });
     }
 }

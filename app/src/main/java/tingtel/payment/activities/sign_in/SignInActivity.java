@@ -126,7 +126,7 @@ public class SignInActivity extends GPSutils {
                 if (error.equalsIgnoreCase("Invalid Hash Key"))
                     AppUtils.showSnackBar("Invalid credentials", usernameEditext);
                 else {
-                    AppUtils.showSnackBar("Server error: --"+error+"-- Please try again", usernameEditext);
+                    AppUtils.showSnackBar(error, usernameEditext);
                 }
 
                 AppUtils.dismissLoadingDialog();
