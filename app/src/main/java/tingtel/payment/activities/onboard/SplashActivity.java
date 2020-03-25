@@ -28,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         String login = sessionManager.getLoginJsonObject();
         String pass = sessionManager.getPasswordJsonObject();
         String email = sessionManager.getEmailJsonObject();
+        String reportIssue = sessionManager.getReportIssueJsonObject();
 
         new Handler().postDelayed(() -> {
             if (sessionManager.getOnboardStatus()) {

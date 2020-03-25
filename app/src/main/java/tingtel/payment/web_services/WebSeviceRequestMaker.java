@@ -18,6 +18,8 @@ import tingtel.payment.models.Login.CustomerLoginResponse;
 import tingtel.payment.models.Login.CustomerLoginSendObject;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
 import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
+import tingtel.payment.models.Report_Issue.ReportIssueResponse;
+import tingtel.payment.models.Report_Issue.ReportIssueSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
@@ -25,6 +27,7 @@ import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
+import tingtel.payment.web_services.interfaces.ReportIssueInterface;
 
 public class WebSeviceRequestMaker {
 
@@ -181,4 +184,35 @@ public class WebSeviceRequestMaker {
             }
         });
     }
+
+    public void reportAnIssue(ReportIssueSendObject reportIssueSendObject, ReportIssueInterface reportIssueInterface) {
+        Call<ReportIssueResponse> call = postInterfaceService.reportIssue(reportIssueSendObject);
+        call.enqueue(new Callback<ReportIssueResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ReportIssueResponse> call, @NonNull Response<ReportIssueResponse> response) {
+                if (response.isSuccessful()) {
+                    ReportIssueResponse reportIssueResponse = response.body();
+
+                    if (reportIssueResponse != null) {
+                        if (reportIssueResponse.getCode().equals(Constants.SUCCESS)) {
+                            reportIssueInterface.onSuccess(reportIssueResponse);
+                        } else {
+                            reportIssueInterface.onError(reportIssueResponse.getDescription());
+                        }
+                    }
+                } else {
+                    reportIssueInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ReportIssueResponse> call, @NonNull Throwable t) {
+                reportIssueInterface.onError(t.getMessage());
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
 }

@@ -111,7 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         logoutButton.setOnClickListener(v -> {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-            builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
+            builder.setMessage(getResources().getString(R.string.do_you_want_to_logout))
                     .setCancelable(false)
                     .setPositiveButton("Yes", (dialog, id) -> {
                         startActivity(new Intent(this, SignInActivity.class));

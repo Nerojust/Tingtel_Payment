@@ -47,6 +47,7 @@ public class SessionManager {
     private static final String USER_NETWORK1 = "USER_NETWORK1";
     private static final String PASSWORD_JSON = "PASSWORD_JSON";
     private static final String EMAIL_JSON = "EMAIL_JSON";
+    private static final String ISSUE_JSON = "ISSUE_JSON";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -418,5 +419,13 @@ public class SessionManager {
 
     public void setEmailJsonObject(String jsonObject) {
         setStringPreference(EMAIL_JSON, jsonObject);
+    }
+
+    public String getReportIssueJsonObject(){
+        return getStringPreference(ISSUE_JSON);
+    }
+
+    public void setReportIssueJsonObject(String jsonObject) {
+        setStringPreference(ISSUE_JSON,jsonObject);
     }
 }

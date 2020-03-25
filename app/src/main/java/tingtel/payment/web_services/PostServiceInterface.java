@@ -13,6 +13,8 @@ import tingtel.payment.models.Login.CustomerLoginResponse;
 import tingtel.payment.models.Login.CustomerLoginSendObject;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
 import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
+import tingtel.payment.models.Report_Issue.ReportIssueResponse;
+import tingtel.payment.models.Report_Issue.ReportIssueSendObject;
 
 public interface PostServiceInterface {
 
@@ -30,4 +32,7 @@ public interface PostServiceInterface {
 
     @POST("changepassword")
     Call<ChangePasswordResponse> changePassword(@Body ChangePasswordSendObject changePasswordSendObject);
+
+    @POST("Report_Issue")
+    Call<ReportIssueResponse> reportIssue(@Body ReportIssueSendObject reportIssueSendObject);
 }
