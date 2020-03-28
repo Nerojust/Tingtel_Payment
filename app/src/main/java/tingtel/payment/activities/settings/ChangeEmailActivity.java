@@ -63,7 +63,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
         webSeviceRequestMaker.changeEmailAddress(changeEmailSendObject, new ChangeEmailInterface() {
             @Override
             public void onSuccess(ChangeEmailResponse changeEmailResponse) {
-                AppUtils.showDialog("Email Successfully Changed", ChangeEmailActivity.this);
+                AppUtils.showDialog(changeEmailResponse.getDescription(), ChangeEmailActivity.this);
                 clearViews();
                 AppUtils.dismissLoadingDialog();
             }
