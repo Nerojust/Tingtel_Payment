@@ -69,9 +69,8 @@ public class SignInActivity extends GPSutils {
             if (AppUtils.isNetworkAvailable(this)) {
                 if (AppUtils.isLocationEnabled(this)) {
                     if (isValidFields()) {
-                        boolean checked = rememberMeCheckbox.isChecked();
-                        sessionManager.setRememberLoginCheck(checked);
-                        sessionManager.setUsername(usernameEditext.getText().toString().trim());
+                        sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
+                        sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
                         loginUser();
                     }
                 } else {

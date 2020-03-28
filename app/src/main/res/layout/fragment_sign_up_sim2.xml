@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:gravity="center|top"
         android:orientation="vertical">
 
@@ -65,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,8 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="50dp"
             android:background="@drawable/dashboard_buttons"
             android:drawableRight="@drawable/ic_keyboard_arrow_right"
             android:fontFamily="@font/rubik_regular"

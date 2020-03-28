@@ -67,9 +67,6 @@ public class SignUpSim1OtpFragment extends Fragment {
                 saveSimDetails();
             }
 
-
-
-
             if (sessionManager.getIsRegistered()) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 Objects.requireNonNull(getActivity()).startActivity(intent);

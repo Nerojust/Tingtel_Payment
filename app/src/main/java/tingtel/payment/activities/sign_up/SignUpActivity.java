@@ -32,11 +32,11 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim1")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
-                AppUtils.showDialog("You Need To Register Your Sim 1 Network Before You Can Make Any Transactions", SignUpActivity.this);
+                AppUtils.showDialog("You need To register Sim 1 before making any transactions", SignUpActivity.this);
 
             } else if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim2")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim2Fragment, null);
-                AppUtils.showDialog("You Need To Register Your Sim 2 Network Before You Can Make Any Transactions", SignUpActivity.this);
+                AppUtils.showDialog("You need To register Sim 2 before making any transactions", SignUpActivity.this);
 
             }
         }
