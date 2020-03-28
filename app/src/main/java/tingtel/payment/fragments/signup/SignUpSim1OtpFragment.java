@@ -3,6 +3,7 @@ package tingtel.payment.fragments.signup;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -45,6 +47,7 @@ public class SignUpSim1OtpFragment extends Fragment {
     private SessionManager sessionManager;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim1_otp, container, false);
@@ -77,11 +80,9 @@ public class SignUpSim1OtpFragment extends Fragment {
                 switch (NoOfSIm) {
 
                     case "SIM1":
-
                         navController.navigate(R.id.action_signUpSim1OtpFragment_to_setPasswordFragment, null);
                         break;
                     case "SIM1 SIM2":
-
                         navController.navigate(R.id.action_signUpSim1OtpFragment_to_SIgnUpSim1SuccessFragment, null);
                         break;
                 }

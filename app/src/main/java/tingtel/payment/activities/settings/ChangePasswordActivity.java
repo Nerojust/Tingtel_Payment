@@ -54,7 +54,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         changePasswordSendObject.setEmail(sessionManager.getEmailFromLogin());
         //todo: get from login
         changePasswordSendObject.setPhone(sessionManager.getNumberFromLogin());
-        changePasswordSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
+        changePasswordSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailFromLogin(), sessionManager.getNumberFromLogin()));
         changePasswordSendObject.setPassword(edRenterNewPassword.getText().toString().trim());
 
         Gson gson = new Gson();
