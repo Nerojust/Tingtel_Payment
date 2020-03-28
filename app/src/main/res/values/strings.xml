@@ -2,7 +2,6 @@
     <string name="app_name">Tingtel Airtime</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <string name="ob_header1">WELCOME TO TINGTEL</string>
@@ -16,7 +15,6 @@
     <string name="ob_desc3">To use Tingtel, kindly accept the required permissions, click on "Get Started"</string>
     <string name="set_your_password">SET YOUR PASSWORD</string>
     <string name="delete">Delete</string>
-    <string name="choose_sim_to_transfer_from">CHOOSE A SIM TO TRANSFER FROM</string>
     <string name="message">MESSAGE</string>
     <string name="dismiss">DISMISS</string>
     <string name="yes_delete">YES, DELETE</string>
@@ -28,18 +26,12 @@
 
     <string name="sim_1">SIM 1</string>
     <string name="sim_2">SIM 2</string>
-    <string name="check_your_current_balance_before_transfer">HEY WAIT! CHECK YOUR CURRENT BALANCE BEFORE PROCEEDING OK!</string>
     <string name="next">NEXT</string>
     <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">TINGTEL HELPS YOU TRANSFER AIRTIME OF ANY NETWORK TO OTHER NETWORKS. \n TO PROCEED, CLICK ON THE TRANSFER AIRTIME BUTTON.</string>
     <string name="transfer_airtime">TRANSFER AIRTIME</string>
     <string name="history">HISTORY</string>
     <string name="welcome_martins">Hi, TOM CRUISE</string>
-    <string name="transfer_amount">NOW ENTER THE TRANSFER AMOUNT</string>
-    <string name="enter_amount_to_transfer">AMOUNT TO TRANSFER</string>
-    <string name="currently_active_sim_1">CURRENTLY ACTIVE SIM 1</string>
-    <string name="mtn_ng">MTN NG</string>
     <string name="naira">"\u20A6"</string>
-    <string name="change">Change</string>
     <string name="select_sim_1_network">SELECT SIM 1 NETWORK</string>
     <string name="enter_your_phone_number">ENTER PHONE NUMBER</string>
     <string name="enter_your_first_name">ENTER FIRST NAME</string>
@@ -48,26 +40,18 @@
     <string name="enter_your_username">ENTER USERNAME</string>
     <string name="sign_up">SIGN UP</string>
     <string name="have_an_account_login">ALREADY HAVE AN ACCOUNT? LOG IN</string>
-    <string name="make_another_transfer">MAKE ANOTHER TRANSFER</string>
-    <string name="view_history">VIEW HISTORY</string>
-    <string name="send_notification_to_recipient">SEND NOTIFICATION TO RECIPIENT</string>
-    <string name="your_request_is_processing">YOUR REQUEST IS PROCESSING</string>
     <string name="remember_me">REMEMBER ME?</string>
     <string name="enter_password">ENTER PASSWORD</string>
     <string name="tingtel">TINGTEL</string>
     <string name="re_enter_your_password">RE-ENTER PASSWORD</string>
     <string name="set_password">SET PASSWORD</string>
-    <string name="create_an_account">CREATE AN ACCOUNT</string>
     <string name="enter_the_4_digit_otp_sent_to_your_phone_or_email">ENTER 4 DIGIT CODE SENT TO YOUR PHONE</string>
     <string name="didn_t_get_the_otp_resend_otp">DIDN\'T GET THE OTP? RESEND OTP.</string>
     <string name="verify">VERIFY</string>
     <string name="otp_verification">OTP VERIFICATION</string>
     <string name="good_job">GOOD JOB</string>
-    <string name="please_select_a_sim_to_check_balance">PLEASE SELECT A SIM TO CHECK BALANCE</string>
     <string name="forgot_password_retrieve">FORGOT PASSWORD? RETRIEVE</string>
-    <string name="not_registered_sign_up">NOT REGISTERED? SIGN UP</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="log_in">LOGIN</string>
     <string name="you_have_successfully_registered_your_sim">YOU HAVE SUCCESSFULLY REGISTERED YOUR SIM</string>
     <string name="register_sim_2_now">REGISTER SIM 2 NOW</string>
     <string name="no_thanks_later">NO THANKS, LATER</string>
@@ -75,36 +59,26 @@
     <string name="amount">AMOUNT</string>
     <string name="service_fee">SERVICE FEE</string>
     <string name="amount_to_be_credited">CREDITED AMOUNT</string>
-    <string name="review">SUMMARY</string>
     <string name="transfer">TRANSFER</string>
     <string name="preview">CONFIRM</string>
-    <string name="confirm_amount">CONFIRM AMOUNT</string>
-    <string name="network">SELECT NETWORK</string>
-    <string name="enter_receiver_s_phone_number">RECEIVER\'s NUMBER</string>
-    <string name="what_is_pin">WHAT IS MY PIN?</string>
     <string name="enter_your_current_password">CURRENT PASSWORD</string>
     <string name="set_your_new_password">NEW PASSWORD</string>
     <string name="re_enter_your_new_password">RE-ENTER PASSWORD</string>
     <string name="change_password">CHANGE PASSWORD</string>
-    <string name="change_your_email_address">EMAIL ADDRESS CHANGE</string>
     <string name="enter_your_current_email_address">CURRENT EMAIL ADDRESS</string>
     <string name="enter_new_email_address">NEW EMAIL ADDRESS</string>
     <string name="re_enter_your_email_address">RE-ENTER EMAIL ADDRESS</string>
-    <string name="user">USER</string>
-    <string name="or_scan_qr_code">SCAN QR CODE</string>
     <string name="select_a_sim_to_get_qr_code">SELECT A SIM TO GET QR CODE</string>
     <string name="get_qr_code">GET QR CODE</string>
     <string name="share_your_code_with_friends">SHARE CODE WITH FRIENDS</string>
     <string name="phone_number">PHONE NUMBER</string>
     <string name="do_you_want_to_delete_this_sim">DO YOU WANT TO DELETE THIS SIM?</string>
-    <string name="title_of_issue">TITLE OF ISSUE</string>
     <string name="explain_in_details">EXPLAIN IN DETAIL</string>
     <string name="report_issue">REPORT ISSUE</string>
     <string name="enter_sim_2_details">ENTER SIM 2 DETAILS</string>
     <string name="select_sim_2_network">SELECT SIM 2 NETWORK</string>
     <string name="from">FROM</string>
     <string name="to">TO</string>
-    <string name="confirmation_amount_is_displayed_here">CONFIRMATION AMOUNT</string>
     <string name="manage_sims">MANAGE SIMS</string>
     <string name="tutorial_how_to_use">TUTORIAL (HOW TO USE)</string>
     <string name="report_an_issue">REPORT AN ISSUE</string>
@@ -114,7 +88,6 @@
     <string name="enter_sim_1_details">ENTER SIM 1 DETAILS</string>
     <string name="enter_transfer_pin">ENTER NETWORK PIN</string>
     <string name="do_you_want_to_exit">DO YOU WANT TO EXIT?</string>
-    <string name="receiver_s_details">RECEIVER\'S DETAILS</string>
     <string name="do_you_want_to_delete_this_beneficiary">DO YOU WANT TO DELETE THIS BENEFICIARY?</string>
     <string name="beneficiary_network">BENEFICIARY NETWORK</string>
     <string name="beneficiary_phone_number">BENEFICIARY PHONE NUMBER</string>
@@ -126,29 +99,13 @@
     <string name="airtel_sim_detected">AIRTEL SIM DETECTED</string>
     <string name="nine_mobile_sim_detected">9MOBILE SIM DETECTED</string>
     <string name="glo_sim_detected">GLO SIM DETECTED</string>
-    <string name="notify_your_friend_about_this_transaction">NOTIFY RECEIVER ABOUT THIS TRANSACTION</string>
-    <string name="select_beneficiary">SELECT BENEFICIARY</string>
-    <string name="seems_you_forgot_your_password">Seems you forgot your password</string>
     <string name="thats_ok_n_n_just_enter_your_email_and_you_will_receive_a_reset_link">Enter your email and you will receive a reset link</string>
     <string name="submit">Submit</string>
     <string name="add_beneficiary">ADD BENEFICIARY</string>
-    <string name="amount_to_be_sent">AMOUNT TO BE SENT</string>
     <string name="thank_you_for_using_this_service_n_if_your_transaction_was_successful_you_can_check_the_status_by_click_the_button_below">Thank you for using this service.   \n If your transaction was successful, check your balance first and then check the status of the transaction</string>
     <string name="Location_needed">Location is needed</string>
     <string name="put_on_your_gps">Location is needed to proceed</string>
     <string name="loading_please_wait">Loading, please wait...</string>
-    <string name="forbidden_by_network_">Forbidden by network</string>
-    <string name="server_might_not_be_available_">Oops! Server might not be available</string>
 
 
-    <string-array name="sim">
-        <item>Sim 1</item>
-        <item>Sim 2</item>
-    </string-array>
-    <string-array name="steps">
-        <item>Sender details</item>
-        <item>Receiver details</item>
-        <item>Summary</item>
-        <item>Status</item>
-    </string-array>
 </resources>

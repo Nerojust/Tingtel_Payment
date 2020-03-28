@@ -80,25 +80,32 @@ public class SignUpSim1Fragment extends Fragment {
 
     private void initListeners(View view) {
         btnSaveSim1NetworkDetails.setOnClickListener(v -> {
-            //todo: add validations
-
-            if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().equalsIgnoreCase("")) {
-                //TODO: correct phone number validation
-                tvPhoneNumber.setError("Kindly Input a valid phone number");
-                tvPhoneNumber.setFocusable(true);
-                return;
-            }
-            sessionManager.setSenderPhoneNumber(tvPhoneNumber.getText().toString());
-            Bundle bundle = new Bundle();
-            bundle.putString("Sim1Serial", Sim1Serial);
+            if (isValidFields()) {
+                sessionManager.setSenderPhoneNumber(tvPhoneNumber.getText().toString());
+                Bundle bundle = new Bundle();
+                bundle.putString("Sim1Serial", Sim1Serial);
 //                bundle.putString("Sim1Network", Sim1Network);
-            bundle.putString("Sim1Network", selectedSpinnerNetwork);
-            bundle.putString("Sim1PhoneNumber", tvPhoneNumber.getText().toString());
-            navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
+                bundle.putString("Sim1Network", selectedSpinnerNetwork);
+                bundle.putString("Sim1PhoneNumber", tvPhoneNumber.getText().toString());
+                navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
+            }
         });
     }
 
+    private boolean isValidFields() {
+        if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().isEmpty()) {
+            AppUtils.showSnackBar("Number is required", tvPhoneNumber);
+            tvPhoneNumber.requestFocus();
+            return false;
+        }
+        if (tvPhoneNumber.getText().toString().length() < 11) {
+            AppUtils.showSnackBar("Number is too short", tvPhoneNumber);
+            tvPhoneNumber.requestFocus();
+            return false;
+        }
 
+        return true;
+    }
 
 
     private void initViews(View view) {

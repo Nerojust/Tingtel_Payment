@@ -37,8 +37,8 @@ import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 public class SignInActivity extends GPSutils {
 
     private NavController navController;
-    private Button btnSingIn;
-    private TextView tvSignUp, forgotPasswordTextView;
+    private Button btnSingIn, tvSignUp;
+    private TextView forgotPasswordTextView;
     private TextInputEditText usernameEditext, passwordEditext;
     private CheckBox rememberMeCheckbox;
     private SessionManager sessionManager;
@@ -128,7 +128,11 @@ public class SignInActivity extends GPSutils {
                 if (error.equalsIgnoreCase("Invalid Hash Key"))
                     AppUtils.showSnackBar("Invalid credentials", usernameEditext);
                 else {
-                    AppUtils.showSnackBar(error, usernameEditext);
+                    if (error.contains("failed to connect")) {
+                        AppUtils.showSnackBar("Network error, please try again", usernameEditext);
+                    } else {
+                        AppUtils.showSnackBar(error, usernameEditext);
+                    }
                 }
 
                 AppUtils.dismissLoadingDialog();

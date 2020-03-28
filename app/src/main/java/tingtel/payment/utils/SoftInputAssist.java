@@ -14,7 +14,7 @@ public class SoftInputAssist {
     private Rect contentAreaOfWindowBounds = new Rect();
     private FrameLayout.LayoutParams rootViewLayout;
     private int usableHeightPrevious = 0;
-    private ViewTreeObserver.OnGlobalLayoutListener listener = () -> possiblyResizeChildOfContent();
+    private ViewTreeObserver.OnGlobalLayoutListener listener = this::possiblyResizeChildOfContent;
 
     public SoftInputAssist(Activity activity) {
         contentContainer = (ViewGroup) activity.findViewById(android.R.id.content);
@@ -55,4 +55,3 @@ public class SoftInputAssist {
         }
     }
 }
-

@@ -1,160 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tingtel_light_gray"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".fragments.signup.SignUpHomeFragment">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:fillViewport="true"
+        android:gravity="center|top"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:src="@drawable/tingtel_one" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:fillViewport="true">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/fragment_header"
-                android:gravity="center|top">
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_14ssp"
-                android:layout_marginTop="@dimen/_30ssp"
-                android:layout_marginBottom="@dimen/_19ssp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="2dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/_24sdp">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:fontFamily="@font/rubik_regular"
-                        android:text="@string/create_an_account"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_17ssp"
-                        android:textStyle="bold" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/_15sdp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_first_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/ic_person"
-                            android:fontFamily="@font/rubik_regular"
-                            android:hint="@string/enter_your_first_name"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_14ssp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="@dimen/_10sdp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_last_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/ic_person"
-                            android:fontFamily="@font/rubik_regular"
-                            android:hint="@string/etner_your_last_name"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_14ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_email_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/ic_mail"
-                            android:fontFamily="@font/rubik_regular"
-                            android:hint="@string/enter_your_email_address"
-                            android:inputType="textEmailAddress"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_14ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="@dimen/_10sdp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/ic_person"
-                            android:fontFamily="@font/rubik_regular"
-                            android:hint="@string/enter_your_username"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_14ssp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <Button
-                        android:id="@+id/btn_sign_up"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/dashboard_buttons"
+                        android:drawableRight="@drawable/ic_person"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="@string/sign_up"
-                        android:textColor="@color/white"
+                        android:hint="@string/enter_your_first_name"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColorHint="@color/white"
                         android:textSize="@dimen/_14ssp" />
 
-                    <TextView
-                        android:id="@+id/tv_login"
-                        android:layout_width="wrap_content"
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_last_name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_20ssp"
-                        android:layout_marginBottom="@dimen/_24ssp"
+                        android:drawableRight="@drawable/ic_person"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="@string/have_an_account_login"
-                        android:textSize="@dimen/_11ssp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+                        android:hint="@string/etner_your_last_name"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_14ssp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </ScrollView>
 
-</RelativeLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_email_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_mail"
+                        android:fontFamily="@font/rubik_regular"
+                        android:hint="@string/enter_your_email_address"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_14ssp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_3sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_person"
+                        android:fontFamily="@font/rubik_regular"
+                        android:hint="@string/enter_your_username"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_14ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@drawable/dashboard_buttons"
+            android:fontFamily="@font/rubik_regular"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10ssp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:layout_weight="0.05">
+
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/have_an_account_login"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold" />
+    </FrameLayout>
+</LinearLayout>

@@ -11,6 +11,7 @@
             <item name="windowActionBar">false</item>
             <item name="windowNoTitle">true</item>
             <item name="android:fontFamily">@font/rubik_regular</item>
+            <item name="windowActionModeOverlay">true</item>
         </style>
 
 

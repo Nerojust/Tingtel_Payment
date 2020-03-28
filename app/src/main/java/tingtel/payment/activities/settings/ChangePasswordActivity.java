@@ -3,7 +3,6 @@ package tingtel.payment.activities.settings;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -98,12 +97,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private boolean isValidFields() {
         if (edCurrentPassword.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Current Password is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Current password is required", edCurrentPassword);
             edCurrentPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edCurrentPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_characters), edCurrentPassword);
             edCurrentPassword.requestFocus();
             return false;
         }
@@ -112,14 +111,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
             edCurrentPassword.requestFocus();
             return false;
         }
-
         if (edNewPassword.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "New Password is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("New Password is required", edNewPassword);
             edNewPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edNewPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_characters), edNewPassword);
             edNewPassword.requestFocus();
             return false;
         }
@@ -129,12 +127,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         }
         if (edRenterNewPassword.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Field is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Field is required", edRenterNewPassword);
             edRenterNewPassword.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(edRenterNewPassword.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_characters), edRenterNewPassword);
             edRenterNewPassword.requestFocus();
             return false;
         }

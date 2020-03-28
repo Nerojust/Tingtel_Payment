@@ -3,7 +3,6 @@ package tingtel.payment.activities.settings;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -96,32 +95,32 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
     private boolean isValidFields() {
         if (edCurrentEmail.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Current Email is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Current email is required", edCurrentEmail);
             edCurrentEmail.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(edCurrentEmail.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Invalid email address", edCurrentEmail);
             edCurrentEmail.requestFocus();
             return false;
         }
         if (edNewEmail.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "New Email is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("New Email is required", edNewEmail);
             edNewEmail.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(edNewEmail.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Invalid email address", edNewEmail);
             edNewEmail.requestFocus();
             return false;
         }
         if (edRenterNewEmail.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Field is required", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Field is required", edRenterNewEmail);
             edRenterNewEmail.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(edRenterNewEmail.getText().toString().trim())) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            AppUtils.showSnackBar("Invalid email address", edRenterNewEmail);
             edRenterNewEmail.requestFocus();
             return false;
         }

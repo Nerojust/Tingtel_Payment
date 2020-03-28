@@ -12,6 +12,7 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SoftInputAssist;
 
 public class SignUpActivity extends AppCompatActivity {
     NavController navController;
@@ -20,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        new SoftInputAssist(this);
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(navhost);
 

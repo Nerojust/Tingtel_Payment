@@ -2,16 +2,17 @@ package tingtel.payment.activities.settings;
 
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    private EditText emailAddressEdittext;
+    private TextInputEditText emailAddressEdittext;
     private String retrievedEmailAaddress;
 
     @Override

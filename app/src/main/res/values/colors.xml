@@ -13,15 +13,12 @@
     <color name="ob_desc">#4A4A4A</color>
     <color name="tingtel_light_gray">#D4D4D6</color>
     <color name="tingtel_lighter_gray">#ECECF0</color>
-    <color name="colorSplash">#E83F07</color>
 
     <color name="tingtel_gray_color">#A39F9F</color>
     <color name="tingtel_white">#ffffff</color>
     <color name="tingtel_light_red">#F37171</color>
-    <color name="tingtel_black">#000000</color>
 
     <color name="corner">#B4B2B2</color>
     <color name="white">#FFFFFF</color>
-    <color name="tingtel_logo_color">#e93e06</color>
 
 </resources>
