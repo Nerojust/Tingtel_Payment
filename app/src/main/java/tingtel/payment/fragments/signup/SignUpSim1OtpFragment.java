@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -61,8 +60,9 @@ public class SignUpSim1OtpFragment extends Fragment {
         btnConfirmOtp.setOnClickListener(v -> {
 
             AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
-            if (appdatabase.simCardsDao().getSerial(Sim1Serial).size()  > 0) {
-                Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
+            if (appdatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
+                //Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
+                AppUtils.showDialog("This Sim has already been registered, kindly delete from setting and Re-register", getActivity());
             } else {
                 saveSimDetails();
             }
@@ -129,7 +129,7 @@ public class SignUpSim1OtpFragment extends Fragment {
 
     private void initViews(View view) {
         resendOtp = view.findViewById(R.id.resendOTPTextview);
-        pinView =view.findViewById(R.id.pinView);
+        pinView = view.findViewById(R.id.pinView);
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
 
         Sim1Network = Objects.requireNonNull(getArguments()).getString("Sim1Network");

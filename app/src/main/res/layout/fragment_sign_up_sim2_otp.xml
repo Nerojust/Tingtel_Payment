@@ -17,73 +17,84 @@
         android:gravity="center|top"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/rubik_regular"
-            android:text="@string/otp_verification"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView_noti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/rubik_regular"
-            android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
-            android:textAlignment="center"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_lock"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@string/otp_verification"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold" />
 
-        <com.chaos.view.PinView
-            android:id="@+id/pinView"
-            style="@style/PinWidget.PinView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textSize="@dimen/_15ssp"
-            app:itemCount="4"
-            app:itemHeight="48dp"
-            app:itemRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineColor="@android:color/darker_gray"
-            app:viewType="rectangle" />
+                <TextView
+                    android:id="@+id/textView_noti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@string/enter_the_4_digit_otp_sent_to_your_phone_or_email"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/resendOTPTextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/rubik_regular"
-            android:text="@string/didn_t_get_the_otp_resend_otp"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/pinView"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="@+id/pinView"
-            app:layout_constraintTop_toBottomOf="@+id/pinView" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_lock"
+                    android:textStyle="bold" />
 
+                <com.chaos.view.PinView
+                    android:id="@+id/pinView"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="@dimen/_15ssp"
+                    app:itemCount="4"
+                    app:itemHeight="48dp"
+                    app:itemRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lineColor="@android:color/darker_gray"
+                    app:viewType="rectangle" />
+
+                <TextView
+                    android:id="@+id/resendOTPTextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@string/didn_t_get_the_otp_resend_otp"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/pinView"
+                    app:layout_constraintHorizontal_bias="0.473"
+                    app:layout_constraintStart_toStartOf="@+id/pinView"
+                    app:layout_constraintTop_toBottomOf="@+id/pinView" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

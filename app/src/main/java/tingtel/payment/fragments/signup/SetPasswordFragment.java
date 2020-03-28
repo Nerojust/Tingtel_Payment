@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,7 @@ import com.google.gson.Gson;
 import java.util.Objects;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.models.Registration.CustomerRegistrationResponse;
 import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
 import tingtel.payment.models.Registration.Sim1;
@@ -57,8 +58,8 @@ public class SetPasswordFragment extends Fragment {
 
     }
 
-    private void goToMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+    private void gotoLoginActivity() {
+        Intent intent = new Intent(getActivity(), SignInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Objects.requireNonNull(getActivity()).startActivity(intent);
 
@@ -100,7 +101,8 @@ public class SetPasswordFragment extends Fragment {
             public void onSuccess(CustomerRegistrationResponse newUser) {
                 AppUtils.dismissLoadingDialog();
                 sessionManager.clearSharedPreferences();
-                goToMainActivity();
+                gotoLoginActivity();
+                Toast.makeText(getContext(), "Please login in with new details", Toast.LENGTH_LONG).show();
             }
 
             @Override
