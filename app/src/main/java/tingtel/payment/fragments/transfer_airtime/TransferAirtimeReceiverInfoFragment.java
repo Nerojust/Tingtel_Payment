@@ -44,9 +44,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             Manifest.permission.READ_CONTACTS
     };
     String[] spinnerPopulation;
-    SelectBeneficiarySheetFragment bottomSheetFragment;
-    NetworkSelectAdapter adapter;
-    RecyclerView recyclerView;
+    private SelectBeneficiarySheetFragment bottomSheetFragment;
+    private NetworkSelectAdapter adapter;
+    private RecyclerView recyclerView;
     private String[] spinnerTitles;
     private int[] spinnerImages;
     private String SenderSimNetwork;

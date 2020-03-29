@@ -18,7 +18,7 @@ import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
 
 public class ChangeEmailActivity extends AppCompatActivity {
 
-    EditText edCurrentEmail, edNewEmail, edRenterNewEmail;
+    EditText edNewEmail, edRenterNewEmail;
     Button btnChangeEmail;
     private SessionManager sessionManager;
 
@@ -41,7 +41,6 @@ public class ChangeEmailActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        edCurrentEmail = findViewById(R.id.current_email);
         edNewEmail = findViewById(R.id.new_email);
         edRenterNewEmail = findViewById(R.id.re_entered_email);
         btnChangeEmail = findViewById(R.id.btn_change_email);
@@ -84,25 +83,13 @@ public class ChangeEmailActivity extends AppCompatActivity {
     }
 
     private void clearViews() {
-        edCurrentEmail.setText("");
         edNewEmail.setText("");
         edRenterNewEmail.setText("");
-        edCurrentEmail.clearFocus();
         edNewEmail.clearFocus();
         edRenterNewEmail.clearFocus();
     }
 
     private boolean isValidFields() {
-        if (edCurrentEmail.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Current email is required", edCurrentEmail);
-            edCurrentEmail.requestFocus();
-            return false;
-        }
-        if (!AppUtils.isValidEmailAddress(edCurrentEmail.getText().toString().trim())) {
-            AppUtils.showSnackBar("Invalid email address", edCurrentEmail);
-            edCurrentEmail.requestFocus();
-            return false;
-        }
         if (edNewEmail.getText().toString().trim().isEmpty()) {
             AppUtils.showSnackBar("New Email is required", edNewEmail);
             edNewEmail.requestFocus();

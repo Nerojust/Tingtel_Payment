@@ -127,4 +127,5 @@ public class SignUpHomeFragment extends Fragment {
 
         return true;
     }
+
 }

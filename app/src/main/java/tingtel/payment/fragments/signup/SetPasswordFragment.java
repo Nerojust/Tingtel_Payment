@@ -108,7 +108,7 @@ public class SetPasswordFragment extends Fragment {
             @Override
             public void onError(String error) {
                 if (error.equalsIgnoreCase("invalid hash key")) {
-                    AppUtils.showSnackBar("Server error. Please try again later.", tvPassword1);
+                    AppUtils.showSnackBar("Server error. Please try again later.::"+error, tvPassword1);
                 } else {
                     AppUtils.showSnackBar(error, tvPassword1);
                 }

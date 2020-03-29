@@ -64,7 +64,6 @@ public class SignUpSim1OtpFragment extends Fragment {
 
             AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
             if (appdatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-                //Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
                 AppUtils.showDialog("This Sim has already been registered, kindly delete from setting and Re-register", getActivity());
             } else {
                 saveSimDetails();
@@ -78,7 +77,6 @@ public class SignUpSim1OtpFragment extends Fragment {
                 String NoOfSIm = sessionManager.getSimStatus();
 
                 switch (NoOfSIm) {
-
                     case "SIM1":
                         navController.navigate(R.id.action_signUpSim1OtpFragment_to_setPasswordFragment, null);
                         break;
@@ -99,7 +97,6 @@ public class SignUpSim1OtpFragment extends Fragment {
 
             @Override
             protected Void doInBackground(Void... voids) {
-
                 Date queryDate = Calendar.getInstance().getTime();
                 AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
 

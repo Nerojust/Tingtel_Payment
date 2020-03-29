@@ -77,21 +77,32 @@ public class SignUpSim2Fragment extends Fragment {
         });
     }
 
+    private boolean isValidFields() {
+        if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().isEmpty()) {
+            AppUtils.showSnackBar("Number is required", tvPhoneNumber);
+            tvPhoneNumber.requestFocus();
+            return false;
+        }
+        if (tvPhoneNumber.getText().toString().length() < 11) {
+            AppUtils.showSnackBar("Number is too short", tvPhoneNumber);
+            tvPhoneNumber.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
     private void initListeners(View view) {
         btnNext.setOnClickListener(v -> {
 //todo: add validations
-            if (tvPhoneNumber.getText().toString().equalsIgnoreCase("")) {
-                //TODO: correct phone number validation
-                tvPhoneNumber.setError("Kindly Input a valid phone number");
-                tvPhoneNumber.setFocusable(true);
-                return;
-            }
+            if (isValidFields()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Sim2Serial", Sim2Serial);
+                bundle.putString("Sim2Network", selectedSpinnerNetwork);
+                bundle.putString("Sim2PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
 
-            Bundle bundle = new Bundle();
-            bundle.putString("Sim2Serial", Sim2Serial);
-            bundle.putString("Sim2Network", selectedSpinnerNetwork);
-            bundle.putString("Sim2PhoneNumber", tvPhoneNumber.getText().toString());
-            navController.navigate(R.id.action_signUpSim2Fragment_to_signUpSim2OtpFragment2, bundle);
+                navController.navigate(R.id.action_signUpSim2Fragment_to_signUpSim2OtpFragment2, bundle);
+            }
         });
     }
 

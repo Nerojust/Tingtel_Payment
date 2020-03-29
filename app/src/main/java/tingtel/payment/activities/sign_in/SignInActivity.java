@@ -233,6 +233,12 @@ public class SignInActivity extends GPSutils {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
     interface MessageDialogInterface {
         void onClick();
     }

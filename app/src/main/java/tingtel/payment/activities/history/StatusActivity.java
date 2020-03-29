@@ -87,4 +87,10 @@ public class StatusActivity extends AppCompatActivity {
             Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 }

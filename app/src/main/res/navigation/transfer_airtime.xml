@@ -14,7 +14,9 @@
             android:id="@+id/action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2"
             app:destination="@id/transferAirtimeReceiverInfoFragment2"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/transferAirtimeReceiverInfoFragment2"
@@ -23,15 +25,18 @@
         tools:layout="@layout/fragment_transfer_airtime_receiver_info">
         <action
             android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_getTransferPinTutorialFragment2"
-            app:destination="@id/getTransferPinTutorialFragment2" />
+            app:destination="@id/getTransferPinTutorialFragment2"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_transferAirtimePreviewFragment2"
             app:destination="@id/transferAirtimePreviewFragment2"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_fade_exit" />
-        <action
-            android:id="@+id/action_transferAirtimeReceiverInfoFragment2_to_QRCodeScanActivity2"
-            app:destination="@id/QRCodeScanActivity2" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="simNetwork"
             app:argType="string" />
@@ -52,21 +57,15 @@
         tools:layout="@layout/fragment_transfer_airtime_preview">
         <action
             android:id="@+id/action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment"
-            app:destination="@id/transferAirtimeSuccessFragment" />
+            app:destination="@id/transferAirtimeSuccessFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <activity
-        android:id="@+id/QRCodeScanActivity2"
-        android:name="tingtel.payment.activities.qr_code.QRCodeScanActivity"
-        android:label="activity_qrcode_scan"
-        tools:layout="@layout/activity_qrcode_scan" />
     <fragment
         android:id="@+id/transferAirtimeSuccessFragment"
         android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimeSuccessFragment"
         android:label="fragment_transfer_airtime_success"
         tools:layout="@layout/fragment_transfer_airtime_success"/>
-    <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="tingtel.payment.fragments.dashboard.DashboardFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
 </navigation>

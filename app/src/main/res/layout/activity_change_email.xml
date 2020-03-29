@@ -28,24 +28,6 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/current_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_mail"
-                android:fontFamily="@font/rubik_regular"
-                android:hint="@string/enter_your_current_email_address"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textSize="@dimen/_13ssp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/new_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

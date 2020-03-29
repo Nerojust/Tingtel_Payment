@@ -33,6 +33,11 @@ public class SettingsActivity extends AppCompatActivity {
         initViews();
         initListeners();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 
     private void initViews() {
         backArrowLayout = findViewById(R.id.backArrowLayout);

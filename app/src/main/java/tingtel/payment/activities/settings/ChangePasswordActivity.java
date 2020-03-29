@@ -19,7 +19,7 @@ import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    private EditText edCurrentPassword, edNewPassword, edRenterNewPassword;
+    private EditText edNewPassword, edRenterNewPassword;
     private Button btnChangePassword;
     private SessionManager sessionManager;
 
@@ -28,6 +28,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         sessionManager = AppUtils.getSessionManagerInstance();
+
         initViews();
         initListeners();
     }
@@ -41,7 +42,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        edCurrentPassword = findViewById(R.id.current_password);
         edNewPassword = findViewById(R.id.new_password);
         edRenterNewPassword = findViewById(R.id.re_entered_password);
         btnChangePassword = findViewById(R.id.btn_set_password);
@@ -86,31 +86,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void clearViews() {
-        edCurrentPassword.setText("");
         edNewPassword.setText("");
         edRenterNewPassword.setText("");
-        edCurrentPassword.clearFocus();
         edNewPassword.clearFocus();
         edRenterNewPassword.clearFocus();
     }
 
 
     private boolean isValidFields() {
-        if (edCurrentPassword.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Current password is required", edCurrentPassword);
-            edCurrentPassword.requestFocus();
-            return false;
-        }
-        if (!AppUtils.isValidFieldsNumbersAndLetters(edCurrentPassword.getText().toString().trim())) {
-            AppUtils.showSnackBar(getResources().getString(R.string.invalid_characters), edCurrentPassword);
-            edCurrentPassword.requestFocus();
-            return false;
-        }
-        if (edCurrentPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", edCurrentPassword);
-            edCurrentPassword.requestFocus();
-            return false;
-        }
         if (edNewPassword.getText().toString().trim().isEmpty()) {
             AppUtils.showSnackBar("New Password is required", edNewPassword);
             edNewPassword.requestFocus();

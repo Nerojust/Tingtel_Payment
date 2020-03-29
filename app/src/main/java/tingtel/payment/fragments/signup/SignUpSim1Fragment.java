@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -45,6 +47,7 @@ public class SignUpSim1Fragment extends Fragment {
     private String NoOfSIm;
     private TextView tvSimInfo;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim1, container, false);
@@ -81,12 +84,13 @@ public class SignUpSim1Fragment extends Fragment {
     private void initListeners(View view) {
         btnSaveSim1NetworkDetails.setOnClickListener(v -> {
             if (isValidFields()) {
-                sessionManager.setSenderPhoneNumber(tvPhoneNumber.getText().toString());
+
                 Bundle bundle = new Bundle();
                 bundle.putString("Sim1Serial", Sim1Serial);
 //                bundle.putString("Sim1Network", Sim1Network);
                 bundle.putString("Sim1Network", selectedSpinnerNetwork);
-                bundle.putString("Sim1PhoneNumber", tvPhoneNumber.getText().toString());
+                bundle.putString("Sim1PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
+
                 navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
             }
         });
@@ -107,7 +111,6 @@ public class SignUpSim1Fragment extends Fragment {
         return true;
     }
 
-
     private void initViews(View view) {
         btnSaveSim1NetworkDetails = view.findViewById(R.id.btn_next);
         tvPhoneNumber = view.findViewById(R.id.tv_phone_number);
@@ -118,7 +121,6 @@ public class SignUpSim1Fragment extends Fragment {
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
-
 
     private void getDataFromCarrier(View view) {
         Sim1Network = sessionManager.getNetworkName();
