@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import com.baoyachi.stepview.VerticalStepView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +25,20 @@ public class StatusActivity extends AppCompatActivity {
     private VerticalStepView stepView;
     private ImageView backButtonImageview, homeImageview, settingsImageview;
     private TextView complaintTextview, referenceIdTextview;
+    private String simNumber;
+    private SessionManager sessionManager;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
+        sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews();
         initListeners();
+
+
     }
 
     private void initListeners() {
@@ -61,13 +66,18 @@ public class StatusActivity extends AppCompatActivity {
 
         String randomString = AppUtils.generateRandomString();
         referenceIdTextview.setText(randomString);
+        int clicked = sessionManager.getWhichSimWasClicked();
+        if (clicked == 0) {
+            phoneNumber = sessionManager.getSimPhoneNumber();
+        }else {
+            phoneNumber = sessionManager.getSimPhoneNumber1();
+        }
 
-        SessionManager sessionManager = AppUtils.getSessionManagerInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
+       // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
 
         List<String> list0 = new ArrayList<>();
-        list0.add(getResources().getString(R.string.naira) + sessionManager.getAmount() + " from " + sessionManager.getSimPhoneNumber() + "(You)");
+        list0.add(getResources().getString(R.string.naira) + sessionManager.getAmount() + " from " + phoneNumber + "(You)");
         list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
         list0.add("From TINGTEL");
         list0.add("To " + sessionManager.getReceiverPhoneNumber());
@@ -92,5 +102,13 @@ public class StatusActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         overridePendingTransition(R.anim.slide_in_left, R.anim.fade_out);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(StatusActivity.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

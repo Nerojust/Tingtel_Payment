@@ -50,6 +50,7 @@ public class SessionManager {
     private static final String ISSUE_JSON = "ISSUE_JSON";
     private static final String EMAIL_FROM_LOGIN = "EMAIL_FROM_LOGIN";
     private static final String NUMBER_FROM_LOGIN = "NUMBER_FROM_LOGIN";
+    private static final String SIM_NUMBER = "SIM_NUMBER";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -445,5 +446,13 @@ public class SessionManager {
 
     public void setEmailFromLogin(String emailFromLogin) {
         setStringPreference(EMAIL_FROM_LOGIN,emailFromLogin);
+    }
+
+    public int getWhichSimWasClicked(){
+        return getIntPreference(SIM_NUMBER);
+    }
+
+    public void setWhichSimWasClicked(int simNo) {
+        setIntPreference(SIM_NUMBER, simNo);
     }
 }

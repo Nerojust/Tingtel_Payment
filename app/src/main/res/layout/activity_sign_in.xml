@@ -59,9 +59,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
 
             <CheckBox
@@ -73,8 +75,19 @@
                 android:textColor="@color/tingtel_red_color"
                 android:textSize="@dimen/_10ssp" />
 
+            <TextView
+                android:id="@+id/fingerprint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_toRightOf="@id/rememberMeCheckbox"
+                android:fontFamily="@font/rubik_regular"
+                android:gravity="right"
+                android:text="Login with fingerprint"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
         <Button

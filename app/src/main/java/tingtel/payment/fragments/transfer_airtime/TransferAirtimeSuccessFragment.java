@@ -67,7 +67,11 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         checkBalanceButton.setOnClickListener(v -> checkBalance());
 
-        statusButton.setOnClickListener(v -> startActivity(new Intent(getContext(), StatusActivity.class)));
+        statusButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),StatusActivity.class);
+            intent.putExtra("simNo", SimNo);
+            startActivity(intent);
+        });
 
         saveBeneficiary.setOnClickListener(v -> {
             SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment(getActivity());

@@ -29,6 +29,7 @@ import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.utils.TingtelObserver;
 
@@ -220,7 +221,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         String UssdCode;
 
         if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
-            TingtelNumber = "08036128786";
+            TingtelNumber = Constants.TINGTEL_MTN;
             UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
             //Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
             dialUssdCode(
@@ -230,14 +231,14 @@ public class TransferAirtimePreviewFragment extends Fragment {
             );
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            TingtelNumber = "07089262158";
+            TingtelNumber = Constants.TINGTEL_AIRTEL;
 
             sendSms();
             Toast.makeText(getContext(), "Please click on send message icon to complete the process", Toast.LENGTH_SHORT).show();
             UssdCode = "";
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
 
-            TingtelNumber = "08174612405";
+            TingtelNumber = Constants.TINGTEL_9MOBILE;
             UssdCode = "*223*" + Pin + "*" + Amount + "*" + TingtelNumber + "#";
             dialUssdCode(
                     getActivity(),
@@ -246,8 +247,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             );
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
-            //08117636062
-            TingtelNumber = "09058815819";
+            TingtelNumber = Constants.TINGTEL_GLO;
             UssdCode = "*131*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
             dialUssdCode(
                     getActivity(),
@@ -255,14 +255,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
                     SimNo
             );
 
-
         } else {
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
             return;
         }
 
         saveHistory();
-
 
         Bundle bundle = new Bundle();
         bundle.putString("senderSimNetwork", SenderSimNetwork);

@@ -65,4 +65,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    //biometric
+    implementation 'androidx.biometric:biometric:1.0.1'
 }

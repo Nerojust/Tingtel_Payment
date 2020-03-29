@@ -5,19 +5,30 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
+import java.security.KeyStore;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+
+import javax.crypto.Cipher;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
@@ -36,13 +47,20 @@ import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
 public class SignInActivity extends GPSutils {
 
+    private static final String KEY_NAME = "Tingtel";
+    private static final String TAG = "Signinactivity";
     private NavController navController;
     private Button btnSingIn, tvSignUp;
-    private TextView forgotPasswordTextView;
+    private TextView forgotPasswordTextView, fingerprintTextview;
     private TextInputEditText usernameEditext, passwordEditext;
     private CheckBox rememberMeCheckbox;
     private SessionManager sessionManager;
-
+    private KeyStore keyStore;
+    private Cipher cipher;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    private String data;
+    private byte[] encryptedText;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -52,13 +70,83 @@ public class SignInActivity extends GPSutils {
         sessionManager = AppUtils.getSessionManagerInstance();
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
+
         initViews();
         initListeners();
         checkBoxRememberSettings();
+        startFingerprintAuthentication();
+    }
+
+    private void startFingerprintAuthentication() {
+        BiometricManager biometricManager = BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate()) {
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                fingerprintTextview.setVisibility(View.VISIBLE);
+                Log.d("MY_APP_TAG", "App can authenticate using biometrics.");
+
+                Executor executor = ContextCompat.getMainExecutor(this);
+                biometricPrompt = new BiometricPrompt(this,
+                        executor, new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                        //Toast.makeText(getApplicationContext(), "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
+                        usernameEditext.requestFocus();
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        // Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                Log.e("MY_APP_TAG", "No biometric features available on this device.");
+                //todo: show a different layout
+                fingerprintTextview.setVisibility(View.GONE);
+
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                Log.e("MY_APP_TAG", "Biometric features are currently unavailable.");
+                fingerprintTextview.setVisibility(View.GONE);
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                Log.e("MY_APP_TAG", "The user hasn't associated " +
+                        "any biometric credentials with their account.");
+                Toast.makeText(this, "Please register a fingerprint in settings", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for Tingtel")
+                .setSubtitle("Log in using your fingerprint")
+                .setNegativeButtonText("No, thanks.")
+                .build();
+
+        // Prompt appears when user clicks "Log in".
+        // Consider integrating with the keystore to unlock cryptographic operations,
+        // if needed by your app.
 
     }
 
+
     private void initListeners() {
+        fingerprintTextview.setOnClickListener(view -> {
+            biometricPrompt.authenticate(promptInfo);
+        });
         tvSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
             startActivity(intent);
@@ -170,6 +258,7 @@ public class SignInActivity extends GPSutils {
         });
         rememberMeCheckbox = findViewById(R.id.rememberMeCheckbox);
 
+        fingerprintTextview = findViewById(R.id.fingerprint);
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
         forgotPasswordTextView = findViewById(R.id.forgotPassword);
@@ -238,6 +327,7 @@ public class SignInActivity extends GPSutils {
         super.onStart();
         overridePendingTransition(R.anim.fragment_open_enter, R.anim.fade_out);
     }
+
     interface MessageDialogInterface {
         void onClick();
     }

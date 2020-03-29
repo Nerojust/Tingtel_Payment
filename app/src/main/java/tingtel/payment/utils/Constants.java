@@ -32,4 +32,10 @@ public class Constants {
     public static final String SUCCESS = "0000";
 
     public static final String TAG = "tingtel_tag";
+
+    public static final  String TINGTEL_MTN = "08036128786";
+    public static final  String TINGTEL_AIRTEL = "07089262158";
+    public static final  String TINGTEL_9MOBILE = "08174612405";
+    public static final  String TINGTEL_GLO = "09058815819";
+
 }

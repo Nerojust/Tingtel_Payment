@@ -301,6 +301,7 @@ public class TransferAirtimeFragment extends Fragment {
             }
 
             SimNo = 1;
+
             SimSerial = sessionManager.getSimSerialICCID1();
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
@@ -309,6 +310,7 @@ public class TransferAirtimeFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Click on a number first", Toast.LENGTH_SHORT).show();
         }
+        sessionManager.setWhichSimWasClicked(SimNo);
     }
 
     private void confirmSimRegistrations() {
