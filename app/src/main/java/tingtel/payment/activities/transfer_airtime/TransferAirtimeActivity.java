@@ -41,4 +41,9 @@ public class TransferAirtimeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+    }
 }

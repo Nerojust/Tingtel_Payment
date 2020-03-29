@@ -31,16 +31,10 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             if (sessionManager.getOnboardStatus()) {
-                //if (sessionManager.getIsRegistered()) {
                 Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
-//                } else {
-//                    Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
             } else {
                 Intent mainIntent = new Intent(SplashActivity.this, OnBoardActivity.class);
                 startActivity(mainIntent);
@@ -48,12 +42,6 @@ public class SplashActivity extends AppCompatActivity {
 
             finish();
         }, 2500);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
 

@@ -14,10 +14,4 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
 }

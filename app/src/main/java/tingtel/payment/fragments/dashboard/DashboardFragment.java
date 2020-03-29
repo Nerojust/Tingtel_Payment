@@ -41,9 +41,9 @@ public class DashboardFragment extends Fragment {
         TextView customerName = view.findViewById(R.id.customerName);
         //setting the retrieved customer name
         if (sessionManager.getFirstName() != null) {
-            customerName.setText("Hi "+sessionManager.getFirstName());
+            customerName.setText("Hi ".concat(sessionManager.getFirstName()));
         } else {
-            customerName.setText("Welcome Customer");
+            customerName.setText(getResources().getString(R.string.welcome_customer));
         }
         Button btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         Button btnHistory = view.findViewById(R.id.btn_history);
@@ -59,7 +59,6 @@ public class DashboardFragment extends Fragment {
             String NoOfSIm = sessionManager.getSimStatus();
 
             switch (NoOfSIm) {
-
                 case "NO SIM":
                     Intent intent = new Intent(getActivity(), SignUpActivity.class);
                     intent.putExtra("task", "registerSim1");
@@ -68,7 +67,6 @@ public class DashboardFragment extends Fragment {
                     break;
 
                 case "SIM1":
-
                     if (!sim1ExistsCheck()) {
                         Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
                         // navigateToSim1Register();
@@ -79,7 +77,6 @@ public class DashboardFragment extends Fragment {
                     }
                     break;
                 case "SIM1 SIM2":
-
                     if (!sim1ExistsCheck()) {
                         Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
                         // navigateToSim1Register();
@@ -101,8 +98,6 @@ public class DashboardFragment extends Fragment {
             }
 
             navController.navigate(R.id.action_mainFragment_to_transferAirtimeActivity, null);
-            //navController.navigate(R.id.action_mainFragment_to_transferAirtimeSuccessFragment2, null);
-
         });
 
         btnHistory.setOnClickListener(v -> {

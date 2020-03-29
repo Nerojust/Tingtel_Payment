@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/img_network"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 tools:src="@drawable/mtn_logo" />
 
             <LinearLayout
@@ -43,10 +43,10 @@
                     android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
-                    tools:text="mtn"
                     android:textAllCaps="true"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="bold"
+                    tools:text="mtn" />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -56,11 +56,11 @@
                     android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
-                    android:textColor="@color/tingtel_red_color"
                     android:textAllCaps="true"
-                    android:textSize="@dimen/_13ssp"
-                    tools:text="NAME"
-                    android:textStyle="bold" />
+                    android:textColor="@color/tingtel_red_color"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"
+                    tools:text="NAME" />
 
                 <TextView
                     android:id="@+id/tv_phone_number"
@@ -69,9 +69,9 @@
                     android:layout_marginLeft="@dimen/_7ssp"
                     android:layout_toRightOf="@+id/img_network"
                     android:fontFamily="@font/rubik_regular"
-                    tools:text="@string/phone_number"
-                    android:textSize="@dimen/_11ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:text="@string/phone_number" />
             </LinearLayout>
 
             <View

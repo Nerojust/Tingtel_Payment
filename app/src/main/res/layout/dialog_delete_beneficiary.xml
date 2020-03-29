@@ -25,6 +25,7 @@
             android:fontFamily="@font/rubik_regular"
             android:text="@string/do_you_want_to_delete_this_beneficiary"
             android:textAlignment="center"
+            android:textSize="@dimen/_13ssp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <LinearLayout

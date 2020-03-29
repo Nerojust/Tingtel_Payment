@@ -18,7 +18,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:src="@drawable/tingtel_one" />
 
         <com.google.android.material.textfield.TextInputLayout

@@ -106,6 +106,7 @@
     <string name="Location_needed">Location is needed</string>
     <string name="put_on_your_gps">Location is needed to proceed</string>
     <string name="loading_please_wait">Loading, please wait...</string>
+    <string name="welcome_customer">Welcome Customer</string>
 
 
 </resources>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="55dp"
-        android:gravity="start"
+        android:gravity="center"
         android:text=""
         android:textColor="@color/tingtel_light_red"
         android:textSize="@dimen/_13ssp"
@@ -45,10 +45,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="@string/from"
                     android:textColor="@color/tingtel_gray_color"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_9ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:maxLines="1"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
                     tools:text="08023456789" />
 
@@ -93,10 +93,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="@string/to"
                     android:textColor="@color/tingtel_gray_color"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_9ssp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,7 +109,7 @@
                     android:gravity="start"
                     android:text=""
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
                     tools:text="08023456789" />
 
@@ -164,7 +164,7 @@
                 android:fontFamily="@font/rubik_regular"
                 android:text=""
                 android:textColor="@color/tingtel_light_red"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 tools:text="N450.00" />
 

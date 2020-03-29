@@ -53,9 +53,4 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
         return true;
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
 }

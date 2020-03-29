@@ -13,10 +13,4 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
 }

@@ -91,6 +91,6 @@ public class StatusActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.fade_out);
     }
 }

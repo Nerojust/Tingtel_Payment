@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
     }
 
     @Override
