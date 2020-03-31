@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import tingtel.payment.R;
-import tingtel.payment.models.Report_Issue.ReportIssueResponse;
-import tingtel.payment.models.Report_Issue.ReportIssueSendObject;
+import tingtel.payment.models.report_Issue.ReportIssueResponse;
+import tingtel.payment.models.report_Issue.ReportIssueSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;

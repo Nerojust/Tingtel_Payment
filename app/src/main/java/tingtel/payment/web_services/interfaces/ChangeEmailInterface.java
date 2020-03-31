@@ -1,7 +1,7 @@
 package tingtel.payment.web_services.interfaces;
 
 
-import tingtel.payment.models.Change_Email.ChangeEmailResponse;
+import tingtel.payment.models.change_Email.ChangeEmailResponse;
 
 public interface ChangeEmailInterface {
     void onSuccess(ChangeEmailResponse changeEmailResponse);

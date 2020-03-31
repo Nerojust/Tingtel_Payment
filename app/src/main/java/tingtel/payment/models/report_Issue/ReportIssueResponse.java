@@ -1,9 +1,9 @@
-package tingtel.payment.models.Registration;
+package tingtel.payment.models.report_Issue;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CustomerRegistrationResponse {
+public class ReportIssueResponse {
 
     @SerializedName("code")
     @Expose

@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import tingtel.payment.R;
-import tingtel.payment.models.Change_Email.ChangeEmailResponse;
-import tingtel.payment.models.Change_Email.ChangeEmailSendObject;
+import tingtel.payment.models.change_Email.ChangeEmailResponse;
+import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;

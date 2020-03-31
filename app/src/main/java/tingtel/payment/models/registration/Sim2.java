@@ -1,4 +1,4 @@
-package tingtel.payment.models.Registration;
+package tingtel.payment.models.registration;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

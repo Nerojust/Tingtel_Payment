@@ -1,4 +1,4 @@
-package tingtel.payment.models.Change_Email;
+package tingtel.payment.models.change_Email;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

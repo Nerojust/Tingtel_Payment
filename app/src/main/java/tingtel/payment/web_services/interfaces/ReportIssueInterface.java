@@ -1,7 +1,7 @@
 package tingtel.payment.web_services.interfaces;
 
 
-import tingtel.payment.models.Report_Issue.ReportIssueResponse;
+import tingtel.payment.models.report_Issue.ReportIssueResponse;
 
 public interface ReportIssueInterface {
     void onSuccess(ReportIssueResponse reportIssueResponse);

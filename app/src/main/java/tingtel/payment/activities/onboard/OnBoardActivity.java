@@ -22,7 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.sign_up.SignUpActivity;
+import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.adapters.OnBoardAdapter;
 import tingtel.payment.models.OnBoardItem;
 import tingtel.payment.utils.AppUtils;
@@ -131,7 +131,7 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(OnBoardActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(OnBoardActivity.this, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

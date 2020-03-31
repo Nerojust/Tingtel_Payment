@@ -1,26 +1,40 @@
-package tingtel.payment.models.Login;
+package tingtel.payment.models.change_Password;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CustomerLoginSendObject {
+public class ChangePasswordSendObject {
 
-    @SerializedName("username")
+    @SerializedName("email")
     @Expose
-    private String username;
+    private String email;
+
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
     @SerializedName("password")
     @Expose
     private String password;
+
     @SerializedName("hash")
     @Expose
     private String hash;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -38,5 +52,4 @@ public class CustomerLoginSendObject {
     public void setHash(String hash) {
         this.hash = hash;
     }
-
 }
