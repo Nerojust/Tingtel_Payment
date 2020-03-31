@@ -35,8 +35,8 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.ForgotPasswordActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
-import tingtel.payment.models.Login.CustomerLoginResponse;
-import tingtel.payment.models.Login.CustomerLoginSendObject;
+import tingtel.payment.models.login.CustomerLoginResponse;
+import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.GPSutils;
@@ -100,7 +100,7 @@ public class SignInActivity extends GPSutils {
                         super.onAuthenticationSucceeded(result);
                         // Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        loginUserWithFingerprint();
                     }
 
                     @Override
@@ -145,7 +145,11 @@ public class SignInActivity extends GPSutils {
 
     private void initListeners() {
         fingerprintTextview.setOnClickListener(view -> {
-            biometricPrompt.authenticate(promptInfo);
+            if (sessionManager.getPassword() != null) {
+                biometricPrompt.authenticate(promptInfo);
+            } else {
+                AppUtils.showDialog("Please login with your password first to use this", this);
+            }
         });
         tvSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
@@ -159,7 +163,8 @@ public class SignInActivity extends GPSutils {
                     if (isValidFields()) {
                         sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
                         sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
-                        loginUser();
+
+                        loginUserWithPassword();
                     }
                 } else {
                     showDialogMessage(getString(R.string.put_on_your_gps), () -> {
@@ -180,7 +185,7 @@ public class SignInActivity extends GPSutils {
     /**
      * this method handles the logging in of the user.
      */
-    private void loginUser() {
+    private void loginUserWithPassword() {
         AppUtils.initLoadingDialog(this);
 
         String username = Objects.requireNonNull(usernameEditext.getText()).toString().trim();
@@ -200,9 +205,71 @@ public class SignInActivity extends GPSutils {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
-                sessionManager.setFirstName(loginResponses.getUserInfo().get(0).getFirstName());
-                sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
-                sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
+                sessionManager.setPassword(password);
+                sessionManager.setIsRegistered(true);
+                saveDetailsToPref(loginResponses);
+
+
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onError(String error) {
+                if (error.equalsIgnoreCase("Invalid Hash Key"))
+                    AppUtils.showSnackBar("Invalid credentials", usernameEditext);
+                else {
+                    if (error.contains("failed to connect")) {
+                        AppUtils.showSnackBar("Network error, please try again", usernameEditext);
+                    } else {
+                        AppUtils.showSnackBar(error, usernameEditext);
+                    }
+                }
+
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.dismissLoadingDialog();
+                AppUtils.showSnackBar(String.valueOf(errorCode), usernameEditext);
+            }
+        });
+
+    }
+
+    private void saveDetailsToPref(CustomerLoginResponse loginResponses) {
+        sessionManager.setFirstName(loginResponses.getUserInfo().get(0).getFirstName());
+        sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
+        sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
+    }
+
+    /**
+     * this method handles the logging in of the user.
+     */
+    private void loginUserWithFingerprint() {
+        AppUtils.initLoadingDialog(this);
+
+        String username = Objects.requireNonNull(usernameEditext.getText()).toString().trim();
+        String password = Objects.requireNonNull(sessionManager.getPassword());
+
+        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
+        loginSendObject.setUsername(username);
+        loginSendObject.setPassword(password);
+        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(loginSendObject);
+        AppUtils.getSessionManagerInstance().setLoginJsonObject(jsonObject);
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
+            @Override
+            public void onSuccess(CustomerLoginResponse loginResponses) {
+                AppUtils.dismissLoadingDialog();
+                saveDetailsToPref(loginResponses);
 
                 sessionManager.setIsRegistered(true);
 
@@ -253,7 +320,7 @@ public class SignInActivity extends GPSutils {
         passwordEditext.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (isValidFields()) {
-                    loginUser();
+                    loginUserWithPassword();
                 }
             }
             return false;
