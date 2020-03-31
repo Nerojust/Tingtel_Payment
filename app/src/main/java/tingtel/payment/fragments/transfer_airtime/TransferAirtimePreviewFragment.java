@@ -68,6 +68,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private ImageView imgReceiver;
     private NavController navController;
     private ImageView homeImageview, settingsImagview, backButtonImageview;
+    private boolean paused;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,7 +111,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
-        btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
+        btnTransfer.setOnClickListener(v -> {
+           if (btnTransfer.getText().toString().equalsIgnoreCase("transfer")) {
+               runAirtimeTransferUssd();
+           }else if (btnTransfer.getText().toString().equalsIgnoreCase("verify")){
+               sendDetailsToServerToCredit();
+           }
+        });
     }
 
 
@@ -265,27 +272,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        //Toast.makeText(getContext(), "onresume was called " + called++, Toast.LENGTH_SHORT).show();
-        buttonClicked = false;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //Toast.makeText(getContext(), "onresume was called " + called1++, Toast.LENGTH_SHORT).show();
+    public void onPause() {
+        super.onPause();
+        paused = true;
         new Handler().postDelayed(() -> {
             if (buttonClicked) {
-                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getContext()))) {
-                    sendDetailsToServerToCredit();
-                } else {
-                    AppUtils.showSnackBar("No network available", tvServiceFee);
+                if (paused) {
+                    btnTransfer.setText("Verify");
+                    btnTransfer.setBackgroundColor(getResources().getColor(R.color.foreground_color));
                 }
             }
-        }, 1200);
-
+        }, 2000);
     }
+
 
     private void sendDetailsToServerToCredit() {
         AppUtils.initLoadingDialog(getContext());
@@ -302,6 +301,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         Gson gson = new Gson();
         String object = gson.toJson(sendCreditDetailsSendObject);
+        sessionManager.setCreditRequestJsonObject(object);
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.sendCreditDetailsToServer(sendCreditDetailsSendObject, new SendCreditDetailsInterface() {
@@ -324,6 +324,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
             @Override
             public void onError(String error) {
                 AppUtils.showDialog(error, getActivity());
+                //retry
+                //sendDetailsToServerToCredit();
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -387,6 +389,4 @@ public class TransferAirtimePreviewFragment extends Fragment {
         startActivity(sendIntent);
 
     }
-
-
 }

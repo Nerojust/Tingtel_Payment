@@ -12,9 +12,9 @@ public class Constants {
     public static final String USERNAME = "tingtel";
     public static final String PASSWORD = BuildConfig.HEADER_PASSWORD;
 
-    public static final long CONNECTION_TIMEOUT = 40;
-    public static final long READ_TIMEOUT = 40;
-    public static final long WRITE_TIMEOUT = 40;
+    public static final long CONNECTION_TIMEOUT = 1;
+    public static final long READ_TIMEOUT = 30;
+    public static final long WRITE_TIMEOUT = 30;
 
     //This error code signifies Invalid user credentials
     public static final String INVALID_CREDENTIALS = "9996";

@@ -206,7 +206,7 @@ public class SignInActivity extends GPSutils {
         webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
-                AppUtils.dismissLoadingDialog();
+
                 sessionManager.setPassword(password);
                 sessionManager.setIsRegistered(true);
                 saveDetailsToPref(loginResponses);
@@ -215,7 +215,7 @@ public class SignInActivity extends GPSutils {
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-
+                AppUtils.dismissLoadingDialog();
             }
 
             @Override

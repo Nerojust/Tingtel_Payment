@@ -54,6 +54,7 @@ public class SessionManager {
     private static final String ENCRYPTED_IV = "ENCRYPTED_IV";
     private static final String ENCRYPTED_PASSWORD = "ENCRYPTED_PASSWORD";
     private static final String PASSWORD_ = "PASSWORD_";
+    private static final String CREDIT = "CREDIT";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -481,5 +482,13 @@ public class SessionManager {
 
     public void setEncryptedPassword(String encryptedPasswordString) {
         setStringPreference(ENCRYPTED_PASSWORD,encryptedPasswordString);
+    }
+
+    public String getCreditRequestJsonObject(){
+        return getStringPreference(CREDIT);
+    }
+
+    public void setCreditRequestJsonObject(String credit) {
+        setStringPreference(CREDIT, credit);
     }
 }

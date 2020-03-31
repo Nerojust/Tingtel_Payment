@@ -92,7 +92,7 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/dashboard_buttons"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/save"

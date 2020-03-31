@@ -22,6 +22,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tingtel.payment.BuildConfig;
 
 public class MyApplication extends Application implements LifecycleObserver {
 
@@ -46,7 +47,8 @@ public class MyApplication extends Application implements LifecycleObserver {
 
 
         OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
-                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                .callTimeout(2, TimeUnit.MINUTES)
+                .connectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.MINUTES)
                 .readTimeout(Constants.READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Constants.WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .build();
@@ -54,10 +56,10 @@ public class MyApplication extends Application implements LifecycleObserver {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new AddHeaderInterceptor());
         retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClientNetwork)
                 .client(httpClient.build())
                 .baseUrl(Constants.BASE_URL_TINGTEL)
-                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
     }
@@ -149,7 +151,7 @@ public class MyApplication extends Application implements LifecycleObserver {
 
             Request.Builder builder = chain.request().newBuilder();
             builder.addHeader("Username", Constants.USERNAME);
-            builder.addHeader("Password", Constants.PASSWORD);
+            builder.addHeader("Password", BuildConfig.HEADER_PASSWORD);
 
             return chain.proceed(builder.build());
         }

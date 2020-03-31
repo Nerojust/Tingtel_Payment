@@ -22,12 +22,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
         String reg = sessionManager.getRegistrationJsonObject();
         String login = sessionManager.getLoginJsonObject();
         String pass = sessionManager.getPasswordJsonObject();
         String email = sessionManager.getEmailJsonObject();
         String reportIssue = sessionManager.getReportIssueJsonObject();
+        String creditUser = sessionManager.getCreditRequestJsonObject();
 
         new Handler().postDelayed(() -> {
             if (sessionManager.getOnboardStatus()) {
