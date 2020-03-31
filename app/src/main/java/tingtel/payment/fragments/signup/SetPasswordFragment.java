@@ -52,7 +52,12 @@ public class SetPasswordFragment extends Fragment {
     private void initListeners(View view) {
         btnSetPassword.setOnClickListener(v -> {
             if (isValidFields()) {
-                registerUser();
+
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getContext()))) {
+                    registerUser();
+                } else {
+                    AppUtils.showSnackBar("No network available", tvPassword1);
+                }
             }
         });
 
@@ -88,7 +93,7 @@ public class SetPasswordFragment extends Fragment {
         customerRegistrationSendObject.setSim1(sim1);
         customerRegistrationSendObject.setSim2(sim2);
         customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
-        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(),sessionManager.getSimPhoneNumber()));
+        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(customerRegistrationSendObject);
@@ -108,7 +113,7 @@ public class SetPasswordFragment extends Fragment {
             @Override
             public void onError(String error) {
                 if (error.equalsIgnoreCase("invalid hash key")) {
-                    AppUtils.showSnackBar("Server error. Please try again later.::"+error, tvPassword1);
+                    AppUtils.showSnackBar("Server error. Please try again later.::" + error, tvPassword1);
                 } else {
                     AppUtils.showSnackBar(error, tvPassword1);
                 }

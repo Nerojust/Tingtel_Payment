@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.gson.Gson;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.text.DecimalFormat;
@@ -23,28 +25,35 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
+import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
+import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.utils.TingtelObserver;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
 
-    Boolean buttonClicked;
-    Button btnTransfer;
+    private Boolean buttonClicked = false;
+    private Button btnTransfer;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
     private String ReceiverPhoneNumber;
     private String Pin;
     private int SimNo;
+    private int called = 0;
+    private int called1 = 0;
     private String final_Amount;
     private String Amount;
     private String SimSerial;
@@ -85,15 +94,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         return view;
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        buttonClicked = false;
-    }
-
-
-
     /**
      * instantiate listeners for click events.
      */
@@ -111,8 +111,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransfer.setOnClickListener(v -> runAirtimeTransferUssd());
-
-
     }
 
 
@@ -262,16 +260,79 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         saveHistory();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("senderSimNetwork", SenderSimNetwork);
-        bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
-        bundle.putString("simSerial", SimSerial);
-        bundle.putInt("simNo", SimNo);
-        bundle.putString("amount", Amount);
-        bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
-        navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
 
         buttonClicked = true;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //Toast.makeText(getContext(), "onresume was called " + called++, Toast.LENGTH_SHORT).show();
+        buttonClicked = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Toast.makeText(getContext(), "onresume was called " + called1++, Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> {
+            if (buttonClicked) {
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getContext()))) {
+                    sendDetailsToServerToCredit();
+                } else {
+                    AppUtils.showSnackBar("No network available", tvServiceFee);
+                }
+            }
+        }, 1200);
+
+    }
+
+    private void sendDetailsToServerToCredit() {
+        AppUtils.initLoadingDialog(getContext());
+
+        SendCreditDetailsSendObject sendCreditDetailsSendObject = new SendCreditDetailsSendObject();
+        sendCreditDetailsSendObject.setAmount(Amount);
+        sendCreditDetailsSendObject.setBeneficiaryMsisdn(ReceiverPhoneNumber);
+        sendCreditDetailsSendObject.setBeneficiaryNetwork(ReceiverSimNetwork);
+        sendCreditDetailsSendObject.setSourceNetwork(SenderSimNetwork);
+        sendCreditDetailsSendObject.setUserPhone(SenderPhoneNumber);
+        String random = AppUtils.generateRandomString();
+        sendCreditDetailsSendObject.setRef(random);
+        sendCreditDetailsSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        Gson gson = new Gson();
+        String object = gson.toJson(sendCreditDetailsSendObject);
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.sendCreditDetailsToServer(sendCreditDetailsSendObject, new SendCreditDetailsInterface() {
+            @Override
+            public void onSuccess(SendCreditDetailsResponse changeEmailResponse) {
+                Bundle bundle = new Bundle();
+                bundle.putString("senderSimNetwork", SenderSimNetwork);
+                bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
+                bundle.putString("simSerial", SimSerial);
+                bundle.putInt("simNo", SimNo);
+                bundle.putString("amount", Amount);
+                bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
+
+                AppUtils.dismissLoadingDialog();
+
+                navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
+
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, getActivity());
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showDialog(String.valueOf(errorCode), getActivity());
+                AppUtils.dismissLoadingDialog();
+            }
+        });
     }
 
     /**

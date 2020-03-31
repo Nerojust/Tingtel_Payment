@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.models.change_Password.ChangePasswordResponse;
 import tingtel.payment.models.change_Password.ChangePasswordSendObject;
@@ -36,7 +38,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void initListeners() {
         btnChangePassword.setOnClickListener(v -> {
             if (isValidFields()) {
-                changePasswordForUser();
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                    changePasswordForUser();
+                } else {
+                    AppUtils.showSnackBar("No network available", btnChangePassword);
+                }
             }
         });
     }

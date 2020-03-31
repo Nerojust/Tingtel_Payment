@@ -99,8 +99,11 @@ public class SignInActivity extends GPSutils {
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
                         // Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-
-                        loginUserWithFingerprint();
+                        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(SignInActivity.this))) {
+                            loginUserWithFingerprint();
+                        } else {
+                            AppUtils.showSnackBar("No network available", passwordEditext);
+                        }
                     }
 
                     @Override
@@ -136,10 +139,6 @@ public class SignInActivity extends GPSutils {
                 .setNegativeButtonText("No, thanks.")
                 .build();
 
-        // Prompt appears when user clicks "Log in".
-        // Consider integrating with the keystore to unlock cryptographic operations,
-        // if needed by your app.
-
     }
 
 
@@ -154,17 +153,20 @@ public class SignInActivity extends GPSutils {
         tvSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
             startActivity(intent);
-
         });
 
         btnSingIn.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(this)) {
                 if (AppUtils.isLocationEnabled(this)) {
                     if (isValidFields()) {
-                        sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
-                        sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
+                        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                            sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
+                            sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
 
-                        loginUserWithPassword();
+                            loginUserWithPassword();
+                        } else {
+                            AppUtils.showSnackBar("No network available", passwordEditext);
+                        }
                     }
                 } else {
                     showDialogMessage(getString(R.string.put_on_your_gps), () -> {

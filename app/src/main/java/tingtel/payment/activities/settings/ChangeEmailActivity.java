@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
@@ -35,7 +37,12 @@ public class ChangeEmailActivity extends AppCompatActivity {
     private void initListeners() {
         btnChangeEmail.setOnClickListener(v -> {
             if (isValidFields()) {
-                changeEmailForUser();
+
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                    changeEmailForUser();
+                } else {
+                    AppUtils.showSnackBar("No network available", btnChangeEmail);
+                }
             }
         });
     }

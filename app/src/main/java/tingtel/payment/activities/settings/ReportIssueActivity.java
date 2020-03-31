@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
@@ -34,7 +36,11 @@ public class ReportIssueActivity extends AppCompatActivity {
         btnReport.setOnClickListener(v -> {
             if (!edDetails.getText().toString().trim().isEmpty()) {
                 if (edDetails.getText().toString().length() > 10) {
-                    sendReport();
+                    if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                        sendReport();
+                    } else {
+                        AppUtils.showSnackBar("No network available", edDetails);
+                    }
                 } else {
                     AppUtils.showSnackBar("Message is too short", edDetails);
                 }
@@ -44,6 +50,7 @@ public class ReportIssueActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -82,7 +89,7 @@ public class ReportIssueActivity extends AppCompatActivity {
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.dismissLoadingDialog();
-                AppUtils.showSnackBar(String.valueOf(errorCode),edDetails);
+                AppUtils.showSnackBar(String.valueOf(errorCode), edDetails);
             }
         });
     }

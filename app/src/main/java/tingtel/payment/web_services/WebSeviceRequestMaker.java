@@ -22,6 +22,8 @@ import tingtel.payment.models.registration.CustomerRegistrationResponse;
 import tingtel.payment.models.registration.CustomerRegistrationSendObject;
 import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
+import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
+import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
@@ -30,6 +32,7 @@ import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 import tingtel.payment.web_services.interfaces.ReportIssueInterface;
+import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 
 public class WebSeviceRequestMaker {
 
@@ -244,6 +247,41 @@ public class WebSeviceRequestMaker {
                     reportIssueInterface.onError("Network Error, please try again");
                 } else {
                     reportIssueInterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void sendCreditDetailsToServer(SendCreditDetailsSendObject transactionHistorySendObject, SendCreditDetailsInterface sendCreditDetailsInterface) {
+        Call<SendCreditDetailsResponse> call = postInterfaceService. sendCreditInfoToServer(transactionHistorySendObject);
+        call.enqueue(new Callback<SendCreditDetailsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SendCreditDetailsResponse> call, @NonNull Response<SendCreditDetailsResponse> response) {
+                if (response.isSuccessful()) {
+                    SendCreditDetailsResponse sendCreditDetailsResponse = response.body();
+
+                    if (sendCreditDetailsResponse != null) {
+                        if (sendCreditDetailsResponse.getCode().equals(Constants.SUCCESS)) {
+                            sendCreditDetailsInterface.onSuccess(sendCreditDetailsResponse);
+                        } else {
+                            sendCreditDetailsInterface.onError(sendCreditDetailsResponse.getDescription());
+                        }
+                    }
+                } else {
+                    sendCreditDetailsInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SendCreditDetailsResponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    sendCreditDetailsInterface.onError("Network Error, please try again");
+                } else {
+                    sendCreditDetailsInterface.onError(t.getMessage());
                 }
                 String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
                 Log.e("Login error", error);

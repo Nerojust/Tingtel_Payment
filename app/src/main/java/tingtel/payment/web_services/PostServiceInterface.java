@@ -15,6 +15,8 @@ import tingtel.payment.models.registration.CustomerRegistrationResponse;
 import tingtel.payment.models.registration.CustomerRegistrationSendObject;
 import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
+import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
+import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
 
 public interface PostServiceInterface {
 
@@ -35,4 +37,7 @@ public interface PostServiceInterface {
 
     @POST("Report_Issue")
     Call<ReportIssueResponse> reportIssue(@Body ReportIssueSendObject reportIssueSendObject);
+
+    @POST("credit_notification_push")
+    Call<SendCreditDetailsResponse> sendCreditInfoToServer(@Body SendCreditDetailsSendObject transactionHistorySendObject);
 }

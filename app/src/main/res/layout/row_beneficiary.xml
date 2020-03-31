@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="@dimen/_5ssp"
-    android:paddingTop="@dimen/_7ssp">
+    android:layout_marginHorizontal="@dimen/_7ssp"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_4ssp"
-        app:cardElevation="@dimen/_4ssp"
-        app:cardMaxElevation="@dimen/_4ssp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="2dp"
         app:cardPreventCornerOverlap="false">
 
         <LinearLayout

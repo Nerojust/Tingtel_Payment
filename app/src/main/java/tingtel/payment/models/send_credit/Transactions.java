@@ -1,4 +1,4 @@
-package tingtel.payment.models.transaction_history;
+package tingtel.payment.models.send_credit;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

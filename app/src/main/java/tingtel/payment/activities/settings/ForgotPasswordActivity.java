@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Objects;
+
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
 
@@ -27,8 +29,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             retrievedEmailAaddress = emailAddressEdittext.getText().toString();
 
             if (isValidFields()) {
-                //send password to email
-                Toast.makeText(this, "Password sent", Toast.LENGTH_SHORT).show();
+
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                    //send password to email
+                    Toast.makeText(this, "Password sent", Toast.LENGTH_SHORT).show();
+                } else {
+                    AppUtils.showSnackBar("No network available", emailAddressEdittext);
+                }
+
             }
             //todo: make retrofit call to the forgot password endpoint and handle the response
 
