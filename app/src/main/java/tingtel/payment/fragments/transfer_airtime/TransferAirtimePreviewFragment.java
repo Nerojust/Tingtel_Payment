@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import tingtel.payment.utils.TingtelObserver;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 
+import static android.content.ContentValues.TAG;
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
@@ -112,11 +114,11 @@ public class TransferAirtimePreviewFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransfer.setOnClickListener(v -> {
-           if (btnTransfer.getText().toString().equalsIgnoreCase("transfer")) {
-               runAirtimeTransferUssd();
-           }else if (btnTransfer.getText().toString().equalsIgnoreCase("verify")){
-               sendDetailsToServerToCredit();
-           }
+            if (btnTransfer.getText().toString().equalsIgnoreCase("transfer")) {
+                runAirtimeTransferUssd();
+            } else if (btnTransfer.getText().toString().equalsIgnoreCase("verify")) {
+                sendDetailsToServerToCredit();
+            }
         });
     }
 
@@ -275,14 +277,19 @@ public class TransferAirtimePreviewFragment extends Fragment {
     public void onPause() {
         super.onPause();
         paused = true;
-        new Handler().postDelayed(() -> {
-            if (buttonClicked) {
-                if (paused) {
-                    btnTransfer.setText("Verify");
-                    btnTransfer.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+        try {
+            new Handler().postDelayed(() -> {
+                if (buttonClicked) {
+                    if (paused) {
+                        btnTransfer.setText("Verify");
+                        btnTransfer.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+                    }
                 }
-            }
-        }, 2000);
+            }, 2000);
+        } catch (Exception e) {
+
+            Log.e(TAG, "onPause: " + e.getMessage());
+        }
     }
 
 
