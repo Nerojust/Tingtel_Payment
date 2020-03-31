@@ -1,11 +1,9 @@
-package tingtel.payment.models.Login;
+package tingtel.payment.models.change_Email;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class CustomerLoginResponse {
+public class ChangeEmailResponse {
 
     @SerializedName("code")
     @Expose
@@ -13,9 +11,6 @@ public class CustomerLoginResponse {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("user_info")
-    @Expose
-    private List<UserInfo> userInfo = null;
 
     public String getCode() {
         return code;
@@ -33,13 +28,4 @@ public class CustomerLoginResponse {
         this.description = description;
     }
 
-    public List<UserInfo> getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(List<UserInfo> userInfo) {
-        this.userInfo = userInfo;
-    }
-
 }
-

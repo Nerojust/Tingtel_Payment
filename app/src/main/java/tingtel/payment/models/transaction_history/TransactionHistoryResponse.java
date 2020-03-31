@@ -1,9 +1,10 @@
-package tingtel.payment.models.Change_Email;
+package tingtel.payment.models.transaction_history;
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChangeEmailResponse {
+public class TransactionHistoryResponse {
 
     @SerializedName("code")
     @Expose
@@ -11,6 +12,9 @@ public class ChangeEmailResponse {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("transactions")
+    @Expose
+    private Transactions transactions;
 
     public String getCode() {
         return code;
@@ -28,4 +32,14 @@ public class ChangeEmailResponse {
         this.description = description;
     }
 
+    public Transactions getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
+    }
+
 }
+
+

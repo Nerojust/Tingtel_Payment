@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import tingtel.payment.R;
-import tingtel.payment.models.Change_Password.ChangePasswordResponse;
-import tingtel.payment.models.Change_Password.ChangePasswordSendObject;
+import tingtel.payment.models.change_Password.ChangePasswordResponse;
+import tingtel.payment.models.change_Password.ChangePasswordSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;

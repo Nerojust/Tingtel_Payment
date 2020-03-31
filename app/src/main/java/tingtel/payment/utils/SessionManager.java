@@ -51,6 +51,9 @@ public class SessionManager {
     private static final String EMAIL_FROM_LOGIN = "EMAIL_FROM_LOGIN";
     private static final String NUMBER_FROM_LOGIN = "NUMBER_FROM_LOGIN";
     private static final String SIM_NUMBER = "SIM_NUMBER";
+    private static final String ENCRYPTED_IV = "ENCRYPTED_IV";
+    private static final String ENCRYPTED_PASSWORD = "ENCRYPTED_PASSWORD";
+    private static final String PASSWORD_ = "PASSWORD_";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -359,6 +362,14 @@ public class SessionManager {
         return getStringPreference(USERNAME);
     }
 
+    public String getPassword() {
+        return getStringPreference(PASSWORD_);
+    }
+
+    public void setPassword(String password) {
+        setStringPreference(PASSWORD_, password);
+    }
+
     public String getEmailAddress() {
         return getStringPreference(EMAIL_ADDRESS);
     }
@@ -454,5 +465,21 @@ public class SessionManager {
 
     public void setWhichSimWasClicked(int simNo) {
         setIntPreference(SIM_NUMBER, simNo);
+    }
+
+    public String getEncryptionIV(){
+        return getStringPreference(ENCRYPTED_IV);
+    }
+
+    public void setEncryptionIV(String encodeToString) {
+        setStringPreference(ENCRYPTED_IV,encodeToString);
+    }
+
+    public String getEncryptedPassword(){
+        return getStringPreference(ENCRYPTED_PASSWORD);
+    }
+
+    public void setEncryptedPassword(String encryptedPasswordString) {
+        setStringPreference(ENCRYPTED_PASSWORD,encryptedPasswordString);
     }
 }

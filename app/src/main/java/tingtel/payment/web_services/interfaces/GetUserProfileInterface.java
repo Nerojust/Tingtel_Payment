@@ -1,7 +1,7 @@
 package tingtel.payment.web_services.interfaces;
 
 
-import tingtel.payment.models.CustomerInfo.CustomerInfoResponse;
+import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 
 public interface GetUserProfileInterface {
     void onSuccess(CustomerInfoResponse customerInfoResponse);

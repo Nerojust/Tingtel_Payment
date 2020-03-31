@@ -19,10 +19,10 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.sign_in.SignInActivity;
-import tingtel.payment.models.Registration.CustomerRegistrationResponse;
-import tingtel.payment.models.Registration.CustomerRegistrationSendObject;
-import tingtel.payment.models.Registration.Sim1;
-import tingtel.payment.models.Registration.Sim2;
+import tingtel.payment.models.registration.CustomerRegistrationResponse;
+import tingtel.payment.models.registration.CustomerRegistrationSendObject;
+import tingtel.payment.models.registration.Sim1;
+import tingtel.payment.models.registration.Sim2;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.SessionManager;
