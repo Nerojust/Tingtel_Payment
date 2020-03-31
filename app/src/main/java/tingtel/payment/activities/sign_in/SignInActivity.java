@@ -204,6 +204,8 @@ public class SignInActivity extends GPSutils {
                 sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
                 sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
 
+                sessionManager.setIsRegistered(true);
+
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
