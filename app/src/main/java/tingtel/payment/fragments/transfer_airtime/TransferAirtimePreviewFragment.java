@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +40,12 @@ import tingtel.payment.utils.TingtelObserver;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 
-import static android.content.ContentValues.TAG;
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
 
     private Boolean buttonClicked = false;
-    private Button btnTransfer;
+    private Button btnTransfer, btn_verify;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -101,7 +99,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * instantiate listeners for click events.
      */
     private void initListeners() {
-
         backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
@@ -116,10 +113,11 @@ public class TransferAirtimePreviewFragment extends Fragment {
         btnTransfer.setOnClickListener(v -> {
             if (btnTransfer.getText().toString().equalsIgnoreCase("transfer")) {
                 runAirtimeTransferUssd();
-            } else if (btnTransfer.getText().toString().equalsIgnoreCase("verify")) {
-                sendDetailsToServerToCredit();
+            } else if (btnTransfer.getText().toString().equalsIgnoreCase("transfer again?")) {
+                runAirtimeTransferUssd();
             }
         });
+        btn_verify.setOnClickListener(v -> sendDetailsToServerToCredit());
     }
 
 
@@ -148,6 +146,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
+        btn_verify = view.findViewById(R.id.btn_verify);
 
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -277,19 +276,16 @@ public class TransferAirtimePreviewFragment extends Fragment {
     public void onPause() {
         super.onPause();
         paused = true;
-        try {
-            new Handler().postDelayed(() -> {
-                if (buttonClicked) {
-                    if (paused) {
-                        btnTransfer.setText("Verify");
-                        btnTransfer.setBackgroundColor(getResources().getColor(R.color.foreground_color));
-                    }
-                }
-            }, 2000);
-        } catch (Exception e) {
 
-            Log.e(TAG, "onPause: " + e.getMessage());
-        }
+        new Handler().postDelayed(() -> {
+            if (buttonClicked) {
+                if (paused) {
+                    btn_verify.setVisibility(View.VISIBLE);
+                    btnTransfer.setText("Transfer again?");
+                }
+            }
+        }, 2000);
+
     }
 
 

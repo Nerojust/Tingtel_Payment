@@ -75,6 +75,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_10sdp"
             android:orientation="horizontal">
 
 
@@ -82,7 +83,6 @@
                 android:id="@+id/check_balance_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_20sdp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/success_buttons"
@@ -95,7 +95,6 @@
                 android:id="@+id/status_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_20sdp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/success_buttons"
@@ -115,7 +114,8 @@
             android:background="@drawable/proceed_button"
             android:fontFamily="@font/rubik_regular"
             android:text="Save Beneficiary"
+            android:layout_marginVertical="@dimen/_7sdp"
             android:textColor="@color/white"
-            android:textSize="@dimen/_11ssp" />
+            android:textSize="@dimen/_12ssp" />
     </LinearLayout>
 </LinearLayout>

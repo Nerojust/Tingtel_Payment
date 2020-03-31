@@ -387,13 +387,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/dashboard_buttons"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@string/transfer"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
+                <Button
+                    android:id="@+id/btn_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/verify_button"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="Verify"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

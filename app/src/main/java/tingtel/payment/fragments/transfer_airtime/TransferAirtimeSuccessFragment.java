@@ -65,10 +65,12 @@ public class TransferAirtimeSuccessFragment extends Fragment {
 
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
-        checkBalanceButton.setOnClickListener(v -> checkBalance());
+        checkBalanceButton.setOnClickListener(v -> {
+            checkBalance();
+        });
 
         statusButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(),StatusActivity.class);
+            Intent intent = new Intent(getContext(), StatusActivity.class);
             intent.putExtra("simNo", SimNo);
             startActivity(intent);
         });
