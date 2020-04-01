@@ -299,6 +299,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         sendCreditDetailsSendObject.setSourceNetwork(SenderSimNetwork);
         sendCreditDetailsSendObject.setUserPhone(SenderPhoneNumber);
         String random = AppUtils.generateRandomString();
+        sessionManager.setTransactionReference(random);
         sendCreditDetailsSendObject.setRef(random);
         sendCreditDetailsSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 

@@ -11,12 +11,16 @@ import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
+import tingtel.payment.models.otp.SendOTPresponse;
+import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.models.registration.CustomerRegistrationResponse;
 import tingtel.payment.models.registration.CustomerRegistrationSendObject;
 import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
 import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
 import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
+import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
+import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 
 public interface PostServiceInterface {
 
@@ -40,4 +44,10 @@ public interface PostServiceInterface {
 
     @POST("credit_notification_push")
     Call<SendCreditDetailsResponse> sendCreditInfoToServer(@Body SendCreditDetailsSendObject transactionHistorySendObject);
+
+    @POST("OTP")
+    Call<SendOTPresponse> sendOTP(@Body SendOTPsendObject sendOTPsendObject);
+
+    @POST("credit_notification_push")
+    Call<CheckTransactionStatusResponse> checkTransactionResult(@Body CheckTransactionStatusSendObject checkTransactionStatusSendObject);
 }

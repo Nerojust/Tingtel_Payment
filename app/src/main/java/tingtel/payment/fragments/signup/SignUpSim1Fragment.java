@@ -21,10 +21,15 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.adapters.SpinnerAdapter;
+import tingtel.payment.models.otp.SendOTPresponse;
+import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.SendOTPinterface;
 
 import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
@@ -37,7 +42,6 @@ public class SignUpSim1Fragment extends Fragment {
     private String[] spinnerTitles;
     private String selectedSpinnerNetwork;
     private String[] spinnerPopulation;
-    private int[] spinnerImages;
     private NavController navController;
     private Button btnSaveSim1NetworkDetails;
     private TextInputEditText tvPhoneNumber;
@@ -46,6 +50,8 @@ public class SignUpSim1Fragment extends Fragment {
     private String Sim1Serial, Sim2Serial;
     private String NoOfSIm;
     private TextView tvSimInfo;
+    private String phoneNumber;
+    private String generatedOTP;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -63,7 +69,7 @@ public class SignUpSim1Fragment extends Fragment {
 
     private void initSpinner() {
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
-        spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo};
+        int[] spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo};
 
         SpinnerAdapter mCustomAdapter = new SpinnerAdapter(Objects.requireNonNull(getActivity()), spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);
@@ -84,16 +90,56 @@ public class SignUpSim1Fragment extends Fragment {
     private void initListeners(View view) {
         btnSaveSim1NetworkDetails.setOnClickListener(v -> {
             if (isValidFields()) {
+                generatedOTP = AppUtils.generateOTP();
+                sessionManager.setOTP(generatedOTP);
+                phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
 
-                Bundle bundle = new Bundle();
-                bundle.putString("Sim1Serial", Sim1Serial);
-//                bundle.putString("Sim1Network", Sim1Network);
-                bundle.putString("Sim1Network", selectedSpinnerNetwork);
-                bundle.putString("Sim1PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
-
-                navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
+                sendOTPtoCustomer();
             }
         });
+    }
+
+    private void sendOTPtoCustomer() {
+        AppUtils.initLoadingDialog(getContext());
+
+        SendOTPsendObject sendOTPsendObject = new SendOTPsendObject();
+        sendOTPsendObject.setPhoneNumber(phoneNumber);
+        sendOTPsendObject.setNetwork(selectedSpinnerNetwork);
+        sendOTPsendObject.setOtp(generatedOTP);
+        sendOTPsendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
+            @Override
+            public void onSuccess(SendOTPresponse sendOTPresponse) {
+                AppUtils.dismissLoadingDialog();
+
+                Bundle bundle = getBundle();
+                navController.navigate(R.id.action_signUpSim1Fragment_to_signUpSim1OtpFragment, bundle);
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, getActivity());
+
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showSnackBar(String.valueOf(errorCode), tvPhoneNumber);
+                AppUtils.dismissLoadingDialog();
+            }
+        });
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("Sim1Serial", Sim1Serial);
+//                bundle.putString("Sim1Network", Sim1Network);
+        bundle.putString("Sim1Network", selectedSpinnerNetwork);
+        bundle.putString("Sim1PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
+        return bundle;
     }
 
     private boolean isValidFields() {

@@ -102,6 +102,34 @@ public class AppUtils {
 
     }
 
+    public static String generateOTP() {
+        String SALTCHARS = "1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 4) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+    }
+
+    public static String checkPhoneNumberAndRestructure(String number) {
+        if (number.substring(0, 1).equals("0")) {
+            number = number.substring(1);
+            number = "234" + number;
+            return number;
+        } else if (number.substring(0, 2).equals("+0")) {
+            number = number.replace("+0", "234");
+            return number;
+        } else if (number.substring(0, 4).equals("+234")) {
+            number = number.replace("+234", "234");
+            return number;
+        } else {
+            return number;
+        }
+    }
+
     public static void showSnackBar(String msg, View view) {
         Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
         Vibrator vibrator = (Vibrator) view.getContext().getSystemService(Context.VIBRATOR_SERVICE);

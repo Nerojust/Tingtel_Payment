@@ -6,30 +6,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class CheckTransactionStatusSendObject {
 
-    @SerializedName("amount")
+    @SerializedName("ref")
     @Expose
-    private String amount;
-    @SerializedName("user_phone")
-    @Expose
-    private String userPhone;
+    private String ref;
     @SerializedName("hash")
     @Expose
     private String hash;
 
-    public String getAmount() {
-        return amount;
+    public String getRef() {
+        return ref;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setRef(String ref) {
+        this.ref = ref;
     }
 
     public String getHash() {
@@ -39,5 +28,4 @@ public class CheckTransactionStatusSendObject {
     public void setHash(String hash) {
         this.hash = hash;
     }
-
 }

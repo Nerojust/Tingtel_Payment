@@ -18,21 +18,27 @@ import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
+import tingtel.payment.models.otp.SendOTPresponse;
+import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.models.registration.CustomerRegistrationResponse;
 import tingtel.payment.models.registration.CustomerRegistrationSendObject;
 import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
 import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
 import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
+import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
+import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
 import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
+import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 import tingtel.payment.web_services.interfaces.ReportIssueInterface;
 import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
+import tingtel.payment.web_services.interfaces.SendOTPinterface;
 
 public class WebSeviceRequestMaker {
 
@@ -255,7 +261,7 @@ public class WebSeviceRequestMaker {
     }
 
     public void sendCreditDetailsToServer(SendCreditDetailsSendObject transactionHistorySendObject, SendCreditDetailsInterface sendCreditDetailsInterface) {
-        Call<SendCreditDetailsResponse> call = postInterfaceService. sendCreditInfoToServer(transactionHistorySendObject);
+        Call<SendCreditDetailsResponse> call = postInterfaceService.sendCreditInfoToServer(transactionHistorySendObject);
         call.enqueue(new Callback<SendCreditDetailsResponse>() {
             @Override
             public void onResponse(@NonNull Call<SendCreditDetailsResponse> call, @NonNull Response<SendCreditDetailsResponse> response) {
@@ -289,4 +295,72 @@ public class WebSeviceRequestMaker {
         });
     }
 
+
+    public void sendOTPtoCustomer(SendOTPsendObject sendOTPsendObject, SendOTPinterface sendOTPinterface) {
+        Call<SendOTPresponse> call = postInterfaceService.sendOTP(sendOTPsendObject);
+        call.enqueue(new Callback<SendOTPresponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SendOTPresponse> call, @NonNull Response<SendOTPresponse> response) {
+                if (response.isSuccessful()) {
+                    SendOTPresponse sendOTPresponse = response.body();
+
+                    if (sendOTPresponse != null) {
+                        if (sendOTPresponse.getStatusCode().equals(Constants.SUCCESS)
+                                && sendOTPresponse.getStatusMessage().equalsIgnoreCase("success")) {
+                            sendOTPinterface.onSuccess(sendOTPresponse);
+                        } else {
+                            sendOTPinterface.onError(sendOTPresponse.getStatusMessage());
+                        }
+                    }
+                } else {
+                    sendOTPinterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SendOTPresponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    sendOTPinterface.onError("Network Error, please try again");
+                } else {
+                    sendOTPinterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void checkTransactionStatus(CheckTransactionStatusSendObject checkTransactionStatusSendObject,
+                                       CheckTransactionStatusInterface checkTransactionStatusInterface) {
+        Call<CheckTransactionStatusResponse> call = postInterfaceService.checkTransactionResult(checkTransactionStatusSendObject);
+        call.enqueue(new Callback<CheckTransactionStatusResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CheckTransactionStatusResponse> call, @NonNull Response<CheckTransactionStatusResponse> response) {
+                if (response.isSuccessful()) {
+                    CheckTransactionStatusResponse checkTransactionStatusResponse = response.body();
+
+                    if (checkTransactionStatusResponse != null) {
+                        checkTransactionStatusInterface.onSuccess(checkTransactionStatusResponse);
+                    }
+                } else {
+                    checkTransactionStatusInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CheckTransactionStatusResponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    checkTransactionStatusInterface.onError("Network Error, please try again");
+                } else {
+                    checkTransactionStatusInterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
 }
