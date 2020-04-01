@@ -74,11 +74,8 @@ public class SignUpSim1OtpFragment extends Fragment {
             if (customerOTP.equals(appOTP)) {
                 Toast.makeText(getContext(), "Verified", Toast.LENGTH_SHORT).show();
 
-                AppUtils.initLoadingDialog(getContext());
+                new Handler().postDelayed(this::performProcessAction, 2000);
 
-                new Handler().postDelayed(this::performProcessAction, 2500);
-
-                AppUtils.dismissLoadingDialog();
             } else {
                 AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
                 pinView.setText(null);
@@ -89,6 +86,7 @@ public class SignUpSim1OtpFragment extends Fragment {
     }
 
     private void resendOTPtoCustomer() {
+        AppUtils.initLoadingDialog(getContext());
 
         SendOTPsendObject sendOTPsendObject = new SendOTPsendObject();
         sendOTPsendObject.setPhoneNumber(Sim1PhoneNumber);
@@ -100,7 +98,7 @@ public class SignUpSim1OtpFragment extends Fragment {
         webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
             @Override
             public void onSuccess(SendOTPresponse sendOTPresponse) {
-                //AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
                 AppUtils.showSnackBar("Code resent", getView());
 
             }
@@ -109,13 +107,13 @@ public class SignUpSim1OtpFragment extends Fragment {
             public void onError(String error) {
                 AppUtils.showDialog(error, getActivity());
 
-                // AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.showSnackBar(String.valueOf(errorCode), getView());
-                // AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
             }
         });
     }

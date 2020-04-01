@@ -21,7 +21,6 @@ import tingtel.payment.R;
 import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
-import tingtel.payment.utils.SoftInputAssist;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +39,6 @@ public class SignUpHomeFragment extends Fragment {
         sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews(view);
-        new SoftInputAssist(Objects.requireNonNull(getActivity()));
         initListeners(view);
         return view;
 
@@ -63,10 +61,10 @@ public class SignUpHomeFragment extends Fragment {
     }
 
     private void saveDatatoPrefs() {
-        sessionManager.setFirstName(firstName.getText().toString().trim());
-        sessionManager.setLastName(lastName.getText().toString().trim());
-        sessionManager.setEmailAddress(emailAddress.getText().toString().trim());
-        sessionManager.setUsername(username.getText().toString().trim());
+        sessionManager.setFirstName(Objects.requireNonNull(firstName.getText()).toString().trim());
+        sessionManager.setLastName(Objects.requireNonNull(lastName.getText()).toString().trim());
+        sessionManager.setEmailAddress(Objects.requireNonNull(emailAddress.getText()).toString().trim());
+        sessionManager.setUsername(Objects.requireNonNull(username.getText()).toString().trim());
     }
 
     private void initViews(View view) {

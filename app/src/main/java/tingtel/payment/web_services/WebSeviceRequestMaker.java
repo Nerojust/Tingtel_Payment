@@ -305,10 +305,10 @@ public class WebSeviceRequestMaker {
                     SendOTPresponse sendOTPresponse = response.body();
 
                     if (sendOTPresponse != null) {
-                        if (sendOTPresponse.getStatusCode().equals(Constants.SUCCESS)) {
+                        if (sendOTPresponse.getStatusMessage().equalsIgnoreCase("success")) {
                             sendOTPinterface.onSuccess(sendOTPresponse);
                         } else {
-                            sendOTPinterface.onError(sendOTPresponse.getStatusMessage());
+                            sendOTPinterface.onError("Could not sent OTP, please contact customer care");
                         }
                     }
                 } else {

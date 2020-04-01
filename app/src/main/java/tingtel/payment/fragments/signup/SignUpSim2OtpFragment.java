@@ -4,6 +4,7 @@ package tingtel.payment.fragments.signup;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.chaos.view.PinView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -43,6 +46,7 @@ public class SignUpSim2OtpFragment extends Fragment {
     private TextView resendOTP;
     private String Sim2Serial;
     private String Sim2PhoneNumber;
+    private PinView pinView;
     private SessionManager sessionManager;
 
 
@@ -51,37 +55,52 @@ public class SignUpSim2OtpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim2_otp, container, false);
 
         initViews(view);
-        initListeners(view);
+        initListeners();
         getCarrierOfSim(getContext(), getActivity());
         getExtrasFromIntent();
 
         return view;
     }
 
-    private void initListeners(View view) {
+    private void initListeners() {
         btnConfirmOtp.setOnClickListener(v -> {
+            String customerOTP = Objects.requireNonNull(pinView.getText()).toString().trim();
+            String appOTP = sessionManager.getOTP();
 
-            AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
-            if (appdatabase.simCardsDao().getSerial(Sim2Serial).size()  > 0) {
-                Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
+            if (customerOTP.equals(appOTP)) {
+                Toast.makeText(getContext(), "Verified", Toast.LENGTH_SHORT).show();
+
+                new Handler().postDelayed(this::performProcessAction, 2000);
             } else {
-                saveSimDetails();
-            }
-
-            if (sessionManager.getIsRegistered()) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                Objects.requireNonNull(getActivity()).startActivity(intent);
-                getActivity().finish();
-            } else {
-
-                navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
+                AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
+                pinView.setText(null);
+                pinView.requestFocus();
             }
         });
         resendOTP.setOnClickListener(v -> resendOTPtoCustomer());
     }
 
+    private void performProcessAction() {
+        AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
+        if (appdatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
+            Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
+        } else {
+            saveSimDetails();
+        }
+
+        if (sessionManager.getIsRegistered()) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Objects.requireNonNull(getActivity()).startActivity(intent);
+            getActivity().finish();
+        } else {
+
+            navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
+        }
+    }
+
 
     private void resendOTPtoCustomer() {
+        AppUtils.initLoadingDialog(getContext());
 
         SendOTPsendObject sendOTPsendObject = new SendOTPsendObject();
         sendOTPsendObject.setPhoneNumber(Sim2PhoneNumber);
@@ -93,7 +112,7 @@ public class SignUpSim2OtpFragment extends Fragment {
         webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
             @Override
             public void onSuccess(SendOTPresponse sendOTPresponse) {
-                //AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
                 AppUtils.showSnackBar("Code resent", getView());
 
             }
@@ -102,16 +121,17 @@ public class SignUpSim2OtpFragment extends Fragment {
             public void onError(String error) {
                 AppUtils.showDialog(error, getActivity());
 
-                // AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.showSnackBar(String.valueOf(errorCode), getView());
-                // AppUtils.dismissLoadingDialog();
+                AppUtils.dismissLoadingDialog();
             }
         });
     }
+
     private void saveSimDetails() {
 
         //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
@@ -153,6 +173,7 @@ public class SignUpSim2OtpFragment extends Fragment {
 
 
     private void initViews(View view) {
+        pinView = view.findViewById(R.id.pinView);
         resendOTP = view.findViewById(R.id.resendOTPTextview);
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
 
