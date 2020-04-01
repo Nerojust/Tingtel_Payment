@@ -57,6 +57,7 @@ public class SessionManager {
     private static final String CREDIT = "CREDIT";
     private static final String OTP = "OTP";
     private static final String TXN = "TXN";
+    private static final String OTP_JSON = "OTP_JSON";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -508,5 +509,13 @@ public class SessionManager {
 
     public void setTransactionReference(String random) {
         setStringPreference(TXN, random);
+    }
+
+    public String getOTPJsonObject(){
+        return getStringPreference(OTP_JSON);
+    }
+
+    public void setOTPJsonObject(String jsonObject) {
+        setStringPreference(OTP_JSON, jsonObject);
     }
 }

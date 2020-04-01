@@ -18,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
@@ -108,6 +109,10 @@ public class SignUpSim1Fragment extends Fragment {
         sendOTPsendObject.setOtp(generatedOTP);
         sendOTPsendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(sendOTPsendObject);
+        sessionManager.setOTPJsonObject(jsonObject);
+
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
             @Override
@@ -127,7 +132,7 @@ public class SignUpSim1Fragment extends Fragment {
 
             @Override
             public void onErrorCode(int errorCode) {
-                AppUtils.showSnackBar(String.valueOf(errorCode), tvPhoneNumber);
+                AppUtils.showSnackBar(String.valueOf(errorCode), getView());
                 AppUtils.dismissLoadingDialog();
             }
         });

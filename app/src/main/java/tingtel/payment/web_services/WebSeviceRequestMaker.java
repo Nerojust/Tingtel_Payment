@@ -305,8 +305,7 @@ public class WebSeviceRequestMaker {
                     SendOTPresponse sendOTPresponse = response.body();
 
                     if (sendOTPresponse != null) {
-                        if (sendOTPresponse.getStatusCode().equals(Constants.SUCCESS)
-                                && sendOTPresponse.getStatusMessage().equalsIgnoreCase("success")) {
+                        if (sendOTPresponse.getStatusCode().equals(Constants.SUCCESS)) {
                             sendOTPinterface.onSuccess(sendOTPresponse);
                         } else {
                             sendOTPinterface.onError(sendOTPresponse.getStatusMessage());

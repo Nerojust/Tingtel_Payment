@@ -16,13 +16,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.adapters.SpinnerAdapter;
+import tingtel.payment.models.otp.SendOTPresponse;
+import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.SendOTPinterface;
 
 import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
@@ -40,6 +46,8 @@ public class SignUpSim2Fragment extends Fragment {
     private String Sim2Serial;
     private String NoOfSIm;
     private TextView tvSimInfo;
+    private String generatedOTP;
+    private String phoneNumber;
 
 
     @Override
@@ -64,8 +72,6 @@ public class SignUpSim2Fragment extends Fragment {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //Toast.makeText(getActivity(), spinnerTitles[i], Toast.LENGTH_SHORT).show();
                 selectedSpinnerNetwork = spinnerTitles[i];
                 sessionManager.setUserNetwork1(selectedSpinnerNetwork);
             }
@@ -96,14 +102,62 @@ public class SignUpSim2Fragment extends Fragment {
         btnNext.setOnClickListener(v -> {
 //todo: add validations
             if (isValidFields()) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Sim2Serial", Sim2Serial);
-                bundle.putString("Sim2Network", selectedSpinnerNetwork);
-                bundle.putString("Sim2PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
+                generatedOTP = AppUtils.generateOTP();
+                sessionManager.setOTP(generatedOTP);
 
-                navController.navigate(R.id.action_signUpSim2Fragment_to_signUpSim2OtpFragment2, bundle);
+                phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
+
+                sendOTPtoCustomer();
             }
         });
+    }
+
+    private void sendOTPtoCustomer() {
+        AppUtils.initLoadingDialog(getContext());
+
+        SendOTPsendObject sendOTPsendObject = new SendOTPsendObject();
+        sendOTPsendObject.setPhoneNumber(phoneNumber);
+        sendOTPsendObject.setNetwork(selectedSpinnerNetwork);
+        sendOTPsendObject.setOtp(generatedOTP);
+        sendOTPsendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(sendOTPsendObject);
+        sessionManager.setOTPJsonObject(jsonObject);
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
+            @Override
+            public void onSuccess(SendOTPresponse sendOTPresponse) {
+                AppUtils.dismissLoadingDialog();
+
+                Bundle bundle = getBundle();
+
+                navController.navigate(R.id.action_signUpSim2Fragment_to_signUpSim2OtpFragment2, bundle);
+
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, getActivity());
+
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showSnackBar(String.valueOf(errorCode), getView());
+                AppUtils.dismissLoadingDialog();
+            }
+        });
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("Sim2Serial", Sim2Serial);
+        bundle.putString("Sim2Network", selectedSpinnerNetwork);
+        bundle.putString("Sim2PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
+        return bundle;
     }
 
     private void initViews(View view) {

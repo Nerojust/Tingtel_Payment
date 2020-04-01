@@ -19,12 +19,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
+import tingtel.payment.models.otp.SendOTPresponse;
+import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.SendOTPinterface;
 
 import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
 
@@ -32,8 +37,6 @@ import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
  * A simple {@link Fragment} subclass.
  */
 public class SignUpSim2OtpFragment extends Fragment {
-
-
     private Button btnConfirmOtp;
     private NavController navController;
     private String Sim2Network;
@@ -74,8 +77,41 @@ public class SignUpSim2OtpFragment extends Fragment {
                 navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
             }
         });
+        resendOTP.setOnClickListener(v -> resendOTPtoCustomer());
     }
 
+
+    private void resendOTPtoCustomer() {
+
+        SendOTPsendObject sendOTPsendObject = new SendOTPsendObject();
+        sendOTPsendObject.setPhoneNumber(Sim2PhoneNumber);
+        sendOTPsendObject.setNetwork(sessionManager.getUserNetwork1());
+        sendOTPsendObject.setOtp(sessionManager.getOTP());
+        sendOTPsendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.sendOTPtoCustomer(sendOTPsendObject, new SendOTPinterface() {
+            @Override
+            public void onSuccess(SendOTPresponse sendOTPresponse) {
+                //AppUtils.dismissLoadingDialog();
+                AppUtils.showSnackBar("Code resent", getView());
+
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, getActivity());
+
+                // AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showSnackBar(String.valueOf(errorCode), getView());
+                // AppUtils.dismissLoadingDialog();
+            }
+        });
+    }
     private void saveSimDetails() {
 
         //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
