@@ -26,13 +26,12 @@ public class SIgnUpSim1SuccessFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim1_success, container, false);
 
         initViews(view);
-        initListeners(view);
+        initListeners();
 
         return view;
     }
 
-    private void initListeners(View view) {
-
+    private void initListeners() {
         btnRegSim2Now.setOnClickListener(v -> navController.navigate(R.id.action_SIgnUpSim1SuccessFragment_to_signUpSim2Fragment, null));
 
         btnRegSim2Later.setOnClickListener(v -> navController.navigate(R.id.action_SIgnUpSim1SuccessFragment_to_setPasswordFragment, null));

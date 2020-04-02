@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,7 @@ public class SignUpSim2OtpFragment extends Fragment {
                 AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
                 pinView.setText(null);
                 pinView.requestFocus();
+                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
         resendOTP.setOnClickListener(v -> resendOTPtoCustomer());

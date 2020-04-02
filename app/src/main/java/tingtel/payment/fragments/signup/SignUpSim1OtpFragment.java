@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,6 +81,7 @@ public class SignUpSim1OtpFragment extends Fragment {
                 AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
                 pinView.setText(null);
                 pinView.requestFocus();
+                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
         resendOtp.setOnClickListener(v -> resendOTPtoCustomer());
@@ -185,6 +187,7 @@ public class SignUpSim1OtpFragment extends Fragment {
     private void initViews(View view) {
         resendOtp = view.findViewById(R.id.resendOTPTextview);
         pinView = view.findViewById(R.id.pinView);
+        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
 
         Sim1Network = Objects.requireNonNull(getArguments()).getString("Sim1Network");
@@ -195,6 +198,5 @@ public class SignUpSim1OtpFragment extends Fragment {
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
-
     }
 }

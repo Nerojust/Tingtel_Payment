@@ -179,7 +179,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:background="@color/tingtel_light_gray"
-                        android:text="Not Completed"
+                        android:text="Processing"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 

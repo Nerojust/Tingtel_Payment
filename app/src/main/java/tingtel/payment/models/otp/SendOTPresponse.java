@@ -3,29 +3,17 @@ package tingtel.payment.models.otp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class SendOTPresponse {
 
-    @SerializedName("datetime")
-    @Expose
-    private String datetime;
     @SerializedName("msisdn")
     @Expose
     private String msisdn;
-    @SerializedName("statusCode")
+    @SerializedName("Code")
     @Expose
-    private String statusCode;
-    @SerializedName("statusMessage")
+    private String code;
+    @SerializedName("description")
     @Expose
-    private String statusMessage;
-
-    public String getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
-    }
+    private String description;
 
     public String getMsisdn() {
         return msisdn;
@@ -35,20 +23,21 @@ public class SendOTPresponse {
         this.msisdn = msisdn;
     }
 
-    public String getStatusCode() {
-        return statusCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getStatusMessage() {
-        return statusMessage;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStatusMessage(String statusMessage) {
-        this.statusMessage = statusMessage;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 
 }

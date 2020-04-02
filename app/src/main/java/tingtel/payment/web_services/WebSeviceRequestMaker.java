@@ -305,10 +305,12 @@ public class WebSeviceRequestMaker {
                     SendOTPresponse sendOTPresponse = response.body();
 
                     if (sendOTPresponse != null) {
-                        if (sendOTPresponse.getStatusMessage().equalsIgnoreCase("success")) {
+                        String code = sendOTPresponse.getCode();
+                        String msg = sendOTPresponse.getDescription();
+                        if (sendOTPresponse.getCode().equals(Constants.SUCCESS)) {
                             sendOTPinterface.onSuccess(sendOTPresponse);
                         } else {
-                            sendOTPinterface.onError("Could not sent OTP, please contact customer care");
+                            sendOTPinterface.onError(sendOTPresponse.getDescription());
                         }
                     }
                 } else {
@@ -342,6 +344,8 @@ public class WebSeviceRequestMaker {
 
                     if (checkTransactionStatusResponse != null) {
                         checkTransactionStatusInterface.onSuccess(checkTransactionStatusResponse);
+                    }else {
+                        checkTransactionStatusInterface.onError("No record found");
                     }
                 } else {
                     checkTransactionStatusInterface.onError("Network error, please try again.");
