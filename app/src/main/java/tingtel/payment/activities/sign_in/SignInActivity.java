@@ -144,10 +144,10 @@ public class SignInActivity extends GPSutils {
 
     private void initListeners() {
         fingerprintTextview.setOnClickListener(view -> {
-            if (sessionManager.getPassword() != null) {
+            if (sessionManager.getPassword() != null && !Objects.requireNonNull(usernameEditext.getText()).toString().isEmpty()) {
                 biometricPrompt.authenticate(promptInfo);
             } else {
-                AppUtils.showDialog("Please login with your password first to use this", this);
+                AppUtils.showDialog("Please login with your credentials first to use this", this);
             }
         });
         tvSignUp.setOnClickListener(v -> {
@@ -248,6 +248,7 @@ public class SignInActivity extends GPSutils {
         sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
     }
 //todo: work on set is registered: check very well
+
     /**
      * this method handles the logging in of the user.
      */
