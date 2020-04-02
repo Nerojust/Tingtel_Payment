@@ -208,7 +208,6 @@ public class SignInActivity extends GPSutils {
             public void onSuccess(CustomerLoginResponse loginResponses) {
 
                 sessionManager.setPassword(password);
-                sessionManager.setIsRegistered(true);
                 saveDetailsToPref(loginResponses);
 
 
@@ -273,8 +272,6 @@ public class SignInActivity extends GPSutils {
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
                 saveDetailsToPref(loginResponses);
-
-                sessionManager.setIsRegistered(true);
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);

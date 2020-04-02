@@ -12,9 +12,11 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 public class SignUpActivity extends AppCompatActivity {
     NavController navController;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +24,13 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(navhost);
+        sessionManager = AppUtils.getSessionManagerInstance();
 
         Intent intent = getIntent();
-
         if (intent.getStringExtra("task") == null) {
-
+            sessionManager.setIsRegistered(false);
         } else {
+            sessionManager.setIsRegistered(true);
             if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim1")) {
                 navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
                 AppUtils.showDialog("You need To register Sim 1 before making any transactions", SignUpActivity.this);

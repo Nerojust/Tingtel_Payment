@@ -68,7 +68,6 @@ public class SetPasswordFragment extends Fragment {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Objects.requireNonNull(getActivity()).startActivity(intent);
 
-        sessionManager.setIsRegistered(true);
         getActivity().finish();
     }
 

@@ -36,6 +36,8 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         sessionManager = AppUtils.getSessionManagerInstance();
 
+        sessionManager.setIsRegistered(false);
+
         ImageView settingsImagview = view.findViewById(R.id.settingsImageview);
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
         TextView customerName = view.findViewById(R.id.customerName);
