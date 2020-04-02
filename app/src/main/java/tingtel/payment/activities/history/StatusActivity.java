@@ -127,9 +127,7 @@ public class StatusActivity extends AppCompatActivity {
                 .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
 
-        stepView.setOnClickListener(v -> {
-            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
-        });
+        stepView.setOnClickListener(v -> Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show());
     }
 
 
@@ -157,7 +155,6 @@ public class StatusActivity extends AppCompatActivity {
                         initListeners();
                         setStepViewToCompletedStatus();
                     }
-                    Toast.makeText(StatusActivity.this, "null oooo", Toast.LENGTH_SHORT).show();
                 } else {
                     AppUtils.showDialog("No transactions found", StatusActivity.this);
                 }

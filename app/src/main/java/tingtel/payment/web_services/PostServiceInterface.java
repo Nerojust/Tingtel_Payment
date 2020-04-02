@@ -3,12 +3,16 @@ package tingtel.payment.web_services;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import tingtel.payment.models.add_sim.AddSimResponse;
+import tingtel.payment.models.add_sim.AddSimSendObject;
 import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.models.change_Password.ChangePasswordResponse;
 import tingtel.payment.models.change_Password.ChangePasswordSendObject;
 import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
+import tingtel.payment.models.delete_account.DeleteAccountResponse;
+import tingtel.payment.models.delete_account.DeleteAccountSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -19,6 +23,8 @@ import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
 import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
 import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
+import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
+import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 
@@ -50,4 +56,13 @@ public interface PostServiceInterface {
 
     @POST("credit_notification_push")
     Call<CheckTransactionStatusResponse> checkTransactionResult(@Body CheckTransactionStatusSendObject checkTransactionStatusSendObject);
+
+    @POST("get_transaction_history")
+    Call<TransactionHistoryResponse> getTransactionHistory(@Body TransactionHistorySendObject transactionHistorySendObject);
+
+    @POST("addsim")
+    Call<AddSimResponse> addSim(@Body AddSimSendObject addSimSendObject);
+
+    @POST("deleteAccount")
+    Call<DeleteAccountResponse> deleteAccount(@Body DeleteAccountSendObject deleteAccountSendObject);
 }

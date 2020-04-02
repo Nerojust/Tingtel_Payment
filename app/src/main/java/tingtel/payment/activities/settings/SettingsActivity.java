@@ -18,18 +18,25 @@ import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.qr_code.QRCodeDisplayActivity;
 import tingtel.payment.activities.sign_in.SignInActivity;
+import tingtel.payment.models.delete_account.DeleteAccountResponse;
+import tingtel.payment.models.delete_account.DeleteAccountSendObject;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 
 public class SettingsActivity extends AppCompatActivity {
 
     Button logoutButton;
     private LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
             reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        sessionManager = AppUtils.getSessionManagerInstance();
         initViews();
         initListeners();
     }
@@ -84,11 +91,12 @@ public class SettingsActivity extends AppCompatActivity {
             Button btnNo = dialogView.findViewById(R.id.btn_no);
 
             btnYes.setOnClickListener(v12 -> {
-//todo: make network call
-                Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
+                if (AppUtils.isNetworkAvailable(this)) {
+                    //perform deletion
+                    deleteAccount();
+                } else {
+                    AppUtils.showSnackBar("No network available", deleteAccountLayout);
+                }
             });
 
             btnNo.setOnClickListener(v1 -> alertDialog.dismiss());
@@ -121,6 +129,39 @@ public class SettingsActivity extends AppCompatActivity {
             android.app.AlertDialog alert = builder.create();
             alert.show();
 
+        });
+    }
+
+    private void deleteAccount() {
+        AppUtils.initLoadingDialog(this);
+
+        DeleteAccountSendObject deleteAccountSendObject = new DeleteAccountSendObject();
+        deleteAccountSendObject.setEmail(sessionManager.getEmailFromLogin());
+        deleteAccountSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+        deleteAccountSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.deleteAccount(deleteAccountSendObject, new DeleteAccountInterface() {
+            @Override
+            public void onSuccess(DeleteAccountResponse deleteAccountResponse) {
+                AppUtils.dismissLoadingDialog();
+
+                Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, SettingsActivity.this);
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showDialog(String.valueOf(errorCode), SettingsActivity.this);
+                AppUtils.dismissLoadingDialog();
+            }
         });
     }
 }

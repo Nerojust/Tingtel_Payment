@@ -10,12 +10,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import tingtel.payment.models.add_sim.AddSimResponse;
+import tingtel.payment.models.add_sim.AddSimSendObject;
 import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.models.change_Password.ChangePasswordResponse;
 import tingtel.payment.models.change_Password.ChangePasswordSendObject;
 import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
+import tingtel.payment.models.delete_account.DeleteAccountResponse;
+import tingtel.payment.models.delete_account.DeleteAccountSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -26,19 +30,24 @@ import tingtel.payment.models.report_Issue.ReportIssueResponse;
 import tingtel.payment.models.report_Issue.ReportIssueSendObject;
 import tingtel.payment.models.send_credit.SendCreditDetailsResponse;
 import tingtel.payment.models.send_credit.SendCreditDetailsSendObject;
+import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
+import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
+import tingtel.payment.web_services.interfaces.AddSimInterface;
 import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
 import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
+import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 import tingtel.payment.web_services.interfaces.ReportIssueInterface;
 import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 import tingtel.payment.web_services.interfaces.SendOTPinterface;
+import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
 
 public class WebSeviceRequestMaker {
 
@@ -305,8 +314,6 @@ public class WebSeviceRequestMaker {
                     SendOTPresponse sendOTPresponse = response.body();
 
                     if (sendOTPresponse != null) {
-                        String code = sendOTPresponse.getCode();
-                        String msg = sendOTPresponse.getDescription();
                         if (sendOTPresponse.getCode().equals(Constants.SUCCESS)) {
                             sendOTPinterface.onSuccess(sendOTPresponse);
                         } else {
@@ -344,7 +351,7 @@ public class WebSeviceRequestMaker {
 
                     if (checkTransactionStatusResponse != null) {
                         checkTransactionStatusInterface.onSuccess(checkTransactionStatusResponse);
-                    }else {
+                    } else {
                         checkTransactionStatusInterface.onError("No record found");
                     }
                 } else {
@@ -360,6 +367,111 @@ public class WebSeviceRequestMaker {
                     checkTransactionStatusInterface.onError("Network Error, please try again");
                 } else {
                     checkTransactionStatusInterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void getTransactionHistory(TransactionHistorySendObject transactionHistorySendObject, TransactionHistoryInterface transactionHistoryInterface) {
+        Call<TransactionHistoryResponse> call = postInterfaceService.getTransactionHistory(transactionHistorySendObject);
+        call.enqueue(new Callback<TransactionHistoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<TransactionHistoryResponse> call, @NonNull Response<TransactionHistoryResponse> response) {
+                if (response.isSuccessful()) {
+                    TransactionHistoryResponse transactionHistoryResponse = response.body();
+
+                    if (transactionHistoryResponse != null) {
+                        if (transactionHistoryResponse.getCode().equals(Constants.SUCCESS)) {
+                            transactionHistoryInterface.onSuccess(transactionHistoryResponse);
+                        } else {
+                            transactionHistoryInterface.onError(transactionHistoryResponse.getDescription());
+                        }
+                    }
+                } else {
+                    transactionHistoryInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TransactionHistoryResponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    transactionHistoryInterface.onError("Network Error, please try again");
+                } else {
+                    transactionHistoryInterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void addSim(AddSimSendObject addSimSendObject, AddSimInterface addSimInterface) {
+        Call<AddSimResponse> call = postInterfaceService.addSim(addSimSendObject);
+        call.enqueue(new Callback<AddSimResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AddSimResponse> call, @NonNull Response<AddSimResponse> response) {
+                if (response.isSuccessful()) {
+                    AddSimResponse addSimResponse = response.body();
+
+                    if (addSimResponse != null) {
+                        if (addSimResponse.getCode().equals(Constants.SUCCESS)) {
+                            addSimInterface.onSuccess(addSimResponse);
+                        } else {
+                            addSimInterface.onError(addSimResponse.getDescription());
+                        }
+                    }
+                } else {
+                    addSimInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AddSimResponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    addSimInterface.onError("Network Error, please try again");
+                } else {
+                    addSimInterface.onError(t.getMessage());
+                }
+                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                Log.e("Login error", error);
+            }
+        });
+    }
+
+    public void deleteAccount(DeleteAccountSendObject deleteAccountSendObject, DeleteAccountInterface deleteAccountInterface) {
+        Call<DeleteAccountResponse> call = postInterfaceService.deleteAccount(deleteAccountSendObject);
+        call.enqueue(new Callback<DeleteAccountResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DeleteAccountResponse> call, @NonNull Response<DeleteAccountResponse> response) {
+                if (response.isSuccessful()) {
+                    DeleteAccountResponse deleteAccountResponse = response.body();
+
+                    if (deleteAccountResponse != null) {
+                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
+                            deleteAccountInterface.onSuccess(deleteAccountResponse);
+                        } else {
+                            deleteAccountInterface.onError(deleteAccountResponse.getDescription());
+                        }
+                    }
+                } else {
+                    deleteAccountInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DeleteAccountResponse> call, @NonNull Throwable t) {
+
+                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                    deleteAccountInterface.onError("Network Error, please try again");
+                } else {
+                    deleteAccountInterface.onError(t.getMessage());
                 }
                 String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
                 Log.e("Login error", error);
