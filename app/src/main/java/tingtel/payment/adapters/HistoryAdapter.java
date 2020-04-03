@@ -12,6 +12,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
@@ -39,8 +44,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         //set animation for recycler view
-        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
         holder.tvAmount.setText(mContext.getResources().getString(R.string.naira) + transactionHistoryResponse.getTransactions().get(position).getAmount());
+
+        try {
+            Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss. SSSSSS").parse("2012-07-10 14:58:00.000000");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        try {
+            Date thisDate = dateFormat.parse("2012-07-10 14:58:00.000000");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         //holder.tvDate.setText(new SimpleDateFormat("MMMM dd, hh:mm a").format(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
         holder.tvSenderPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getUserPhone());
         holder.tvReceiverPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
@@ -58,13 +76,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         setNetworkLogo(receiverNetwork, holder.imgReceiverNetwork);
 
 
-        holder.container.setOnClickListener(v ->{
+        holder.container.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, StatusActivity.class);
             intent.putExtra("amount", transactionHistoryResponse.getTransactions().get(position).getAmount());
             intent.putExtra("ref_id", transactionHistoryResponse.getTransactions().get(position).getRef());
             intent.putExtra("status", transactionHistoryResponse.getTransactions().get(position).getStatus());
             intent.putExtra("sender_number", transactionHistoryResponse.getTransactions().get(position).getUserPhone());
-            intent.putExtra("receiver_number",transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
+            intent.putExtra("receiver_number", transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
             mContext.startActivity(intent);
         });
 

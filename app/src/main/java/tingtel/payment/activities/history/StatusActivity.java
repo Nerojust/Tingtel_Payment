@@ -40,8 +40,6 @@ public class StatusActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private String phoneNumber;
     private String amount;
-    private String ref_id;
-    private int status;
     private String sender_number;
     private String receiver_number;
 
@@ -68,8 +66,8 @@ public class StatusActivity extends AppCompatActivity {
             Intent intent = getIntent();
             if (intent.getExtras() != null) {
                 amount = intent.getStringExtra("amount");
-                ref_id = intent.getStringExtra("ref_id");
-                status = intent.getIntExtra("status", 0);
+                String ref_id = intent.getStringExtra("ref_id");
+                int status = intent.getIntExtra("status", 0);
                 sender_number = intent.getStringExtra("sender_number");
                 receiver_number = intent.getStringExtra("receiver_number");
 
