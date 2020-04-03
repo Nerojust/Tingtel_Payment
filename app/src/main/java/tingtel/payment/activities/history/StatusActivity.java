@@ -39,15 +39,48 @@ public class StatusActivity extends AppCompatActivity {
     private String simNumber;
     private SessionManager sessionManager;
     private String phoneNumber;
+    private String amount;
+    private String ref_id;
+    private int status;
+    private String sender_number;
+    private String receiver_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
         sessionManager = AppUtils.getSessionManagerInstance();
+        initViews();
+        initListeners();
 
-        checkStatusOfTransaction();
+        if (sessionManager.getComingFromSuccess()) {
+            if (sessionManager.getTransactionReference() != null) {
+                referenceIdTextview.setText(sessionManager.getTransactionReference());
+            }
+            int clicked = sessionManager.getWhichSimWasClicked();
+            if (clicked == 0) {
+                phoneNumber = sessionManager.getSimPhoneNumber();
+            } else {
+                phoneNumber = sessionManager.getSimPhoneNumber1();
+            }
+            checkStatusOfTransaction();
+        } else {
+            Intent intent = getIntent();
+            if (intent.getExtras() != null) {
+                amount = intent.getStringExtra("amount");
+                ref_id = intent.getStringExtra("ref_id");
+                status = intent.getIntExtra("status", 0);
+                sender_number =intent.getStringExtra("sender_number");
+                receiver_number =intent.getStringExtra("receiver_number");
 
+                referenceIdTextview.setText(ref_id);
+                if (status == 0) {
+                    setStepViewToPendingStatusHistory();
+                } else if (status == 1) {
+                    setStepViewToCompletedStatusHistory();
+                }
+            }
+        }
     }
 
     private void initListeners() {
@@ -72,18 +105,52 @@ public class StatusActivity extends AppCompatActivity {
         complaintTextview = findViewById(R.id.complaintTextview);
         referenceIdTextview = findViewById(R.id.referenceIdTextview);
 
-        if (sessionManager.getTransactionReference() != null) {
-            referenceIdTextview.setText(sessionManager.getTransactionReference());
-        }
-        int clicked = sessionManager.getWhichSimWasClicked();
-        if (clicked == 0) {
-            phoneNumber = sessionManager.getSimPhoneNumber();
-        } else {
-            phoneNumber = sessionManager.getSimPhoneNumber1();
-        }
-
         // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
+    }
+    private void setStepViewToPendingStatusHistory() {
+        List<String> list0 = new ArrayList<>();
+        list0.add(getResources().getString(R.string.naira) +amount + " from " + sender_number + "(You)");
+        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
+        list0.add("From TINGTEL");
+        list0.add("To " + receiver_number);
+        stepView.setStepsViewIndicatorComplectingPosition(list0.size() - 2)
+                .reverseDraw(false)//default is true
+                .setStepViewTexts(list0)
+                .setLinePaddingProportion(1f)
+                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
+                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.black))
+                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.black))
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
+
+        stepView.setOnClickListener(v -> {
+            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
+        });
+    }
+    private void setStepViewToCompletedStatusHistory() {
+        List<String> list0 = new ArrayList<>();
+        list0.add(getResources().getString(R.string.naira) +amount + " from " + sender_number + "(You)");
+        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
+        list0.add("From TINGTEL");
+        list0.add("To " + receiver_number);
+        stepView.setStepsViewIndicatorComplectingPosition(list0.size())
+                .reverseDraw(false)//default is true
+                .setStepViewTexts(list0)
+                .setLinePaddingProportion(1f)
+                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
+                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.black))
+                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.black))
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
+
+        stepView.setOnClickListener(v -> {
+            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void setStepViewToPendingStatus() {
@@ -192,21 +259,16 @@ public class StatusActivity extends AppCompatActivity {
         Button retry = dialogView.findViewById(R.id.btn_ok);
 
         tvMessage.setText(message);
-        retry.setOnClickListener(v -> checkStatusOfTransaction());
+        retry.setOnClickListener(v -> {
+            checkStatusOfTransaction();
+            alertDialog.dismiss();
+        });
         alertDialog.show();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.fade_out);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(StatusActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
     }
 }

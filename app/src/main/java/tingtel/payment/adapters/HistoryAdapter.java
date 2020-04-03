@@ -1,29 +1,28 @@
 package tingtel.payment.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import tingtel.payment.R;
-import tingtel.payment.models.History;
+import tingtel.payment.activities.history.StatusActivity;
+import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
     private final Context mContext;
-    private final List<History> mData;
+    private final TransactionHistoryResponse transactionHistoryResponse;
 
-    public HistoryAdapter(Context mContext, List lst) {
-
+    public HistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
         this.mContext = mContext;
-        this.mData = lst;
+        this.transactionHistoryResponse = transactionHistoryResponse;
     }
 
     @Override
@@ -39,58 +38,79 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.itemView.setTag(mData.get(position));
+        //set animation for recycler view
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
+        holder.tvAmount.setText(mContext.getResources().getString(R.string.naira) + transactionHistoryResponse.getTransactions().get(position).getAmount());
+        //holder.tvDate.setText(new SimpleDateFormat("MMMM dd, hh:mm a").format(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
+        holder.tvSenderPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getUserPhone());
+        holder.tvReceiverPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
+        holder.ref_id.setText(transactionHistoryResponse.getTransactions().get(position).getRef());
+        Integer statusId = transactionHistoryResponse.getTransactions().get(position).getStatus();
+        if (statusId == 0) {
+            holder.status.setText("Pending");
+        } else if (statusId == 1) {
+            holder.status.setText("Completed");
+        }
+        String senderNetwork = transactionHistoryResponse.getTransactions().get(position).getSourceNetwork();
+        String receiverNetwork = transactionHistoryResponse.getTransactions().get(position).getBeneficiaryNetwork();
 
-        holder.tvAmount.setText("#" + mData.get(position).getAmount());
-        holder.tvDate.setText(new SimpleDateFormat("MMMM dd, hh:mm a").format(mData.get(position).getDate()));
-        holder.tvSenderPhoneNumber.setText(mData.get(position).getSenderPhoneNumber());
-        holder.tvReceiverPhoneNumber.setText(mData.get(position).getReceiverPhoneNumber());
+        setNetworkLogo(senderNetwork, holder.imageSenderNetwork);
+        setNetworkLogo(receiverNetwork, holder.imgReceiverNetwork);
 
 
-//        setNetworkImage(holder, mData.get(position).getSimName());
+        holder.container.setOnClickListener(v ->{
+            Intent intent = new Intent(mContext, StatusActivity.class);
+            intent.putExtra("amount", transactionHistoryResponse.getTransactions().get(position).getAmount());
+            intent.putExtra("ref_id", transactionHistoryResponse.getTransactions().get(position).getRef());
+            intent.putExtra("status", transactionHistoryResponse.getTransactions().get(position).getStatus());
+            intent.putExtra("sender_number", transactionHistoryResponse.getTransactions().get(position).getUserPhone());
+            intent.putExtra("receiver_number",transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
+            mContext.startActivity(intent);
+        });
+
     }
 
+    private void setNetworkLogo(String networkLogo, ImageView imageView) {
+        if (networkLogo.substring(0, 3).equalsIgnoreCase("mtn")) {
+            imageView.setBackgroundResource(R.drawable.mtn_logo);
+        } else if (networkLogo.substring(0, 3).equalsIgnoreCase("air")) {
+            imageView.setBackgroundResource(R.drawable.airtel_logo);
+        } else if (networkLogo.substring(0, 3).equalsIgnoreCase("glo")) {
+            imageView.setBackgroundResource(R.drawable.glo_logo);
+        } else if (networkLogo.substring(0, 3).equalsIgnoreCase("9mo")
+                || (networkLogo.substring(0, 3).equalsIgnoreCase("eti"))) {
+            imageView.setBackgroundResource(R.drawable.nmobile_logo);
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return transactionHistoryResponse.getTransactions().size();
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView tvDate;
+        final TextView tvDate, status, ref_id;
         final TextView tvAmount;
         final TextView tvSenderPhoneNumber;
-        final ImageView imgSenderNetwork;
         final TextView tvReceiverPhoneNumber;
-        final ImageView imgReceiverNetwork;
-        final Button btnDelete;
-
+        final ImageView imgReceiverNetwork, imageSenderNetwork;
+        final ImageView btnDelete;
+        final LinearLayout container;
 
         MyViewHolder(View itemView) {
             super(itemView);
+            container = itemView.findViewById(R.id.layoutContainer);
             tvDate = itemView.findViewById(R.id.tv_date);
             tvAmount = itemView.findViewById(R.id.tv_amount);
             tvSenderPhoneNumber = itemView.findViewById(R.id.tv_sender_phone_number);
-            imgSenderNetwork = itemView.findViewById(R.id.img_sender_network);
             tvReceiverPhoneNumber = itemView.findViewById(R.id.tv_receiver_phone_number);
             imgReceiverNetwork = itemView.findViewById(R.id.img_receiver_network);
+            imageSenderNetwork = itemView.findViewById(R.id.img_sender_network);
             btnDelete = itemView.findViewById(R.id.btn_delete);
-
-
-            Context context = itemView.getContext();
-
-            itemView.setOnClickListener(view -> {
-                History HistoryModel = (History) view.getTag();
-//                    Intent i = new Intent(view.getContext(), MainActivity.class);
-//                    i.putExtra("desc", cpu.getCode());
-//                    i.putExtra("title", cpu.getName());
-//                    view.getContext().startActivity(i);
-
-                // method.DialUssdCode((BanksHistorysActivity)context, HistoryModel.get, context, 0);
-            });
-            itemView.setOnLongClickListener(v -> true);
+            status = itemView.findViewById(R.id.status);
+            ref_id = itemView.findViewById(R.id.ref_id_tv);
         }
     }
 

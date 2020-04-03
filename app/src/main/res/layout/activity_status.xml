@@ -64,9 +64,9 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/tingtel_light_gray"
                 android:padding="@dimen/_5ssp"
-                android:text="Your request is being processed"
+                android:gravity="center"
+                android:text="Transaction Status:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
 

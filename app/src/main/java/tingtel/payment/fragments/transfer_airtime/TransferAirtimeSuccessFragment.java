@@ -70,6 +70,8 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         });
 
         statusButton.setOnClickListener(v -> {
+            AppUtils.getSessionManagerInstance().setComingFromSuccess(true);
+
             Intent intent = new Intent(getContext(), StatusActivity.class);
             intent.putExtra("simNo", SimNo);
             startActivity(intent);
@@ -114,7 +116,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
             return;
         }
         statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
-        statusButton.setEnabled(true);
+        //statusButton.setEnabled(true);
         AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
     }
 

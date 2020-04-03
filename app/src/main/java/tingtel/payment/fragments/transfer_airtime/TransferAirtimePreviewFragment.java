@@ -45,7 +45,7 @@ import static tingtel.payment.utils.DialUtils.dialUssdCode;
 public class TransferAirtimePreviewFragment extends Fragment {
 
     private Boolean buttonClicked = false;
-    private Button btnTransfer, btn_verify;
+    private Button btn_verify, btnTransfer;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -117,6 +117,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
                 runAirtimeTransferUssd();
             }
         });
+
         btn_verify.setOnClickListener(v -> sendDetailsToServerToCredit());
     }
 
@@ -281,7 +282,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             if (buttonClicked) {
                 if (paused) {
                     btn_verify.setVisibility(View.VISIBLE);
-                    btnTransfer.setText("Transfer again?");
+                    //btnTransfer.setText("Transfer again?");
                 }
             }
         }, 2000);

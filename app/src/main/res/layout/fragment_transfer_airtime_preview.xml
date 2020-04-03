@@ -403,7 +403,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/verify_button"
                     android:fontFamily="@font/rubik_regular"
-                    android:text="Verify"
+                    android:text="Successful? Verify here"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp"
                     android:visibility="gone" />

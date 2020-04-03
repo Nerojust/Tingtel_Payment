@@ -386,7 +386,7 @@ public class WebSeviceRequestMaker {
                         if (transactionHistoryResponse.getCode().equals(Constants.SUCCESS)) {
                             transactionHistoryInterface.onSuccess(transactionHistoryResponse);
                         } else {
-                            transactionHistoryInterface.onError(transactionHistoryResponse.getDescription());
+                            transactionHistoryInterface.onError("Error retrieving data");
                         }
                     }
                 } else {
@@ -418,11 +418,11 @@ public class WebSeviceRequestMaker {
                     AddSimResponse addSimResponse = response.body();
 
                     if (addSimResponse != null) {
-                        if (addSimResponse.getCode().equals(Constants.SUCCESS)) {
-                            addSimInterface.onSuccess(addSimResponse);
-                        } else {
-                            addSimInterface.onError(addSimResponse.getDescription());
-                        }
+//                        if (addSimResponse.getCode().equals(Constants.SUCCESS)) {
+//                            addSimInterface.onSuccess(addSimResponse);
+//                        } else {
+//                            addSimInterface.onError(addSimResponse.getDescription());
+//                        }
                     }
                 } else {
                     addSimInterface.onError("Network error, please try again.");
@@ -453,11 +453,11 @@ public class WebSeviceRequestMaker {
                     DeleteAccountResponse deleteAccountResponse = response.body();
 
                     if (deleteAccountResponse != null) {
-                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
-                            deleteAccountInterface.onSuccess(deleteAccountResponse);
-                        } else {
-                            deleteAccountInterface.onError(deleteAccountResponse.getDescription());
-                        }
+//                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
+//                            deleteAccountInterface.onSuccess(deleteAccountResponse);
+//                        } else {
+//                            deleteAccountInterface.onError(deleteAccountResponse.getDescription());
+//                        }
                     }
                 } else {
                     deleteAccountInterface.onError("Network error, please try again.");

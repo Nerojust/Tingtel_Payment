@@ -58,6 +58,7 @@ public class SessionManager {
     private static final String OTP = "OTP";
     private static final String TXN = "TXN";
     private static final String OTP_JSON = "OTP_JSON";
+    private static final String SUCCESS_PAGE = "SUCCESS_PAGE";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences(){
@@ -517,5 +518,13 @@ public class SessionManager {
 
     public void setOTPJsonObject(String jsonObject) {
         setStringPreference(OTP_JSON, jsonObject);
+    }
+
+    public boolean getComingFromSuccess(){
+        return getBooleanPreference(SUCCESS_PAGE);
+    }
+
+    public void setComingFromSuccess(boolean b) {
+        setBooleanPreference(SUCCESS_PAGE, b);
     }
 }
