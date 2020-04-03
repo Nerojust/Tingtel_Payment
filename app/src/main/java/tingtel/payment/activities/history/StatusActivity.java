@@ -70,8 +70,8 @@ public class StatusActivity extends AppCompatActivity {
                 amount = intent.getStringExtra("amount");
                 ref_id = intent.getStringExtra("ref_id");
                 status = intent.getIntExtra("status", 0);
-                sender_number =intent.getStringExtra("sender_number");
-                receiver_number =intent.getStringExtra("receiver_number");
+                sender_number = intent.getStringExtra("sender_number");
+                receiver_number = intent.getStringExtra("receiver_number");
 
                 referenceIdTextview.setText(ref_id);
                 if (status == 0) {
@@ -108,9 +108,10 @@ public class StatusActivity extends AppCompatActivity {
         // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
     }
+
     private void setStepViewToPendingStatusHistory() {
         List<String> list0 = new ArrayList<>();
-        list0.add(getResources().getString(R.string.naira) +amount + " from " + sender_number + "(You)");
+        list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
         list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
         list0.add("From TINGTEL");
         list0.add("To " + receiver_number);
@@ -130,9 +131,10 @@ public class StatusActivity extends AppCompatActivity {
             Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
         });
     }
+
     private void setStepViewToCompletedStatusHistory() {
         List<String> list0 = new ArrayList<>();
-        list0.add(getResources().getString(R.string.naira) +amount + " from " + sender_number + "(You)");
+        list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
         list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
         list0.add("From TINGTEL");
         list0.add("To " + receiver_number);
@@ -214,12 +216,8 @@ public class StatusActivity extends AppCompatActivity {
                 if (sendOTPresponse.getTransactions() != null) {
                     Integer status = sendOTPresponse.getTransactions().getStatus();
                     if (status == 0) {
-                        initViews();
-                        initListeners();
                         setStepViewToPendingStatus();
                     } else {
-                        initViews();
-                        initListeners();
                         setStepViewToCompletedStatus();
                     }
                 } else {

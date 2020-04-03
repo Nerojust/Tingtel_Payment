@@ -37,7 +37,11 @@ public class HistoryActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        getAllHistory();
+        if (AppUtils.isNetworkAvailable(this)) {
+            getAllHistory();
+        } else {
+            AppUtils.showSnackBar("No network available", recyclerView);
+        }
     }
 
     private void getAllHistory() {
@@ -45,7 +49,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-         transactionHistorySendObject.setUserPhone(AppUtils.getSessionManagerInstance().getNumberFromLogin());
+        transactionHistorySendObject.setUserPhone(AppUtils.getSessionManagerInstance().getNumberFromLogin());
         //todo:change back
         //transactionHistorySendObject.setUserPhone("2348038141686");
 
@@ -53,9 +57,9 @@ public class HistoryActivity extends AppCompatActivity {
         webSeviceRequestMaker.getTransactionHistory(transactionHistorySendObject, new TransactionHistoryInterface() {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
-                if (transactionHistoryResponse.getTransactions()==null){
+                if (transactionHistoryResponse.getTransactions() == null) {
                     noRecordFound.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     noRecordFound.setVisibility(View.GONE);
                     HistoryAdapter historyAdapter = new HistoryAdapter(HistoryActivity.this, transactionHistoryResponse);
                     recyclerView.setAdapter(historyAdapter);
