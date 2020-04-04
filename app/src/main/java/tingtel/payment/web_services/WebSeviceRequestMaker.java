@@ -418,11 +418,11 @@ public class WebSeviceRequestMaker {
                     AddSimResponse addSimResponse = response.body();
 
                     if (addSimResponse != null) {
-//                        if (addSimResponse.getCode().equals(Constants.SUCCESS)) {
-//                            addSimInterface.onSuccess(addSimResponse);
-//                        } else {
-//                            addSimInterface.onError(addSimResponse.getDescription());
-//                        }
+                        if (addSimResponse.getCode().equals(Constants.SUCCESS)) {
+                            addSimInterface.onSuccess(addSimResponse);
+                        } else {
+                            addSimInterface.onError(addSimResponse.getDescription());
+                        }
                     }
                 } else {
                     addSimInterface.onError("Network error, please try again.");
