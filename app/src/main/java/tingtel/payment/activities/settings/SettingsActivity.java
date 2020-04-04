@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
-import tingtel.payment.activities.qr_code.QRCodeDisplayActivity;
 import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
 import tingtel.payment.models.delete_account.DeleteAccountSendObject;
@@ -43,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initViews() {
         backArrowLayout = findViewById(R.id.backArrowLayout);
-        qrCodeLayout = findViewById(R.id.qrCodeLayout);
+        //qrCodeLayout = findViewById(R.id.qrCodeLayout);
 
         changePasswordLayout = findViewById(R.id.changePasswordLayout);
         changeEmailAddressLayout = findViewById(R.id.changeEmailLayout);
@@ -59,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initListeners() {
         backArrowLayout.setOnClickListener(v -> finish());
-        qrCodeLayout.setOnClickListener(v -> startActivity(new Intent(this, QRCodeDisplayActivity.class)));
+        //qrCodeLayout.setOnClickListener(v -> startActivity(new Intent(this, QRCodeDisplayActivity.class)));
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         manageSimLayout.setOnClickListener(v -> startActivity(new Intent(this, ManageSimActivity.class)));
@@ -146,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DeleteAccountResponse deleteAccountResponse) {
                 AppUtils.dismissLoadingDialog();
-
+                Toast.makeText(SettingsActivity.this, "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

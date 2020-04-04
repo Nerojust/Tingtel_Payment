@@ -453,11 +453,11 @@ public class WebSeviceRequestMaker {
                     DeleteAccountResponse deleteAccountResponse = response.body();
 
                     if (deleteAccountResponse != null) {
-//                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
-//                            deleteAccountInterface.onSuccess(deleteAccountResponse);
-//                        } else {
-//                            deleteAccountInterface.onError(deleteAccountResponse.getDescription());
-//                        }
+                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
+                            deleteAccountInterface.onSuccess(deleteAccountResponse);
+                        } else {
+                            deleteAccountInterface.onError(deleteAccountResponse.getDescription());
+                        }
                     }
                 } else {
                     deleteAccountInterface.onError("Network error, please try again.");
