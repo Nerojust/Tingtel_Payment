@@ -40,8 +40,10 @@ public class StatusActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private String phoneNumber;
     private String amount;
+    private Button refreshButton;
     private String sender_number;
     private String receiver_number;
+    private String referenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class StatusActivity extends AppCompatActivity {
 
         if (sessionManager.getComingFromSuccess()) {
             if (sessionManager.getTransactionReference() != null) {
-                referenceIdTextview.setText(sessionManager.getTransactionReference());
+                referenceId = sessionManager.getTransactionReference();
+                referenceIdTextview.setText(referenceId);
             }
             int clicked = sessionManager.getWhichSimWasClicked();
             if (clicked == 0) {
@@ -66,12 +69,13 @@ public class StatusActivity extends AppCompatActivity {
             Intent intent = getIntent();
             if (intent.getExtras() != null) {
                 amount = intent.getStringExtra("amount");
-                String ref_id = intent.getStringExtra("ref_id");
+                referenceId = intent.getStringExtra("ref_id");
+
                 int status = intent.getIntExtra("status", 0);
                 sender_number = intent.getStringExtra("sender_number");
                 receiver_number = intent.getStringExtra("receiver_number");
 
-                referenceIdTextview.setText(ref_id);
+                referenceIdTextview.setText(referenceId);
                 if (status == 0) {
                     setStepViewToPendingStatusHistory();
                 } else if (status == 1) {
@@ -93,6 +97,8 @@ public class StatusActivity extends AppCompatActivity {
 
         settingsImageview.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
+        refreshButton.setOnClickListener(v -> checkStatusOfTransaction());
+
         complaintTextview.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
     }
 
@@ -102,6 +108,7 @@ public class StatusActivity extends AppCompatActivity {
         settingsImageview = findViewById(R.id.settingsImageview);
         complaintTextview = findViewById(R.id.complaintTextview);
         referenceIdTextview = findViewById(R.id.referenceIdTextview);
+        refreshButton = findViewById(R.id.refreshButton);
 
         // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
@@ -202,7 +209,7 @@ public class StatusActivity extends AppCompatActivity {
         AppUtils.initLoadingDialog(this);
 
         CheckTransactionStatusSendObject checkTransactionStatusSendObject = new CheckTransactionStatusSendObject();
-        checkTransactionStatusSendObject.setRef(sessionManager.getTransactionReference());
+        checkTransactionStatusSendObject.setRef(referenceId);
         checkTransactionStatusSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
