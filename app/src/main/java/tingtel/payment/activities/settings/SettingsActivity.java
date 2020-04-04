@@ -28,7 +28,7 @@ import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 public class SettingsActivity extends AppCompatActivity {
 
     Button logoutButton;
-    private LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
+    private LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,addSimlayout,
             reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     private SessionManager sessionManager;
 
@@ -55,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         privacyPolicyLayout = findViewById(R.id.privacyPolicyLayout);
         aboutUsLayout = findViewById(R.id.aboutUsLayout);
         logoutButton = findViewById(R.id.logoutButton);
+        addSimlayout = findViewById(R.id.addSimLayout);
     }
 
     private void initListeners() {
@@ -63,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         manageSimLayout.setOnClickListener(v -> startActivity(new Intent(this, ManageSimActivity.class)));
+        addSimlayout.setOnClickListener(v->startActivity(new Intent(this, AddSimActivity.class)));
         tutorialLayout.setOnClickListener(v -> startActivity(new Intent(this, TutorialActivity.class)));
         reportIssueLayout.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
 

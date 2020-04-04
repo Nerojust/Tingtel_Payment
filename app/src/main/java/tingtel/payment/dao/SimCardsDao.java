@@ -20,9 +20,11 @@ public interface SimCardsDao {
     @Insert
     void insert(SimCards SimCards);
 
-
     @Query("DELETE FROM SimCards")
     void delete();
+
+    @Query("SELECT * FROM SimCards WHERE SimSerial = :number")
+    List<SimCards> getNumber(String number);
 
     @Query("SELECT * FROM SimCards WHERE SimSerial = :Serial")
     List<SimCards> getSerial(String Serial);
