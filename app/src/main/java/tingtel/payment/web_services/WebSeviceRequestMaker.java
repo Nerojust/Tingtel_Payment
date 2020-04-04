@@ -386,7 +386,7 @@ public class WebSeviceRequestMaker {
                         if (transactionHistoryResponse.getCode().equals(Constants.SUCCESS)) {
                             transactionHistoryInterface.onSuccess(transactionHistoryResponse);
                         } else {
-                            transactionHistoryInterface.onError("Error retrieving data");
+                            transactionHistoryInterface.onError(transactionHistoryResponse.getDescription());
                         }
                     }
                 } else {
