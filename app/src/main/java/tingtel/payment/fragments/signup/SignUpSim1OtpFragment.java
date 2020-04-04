@@ -28,7 +28,6 @@ import java.util.Objects;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.settings.AddSimActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
 import tingtel.payment.models.add_sim.AddSimResponse;
@@ -79,7 +78,7 @@ public class SignUpSim1OtpFragment extends Fragment {
             if (customerOTP.equals(appOTP)) {
                 Toast.makeText(getContext(), "Verified", Toast.LENGTH_SHORT).show();
 
-                new Handler().postDelayed(this::performProcessAction, 2000);
+                new Handler().postDelayed(this::performProcessAction, 1500);
 
             } else {
                 AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
@@ -208,6 +207,8 @@ public class SignUpSim1OtpFragment extends Fragment {
 
 
     private void makeAddSimRequest() {
+        AppUtils.initLoadingDialog(getContext());
+
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
         addSimSendObject.setPhone2(Sim1PhoneNumber);

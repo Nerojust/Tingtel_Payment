@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".activities.history.HistoryActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
         android:layout_width="match_parent"
@@ -18,8 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="15sp"
-
-        tools:text="No record found" />
+        android:text="No record found"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp"
+        android:visibility="gone" />
 
 </LinearLayout>

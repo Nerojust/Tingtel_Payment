@@ -74,7 +74,7 @@ public class SignUpSim2OtpFragment extends Fragment {
             if (customerOTP.equals(appOTP)) {
                 Toast.makeText(getContext(), "Verified", Toast.LENGTH_SHORT).show();
 
-                new Handler().postDelayed(this::performProcessAction, 2000);
+                new Handler().postDelayed(this::performProcessAction, 1500);
             } else {
                 AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
                 pinView.setText(null);
@@ -193,6 +193,8 @@ public class SignUpSim2OtpFragment extends Fragment {
     }
 
     private void makeAddSimRequest() {
+        AppUtils.initLoadingDialog(getContext());
+
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
         addSimSendObject.setPhone2(Sim2PhoneNumber);

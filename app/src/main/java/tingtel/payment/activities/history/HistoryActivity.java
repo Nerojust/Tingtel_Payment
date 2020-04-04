@@ -26,6 +26,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TextView noRecordFound;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +51,14 @@ public class HistoryActivity extends AppCompatActivity {
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
         transactionHistorySendObject.setUserPhone(AppUtils.getSessionManagerInstance().getNumberFromLogin());
-        //todo:change back
-        //transactionHistorySendObject.setUserPhone("2348038141686");
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.getTransactionHistory(transactionHistorySendObject, new TransactionHistoryInterface() {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
-                if (transactionHistoryResponse.getTransactions() == null) {
+                if (transactionHistoryResponse.getTransactions().size() == 0) {
                     noRecordFound.setVisibility(View.VISIBLE);
+                    alertDialog.dismiss();
                 } else {
                     noRecordFound.setVisibility(View.GONE);
                     HistoryAdapter historyAdapter = new HistoryAdapter(HistoryActivity.this, transactionHistoryResponse);
@@ -72,9 +72,13 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                displayDialog(error, HistoryActivity.this);
+                if (error.equalsIgnoreCase("Error retrieving data")) {
+                    noRecordFound.setVisibility(View.VISIBLE);
+                } else {
+                    displayDialog(error, HistoryActivity.this);
+                    noRecordFound.setVisibility(View.GONE);
+                }
                 AppUtils.dismissLoadingDialog();
-                noRecordFound.setVisibility(View.GONE);
             }
 
             @Override
@@ -98,7 +102,7 @@ public class HistoryActivity extends AppCompatActivity {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);
-        AlertDialog alertDialog = builder.create();
+        alertDialog = builder.create();
 
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
         Button retry = dialogView.findViewById(R.id.btn_ok);
