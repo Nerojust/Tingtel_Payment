@@ -342,7 +342,7 @@ public class WebSeviceRequestMaker {
 
     public void checkTransactionStatus(CheckTransactionStatusSendObject checkTransactionStatusSendObject,
                                        CheckTransactionStatusInterface checkTransactionStatusInterface) {
-        Call<CheckTransactionStatusResponse> call = postInterfaceService.checkTransactionResult(checkTransactionStatusSendObject);
+        Call<CheckTransactionStatusResponse> call = postInterfaceService.checkStatusOfTransaction(checkTransactionStatusSendObject);
         call.enqueue(new Callback<CheckTransactionStatusResponse>() {
             @Override
             public void onResponse(@NonNull Call<CheckTransactionStatusResponse> call, @NonNull Response<CheckTransactionStatusResponse> response) {

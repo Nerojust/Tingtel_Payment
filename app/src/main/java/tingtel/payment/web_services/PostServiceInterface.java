@@ -55,7 +55,7 @@ public interface PostServiceInterface {
     Call<SendOTPresponse> sendOTP(@Body SendOTPsendObject sendOTPsendObject);
 
     @POST("credit_update_report")
-    Call<CheckTransactionStatusResponse> checkTransactionResult(@Body CheckTransactionStatusSendObject checkTransactionStatusSendObject);
+    Call<CheckTransactionStatusResponse> checkStatusOfTransaction(@Body CheckTransactionStatusSendObject checkTransactionStatusSendObject);
 
     @POST("get_transaction_history")
     Call<TransactionHistoryResponse> getTransactionHistory(@Body TransactionHistorySendObject transactionHistorySendObject);
