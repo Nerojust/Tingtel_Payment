@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="15sp"
-        android:visibility="gone"
+
         tools:text="No record found" />
 
 </LinearLayout>

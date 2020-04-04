@@ -28,13 +28,17 @@ import java.util.Objects;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.settings.AddSimActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
+import tingtel.payment.models.add_sim.AddSimResponse;
+import tingtel.payment.models.add_sim.AddSimSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
 import tingtel.payment.models.otp.SendOTPsendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.AddSimInterface;
 import tingtel.payment.web_services.interfaces.SendOTPinterface;
 
 import static tingtel.payment.utils.NetworkCarrierUtils.getCarrierOfSim;
@@ -130,9 +134,10 @@ public class SignUpSim1OtpFragment extends Fragment {
         }
 
         if (sessionManager.getIsRegistered()) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            Objects.requireNonNull(getActivity()).startActivity(intent);
-            getActivity().finish();
+
+
+            makeAddSimRequest();
+
         } else {
             String NoOfSIm = sessionManager.getSimStatus();
 
@@ -198,5 +203,42 @@ public class SignUpSim1OtpFragment extends Fragment {
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
+    }
+
+
+
+    private void makeAddSimRequest() {
+        AddSimSendObject addSimSendObject = new AddSimSendObject();
+        addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
+        addSimSendObject.setPhone2(Sim1PhoneNumber);
+        addSimSendObject.setUser_phone(sessionManager.getNumberFromLogin());
+        addSimSendObject.setSim2_network(Sim1Network);
+        addSimSendObject.setSim2_serial(Sim1Serial);
+        addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.addSim(addSimSendObject, new AddSimInterface() {
+            @Override
+            public void onSuccess(AddSimResponse addSimResponse) {
+                AppUtils.dismissLoadingDialog();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Objects.requireNonNull(getActivity()).startActivity(intent);
+                getActivity().finish();
+                Toast.makeText(getActivity(), "Sim added successfully", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                Toast.makeText(getActivity(), String.valueOf(errorCode), Toast.LENGTH_SHORT).show();
+                AppUtils.dismissLoadingDialog();
+            }
+        });
     }
 }
