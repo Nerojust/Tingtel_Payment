@@ -96,6 +96,7 @@
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1.5"
                     android:gravity="start"
+                    android:textIsSelectable="true"
                     android:text=""
                     android:textColor="@color/tingtel_red_color"
                     android:textSize="@dimen/_12ssp"

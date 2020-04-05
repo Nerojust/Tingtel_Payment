@@ -1,6 +1,7 @@
 package tingtel.payment.activities.history;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.adapters.HistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
@@ -27,6 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView noRecordFound;
     private AlertDialog alertDialog;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +38,15 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         noRecordFound = findViewById(R.id.no_result_found);
         recyclerView = findViewById(R.id.rv_history);
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setOnRefreshListener(this::getAllHistory);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         if (AppUtils.isNetworkAvailable(this)) {
             getAllHistory();
+
         } else {
             AppUtils.showSnackBar("No network available", recyclerView);
         }
@@ -66,6 +73,9 @@ public class HistoryActivity extends AppCompatActivity {
                     historyAdapter.notifyDataSetChanged();
                     recyclerView.setHasFixedSize(true);
                     recyclerView.smoothScrollToPosition(0);
+                    if (swipeRefreshLayout.isRefreshing()){
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
                 }
                 AppUtils.dismissLoadingDialog();
             }
@@ -90,6 +100,15 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
+        if (status) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } super.onBackPressed();
+
+    }
 
     /**
      * to display a dialog

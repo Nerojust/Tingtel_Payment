@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,46 +43,36 @@ public class StatusActivity extends AppCompatActivity {
     private String sender_number;
     private String receiver_number;
     private String referenceId;
+    private String created_date;
+    private List<String> list0;
+    private int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
         sessionManager = AppUtils.getSessionManagerInstance();
+        list0 = new ArrayList<>();
+
         initViews();
         initListeners();
+        getExtras();
+        checkStatusOfTransaction();
+    }
 
-        if (sessionManager.getComingFromSuccess()) {
-            if (sessionManager.getTransactionReference() != null) {
-                referenceId = sessionManager.getTransactionReference();
-                referenceIdTextview.setText(referenceId);
-            }
-            int clicked = sessionManager.getWhichSimWasClicked();
-            if (clicked == 0) {
-                phoneNumber = sessionManager.getSimPhoneNumber();
-            } else {
-                phoneNumber = sessionManager.getSimPhoneNumber1();
-            }
-            checkStatusOfTransaction();
-        } else {
-            Intent intent = getIntent();
-            if (intent.getExtras() != null) {
-                amount = intent.getStringExtra("amount");
-                referenceId = intent.getStringExtra("ref_id");
-
-                int status = intent.getIntExtra("status", 0);
-                sender_number = intent.getStringExtra("sender_number");
-                receiver_number = intent.getStringExtra("receiver_number");
-
-                referenceIdTextview.setText(referenceId);
-                if (status == 0) {
-                    setStepViewToPendingStatusHistory();
-                } else if (status == 1) {
-                    setStepViewToCompletedStatusHistory();
-                }
-            }
+    private void getExtras() {
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            amount = intent.getStringExtra("amount");
+            referenceId = intent.getStringExtra("ref_id");
+            created_date = intent.getStringExtra("date");
+            status = intent.getIntExtra("status", 0);
+            sender_number = intent.getStringExtra("sender_number");
+            receiver_number = intent.getStringExtra("receiver_number");
+            //referenceIdTextview.setText(referenceId);
         }
     }
+
 
     private void initListeners() {
         backButtonImageview.setOnClickListener(v -> finish());
@@ -97,9 +86,19 @@ public class StatusActivity extends AppCompatActivity {
 
         settingsImageview.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
-        refreshButton.setOnClickListener(v -> checkStatusOfTransaction());
+        refreshButton.setOnClickListener(v -> {
+            recreate();
+        });
 
         complaintTextview.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
+    }
+
+    @Override
+    public void recreate() {
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
+        super.recreate();
     }
 
     private void initViews() {
@@ -115,58 +114,23 @@ public class StatusActivity extends AppCompatActivity {
     }
 
     private void setStepViewToPendingStatusHistory() {
-        List<String> list0 = new ArrayList<>();
         list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
-        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
+        list0.add("TO TINGTEL \n at " + created_date);
         list0.add("From TINGTEL");
         list0.add("To " + receiver_number);
-        stepView.setStepsViewIndicatorComplectingPosition(list0.size() - 2)
-                .reverseDraw(false)//default is true
-                .setStepViewTexts(list0)
-                .setLinePaddingProportion(1f)
-                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
-
-        stepView.setOnClickListener(v -> {
-            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
-        });
+        setStepParams(list0, list0.size() - 2);
     }
 
     private void setStepViewToCompletedStatusHistory() {
-        List<String> list0 = new ArrayList<>();
         list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
-        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
+        list0.add("TO TINGTEL \n at " + created_date);
         list0.add("From TINGTEL");
         list0.add("To " + receiver_number);
-        stepView.setStepsViewIndicatorComplectingPosition(list0.size())
-                .reverseDraw(false)//default is true
-                .setStepViewTexts(list0)
-                .setLinePaddingProportion(1f)
-                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
-
-        stepView.setOnClickListener(v -> {
-            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
-        });
+        setStepParams(list0, list0.size());
     }
 
-    private void setStepViewToPendingStatus() {
-        List<String> list0 = new ArrayList<>();
-        list0.add(getResources().getString(R.string.naira) + sessionManager.getAmount() + " from " + phoneNumber + "(You)");
-        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
-        list0.add("From TINGTEL");
-        list0.add("To " + sessionManager.getReceiverPhoneNumber());
-        stepView.setStepsViewIndicatorComplectingPosition(list0.size() - 2)
+    private void setStepParams(List<String> list0, int size) {
+        stepView.setStepsViewIndicatorComplectingPosition(size)
                 .reverseDraw(false)//default is true
                 .setStepViewTexts(list0)
                 .setLinePaddingProportion(1f)
@@ -177,31 +141,6 @@ public class StatusActivity extends AppCompatActivity {
                 .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
                 .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
-
-        stepView.setOnClickListener(v -> {
-            Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    private void setStepViewToCompletedStatus() {
-        List<String> list0 = new ArrayList<>();
-        list0.add(getResources().getString(R.string.naira) + sessionManager.getAmount() + " from " + phoneNumber + "(You)");
-        list0.add("TO TINGTEL \n at " + "4:23pm, Fri. 23rd March 2020");
-        list0.add("From TINGTEL");
-        list0.add("To " + sessionManager.getReceiverPhoneNumber());
-        stepView.setStepsViewIndicatorComplectingPosition(list0.size())
-                .reverseDraw(false)//default is true
-                .setStepViewTexts(list0)
-                .setLinePaddingProportion(1f)
-                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.black))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.tingtel_red_color))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.ic_check_circle))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));
-
-        stepView.setOnClickListener(v -> Toast.makeText(this, "This is the current status of your transaction", Toast.LENGTH_SHORT).show());
     }
 
 
@@ -216,18 +155,19 @@ public class StatusActivity extends AppCompatActivity {
         webSeviceRequestMaker.checkTransactionStatus(checkTransactionStatusSendObject, new CheckTransactionStatusInterface() {
             @Override
             public void onSuccess(CheckTransactionStatusResponse sendOTPresponse) {
-                AppUtils.dismissLoadingDialog();
+
 
                 if (sendOTPresponse.getTransactions() != null) {
                     Integer status = sendOTPresponse.getTransactions().getStatus();
                     if (status == 0) {
-                        setStepViewToPendingStatus();
+                        setStepViewToPendingStatusHistory();
                     } else {
-                        setStepViewToCompletedStatus();
+                        setStepViewToCompletedStatusHistory();
                     }
                 } else {
                     AppUtils.showDialog("No transactions found", StatusActivity.this);
                 }
+                AppUtils.dismissLoadingDialog();
             }
 
             @Override

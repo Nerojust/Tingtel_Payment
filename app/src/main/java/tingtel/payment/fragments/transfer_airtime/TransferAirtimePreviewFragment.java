@@ -230,7 +230,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             TingtelNumber = Constants.TINGTEL_MTN;
             UssdCode = "*600*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
-            //Toast.makeText(getActivity(), UssdCode, Toast.LENGTH_LONG).show();
             dialUssdCode(
                     getActivity(),
                     UssdCode,
@@ -239,10 +238,15 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
             TingtelNumber = Constants.TINGTEL_AIRTEL;
-
-            sendSms();
-            Toast.makeText(getContext(), "Please click on send message icon to complete the process", Toast.LENGTH_SHORT).show();
-            UssdCode = "";
+            UssdCode = "*432*1*" + TingtelNumber + "*" + Amount + "*" + Pin + "#";
+            dialUssdCode(
+                    getActivity(),
+                    UssdCode,
+                    SimNo
+            );
+//            sendSms();
+//            Toast.makeText(getContext(), "Please click on send message icon to complete the process", Toast.LENGTH_SHORT).show();
+//            UssdCode = "";
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
 
             TingtelNumber = Constants.TINGTEL_9MOBILE;

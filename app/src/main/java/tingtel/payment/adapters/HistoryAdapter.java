@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
@@ -41,33 +41,36 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
     }
 
+    public String formateDate(String dateString) {
+        Date date;
+        String formattedDate = "";
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(dateString);
+            formattedDate = new SimpleDateFormat("MMMM dd, hh:mm a", Locale.getDefault()).format(date);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return formattedDate;
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
-        holder.tvAmount.setText(mContext.getResources().getString(R.string.naira) + transactionHistoryResponse.getTransactions().get(position).getAmount());
-
-        try {
-            Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss. SSSSSS").parse("2012-07-10 14:58:00.000000");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-        try {
-            Date thisDate = dateFormat.parse("2012-07-10 14:58:00.000000");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        //holder.tvDate.setText(new SimpleDateFormat("MMMM dd, hh:mm a").format(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
+        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), transactionHistoryResponse.getTransactions().get(position).getAmount()));
+        holder.tvDate.setText(formateDate(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
         holder.tvSenderPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getUserPhone());
         holder.tvReceiverPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
         holder.ref_id.setText(transactionHistoryResponse.getTransactions().get(position).getRef());
         Integer statusId = transactionHistoryResponse.getTransactions().get(position).getStatus();
         if (statusId == 0) {
             holder.status.setText("Pending");
+            holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
         } else if (statusId == 1) {
             holder.status.setText("Completed");
+            holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
         }
         String senderNetwork = transactionHistoryResponse.getTransactions().get(position).getSourceNetwork();
         String receiverNetwork = transactionHistoryResponse.getTransactions().get(position).getBeneficiaryNetwork();
@@ -83,6 +86,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             intent.putExtra("status", transactionHistoryResponse.getTransactions().get(position).getStatus());
             intent.putExtra("sender_number", transactionHistoryResponse.getTransactions().get(position).getUserPhone());
             intent.putExtra("receiver_number", transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
+            intent.putExtra("date", formateDate(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
             mContext.startActivity(intent);
         });
 
@@ -114,7 +118,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         final TextView tvSenderPhoneNumber;
         final TextView tvReceiverPhoneNumber;
         final ImageView imgReceiverNetwork, imageSenderNetwork;
-        final ImageView btnDelete;
+        //  final ImageView btnDelete;
         final LinearLayout container;
 
         MyViewHolder(View itemView) {
@@ -126,7 +130,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             tvReceiverPhoneNumber = itemView.findViewById(R.id.tv_receiver_phone_number);
             imgReceiverNetwork = itemView.findViewById(R.id.img_receiver_network);
             imageSenderNetwork = itemView.findViewById(R.id.img_sender_network);
-            btnDelete = itemView.findViewById(R.id.btn_delete);
+            //btnDelete = itemView.findViewById(R.id.btn_delete);
             status = itemView.findViewById(R.id.status);
             ref_id = itemView.findViewById(R.id.ref_id_tv);
         }

@@ -18,7 +18,7 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.history.StatusActivity;
+import tingtel.payment.activities.history.HistoryActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.utils.AppUtils;
 
@@ -72,7 +72,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         statusButton.setOnClickListener(v -> {
             AppUtils.getSessionManagerInstance().setComingFromSuccess(true);
 
-            Intent intent = new Intent(getContext(), StatusActivity.class);
+            Intent intent = new Intent(getContext(), HistoryActivity.class);
             intent.putExtra("simNo", SimNo);
             startActivity(intent);
         });
@@ -96,7 +96,6 @@ public class TransferAirtimeSuccessFragment extends Fragment {
         SimNo = getArguments().getInt("simNo");
         Amount = getArguments().getString("amount");
         ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
-
     }
 
     private void checkBalance() {
@@ -116,7 +115,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
             return;
         }
         statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
-        //statusButton.setEnabled(true);
+        statusButton.setEnabled(true);
         AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
     }
 

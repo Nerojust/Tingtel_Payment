@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.transfer_airtime;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,13 +43,14 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_save_beneficiary_sheet, container, false);
 
-        ReceiverPhoneNumber = getArguments().getString("ReceiverPhoneNumber");
-        Receivernetwork = getArguments().getString("ReceiverNetwork");
+        if (getArguments() != null) {
+            ReceiverPhoneNumber = getArguments().getString("ReceiverPhoneNumber");
+            Receivernetwork = getArguments().getString("ReceiverNetwork");
+        }
 
         initViews(view);
         initValues();
@@ -60,9 +62,14 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
     private void initListeners() {
         btnSave.setOnClickListener(v -> {
             if (!edName.getText().toString().isEmpty()) {
-                saveBeneficiary();
+                if (AppUtils.isValidFieldsNumbersAndLetters(edName.getText().toString().trim())) {
+                    saveBeneficiary();
+                } else {
+                    Toast.makeText(activity, "Invalid character/s detected", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 AppUtils.showSnackBar("Fill in a name", edName);
+                edName.requestFocus();
             }
         });
     }
@@ -79,19 +86,15 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
         btnSave = view.findViewById(R.id.btn_save);
     }
 
-
     private void saveBeneficiary() {
-
         ReceiverName = edName.getText().toString();
 
+        @SuppressLint("StaticFieldLeak")
         class SaveTask extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
-/*
-  in the background, save the data to roomdb using the balance model
- */
-
+                // in the background, save the data to roomdb using the balance model
                 AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
 
                 //creating a task
@@ -109,16 +112,12 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(activity, "Saved beneficiary", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Beneficiary saved", Toast.LENGTH_SHORT).show();
             }
         }
         SaveTask st = new SaveTask();
         st.execute();
 
-
         dismiss();
-
-
     }
-
 }

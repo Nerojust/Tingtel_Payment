@@ -6,6 +6,7 @@
     <color name="black">#000000</color>
 
     <color name="tingtel_red_color">#F11808</color>
+    <color name="green">#0EAC16</color>
 
     <color name="selected_dot">#2D9CDB</color>
     <color name="idle_dot">#662D9CDB</color>
