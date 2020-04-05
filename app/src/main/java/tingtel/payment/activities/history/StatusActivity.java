@@ -69,7 +69,6 @@ public class StatusActivity extends AppCompatActivity {
             status = intent.getIntExtra("status", 0);
             sender_number = intent.getStringExtra("sender_number");
             receiver_number = intent.getStringExtra("receiver_number");
-            //referenceIdTextview.setText(referenceId);
         }
     }
 
@@ -156,14 +155,15 @@ public class StatusActivity extends AppCompatActivity {
             @Override
             public void onSuccess(CheckTransactionStatusResponse sendOTPresponse) {
 
-
                 if (sendOTPresponse.getTransactions() != null) {
                     Integer status = sendOTPresponse.getTransactions().getStatus();
+                    referenceIdTextview.setText(referenceId);
                     if (status == 0) {
                         setStepViewToPendingStatusHistory();
                     } else {
                         setStepViewToCompletedStatusHistory();
                     }
+
                 } else {
                     AppUtils.showDialog("No transactions found", StatusActivity.this);
                 }
