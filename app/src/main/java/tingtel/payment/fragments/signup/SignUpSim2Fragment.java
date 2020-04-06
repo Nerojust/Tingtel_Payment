@@ -156,7 +156,7 @@ public class SignUpSim2Fragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("Sim2Serial", Sim2Serial);
         bundle.putString("Sim2Network", selectedSpinnerNetwork);
-        bundle.putString("Sim2PhoneNumber", Objects.requireNonNull(tvPhoneNumber.getText()).toString());
+        bundle.putString("Sim2PhoneNumber", Objects.requireNonNull(phoneNumber));
         return bundle;
     }
 

@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kofigyan.stateprogressbar.StateProgressBar;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -157,7 +155,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         btnPreview.setOnClickListener(v -> {
             if (isValidFields()) {
                 ReceiverSimNetwork = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
-                String number = edReceiverPhoneNumber.getText().toString().trim();
+                String number = AppUtils.checkPhoneNumberAndRestructure(edReceiverPhoneNumber.getText().toString().trim());
                 Bundle bundle = new Bundle();
                 bundle.putString("senderSimNetwork", SenderSimNetwork);
                 bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
@@ -188,11 +186,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private void initViews(View view) {
         AppUtils.getSessionManagerInstance().setSelectedRvNetwork("");
 
-        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
-        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
-        stateProgressBar.setStateDescriptionData(descriptionData);
-        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
-        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
+        AppUtils.showProgressTracker(view);
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);

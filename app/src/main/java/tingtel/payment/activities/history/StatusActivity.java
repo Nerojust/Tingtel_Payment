@@ -3,6 +3,7 @@ package tingtel.payment.activities.history;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 
 public class StatusActivity extends AppCompatActivity {
+    private static final String TAG = "Status Activity";
     private VerticalStepView stepView;
     private ImageView backButtonImageview, homeImageview, settingsImageview;
     private TextView complaintTextview, referenceIdTextview;
@@ -69,6 +71,8 @@ public class StatusActivity extends AppCompatActivity {
             status = intent.getIntExtra("status", 0);
             sender_number = intent.getStringExtra("sender_number");
             receiver_number = intent.getStringExtra("receiver_number");
+
+            receiver_number = AppUtils.checkPhoneNumberAndRemovePrefix(receiver_number);
         }
     }
 
@@ -172,8 +176,11 @@ public class StatusActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                displayDialog(error, StatusActivity.this);
-
+                try {
+                    displayDialog(error, StatusActivity.this);
+                } catch (Exception e) {
+                    Log.e(TAG, "onError: " + e.getMessage());
+                }
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -183,6 +190,12 @@ public class StatusActivity extends AppCompatActivity {
                 AppUtils.dismissLoadingDialog();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        AppUtils.initLoadingDialog(this);
+        super.onBackPressed();
     }
 
     /**

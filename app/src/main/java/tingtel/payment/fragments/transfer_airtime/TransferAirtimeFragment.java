@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,14 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-
-import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
@@ -68,49 +61,18 @@ public class TransferAirtimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime, container, false);
 
         initViews(view);
-        initListeners(view);
+        initListeners();
 
         confirmSimRegistrations();
-        populateSimRadioButtons();
+        populatePhoneNumberViews();
 
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-
-        inflater.inflate(R.menu.menu_main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-
-    }
-
-    //For handling item selection
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_home:
-                Toast.makeText(getContext(), "home Fragment item", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
-        //softInputAssist = new SoftInputAssist(getActivity());
-
-        String[] descriptionData = {"Sender", "Receiver", "Summary"};
-        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
-        stateProgressBar.setStateDescriptionData(descriptionData);
-        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
-        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
+        AppUtils.showProgressTracker(view);
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
@@ -165,7 +127,7 @@ public class TransferAirtimeFragment extends Fragment {
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
-    private void initListeners(View view) {
+    private void initListeners() {
         backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
@@ -245,11 +207,6 @@ public class TransferAirtimeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-//        softInputAssist.onResume();
-        super.onResume();
-    }
 
     private void performCheckBeforeDialing() {
         if (isSim1TextviewClicked) {
@@ -371,7 +328,7 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
 
-    private void populateSimRadioButtons() {
+    private void populatePhoneNumberViews() {
         noOfSIm = sessionManager.getSimStatus();
 
         switch (noOfSIm) {
@@ -383,7 +340,7 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1":
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.GONE);
-                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
+                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sessionManager.getSimPhoneNumber()));
 
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_white));
                 sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
@@ -393,8 +350,8 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1 SIM2":
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.VISIBLE);
-                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + sessionManager.getSimPhoneNumber());
-                sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + sessionManager.getSimPhoneNumber1());
+                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sessionManager.getSimPhoneNumber()));
+                sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sessionManager.getSimPhoneNumber1()));
 
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
                 sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));

@@ -138,7 +138,7 @@ public class SetPasswordFragment extends Fragment {
     }
 
     private boolean isValidFields() {
-        if (tvPassword1.getText().toString().trim().isEmpty()) {
+        if (Objects.requireNonNull(tvPassword1.getText()).toString().trim().isEmpty()) {
             AppUtils.showSnackBar("New Password is required", tvPassword1);
             tvPassword1.requestFocus();
             return false;
@@ -149,7 +149,7 @@ public class SetPasswordFragment extends Fragment {
             return false;
         }
 
-        if (tvPassword2.getText().toString().trim().isEmpty()) {
+        if (Objects.requireNonNull(tvPassword2.getText()).toString().trim().isEmpty()) {
             AppUtils.showSnackBar("This is required", tvPassword2);
             tvPassword2.requestFocus();
             return false;

@@ -3,8 +3,7 @@ package tingtel.payment.models.transaction_history;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class Transaction {
+public class Phone1Transaction {
 
     @SerializedName("id")
     @Expose

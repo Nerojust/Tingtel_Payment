@@ -29,6 +29,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -114,6 +115,15 @@ public class AppUtils {
         return saltStr;
     }
 
+    public static void showProgressTracker(View view) {
+
+        String[] descriptionData = {"Sender", "Receiver", "Summary"};
+        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
+        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
+    }
+
     public static String checkPhoneNumberAndRestructure(String number) {
         if (number.substring(0, 1).equals("0")) {
             number = number.substring(1);
@@ -124,6 +134,18 @@ public class AppUtils {
             return number;
         } else if (number.substring(0, 4).equals("+234")) {
             number = number.replace("+234", "234");
+            return number;
+        } else {
+            return number;
+        }
+    }
+
+    public static String checkPhoneNumberAndRemovePrefix(String number) {
+        if (number.substring(0, 3).equals("234")) {
+            number = number.replace("234", "0");
+            return number;
+        } else if (number.substring(0, 4).equals("+234")) {
+            number = number.replace("+234", "0");
             return number;
         } else {
             return number;
@@ -237,7 +259,9 @@ public class AppUtils {
     }
 
     public static void dismissLoadingDialog() {
-        progress.dismiss();
+        if (progress.isShowing()) {
+            progress.dismiss();
+        }
     }
 
 

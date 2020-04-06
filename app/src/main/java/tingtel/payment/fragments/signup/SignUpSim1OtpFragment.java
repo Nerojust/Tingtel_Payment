@@ -189,21 +189,24 @@ public class SignUpSim1OtpFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        sessionManager = AppUtils.getSessionManagerInstance();
+
         resendOtp = view.findViewById(R.id.resendOTPTextview);
         pinView = view.findViewById(R.id.pinView);
-        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
 
-        Sim1Network = Objects.requireNonNull(getArguments()).getString("Sim1Network");
-        Sim1Serial = getArguments().getString("Sim1Serial");
-        Sim1PhoneNumber = getArguments().getString("Sim1PhoneNumber");
+        getExtrasFromIntent();
 
-        sessionManager = AppUtils.getSessionManagerInstance();
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
+    private void getExtrasFromIntent() {
+        Sim1Network = Objects.requireNonNull(getArguments()).getString("Sim1Network");
+        Sim1Serial = getArguments().getString("Sim1Serial");
+        Sim1PhoneNumber = getArguments().getString("Sim1PhoneNumber");
+    }
 
 
     private void makeAddSimRequest() {

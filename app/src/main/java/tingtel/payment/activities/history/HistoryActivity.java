@@ -58,24 +58,29 @@ public class HistoryActivity extends AppCompatActivity {
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
         transactionHistorySendObject.setUserPhone(AppUtils.getSessionManagerInstance().getNumberFromLogin());
+        //Toast.makeText(this, AppUtils.getSessionManagerInstance().getNumberFromLogin(), Toast.LENGTH_SHORT).show();
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.getTransactionHistory(transactionHistorySendObject, new TransactionHistoryInterface() {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
-                if (transactionHistoryResponse.getTransactions().size() == 0) {
-                    noRecordFound.setVisibility(View.VISIBLE);
-                    alertDialog.dismiss();
-                } else {
-                    noRecordFound.setVisibility(View.GONE);
-                    HistoryAdapter historyAdapter = new HistoryAdapter(HistoryActivity.this, transactionHistoryResponse);
-                    recyclerView.setAdapter(historyAdapter);
-                    historyAdapter.notifyDataSetChanged();
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.smoothScrollToPosition(0);
-                    if (swipeRefreshLayout.isRefreshing()){
-                        swipeRefreshLayout.setRefreshing(false);
+                if (transactionHistoryResponse != null) {
+                    if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
+                        noRecordFound.setVisibility(View.VISIBLE);
+                        alertDialog.dismiss();
+                    } else {
+                        noRecordFound.setVisibility(View.GONE);
+                        HistoryAdapter historyAdapter = new HistoryAdapter(HistoryActivity.this, transactionHistoryResponse);
+                        recyclerView.setAdapter(historyAdapter);
+                        historyAdapter.notifyDataSetChanged();
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.smoothScrollToPosition(0);
+                        if (swipeRefreshLayout.isRefreshing()) {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
                     }
+                }else {
+                    AppUtils.showDialog("Server Error", HistoryActivity.this);
                 }
                 AppUtils.dismissLoadingDialog();
             }
@@ -106,7 +111,8 @@ public class HistoryActivity extends AppCompatActivity {
         if (status) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
-        } super.onBackPressed();
+        }
+        super.onBackPressed();
 
     }
 

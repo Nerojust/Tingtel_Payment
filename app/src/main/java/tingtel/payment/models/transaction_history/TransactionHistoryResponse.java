@@ -6,17 +6,18 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+
 public class TransactionHistoryResponse {
 
     @SerializedName("code")
     @Expose
     private String code;
-    @SerializedName("description")
+    @SerializedName("phone1_transactions")
     @Expose
-    private String description;
-    @SerializedName("transactions")
+    private List<Phone1Transaction> phone1Transactions = null;
+    @SerializedName("phone2_transactions")
     @Expose
-    private List<Transaction> transactions = null;
+    private List<Phone2Transaction> phone2Transactions = null;
 
     public String getCode() {
         return code;
@@ -26,20 +27,20 @@ public class TransactionHistoryResponse {
         this.code = code;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Phone1Transaction> getPhone1Transactions() {
+        return phone1Transactions;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPhone1Transactions(List<Phone1Transaction> phone1Transactions) {
+        this.phone1Transactions = phone1Transactions;
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public List<Phone2Transaction> getPhone2Transactions() {
+        return phone2Transactions;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setPhone2Transactions(List<Phone2Transaction> phone2Transactions) {
+        this.phone2Transactions = phone2Transactions;
     }
 
 }

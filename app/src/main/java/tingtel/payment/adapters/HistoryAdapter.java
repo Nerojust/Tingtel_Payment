@@ -20,6 +20,7 @@ import java.util.Locale;
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
+import tingtel.payment.utils.AppUtils;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
     private final Context mContext;
@@ -59,12 +60,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
-        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), transactionHistoryResponse.getTransactions().get(position).getAmount()));
-        holder.tvDate.setText(formateDate(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
-        holder.tvSenderPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getUserPhone());
-        holder.tvReceiverPhoneNumber.setText(transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
-        holder.ref_id.setText(transactionHistoryResponse.getTransactions().get(position).getRef());
-        Integer statusId = transactionHistoryResponse.getTransactions().get(position).getStatus();
+        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), transactionHistoryResponse.getPhone1Transactions().get(position).getAmount()));
+        holder.tvDate.setText(formateDate(transactionHistoryResponse.getPhone1Transactions().get(position).getCreatedAt()));
+        holder.tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(transactionHistoryResponse.getPhone1Transactions().get(position).getUserPhone()));
+        holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryMsisdn()));
+        holder.ref_id.setText(transactionHistoryResponse.getPhone1Transactions().get(position).getRef());
+        Integer statusId = transactionHistoryResponse.getPhone1Transactions().get(position).getStatus();
         if (statusId == 0) {
             holder.status.setText("Pending");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
@@ -72,8 +73,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             holder.status.setText("Completed");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
         }
-        String senderNetwork = transactionHistoryResponse.getTransactions().get(position).getSourceNetwork();
-        String receiverNetwork = transactionHistoryResponse.getTransactions().get(position).getBeneficiaryNetwork();
+        String senderNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getSourceNetwork();
+        String receiverNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryNetwork();
 
         setNetworkLogo(senderNetwork, holder.imageSenderNetwork);
         setNetworkLogo(receiverNetwork, holder.imgReceiverNetwork);
@@ -81,12 +82,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
         holder.container.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, StatusActivity.class);
-            intent.putExtra("amount", transactionHistoryResponse.getTransactions().get(position).getAmount());
-            intent.putExtra("ref_id", transactionHistoryResponse.getTransactions().get(position).getRef());
-            intent.putExtra("status", transactionHistoryResponse.getTransactions().get(position).getStatus());
-            intent.putExtra("sender_number", transactionHistoryResponse.getTransactions().get(position).getUserPhone());
-            intent.putExtra("receiver_number", transactionHistoryResponse.getTransactions().get(position).getBeneficiaryMsisdn());
-            intent.putExtra("date", formateDate(transactionHistoryResponse.getTransactions().get(position).getCreatedAt()));
+            intent.putExtra("amount", transactionHistoryResponse.getPhone1Transactions().get(position).getAmount());
+            intent.putExtra("ref_id", transactionHistoryResponse.getPhone1Transactions().get(position).getRef());
+            intent.putExtra("status", transactionHistoryResponse.getPhone1Transactions().get(position).getStatus());
+            intent.putExtra("sender_number", transactionHistoryResponse.getPhone1Transactions().get(position).getUserPhone());
+            intent.putExtra("receiver_number", transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryMsisdn());
+            intent.putExtra("date", formateDate(transactionHistoryResponse.getPhone1Transactions().get(position).getCreatedAt()));
             mContext.startActivity(intent);
         });
 
@@ -107,7 +108,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return transactionHistoryResponse.getTransactions().size();
+        return transactionHistoryResponse.getPhone1Transactions().size();
     }
 
 

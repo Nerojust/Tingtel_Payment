@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
-import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -28,6 +28,7 @@ import java.util.Objects;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.history.HistoryActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.History;
@@ -53,11 +54,13 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private String Pin;
     private int SimNo;
     private int called = 0;
+    private Button statusButton, saveBeneficiary, checkBalanceButton;
     private int called1 = 0;
     private String final_Amount;
     private String Amount;
     private String SimSerial;
     private SessionManager sessionManager;
+    private LinearLayout nextLayout;
     private String TingtelNumber;
     private TextView tvSenderPhoneNumber;
     private TextView tvReceiverPhoneNumber;
@@ -69,6 +72,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
     private NavController navController;
     private ImageView homeImageview, settingsImagview, backButtonImageview;
     private boolean paused;
+    private String randomString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +91,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             SenderPhoneNumber = sessionManager.getSimPhoneNumber1();
             SimSerial = sessionManager.getSimSerialICCID1();
         }
-
+        SenderPhoneNumber = AppUtils.checkPhoneNumberAndRestructure(SenderPhoneNumber);
 
         populateDetailsTextViews();
         initListeners();
@@ -111,16 +115,63 @@ public class TransferAirtimePreviewFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransfer.setOnClickListener(v -> {
-            if (btnTransfer.getText().toString().equalsIgnoreCase("transfer")) {
-                runAirtimeTransferUssd();
-            } else if (btnTransfer.getText().toString().equalsIgnoreCase("transfer again?")) {
-                runAirtimeTransferUssd();
-            }
+            sendDetailsToServerToCredit();
         });
 
-        btn_verify.setOnClickListener(v -> sendDetailsToServerToCredit());
+        checkBalanceButton.setOnClickListener(v -> {
+            checkBalance();
+        });
+
+        statusButton.setOnClickListener(v -> {
+            AppUtils.getSessionManagerInstance().setComingFromSuccess(true);
+
+            Intent intent = new Intent(getContext(), HistoryActivity.class);
+            intent.putExtra("simNo", SimNo);
+            startActivity(intent);
+        });
+
+        saveBeneficiary.setOnClickListener(v -> {
+            SaveBeneficiarySheetFragment bottomSheetFragment = new SaveBeneficiarySheetFragment(getActivity());
+            Bundle bundle = new Bundle();
+            bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
+            bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
+            bottomSheetFragment.setArguments(bundle);
+            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+        });
+
+
     }
 
+    private void checkBalance() {
+        String UssdCode;
+        if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
+            UssdCode = "*556#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
+            UssdCode = "*123#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
+            UssdCode = "*124*1#";
+        } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo") ||
+                (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
+            UssdCode = "*232#";
+        } else {
+
+            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+            return;
+        }
+        statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
+        statusButton.setEnabled(true);
+        AppUtils.dialUssdCode(getActivity(), UssdCode, SimNo);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (isRemoving()) {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        }
+    }
 
     /**
      * instantiate all necessary views
@@ -128,11 +179,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * @param view
      */
     private void initViews(View view) {
-        String[] descriptionData = {"Sender", "Receiver", "Summary", "Status"};
-        StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
-        stateProgressBar.setStateDescriptionData(descriptionData);
-        stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");
-        stateProgressBar.setStateNumberTypeface("font/rubik_regular.ttf");
+        AppUtils.showProgressTracker(view);
 
         sessionManager = AppUtils.getSessionManagerInstance();
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
@@ -147,8 +194,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvServiceFee = view.findViewById(R.id.tv_service_fee);
         tvCreditedAmount = view.findViewById(R.id.tv_credited_amount);
         btnTransfer = view.findViewById(R.id.btn_transfer);
-        btn_verify = view.findViewById(R.id.btn_verify);
+        checkBalanceButton = view.findViewById(R.id.check_balance_button);
+        statusButton = view.findViewById(R.id.status_button);
+        saveBeneficiary = view.findViewById(R.id.makeAnotherTransferButton);
+        nextLayout = view.findViewById(R.id.nextLayout);
 
+        randomString = AppUtils.generateRandomString();
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
@@ -164,17 +215,14 @@ public class TransferAirtimePreviewFragment extends Fragment {
         Amount = getArguments().getString("amount");
         ReceiverPhoneNumber = getArguments().getString("receiverPhoneNumber");
         Pin = getArguments().getString("pin");
-
-        sessionManager.setReceiverPhoneNumber(ReceiverPhoneNumber);
-        sessionManager.setAmount(Amount);
     }
 
     /**
      * set data to views
      */
     private void populateDetailsTextViews() {
-        tvSenderPhoneNumber.setText(SenderPhoneNumber);
-        tvReceiverPhoneNumber.setText(ReceiverPhoneNumber);
+        tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(SenderPhoneNumber));
+        tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(ReceiverPhoneNumber));
         //calculate 10% of amount entered
         double dividedAmount = Integer.parseInt(Amount) / 10;
         double balanceAmount = Integer.parseInt(Amount) - dividedAmount;
@@ -285,8 +333,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         new Handler().postDelayed(() -> {
             if (buttonClicked) {
                 if (paused) {
-                    btn_verify.setVisibility(View.VISIBLE);
-                    //btnTransfer.setText("Transfer again?");
+                    nextLayout.setVisibility(View.VISIBLE);
                 }
             }
         }, 2000);
@@ -303,47 +350,55 @@ public class TransferAirtimePreviewFragment extends Fragment {
         sendCreditDetailsSendObject.setBeneficiaryNetwork(ReceiverSimNetwork);
         sendCreditDetailsSendObject.setSourceNetwork(SenderSimNetwork);
         sendCreditDetailsSendObject.setUserPhone(SenderPhoneNumber);
-        String random = AppUtils.generateRandomString();
-        sessionManager.setTransactionReference(random);
-        sendCreditDetailsSendObject.setRef(random);
+        sendCreditDetailsSendObject.setRef(randomString);
         sendCreditDetailsSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
         Gson gson = new Gson();
         String object = gson.toJson(sendCreditDetailsSendObject);
         sessionManager.setCreditRequestJsonObject(object);
+        sessionManager.setTransactionReference(randomString);
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.sendCreditDetailsToServer(sendCreditDetailsSendObject, new SendCreditDetailsInterface() {
             @Override
             public void onSuccess(SendCreditDetailsResponse changeEmailResponse) {
-                Bundle bundle = new Bundle();
-                bundle.putString("senderSimNetwork", SenderSimNetwork);
-                bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
-                bundle.putString("simSerial", SimSerial);
-                bundle.putInt("simNo", SimNo);
-                bundle.putString("amount", Amount);
-                bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
+                //after sending the request ahead, begin the transfer process.
+                runAirtimeTransferUssd();
+                nextLayout.setVisibility(View.VISIBLE);
+                Bundle bundle = getBundle();
 
                 AppUtils.dismissLoadingDialog();
 
-                navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
+                //navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
 
             }
 
             @Override
             public void onError(String error) {
                 AppUtils.showDialog(error, getActivity());
-                //retry
-                //sendDetailsToServerToCredit();
+
+                nextLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.showDialog(String.valueOf(errorCode), getActivity());
+                nextLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
         });
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("senderSimNetwork", SenderSimNetwork);
+        bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
+        bundle.putString("simSerial", SimSerial);
+        bundle.putInt("simNo", SimNo);
+        bundle.putString("amount", Amount);
+        bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
+        return bundle;
     }
 
     /**
