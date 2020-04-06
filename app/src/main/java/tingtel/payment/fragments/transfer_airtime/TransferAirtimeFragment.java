@@ -374,7 +374,7 @@ public class TransferAirtimeFragment extends Fragment {
             edAmount.requestFocus();
             return false;
         }
-        if (edAmount.getText().toString().trim().length() < 3) {
+        if (edAmount.getText().toString().trim().length() < 2) {
             AppUtils.showSnackBar("Amount is too low. Minimum is " + getResources().getString(R.string.naira) + "100", edAmount);
             edAmount.requestFocus();
             return false;

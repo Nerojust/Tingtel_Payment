@@ -79,13 +79,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<CustomerRegistrationResponse> call, @NonNull Throwable t) {
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    createNewUserInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        createNewUserInterface.onError("Network Error, please try again");
+                    } else {
+                        createNewUserInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    createNewUserInterface.onError(t.getMessage());
+                    createNewUserInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -117,13 +121,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<CustomerLoginResponse> call, @NonNull Throwable t) {
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    loginResponseInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        loginResponseInterface.onError("Network Error, please try again");
+                    } else {
+                        loginResponseInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    loginResponseInterface.onError(t.getMessage());
+                    loginResponseInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -184,14 +192,18 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<ChangeEmailResponse> call, @NonNull Throwable t) {
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    changeEmailInterface.onError("Network Error, please try again");
-                } else {
-                    changeEmailInterface.onError(t.getMessage());
-                }
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        changeEmailInterface.onError("Network Error, please try again");
+                    } else {
+                        changeEmailInterface.onError(t.getMessage());
+                    }
 
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    changeEmailInterface.onError("Network error");
+                }
             }
         });
     }
@@ -223,13 +235,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<ChangePasswordResponse> call, @NonNull Throwable t) {
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    changePasswordInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        changePasswordInterface.onError("Network Error, please try again");
+                    } else {
+                        changePasswordInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    changePasswordInterface.onError(t.getMessage());
+                    changePasswordInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -257,14 +273,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<ReportIssueResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    reportIssueInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        reportIssueInterface.onError("Network Error, please try again");
+                    } else {
+                        reportIssueInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    reportIssueInterface.onError(t.getMessage());
+                    reportIssueInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -292,14 +311,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<SendCreditDetailsResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    sendCreditDetailsInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        sendCreditDetailsInterface.onError("Network Error, please try again");
+                    } else {
+                        sendCreditDetailsInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    sendCreditDetailsInterface.onError(t.getMessage());
+                    sendCreditDetailsInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -328,14 +350,18 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<SendOTPresponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        sendOTPinterface.onError("Network Error, please try again");
+                    } else {
+                        sendOTPinterface.onError(t.getMessage());
+                    }
 
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    sendOTPinterface.onError("Network Error, please try again");
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    sendOTPinterface.onError(t.getMessage());
+                    sendOTPinterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -362,14 +388,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<CheckTransactionStatusResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    checkTransactionStatusInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        checkTransactionStatusInterface.onError("Network Error, please try again");
+                    } else {
+                        checkTransactionStatusInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    checkTransactionStatusInterface.onError(t.getMessage());
+                    checkTransactionStatusInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -397,14 +426,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<TransactionHistoryResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    transactionHistoryInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        transactionHistoryInterface.onError("Network Error, please try again");
+                    } else {
+                        transactionHistoryInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    transactionHistoryInterface.onError(t.getMessage());
+                    transactionHistoryInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -432,14 +464,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<AddSimResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    addSimInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        addSimInterface.onError("Network Error, please try again");
+                    } else {
+                        addSimInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    addSimInterface.onError(t.getMessage());
+                    addSimInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }
@@ -467,14 +502,17 @@ public class WebSeviceRequestMaker {
 
             @Override
             public void onFailure(@NonNull Call<DeleteAccountResponse> call, @NonNull Throwable t) {
-
-                if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
-                    deleteAccountInterface.onError("Network Error, please try again");
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        deleteAccountInterface.onError("Network Error, please try again");
+                    } else {
+                        deleteAccountInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
                 } else {
-                    deleteAccountInterface.onError(t.getMessage());
+                    deleteAccountInterface.onError("Network error");
                 }
-                String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
-                Log.e("Login error", error);
             }
         });
     }

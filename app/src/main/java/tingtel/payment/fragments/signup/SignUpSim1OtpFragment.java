@@ -87,7 +87,13 @@ public class SignUpSim1OtpFragment extends Fragment {
                 Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
-        resendOtp.setOnClickListener(v -> resendOTPtoCustomer());
+        resendOtp.setOnClickListener(v -> {
+            if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                resendOTPtoCustomer();
+            } else {
+                AppUtils.showSnackBar("No network available", resendOtp);
+            }
+        });
     }
 
     private void resendOTPtoCustomer() {

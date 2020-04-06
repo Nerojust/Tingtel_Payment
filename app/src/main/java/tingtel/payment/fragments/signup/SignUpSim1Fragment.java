@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -94,8 +95,13 @@ public class SignUpSim1Fragment extends Fragment {
                 generatedOTP = AppUtils.generateOTP();
                 sessionManager.setOTP(generatedOTP);
                 phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
+                Toast.makeText(getContext(), phoneNumber, Toast.LENGTH_SHORT).show();
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                  sendOTPtoCustomer();
+                } else {
+                    AppUtils.showSnackBar("No network available", tvPhoneNumber);
+                }
 
-                sendOTPtoCustomer();
             }
         });
     }

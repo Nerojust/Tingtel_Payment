@@ -107,7 +107,11 @@ public class SignUpSim2Fragment extends Fragment {
 
                 phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
 
-                sendOTPtoCustomer();
+                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                    sendOTPtoCustomer();
+                } else {
+                    AppUtils.showSnackBar("No network available", tvPhoneNumber);
+                }
             }
         });
     }

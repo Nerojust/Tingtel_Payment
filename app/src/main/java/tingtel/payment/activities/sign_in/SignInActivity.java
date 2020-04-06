@@ -128,7 +128,7 @@ public class SignInActivity extends GPSutils {
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
                 Log.e("MY_APP_TAG", "The user hasn't associated " +
                         "any biometric credentials with their account.");
-                Toast.makeText(this, "Please register a fingerprint in settings", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Please register a fingerprint in settings", Toast.LENGTH_SHORT).show();
                 break;
         }
 

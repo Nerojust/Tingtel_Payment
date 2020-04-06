@@ -94,10 +94,12 @@ public class SignUpSim2OtpFragment extends Fragment {
         }
 
         if (sessionManager.getIsRegistered()) {
-
-            makeAddSimRequest();
+            if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                makeAddSimRequest();
+            } else {
+                AppUtils.showSnackBar("No network available", resendOTP);
+            }
         } else {
-
             navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
         }
     }

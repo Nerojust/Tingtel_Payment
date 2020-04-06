@@ -44,12 +44,12 @@ public class SetPasswordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_set_password, container, false);
 
         initViews(view);
-        initListeners(view);
+        initListeners();
 
         return view;
     }
 
-    private void initListeners(View view) {
+    private void initListeners() {
         btnSetPassword.setOnClickListener(v -> {
             if (isValidFields()) {
 

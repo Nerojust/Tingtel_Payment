@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.Gson;
+
 import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
@@ -52,7 +54,12 @@ public class SimOneHistoryFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_one_history, container, false);
 
         initViews(view);
-        getAllHistory();
+        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+              getAllHistory();
+        } else {
+            AppUtils.showSnackBar("No network available", noRecordFound);
+        }
+
 
         return view;
     }
@@ -73,7 +80,10 @@ public class SimOneHistoryFragment extends Fragment {
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-        transactionHistorySendObject.setUserPhone(AppUtils.getSessionManagerInstance().getNumberFromLogin());
+        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(transactionHistorySendObject);
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.getTransactionHistory(transactionHistorySendObject, new TransactionHistoryInterface() {
@@ -82,7 +92,9 @@ public class SimOneHistoryFragment extends Fragment {
                 if (transactionHistoryResponse != null) {
                     if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
                         noRecordFound.setVisibility(View.VISIBLE);
-                        alertDialog.dismiss();
+//                        if (alertDialog.isShowing()) {
+//                            alertDialog.dismiss();
+//                        }
                     } else {
                         noRecordFound.setVisibility(View.GONE);
                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
@@ -150,7 +162,12 @@ public class SimOneHistoryFragment extends Fragment {
 
         tvMessage.setText(message);
         retry.setOnClickListener(v -> {
-            getAllHistory();
+            if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                getAllHistory();
+            } else {
+                AppUtils.showSnackBar("No network available", noRecordFound);
+            }
+
             alertDialog.dismiss();
         });
         alertDialog.show();
