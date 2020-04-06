@@ -22,11 +22,11 @@ import tingtel.payment.activities.history.StatusActivity;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.utils.AppUtils;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
+public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdapter.MyViewHolder> {
     private final Context mContext;
     private final TransactionHistoryResponse transactionHistoryResponse;
 
-    public HistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
+    public SimOneHistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
         this.mContext = mContext;
         this.transactionHistoryResponse = transactionHistoryResponse;
     }
