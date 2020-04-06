@@ -40,6 +40,7 @@ public class SimOneHistoryFragment extends Fragment {
     private TextView noRecordFound;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private AlertDialog.Builder builder;
 
 
     public SimOneHistoryFragment() {
@@ -52,6 +53,8 @@ public class SimOneHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_one_history, container, false);
+        builder = new AlertDialog.Builder(getContext());
+
 
         initViews(view);
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
@@ -92,9 +95,9 @@ public class SimOneHistoryFragment extends Fragment {
                 if (transactionHistoryResponse != null) {
                     if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
                         noRecordFound.setVisibility(View.VISIBLE);
-//                        if (alertDialog.isShowing()) {
-//                            alertDialog.dismiss();
-//                        }
+                        if (alertDialog.isShowing()) {
+                            alertDialog.dismiss();
+                        }
                     } else {
                         noRecordFound.setVisibility(View.GONE);
                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
@@ -151,7 +154,7 @@ public class SimOneHistoryFragment extends Fragment {
      * @param activity: Get the calling activity
      */
     private void displayDialog(String message, Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);

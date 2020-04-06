@@ -72,6 +72,7 @@ public class StatusActivity extends AppCompatActivity {
             sender_number = intent.getStringExtra("sender_number");
             receiver_number = intent.getStringExtra("receiver_number");
 
+            sender_number = AppUtils.checkPhoneNumberAndRemovePrefix(sender_number);
             receiver_number = AppUtils.checkPhoneNumberAndRemovePrefix(receiver_number);
         }
     }
