@@ -330,7 +330,7 @@ public class TransferAirtimeFragment extends Fragment {
     private boolean sim2ExistsCheck() {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
         if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            sessionManager.setSimPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+            sessionManager.setSimPhoneNumber1(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
             return true;
         } else {
             return false;
