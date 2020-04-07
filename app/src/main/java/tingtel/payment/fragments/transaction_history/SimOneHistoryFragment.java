@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -41,9 +42,7 @@ public class SimOneHistoryFragment extends Fragment {
     private LinearLayout noRecordFoundLayout;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private AlertDialog.Builder builder;
     private View dialogView;
-    private PageViewModel pageViewModel;
 
     public SimOneHistoryFragment() {
         // Required empty public constructor
@@ -60,7 +59,7 @@ public class SimOneHistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+        PageViewModel pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -73,7 +72,7 @@ public class SimOneHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_one_history, container, false);
-        builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
         dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);
@@ -98,7 +97,14 @@ public class SimOneHistoryFragment extends Fragment {
 
         swipeRefreshLayout.setOnRefreshListener(this::getAllHistory);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.smoothScrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -129,8 +135,7 @@ public class SimOneHistoryFragment extends Fragment {
                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
                         recyclerView.setAdapter(historyAdapter);
                         historyAdapter.notifyDataSetChanged();
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.smoothScrollToPosition(0);
+
                         if (swipeRefreshLayout.isRefreshing()) {
                             swipeRefreshLayout.setRefreshing(false);
                         }

@@ -22,6 +22,7 @@ import java.util.List;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.Beneficiary;
+import tingtel.payment.utils.AppUtils;
 
 public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.MyViewHolder> {
 
@@ -55,7 +56,7 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
     public void onBindViewHolder(final BeneficiaryAdapter.MyViewHolder holder, final int position) {
         holder.itemView.setTag(mData.get(position));
         holder.imgDelete.setTag(mData.get(position));
-        holder.tvPhoneNumber.setText(mData.get(position).getPhoneNumber());
+        holder.tvPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(mData.get(position).getPhoneNumber()));
         holder.tvNetworkName.setText(mData.get(position).getNetwork());
         holder.tvName.setText(mData.get(position).getName());
 

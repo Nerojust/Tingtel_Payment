@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +43,7 @@ import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 import static tingtel.payment.utils.DialUtils.dialUssdCode;
 
 public class TransferAirtimePreviewFragment extends Fragment {
-
-    private Boolean buttonClicked = false;
-    private Button btn_verify, btnTransfer;
+    private Button btnTransfer;
     private String SenderSimNetwork;
     private String SenderPhoneNumber;
     private String ReceiverSimNetwork;
@@ -292,9 +289,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
                     UssdCode,
                     SimNo
             );
-//            sendSms();
-//            Toast.makeText(getContext(), "Please click on send message icon to complete the process", Toast.LENGTH_SHORT).show();
-//            UssdCode = "";
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")) {
 
             TingtelNumber = Constants.TINGTEL_9MOBILE;
@@ -320,24 +314,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
         }
 
         saveHistory();
-
-
-        buttonClicked = true;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        paused = true;
-
-        new Handler().postDelayed(() -> {
-            if (buttonClicked) {
-                if (paused) {
-                    nextLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        }, 2000);
-
     }
 
 

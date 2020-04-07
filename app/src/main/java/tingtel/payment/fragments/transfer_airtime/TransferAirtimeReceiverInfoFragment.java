@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -31,7 +30,6 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.adapters.NetworkSelectAdapter;
-import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.models.NetworkSelect;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
@@ -68,8 +66,8 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
                 if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
-                    //Toast.makeText(getActivity(), "received", Toast.LENGTH_LONG).show();
-                    edReceiverPhoneNumber.setText(intent.getStringExtra("phoneNumber"));
+                    String number = intent.getStringExtra("phoneNumber");
+                    edReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(number));
                     bottomSheetFragment.dismiss();
 
                 }
@@ -79,14 +77,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
     private ImageView imgSelectBeneficiary, backButtonImageview;
     private List<NetworkSelect> networkList = new ArrayList<>();
-    private SpinnerAdapter mCustomAdapter;
-    private Spinner mSpinner;
-    //private SoftInputAssist softInputAssist;
 
     public void onResume() {
         super.onResume();
-        // softInputAssist.onResume();
-        //  Log.e(TAG, "onResume()");
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("barcodeSerialcaptured"));
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("selectedbeneficiary"));
     }
@@ -223,7 +216,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             return false;
         }
 
-        if (network == "") {
+        if (network.equals("")) {
             AppUtils.showSnackBar("Select a network", edPin);
             return false;
         }
