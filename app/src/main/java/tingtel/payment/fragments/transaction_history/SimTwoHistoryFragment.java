@@ -1,7 +1,6 @@
 package tingtel.payment.fragments.transaction_history;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -22,6 +22,7 @@ import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.history.main.PageViewModel;
 import tingtel.payment.adapters.SimTwoHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
@@ -34,14 +35,35 @@ import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
  */
 public class SimTwoHistoryFragment extends Fragment {
 
+    private static final String ARG_SECTION_NUMBER = "section_number";
     private RecyclerView recyclerView;
     private TextView noRecordFound;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private View dialogView;
+    private PageViewModel pageViewModel;
 
     public SimTwoHistoryFragment() {
         // Required empty public constructor
+    }
+
+    public static SimTwoHistoryFragment newInstance(int index) {
+        SimTwoHistoryFragment fragment = new SimTwoHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_SECTION_NUMBER, index);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+        int index = 1;
+        if (getArguments() != null) {
+            index = getArguments().getInt(ARG_SECTION_NUMBER);
+        }
+        pageViewModel.setIndex(index);
     }
 
 
@@ -52,8 +74,15 @@ public class SimTwoHistoryFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_two_history, container, false);
 
         initViews(view);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        ViewGroup viewGroup = getActivity().findViewById(android.R.id.content);
+        dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+
+
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
-            getAllHistory();
+            getAllHistoryForSimTwo();
         } else {
             AppUtils.showSnackBar("No network available", noRecordFound);
         }
@@ -63,21 +92,20 @@ public class SimTwoHistoryFragment extends Fragment {
 
     private void initViews(View view) {
         noRecordFound = view.findViewById(R.id.no_result_found);
-        recyclerView = view.findViewById(R.id.rv_history);
+        recyclerView = view.findViewById(R.id.rv_history_2);
         swipeRefreshLayout = view.findViewById(R.id.swipeLayout);
-
-        swipeRefreshLayout.setOnRefreshListener(this::getAllHistory);
+        swipeRefreshLayout.setOnRefreshListener(this::getAllHistoryForSimTwo);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    private void getAllHistory() {
-        AppUtils.initLoadingDialog(getContext());
+    private void getAllHistoryForSimTwo() {
+        //AppUtils.initLoadingDialog(getContext());
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
+        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getSimPhoneNumber1()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(transactionHistorySendObject);
@@ -87,12 +115,14 @@ public class SimTwoHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getPhone2Transactions().size() == 0) {
+                    if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
                         noRecordFound.setVisibility(View.VISIBLE);
-                      //  alertDialog.dismiss();
+                        if (alertDialog.isShowing()) {
+                            alertDialog.dismiss();
+                        }
                     } else {
                         noRecordFound.setVisibility(View.GONE);
-                        SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getActivity(), transactionHistoryResponse);
+                        SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getContext(), transactionHistoryResponse);
                         recyclerView.setAdapter(historyAdapter);
                         historyAdapter.notifyDataSetChanged();
                         recyclerView.setHasFixedSize(true);
@@ -102,7 +132,7 @@ public class SimTwoHistoryFragment extends Fragment {
                         }
                     }
                 } else {
-                    AppUtils.showDialog("Server Error", getActivity());
+                    AppUtils.showSnackBar("Server Error", getView());
                 }
                 AppUtils.dismissLoadingDialog();
             }
@@ -112,7 +142,7 @@ public class SimTwoHistoryFragment extends Fragment {
                 if (error.equalsIgnoreCase("Error retrieving data")) {
                     noRecordFound.setVisibility(View.VISIBLE);
                 } else {
-                    displayDialog(error, getActivity());
+                    displayDialog(error);
                     noRecordFound.setVisibility(View.GONE);
                 }
                 AppUtils.dismissLoadingDialog();
@@ -127,37 +157,14 @@ public class SimTwoHistoryFragment extends Fragment {
         });
     }
 
-   /* @Override
-    public void onBackPressed() {
-        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
-        if (status) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
-        super.onBackPressed();
-
-    }*/
-
-    /**
-     * to display a dialog
-     *
-     * @param message:  message to be displayed
-     * @param activity: Get the calling activity
-     */
-    private void displayDialog(String message, Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        ViewGroup viewGroup = activity.findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_retry, viewGroup, false);
-        builder.setView(dialogView);
-        alertDialog = builder.create();
-
+    private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
         Button retry = dialogView.findViewById(R.id.btn_ok);
 
         tvMessage.setText(message);
         retry.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
-                getAllHistory();
+                getAllHistoryForSimTwo();
             } else {
                 AppUtils.showSnackBar("No network available", noRecordFound);
             }

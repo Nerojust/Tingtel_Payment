@@ -193,12 +193,6 @@ public class StatusActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        AppUtils.initLoadingDialog(this);
-        super.onBackPressed();
-    }
-
     /**
      * to display a dialog
      *

@@ -8,21 +8,16 @@
     tools:context=".activities.history.HistoryActivity">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
-        style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@color/tingtel_gray_color"
-        android:minHeight="?attr/actionBarSize"
-        app:tabTextColor="@color/white">
-
-    </com.google.android.material.tabs.TabLayout>
+        android:layout_height="wrap_content"
+        app:tabTextColor="@color/white" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </LinearLayout>

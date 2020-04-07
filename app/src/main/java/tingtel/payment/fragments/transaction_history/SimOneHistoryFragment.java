@@ -1,7 +1,6 @@
 package tingtel.payment.fragments.transaction_history;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,6 +24,7 @@ import java.util.Objects;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.activities.history.main.PageViewModel;
 import tingtel.payment.adapters.SimOneHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
@@ -41,19 +42,44 @@ public class SimOneHistoryFragment extends Fragment {
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private AlertDialog.Builder builder;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
 
     public SimOneHistoryFragment() {
         // Required empty public constructor
     }
+    private View dialogView;
+    private PageViewModel pageViewModel;
 
+    public static SimOneHistoryFragment newInstance(int index) {
+        SimOneHistoryFragment fragment = new SimOneHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_SECTION_NUMBER, index);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+        int index = 1;
+        if (getArguments() != null) {
+            index = getArguments().getInt(ARG_SECTION_NUMBER);
+        }
+        pageViewModel.setIndex(index);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_one_history, container, false);
-        builder = new AlertDialog.Builder(getContext());
+        builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+        ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
+        dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
 
 
         initViews(view);
@@ -79,7 +105,7 @@ public class SimOneHistoryFragment extends Fragment {
     }
 
     private void getAllHistory() {
-        //AppUtils.initLoadingDialog(getContext());
+        AppUtils.initLoadingDialog(getContext());
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
@@ -121,7 +147,7 @@ public class SimOneHistoryFragment extends Fragment {
                 if (error.equalsIgnoreCase("Error retrieving data")) {
                     noRecordFound.setVisibility(View.VISIBLE);
                 } else {
-                    displayDialog(error, getActivity());
+                    displayDialog(error);
                     noRecordFound.setVisibility(View.GONE);
                 }
                 AppUtils.dismissLoadingDialog();
@@ -129,7 +155,7 @@ public class SimOneHistoryFragment extends Fragment {
 
             @Override
             public void onErrorCode(int errorCode) {
-                AppUtils.showDialog(String.valueOf(errorCode), getActivity());
+                //AppUtils.showDialog(String.valueOf(errorCode), getActivity());
                 noRecordFound.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
@@ -147,25 +173,17 @@ public class SimOneHistoryFragment extends Fragment {
 
     }
 
-    /**
-     * to display a dialog
-     *
-     * @param message:  message to be displayed
-     * @param activity: Get the calling activity
-     */
-    private void displayDialog(String message, Activity activity) {
 
-        ViewGroup viewGroup = activity.findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_retry, viewGroup, false);
-        builder.setView(dialogView);
-        alertDialog = builder.create();
-
+    private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
         Button retry = dialogView.findViewById(R.id.btn_ok);
 
         tvMessage.setText(message);
         retry.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                if (alertDialog.isShowing()){
+                    alertDialog.dismiss();
+                }
                 getAllHistory();
             } else {
                 AppUtils.showSnackBar("No network available", noRecordFound);

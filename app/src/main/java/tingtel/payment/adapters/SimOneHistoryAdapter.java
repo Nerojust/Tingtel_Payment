@@ -36,7 +36,7 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.row_history, parent, false);
+        view = mInflater.inflate(R.layout.row_history_sim_one, parent, false);
         // click listener here
         return new MyViewHolder(view);
 
@@ -72,6 +72,9 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
         } else if (statusId == 1) {
             holder.status.setText("Completed");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
+        }else if (statusId ==2){
+            holder.status.setText("Sent,Pending SMS");
+            holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
         }
         String senderNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getSourceNetwork();
         String receiverNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryNetwork();
