@@ -14,7 +14,7 @@
         android:text="Your Recent Transactions"
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"

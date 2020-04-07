@@ -319,12 +319,22 @@ public class TransferAirtimeFragment extends Fragment {
 
     private boolean sim1ExistsCheck() {
         String Sim1Serial = sessionManager.getSimSerialICCID();
-        return appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0;
+        if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
+            sessionManager.setSimPhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean sim2ExistsCheck() {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
-        return appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0;
+        if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
+            sessionManager.setSimPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

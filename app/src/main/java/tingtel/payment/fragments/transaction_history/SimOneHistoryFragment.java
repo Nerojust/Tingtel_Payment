@@ -107,7 +107,7 @@ public class SimOneHistoryFragment extends Fragment {
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
+        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getSimPhoneNumber()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(transactionHistorySendObject);

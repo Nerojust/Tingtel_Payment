@@ -415,7 +415,7 @@ public class WebSeviceRequestMaker {
                         if (transactionHistoryResponse.getCode().equals(Constants.SUCCESS)) {
                             transactionHistoryInterface.onSuccess(transactionHistoryResponse);
                         } else {
-                            transactionHistoryInterface.onError("Error. Try again later");
+                            transactionHistoryInterface.onError("Error. Try again later" + transactionHistoryResponse.getCode());
                         }
                     }
                 } else {
