@@ -61,7 +61,7 @@ public class SessionManager {
     private static final String SUCCESS_PAGE = "SUCCESS_PAGE";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
-    public void clearSharedPreferences(){
+    public void clearSharedPreferences() {
         SharedPreferences.Editor editor = pref.edit();
         editor.remove(FIRST_NAME);
         editor.remove(LAST_NAME);
@@ -136,6 +136,19 @@ public class SessionManager {
             return null;
         }
     }
+
+    public void startLoginSession() {
+        setBooleanPreference(IS_LOGIN, true);
+    }
+
+    public boolean isLogin() {
+        return getBooleanPreference(IS_LOGIN);
+    }
+
+    public void logout() {
+        setBooleanPreference(IS_LOGIN, false);
+    }
+
 
     public String getNetworkName() {
         return getStringPreference(NETWORK_NAME);
@@ -246,13 +259,6 @@ public class SessionManager {
         setStringPreference(APPSTATE, AppState);
     }
 
-    public Boolean getIsLogin() {
-        return getBooleanPreference(IS_LOGIN);
-    }
-
-    public void setIsLogin(Boolean isLogin) {
-        setBooleanPreference(IS_LOGIN, isLogin);
-    }
 
     public Boolean getIsRegistered() {
         return getBooleanPreference(IS_REGISTERED);
@@ -416,7 +422,7 @@ public class SessionManager {
         setStringPreference(LOGIN_OBJECT, login);
     }
 
-    public boolean getRememberLoginCheck(){
+    public boolean getRememberLoginCheck() {
         return getBooleanPreference(CHECKED);
     }
 
@@ -424,15 +430,15 @@ public class SessionManager {
         setBooleanPreference(CHECKED, checked);
     }
 
-    public String getPasswordJsonObject(){
+    public String getPasswordJsonObject() {
         return getStringPreference(PASSWORD_JSON);
     }
 
     public void setPasswordJsonObject(String jsonObject) {
-        setStringPreference(PASSWORD_JSON,jsonObject);
+        setStringPreference(PASSWORD_JSON, jsonObject);
     }
 
-    public String getEmailJsonObject(){
+    public String getEmailJsonObject() {
         return getStringPreference(EMAIL_JSON);
     }
 
@@ -440,31 +446,31 @@ public class SessionManager {
         setStringPreference(EMAIL_JSON, jsonObject);
     }
 
-    public String getReportIssueJsonObject(){
+    public String getReportIssueJsonObject() {
         return getStringPreference(ISSUE_JSON);
     }
 
     public void setReportIssueJsonObject(String jsonObject) {
-        setStringPreference(ISSUE_JSON,jsonObject);
+        setStringPreference(ISSUE_JSON, jsonObject);
     }
 
-    public String getNumberFromLogin(){
+    public String getNumberFromLogin() {
         return getStringPreference(NUMBER_FROM_LOGIN);
     }
 
     public void setNumberFromLogin(String phone) {
-        setStringPreference(NUMBER_FROM_LOGIN,phone);
+        setStringPreference(NUMBER_FROM_LOGIN, phone);
     }
 
-    public String getEmailFromLogin(){
+    public String getEmailFromLogin() {
         return getStringPreference(EMAIL_FROM_LOGIN);
     }
 
     public void setEmailFromLogin(String emailFromLogin) {
-        setStringPreference(EMAIL_FROM_LOGIN,emailFromLogin);
+        setStringPreference(EMAIL_FROM_LOGIN, emailFromLogin);
     }
 
-    public int getWhichSimWasClicked(){
+    public int getWhichSimWasClicked() {
         return getIntPreference(SIM_NUMBER);
     }
 
@@ -472,23 +478,23 @@ public class SessionManager {
         setIntPreference(SIM_NUMBER, simNo);
     }
 
-    public String getEncryptionIV(){
+    public String getEncryptionIV() {
         return getStringPreference(ENCRYPTED_IV);
     }
 
     public void setEncryptionIV(String encodeToString) {
-        setStringPreference(ENCRYPTED_IV,encodeToString);
+        setStringPreference(ENCRYPTED_IV, encodeToString);
     }
 
-    public String getEncryptedPassword(){
+    public String getEncryptedPassword() {
         return getStringPreference(ENCRYPTED_PASSWORD);
     }
 
     public void setEncryptedPassword(String encryptedPasswordString) {
-        setStringPreference(ENCRYPTED_PASSWORD,encryptedPasswordString);
+        setStringPreference(ENCRYPTED_PASSWORD, encryptedPasswordString);
     }
 
-    public String getCreditRequestJsonObject(){
+    public String getCreditRequestJsonObject() {
         return getStringPreference(CREDIT);
     }
 
@@ -496,15 +502,15 @@ public class SessionManager {
         setStringPreference(CREDIT, credit);
     }
 
-    public String getOTP (){
+    public String getOTP() {
         return getStringPreference(OTP);
     }
 
     public void setOTP(String generatedOTP) {
-        setStringPreference(OTP,generatedOTP);
+        setStringPreference(OTP, generatedOTP);
     }
 
-    public String getTransactionReference(){
+    public String getTransactionReference() {
         return getStringPreference(TXN);
     }
 
@@ -512,7 +518,7 @@ public class SessionManager {
         setStringPreference(TXN, random);
     }
 
-    public String getOTPJsonObject(){
+    public String getOTPJsonObject() {
         return getStringPreference(OTP_JSON);
     }
 
@@ -520,7 +526,7 @@ public class SessionManager {
         setStringPreference(OTP_JSON, jsonObject);
     }
 
-    public boolean getComingFromSuccess(){
+    public boolean getComingFromSuccess() {
         return getBooleanPreference(SUCCESS_PAGE);
     }
 

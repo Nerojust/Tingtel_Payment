@@ -1,6 +1,7 @@
 package tingtel.payment.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -32,6 +33,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Objects;
 import java.util.Random;
@@ -40,6 +42,7 @@ import java.util.regex.Pattern;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.sign_in.SignInActivity;
 
 /**
  * Utilities class or helper class
@@ -155,7 +158,9 @@ public class AppUtils {
     public static void showSnackBar(String msg, View view) {
         Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
         Vibrator vibrator = (Vibrator) view.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(Constants.VIBRATOR_INTEGER);
+        if (vibrator != null) {
+            vibrator.vibrate(Constants.VIBRATOR_INTEGER);
+        }
         mySnackbar.show();
     }
 
@@ -265,12 +270,13 @@ public class AppUtils {
     }
 
 
+    @SuppressLint("NewApi")
     public static String getSHA512(String input) {
         String toReturn = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");
             digest.reset();
-            digest.update(input.getBytes("utf8"));
+            digest.update(input.getBytes(StandardCharsets.UTF_8));
             toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,6 +285,30 @@ public class AppUtils {
         return toReturn;
     }
 
+
+    public static void logOutInactivitySessionTimeout(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("Alert");
+        builder.setMessage("Session timeout");
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", (dialog, id) -> {
+            Intent intent = new Intent(activity, SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            AppUtils.getSessionManagerInstance().logout();
+            activity.finish();
+            activity.startActivity(intent);
+
+        });
+
+        try {
+            AlertDialog alert = builder.create();
+            alert.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 /*
     public static void errorCodeSwitch(Context context, int errorCode) {
         switch (errorCode) {

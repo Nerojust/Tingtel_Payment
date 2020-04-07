@@ -72,7 +72,7 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
         } else if (statusId == 1) {
             holder.status.setText("Completed");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
-        }else if (statusId ==2){
+        } else if (statusId == 2) {
             holder.status.setText("Sent,Pending SMS");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
         }

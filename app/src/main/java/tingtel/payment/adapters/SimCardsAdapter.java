@@ -29,10 +29,10 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     private final Context mContext;
     private final Activity activity;
     private final List<SimCards> mData;
+    SessionManager sessionManager = AppUtils.getSessionManagerInstance();
     private AppDatabase appDatabase;
     private Fragment navhost;
     private NavController navController;
-    SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
     public SimCardsAdapter(Context mContext, List lst, Activity activity) {
 

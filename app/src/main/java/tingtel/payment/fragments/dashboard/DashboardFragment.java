@@ -112,21 +112,13 @@ public class DashboardFragment extends Fragment {
 
     private boolean sim1ExistsCheck() {
         String Sim1Serial = sessionManager.getSimSerialICCID();
-        if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0;
 
     }
 
     private boolean sim2ExistsCheck() {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
 
-        if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0;
     }
 }

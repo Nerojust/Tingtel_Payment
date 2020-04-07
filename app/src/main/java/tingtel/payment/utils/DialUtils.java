@@ -48,7 +48,7 @@ public class DialUtils {
             ussdCodeTodial = ussdCodeTodial.substring(0, ussdCodeTodial.length() - 1);
         }
         //create your own
-        String finalUssdCode =  ussdCodeTodial + Uri.encode("#");
+        String finalUssdCode = ussdCodeTodial + Uri.encode("#");
         //perform the action
         Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + finalUssdCode));
         intent.putExtra("com.android.phone.extra.slot", simNumber); //For sim 1

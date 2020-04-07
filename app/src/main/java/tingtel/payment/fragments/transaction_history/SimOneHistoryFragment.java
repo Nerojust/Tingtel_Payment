@@ -37,19 +37,17 @@ import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
  */
 public class SimOneHistoryFragment extends Fragment {
 
+    private static final String ARG_SECTION_NUMBER = "section_number";
     private RecyclerView recyclerView;
     private TextView noRecordFound;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private AlertDialog.Builder builder;
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-
+    private View dialogView;
+    private PageViewModel pageViewModel;
     public SimOneHistoryFragment() {
         // Required empty public constructor
     }
-    private View dialogView;
-    private PageViewModel pageViewModel;
 
     public static SimOneHistoryFragment newInstance(int index) {
         SimOneHistoryFragment fragment = new SimOneHistoryFragment();
@@ -84,7 +82,7 @@ public class SimOneHistoryFragment extends Fragment {
 
         initViews(view);
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
-              getAllHistory();
+            getAllHistory();
         } else {
             AppUtils.showSnackBar("No network available", noRecordFound);
         }
@@ -181,7 +179,7 @@ public class SimOneHistoryFragment extends Fragment {
         tvMessage.setText(message);
         retry.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
-                if (alertDialog.isShowing()){
+                if (alertDialog.isShowing()) {
                     alertDialog.dismiss();
                 }
                 getAllHistory();

@@ -105,7 +105,8 @@ public class SimTwoHistoryFragment extends Fragment {
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getSimPhoneNumber1()));
+        //transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getSimPhoneNumber1()));
+        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(transactionHistorySendObject);
@@ -115,7 +116,7 @@ public class SimTwoHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
+                    if (transactionHistoryResponse.getPhone2Transactions().size() == 0) {
                         noRecordFound.setVisibility(View.VISIBLE);
                         if (alertDialog.isShowing()) {
                             alertDialog.dismiss();

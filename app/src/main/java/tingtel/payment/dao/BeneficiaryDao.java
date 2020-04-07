@@ -27,5 +27,5 @@ public interface BeneficiaryDao {
 
     @Query("DELETE FROM Beneficiary WHERE id = :id")
     void deleteBeneficiary(int id);
-    
+
 }

@@ -3,46 +3,28 @@ package tingtel.payment.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.os.Looper;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.activities.sign_in.SignInActivity;
+import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.MyApplication;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId() == R.id.action_home) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if (item.getItemId() == R.id.action_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
+        if (!AppUtils.getSessionManagerInstance().isLogin()){
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
-    }
 
     @Override
     public void onBackPressed() {
@@ -53,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    AppUtils.getSessionManagerInstance().logout();
                     startActivity(intent);
                     MainActivity.this.onSuperBackPressed();
                 })
@@ -64,5 +47,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void onSuperBackPressed() {
         super.onBackPressed();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void doLogout() {
+        new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
     }
 }

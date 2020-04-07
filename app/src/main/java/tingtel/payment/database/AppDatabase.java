@@ -23,24 +23,14 @@ import tingtel.payment.models.DateConverter;
 import tingtel.payment.models.History;
 import tingtel.payment.models.SimCards;
 
-@Database(entities = {SimCards.class, History.class, Beneficiary.class},version = 1, exportSchema = false)
+@Database(entities = {SimCards.class, History.class, Beneficiary.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static AppDatabase mInstance;
-
     private static final String DATABASE_NAME = "production";
-
-
+    private static AppDatabase mInstance;
     //livedata to monitor when database is being populated
     private final MutableLiveData<String> mIsDatabaseCreated = new MutableLiveData<>();
-
-
-
-    public abstract SimCardsDao simCardsDao();
-    public abstract HistoryDao historyDao();
-    public abstract BeneficiaryDao beneficiaryDao();
-
 
     public synchronized static AppDatabase getInstance(Context context) {
         if (mInstance == null) {
@@ -48,8 +38,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return mInstance;
     }
-
-
 
     public static AppDatabase getDatabaseInstance(final Context context) {
         return Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
@@ -77,10 +65,17 @@ public abstract class AppDatabase extends RoomDatabase {
 
     }
 
+    public abstract SimCardsDao simCardsDao();
+
+    public abstract HistoryDao historyDao();
+
+    public abstract BeneficiaryDao beneficiaryDao();
+
     @Override
     protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
         return null;
     }
+
     @Override
     protected InvalidationTracker createInvalidationTracker() {
         return null;

@@ -45,8 +45,8 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) mContext.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.row_spinner, parent, false);
-            mViewHolder.mFlag = (ImageView) convertView.findViewById(R.id.img_spinner_image);
-            mViewHolder.mName = (TextView) convertView.findViewById(R.id.tv_spinner_text);
+            mViewHolder.mFlag = convertView.findViewById(R.id.img_spinner_image);
+            mViewHolder.mName = convertView.findViewById(R.id.tv_spinner_text);
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();

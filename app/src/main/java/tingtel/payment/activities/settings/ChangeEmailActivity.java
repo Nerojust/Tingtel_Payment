@@ -1,6 +1,8 @@
 package tingtel.payment.activities.settings;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -14,11 +16,12 @@ import tingtel.payment.R;
 import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
 
-public class ChangeEmailActivity extends AppCompatActivity {
+public class ChangeEmailActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
 
     EditText edNewEmail, edRenterNewEmail;
     Button btnChangeEmail;
@@ -124,5 +127,23 @@ public class ChangeEmailActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void doLogout() {
+        new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
     }
 }

@@ -70,7 +70,6 @@ public class SignInActivity extends GPSutils {
         sessionManager = AppUtils.getSessionManagerInstance();
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
-
         initViews();
         initListeners();
         checkBoxRememberSettings();
@@ -206,7 +205,7 @@ public class SignInActivity extends GPSutils {
         webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
-
+                sessionManager.startLoginSession();
                 sessionManager.setPassword(password);
                 saveDetailsToPref(loginResponses);
 
@@ -271,6 +270,7 @@ public class SignInActivity extends GPSutils {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
+                sessionManager.startLoginSession();
                 saveDetailsToPref(loginResponses);
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -394,7 +394,7 @@ public class SignInActivity extends GPSutils {
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.fragment_open_enter, R.anim.fade_out);
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
     }
 
     interface MessageDialogInterface {

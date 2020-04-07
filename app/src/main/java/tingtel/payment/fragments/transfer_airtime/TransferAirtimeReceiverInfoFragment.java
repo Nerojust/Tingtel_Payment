@@ -85,7 +85,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-       // softInputAssist.onResume();
+        // softInputAssist.onResume();
         //  Log.e(TAG, "onResume()");
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("barcodeSerialcaptured"));
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).registerReceiver(this.mas, new IntentFilter("selectedbeneficiary"));
@@ -217,14 +217,14 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
-        if (edReceiverPhoneNumber.getText().toString().length()< Constants.MINIMUM_PHONE_NUMBER_DIGITS){
+        if (edReceiverPhoneNumber.getText().toString().length() < Constants.MINIMUM_PHONE_NUMBER_DIGITS) {
             AppUtils.showSnackBar("Number is too short. Must be 11 digits", edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
 
-        if (network == ""){
-            AppUtils.showSnackBar("Select a network",edPin);
+        if (network == "") {
+            AppUtils.showSnackBar("Select a network", edPin);
             return false;
         }
         if (edPin.getText().toString().isEmpty()) {

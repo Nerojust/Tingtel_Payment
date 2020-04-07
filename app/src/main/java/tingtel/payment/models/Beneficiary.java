@@ -13,7 +13,6 @@ public class Beneficiary {
     private String network;
 
 
-
     public int getId() {
         return id;
     }

@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +22,12 @@ import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
 import tingtel.payment.models.delete_account.DeleteAccountSendObject;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
 
     Button logoutButton;
     private LinearLayout changePasswordLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
@@ -62,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         manageSimLayout.setOnClickListener(v -> startActivity(new Intent(this, ManageSimActivity.class)));
-       // addSimlayout.setOnClickListener(v->startActivity(new Intent(this, AddSimActivity.class)));
+        // addSimlayout.setOnClickListener(v->startActivity(new Intent(this, AddSimActivity.class)));
         tutorialLayout.setOnClickListener(v -> startActivity(new Intent(this, TutorialActivity.class)));
         reportIssueLayout.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
 
@@ -123,6 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setPositiveButton("Yes", (dialog, id) -> {
                         startActivity(new Intent(this, SignInActivity.class));
+                        AppUtils.getSessionManagerInstance().logout();
                         finishAffinity();
                     })
                     .setNegativeButton("No", (dialog, id) -> dialog.cancel());
@@ -163,5 +167,23 @@ public class SettingsActivity extends AppCompatActivity {
                 AppUtils.dismissLoadingDialog();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void doLogout() {
+        new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
     }
 }

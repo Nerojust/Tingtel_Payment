@@ -3,6 +3,8 @@ package tingtel.payment.activities.history;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +30,12 @@ import tingtel.payment.activities.settings.SettingsActivity;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 
-public class StatusActivity extends AppCompatActivity {
+public class StatusActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
     private static final String TAG = "Status Activity";
     private VerticalStepView stepView;
     private ImageView backButtonImageview, homeImageview, settingsImageview;
@@ -221,5 +224,17 @@ public class StatusActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fade_out);
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        MyApplication.LogOutTimerUtil.startLogoutTimer(this, this);
+    }
+
+    @Override
+    public void doLogout() {
+        new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
     }
 }

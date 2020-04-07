@@ -81,7 +81,10 @@ public class MyApplication extends Application implements LifecycleObserver {
 
             //logoutTime = sessionManagerAgent.getSessionIdleTimeForAgent() * 60000;
             //todo: change back
-            logoutTime = 1000000;
+            //10secs
+            logoutTime = 10000;
+            //10 minutes
+            // logoutTime = 1000000;
 
             if (longTimer == null) {
                 longTimer = new Timer();
