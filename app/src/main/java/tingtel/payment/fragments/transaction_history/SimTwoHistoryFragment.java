@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class SimTwoHistoryFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private RecyclerView recyclerView;
-    private TextView noRecordFound;
+    private LinearLayout noRecordFoundLayout;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View dialogView;
@@ -84,14 +85,14 @@ public class SimTwoHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistoryForSimTwo();
         } else {
-            AppUtils.showSnackBar("No network available", noRecordFound);
+            AppUtils.showSnackBar("No network available", noRecordFoundLayout);
         }
 
         return view;
     }
 
     private void initViews(View view) {
-        noRecordFound = view.findViewById(R.id.no_result_found);
+        noRecordFoundLayout = view.findViewById(R.id.no_result_found_layout);
         recyclerView = view.findViewById(R.id.rv_history_2);
         swipeRefreshLayout = view.findViewById(R.id.swipeLayout);
         swipeRefreshLayout.setOnRefreshListener(this::getAllHistoryForSimTwo);
@@ -117,12 +118,14 @@ public class SimTwoHistoryFragment extends Fragment {
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
                     if (transactionHistoryResponse.getPhone2Transactions().size() == 0) {
-                        noRecordFound.setVisibility(View.VISIBLE);
+                        noRecordFoundLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {
                             alertDialog.dismiss();
                         }
                     } else {
-                        noRecordFound.setVisibility(View.GONE);
+                        noRecordFoundLayout.setVisibility(View.GONE);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
                         SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getContext(), transactionHistoryResponse);
                         recyclerView.setAdapter(historyAdapter);
                         historyAdapter.notifyDataSetChanged();
@@ -140,12 +143,9 @@ public class SimTwoHistoryFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (error.equalsIgnoreCase("Error retrieving data")) {
-                    noRecordFound.setVisibility(View.VISIBLE);
-                } else {
-                    displayDialog(error);
-                    noRecordFound.setVisibility(View.GONE);
-                }
+                displayDialog(error);
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -153,7 +153,8 @@ public class SimTwoHistoryFragment extends Fragment {
             public void onErrorCode(int errorCode) {
                 AppUtils.showDialog(String.valueOf(errorCode), getActivity());
                 AppUtils.dismissLoadingDialog();
-                noRecordFound.setVisibility(View.GONE);
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
             }
         });
     }
@@ -167,7 +168,7 @@ public class SimTwoHistoryFragment extends Fragment {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                 getAllHistoryForSimTwo();
             } else {
-                AppUtils.showSnackBar("No network available", noRecordFound);
+                AppUtils.showSnackBar("No network available", noRecordFoundLayout);
             }
             alertDialog.dismiss();
         });

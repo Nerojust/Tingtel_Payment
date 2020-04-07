@@ -1,12 +1,12 @@
 package tingtel.payment.fragments.transaction_history;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
-import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.history.main.PageViewModel;
 import tingtel.payment.adapters.SimOneHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
@@ -39,12 +38,13 @@ public class SimOneHistoryFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private RecyclerView recyclerView;
-    private TextView noRecordFound;
+    private LinearLayout noRecordFoundLayout;
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private AlertDialog.Builder builder;
     private View dialogView;
     private PageViewModel pageViewModel;
+
     public SimOneHistoryFragment() {
         // Required empty public constructor
     }
@@ -84,7 +84,7 @@ public class SimOneHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistory();
         } else {
-            AppUtils.showSnackBar("No network available", noRecordFound);
+            AppUtils.showSnackBar("No network available", noRecordFoundLayout);
         }
 
 
@@ -92,8 +92,8 @@ public class SimOneHistoryFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        noRecordFound = view.findViewById(R.id.no_result_found);
-        recyclerView = view.findViewById(R.id.rv_history);
+        noRecordFoundLayout = view.findViewById(R.id.no_result_found_layout);
+        recyclerView = view.findViewById(R.id.rv_history_1);
         swipeRefreshLayout = view.findViewById(R.id.swipeLayout);
 
         swipeRefreshLayout.setOnRefreshListener(this::getAllHistory);
@@ -118,12 +118,14 @@ public class SimOneHistoryFragment extends Fragment {
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
                     if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
-                        noRecordFound.setVisibility(View.VISIBLE);
+                        noRecordFoundLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {
                             alertDialog.dismiss();
                         }
                     } else {
-                        noRecordFound.setVisibility(View.GONE);
+                        noRecordFoundLayout.setVisibility(View.GONE);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
                         recyclerView.setAdapter(historyAdapter);
                         historyAdapter.notifyDataSetChanged();
@@ -142,34 +144,33 @@ public class SimOneHistoryFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (error.equalsIgnoreCase("Error retrieving data")) {
-                    noRecordFound.setVisibility(View.VISIBLE);
-                } else {
-                    displayDialog(error);
-                    noRecordFound.setVisibility(View.GONE);
-                }
+
+                displayDialog(error);
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 //AppUtils.showDialog(String.valueOf(errorCode), getActivity());
-                noRecordFound.setVisibility(View.GONE);
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
         });
     }
-
-    @Override
-    public void onDetach() {
-        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
-        if (status) {
-            startActivity(new Intent(getContext(), MainActivity.class));
-            Objects.requireNonNull(getActivity()).finish();
-        }
-        super.onDetach();
-
-    }
+//todo: check this
+//    @Override
+//    public void onDetach() {
+//        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
+//        if (status) {
+//            startActivity(new Intent(getContext(), MainActivity.class));
+//            Objects.requireNonNull(getActivity()).finish();
+//        }
+//        super.onDetach();
+//
+//    }
 
 
     private void displayDialog(String message) {
@@ -184,7 +185,7 @@ public class SimOneHistoryFragment extends Fragment {
                 }
                 getAllHistory();
             } else {
-                AppUtils.showSnackBar("No network available", noRecordFound);
+                AppUtils.showSnackBar("No network available", noRecordFoundLayout);
             }
 
             alertDialog.dismiss();

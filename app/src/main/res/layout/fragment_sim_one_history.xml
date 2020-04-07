@@ -19,24 +19,46 @@
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_below="@id/recent"
+        android:layout_margin="10dp"
+        android:visibility="gone">
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
+            android:id="@+id/rv_history_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/no_result_found"
+    <LinearLayout
+        android:id="@+id/no_result_found_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
-        android:text="No record found"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13ssp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <TextView
+            android:id="@+id/no_result_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="263dp"
+            android:gravity="center"
+            android:text="No record found"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_empty" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -34,10 +34,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return SimOneHistoryFragment.newInstance(position);
             case 1:
                 return SimTwoHistoryFragment.newInstance(position);
-
-            default:
-                return null;
         }
+        return null;
     }
 
     @Nullable

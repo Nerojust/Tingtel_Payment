@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity implements MyApplication.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (!AppUtils.getSessionManagerInstance().isLogin()){
-            startActivity(new Intent(this, SignInActivity.class));
-            finish();
-        }
+//        if (!AppUtils.getSessionManagerInstance().isLogin()){
+//            startActivity(new Intent(this, SignInActivity.class));
+//            finish();
+//        }
     }
 
 
