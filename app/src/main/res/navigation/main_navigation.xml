@@ -24,20 +24,7 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_mainFragment_to_transferAirtimeSuccessFragment2"
-            app:destination="@id/transferAirtimeSuccessFragment2"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_mainFragment_to_statusActivity"
-            app:destination="@id/statusActivity"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
     <activity
         android:id="@+id/transferAirtimeActivity"
@@ -49,14 +36,4 @@
         android:name="tingtel.payment.activities.history.HistoryActivity"
         android:label="activity_history"
         tools:layout="@layout/activity_history" />
-    <fragment
-        android:id="@+id/transferAirtimeSuccessFragment2"
-        android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimeSuccessFragment"
-        android:label="fragment_transfer_airtime_success"
-        tools:layout="@layout/fragment_transfer_airtime_success" />
-    <activity
-        android:id="@+id/statusActivity"
-        android:name="tingtel.payment.activities.history.StatusActivity"
-        android:label="activity_status"
-        tools:layout="@layout/activity_status" />
 </navigation>

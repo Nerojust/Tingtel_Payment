@@ -54,26 +54,5 @@
         android:id="@+id/transferAirtimePreviewFragment2"
         android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimePreviewFragment"
         android:label="fragment_transfer_airtime_preview"
-        tools:layout="@layout/fragment_transfer_airtime_preview">
-        <action
-            android:id="@+id/action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment"
-            app:destination="@id/transferAirtimeSuccessFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/transferAirtimeSuccessFragment"
-        android:name="tingtel.payment.fragments.transfer_airtime.TransferAirtimeSuccessFragment"
-        android:label="fragment_transfer_airtime_success"
-        tools:layout="@layout/fragment_transfer_airtime_success">
-        <action
-            android:id="@+id/action_transferAirtimeSuccessFragment_to_transferAirtimeFragment2"
-            app:destination="@id/transferAirtimeFragment2"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
+        tools:layout="@layout/fragment_transfer_airtime_preview"/>
 </navigation>

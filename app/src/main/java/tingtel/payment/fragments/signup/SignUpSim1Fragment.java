@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -25,6 +25,7 @@ import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.models.otp.SendOTPresponse;
 import tingtel.payment.models.otp.SendOTPsendObject;
@@ -95,7 +96,7 @@ public class SignUpSim1Fragment extends Fragment {
                 generatedOTP = AppUtils.generateOTP();
                 sessionManager.setOTP(generatedOTP);
                 phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
-                Toast.makeText(getContext(), phoneNumber, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), phoneNumber, Toast.LENGTH_SHORT).show();
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                     sendOTPtoCustomer();
                 } else {
@@ -205,6 +206,17 @@ public class SignUpSim1Fragment extends Fragment {
         } else if (Sim1Network.substring(0, 3).equalsIgnoreCase("glo")) {
             mSpinner.setSelection(3);
             tvSimInfo.setText(getResources().getString(R.string.glo_sim_detected));
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (isRemoving()) {
+            if (sessionManager.getComingFromDashboard()) {
+                startActivity(new Intent(getContext(), MainActivity.class));
+                Objects.requireNonNull(getActivity()).finish();
+            }
         }
     }
 }

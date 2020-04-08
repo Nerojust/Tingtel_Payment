@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.models.otp.SendOTPresponse;
 import tingtel.payment.models.otp.SendOTPsendObject;
@@ -200,6 +202,23 @@ public class SignUpSim2Fragment extends Fragment {
         } else if (Sim2Network.substring(0, 3).equalsIgnoreCase("glo")) {
             mSpinner.setSelection(3);
             tvSimInfo.setText(getResources().getString(R.string.glo_sim_detected));
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (isRemoving()) {
+            if (sessionManager.getComingFromDashboard()) {
+                startActivity(new Intent(getContext(), MainActivity.class));
+                Objects.requireNonNull(getActivity()).finish();
+            }
         }
     }
 }

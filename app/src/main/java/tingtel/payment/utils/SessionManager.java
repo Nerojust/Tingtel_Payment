@@ -59,6 +59,7 @@ public class SessionManager {
     private static final String TXN = "TXN";
     private static final String OTP_JSON = "OTP_JSON";
     private static final String SUCCESS_PAGE = "SUCCESS_PAGE";
+    private static final String DASHBOARD = "DASHBOARD";
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences() {
@@ -532,5 +533,13 @@ public class SessionManager {
 
     public void setComingFromSuccess(boolean b) {
         setBooleanPreference(SUCCESS_PAGE, b);
+    }
+
+    public boolean getComingFromDashboard(){
+        return getBooleanPreference(DASHBOARD);
+    }
+
+    public void setComingFromDashboard(boolean b) {
+        setBooleanPreference(DASHBOARD, b);
     }
 }

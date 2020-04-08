@@ -143,7 +143,7 @@ public class SimTwoHistoryFragment extends Fragment {
                 } else {
                     AppUtils.showSnackBar("Server Error", getView());
                 }
-                AppUtils.dismissLoadingDialog();
+                //AppUtils.dismissLoadingDialog();
             }
 
             @Override
@@ -151,13 +151,13 @@ public class SimTwoHistoryFragment extends Fragment {
                 displayDialog(error);
                 noRecordFoundLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.GONE);
-                AppUtils.dismissLoadingDialog();
+                //AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.showDialog(String.valueOf(errorCode), getActivity());
-                AppUtils.dismissLoadingDialog();
+                //AppUtils.dismissLoadingDialog();
                 noRecordFoundLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.GONE);
             }
