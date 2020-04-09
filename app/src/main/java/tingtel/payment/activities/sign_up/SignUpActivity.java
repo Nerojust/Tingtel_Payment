@@ -18,16 +18,18 @@ import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 
 public class SignUpActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
-    NavController navController;
-    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
-        navController = NavHostFragment.findNavController(navhost);
-        sessionManager = AppUtils.getSessionManagerInstance();
+        NavController navController = null;
+        if (navhost != null) {
+            navController = NavHostFragment.findNavController(navhost);
+        }
+        SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
         Intent intent = getIntent();
         if (intent.getStringExtra("task") == null) {
@@ -35,13 +37,16 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
         } else {
             sessionManager.setIsRegistered(true);
             if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim1")) {
-                navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
+                if (navController != null) {
+                    navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
+                }
                 AppUtils.showDialog("You need To register Sim 1 before making any transactions", SignUpActivity.this);
 
             } else if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim2")) {
-                navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim2Fragment, null);
+                if (navController != null) {
+                    navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim2Fragment, null);
+                }
                 AppUtils.showDialog("You need To register Sim 2 before making any transactions", SignUpActivity.this);
-
             }
         }
     }

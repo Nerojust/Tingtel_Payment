@@ -60,6 +60,23 @@ public class SessionManager {
     private static final String OTP_JSON = "OTP_JSON";
     private static final String SUCCESS_PAGE = "SUCCESS_PAGE";
     private static final String DASHBOARD = "DASHBOARD";
+    private static final String SIM_ONE_NUMBER_FROM_LOGIN = "SIM_ONE_NUMBER_FROM_LOGIN";
+    private static final String SIM_TWO_NUMBER_FROM_LOGIN = "SIM_TWO_NUMBER_FROM_LOGIN";
+    private static final String SIM_THREE_NUMBER_FROM_LOGIN = "SIM_THREE_NUMBER_FROM_LOGIN";
+    private static final String SIM_FOUR_NUMBER_FROM_LOGIN = "SIM_FOUR_NUMBER_FROM_LOGIN";
+
+    private static final String SERIAL_1_FROM_LOGIN = "SERIAL_1_FROM_LOGIN";
+    private static final String SERIAL_2_FROM_LOGIN = "SERIAL_2_FROM_LOGIN";
+    private static final String SERIAL_3_FROM_LOGIN = "SERIAL_3_FROM_LOGIN";
+    private static final String SERIAL_4_FROM_LOGIN = "SERIAL_4_FROM_LOGIN";
+
+    private static final String SIM_1_NETWORK_FROM_LOGIN = "SIM_1_NETWORK_FROM_LOGIN";
+    private static final String SIM_2_NETWORK_FROM_LOGIN = "SIM_2_NETWORK_FROM_LOGIN";
+    private static final String SIM_3_NETWORK_FROM_LOGIN = "SIM_3_NETWORK_FROM_LOGIN";
+    private static final String SIM_4_NETWORK_FROM_LOGIN = "SIM_4_NETWORK_FROM_LOGIN";
+    private static final String ADD_SIM = "ADD_SIM";
+
+
     private final SharedPreferences pref = getSharedPreferencesCustomer();
 
     public void clearSharedPreferences() {
@@ -354,11 +371,11 @@ public class SessionManager {
         return getStringPreference(FIRST_NAME);
     }
 
-    public void setFirstName(String firstname) {
+    public void setFirstNameFromLogin(String firstname) {
         setStringPreference(FIRST_NAME, firstname);
     }
 
-    public String getLastName() {
+    public String getLastNameFromLogin() {
         return getStringPreference(LAST_NAME);
     }
 
@@ -535,11 +552,115 @@ public class SessionManager {
         setBooleanPreference(SUCCESS_PAGE, b);
     }
 
-    public boolean getComingFromDashboard(){
+    public boolean getComingFromDashboard() {
         return getBooleanPreference(DASHBOARD);
     }
 
     public void setComingFromDashboard(boolean b) {
         setBooleanPreference(DASHBOARD, b);
+    }
+
+    public String getSimOnePhoneNumberFromLogin() {
+        return getStringPreference(SIM_ONE_NUMBER_FROM_LOGIN);
+    }
+
+    public void setSimOnePhoneNumberFromLogin(String phone) {
+        setStringPreference(SIM_ONE_NUMBER_FROM_LOGIN, phone);
+    }
+
+    public String getSimTwoPhoneNumberFromLogin() {
+        return getStringPreference(SIM_TWO_NUMBER_FROM_LOGIN);
+    }
+
+    public void setSimTwoPhoneNumberFromLogin(String phone) {
+        setStringPreference(SIM_TWO_NUMBER_FROM_LOGIN, phone);
+    }
+
+    public String getSimThreePhoneNumberFromLogin() {
+        return getStringPreference(SIM_THREE_NUMBER_FROM_LOGIN);
+    }
+
+    public void setSimThreePhoneNumberFromLogin(String phone) {
+        setStringPreference(SIM_THREE_NUMBER_FROM_LOGIN, phone);
+    }
+
+    public String getSimFourPhoneNumberFromLogin() {
+        return getStringPreference(SIM_FOUR_NUMBER_FROM_LOGIN);
+    }
+
+    public void setSimFourPhoneNumberFromLogin(String phone) {
+        setStringPreference(SIM_FOUR_NUMBER_FROM_LOGIN, phone);
+    }
+
+    public void setSimOneSerialICCIDFromLogin(String serial) {
+        setStringPreference(SERIAL_1_FROM_LOGIN, serial);
+    }
+
+    public String getSimOneSerialICCIDfromLogin() {
+        return getStringPreference(SERIAL_1_FROM_LOGIN);
+    }
+
+    public void setSimTwoSerialICCIDFromLogin(String serial) {
+        setStringPreference(SERIAL_2_FROM_LOGIN, serial);
+    }
+
+    public String getSimTwoSerialICCIDfromLogin() {
+        return getStringPreference(SERIAL_2_FROM_LOGIN);
+    }
+
+    public void setSimThreeSerialICCIDFromLogin(String serial) {
+        setStringPreference(SERIAL_3_FROM_LOGIN, serial);
+    }
+
+    public String getSimThreeSerialICCIDfromLogin() {
+        return getStringPreference(SERIAL_3_FROM_LOGIN);
+    }
+
+    public void setSimFourSerialICCIDFromLogin(String serial) {
+        setStringPreference(SERIAL_4_FROM_LOGIN, serial);
+    }
+
+    public String getSimFourSerialICCIDfromLogin() {
+        return getStringPreference(SERIAL_4_FROM_LOGIN);
+    }
+
+    public String getNetworkNameSimOneFromLogin() {
+        return getStringPreference(SIM_1_NETWORK_FROM_LOGIN);
+    }
+
+    public void setNetworkNameSimOneFromLogin(String network) {
+        setStringPreference(SIM_1_NETWORK_FROM_LOGIN, network);
+    }
+
+    public String getNetworkNameSimTwoFromLogin() {
+        return getStringPreference(SIM_2_NETWORK_FROM_LOGIN);
+    }
+
+    public void setNetworkNameSimTwoFromLogin(String network) {
+        setStringPreference(SIM_2_NETWORK_FROM_LOGIN, network);
+    }
+
+    public String getNetworkNameSimThreeFromLogin() {
+        return getStringPreference(SIM_3_NETWORK_FROM_LOGIN);
+    }
+
+    public void setNetworkNameSimThreeFromLogin(String network) {
+        setStringPreference(SIM_3_NETWORK_FROM_LOGIN, network);
+    }
+
+    public String getNetworkNameSimFourFromLogin() {
+        return getStringPreference(SIM_4_NETWORK_FROM_LOGIN);
+    }
+
+    public void setNetworkNameSimFourFromLogin(String network) {
+        setStringPreference(SIM_4_NETWORK_FROM_LOGIN, network);
+    }
+
+    public String getAddSimJsonObject(){
+        return getStringPreference(ADD_SIM);
+    }
+
+    public void setAddSimJsonObject(String jsonObject) {
+        setStringPreference(ADD_SIM, jsonObject);
     }
 }

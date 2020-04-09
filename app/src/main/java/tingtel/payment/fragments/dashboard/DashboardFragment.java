@@ -81,7 +81,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void checkIfSimIsRegistered() {
-        sessionManager.setComingFromDashboard(true);
+        //sessionManager.setComingFromDashboard(true);
 
         //check if both sim 1 and sim 2 are in the db registered.
         String NoOfSIm = sessionManager.getSimStatus();

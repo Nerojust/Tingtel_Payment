@@ -20,6 +20,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.chaos.view.PinView;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -139,10 +140,7 @@ public class SignUpSim1OtpFragment extends Fragment {
         }
 
         if (sessionManager.getIsRegistered()) {
-
-
             makeAddSimRequest();
-
         } else {
             String NoOfSIm = sessionManager.getSimStatus();
 
@@ -221,10 +219,15 @@ public class SignUpSim1OtpFragment extends Fragment {
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
         addSimSendObject.setPhone2(Sim1PhoneNumber);
-        addSimSendObject.setUser_phone(sessionManager.getNumberFromLogin());
-        addSimSendObject.setSim2_network(Sim1Network);
-        addSimSendObject.setSim2_serial(Sim1Serial);
+        addSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+        addSimSendObject.setSim2Network(Sim1Network);
+        addSimSendObject.setSim2Serial(Sim1Serial);
+        addSimSendObject.setPhoneSim("1");
         addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(addSimSendObject);
+        sessionManager.setAddSimJsonObject(jsonObject);
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.addSim(addSimSendObject, new AddSimInterface() {

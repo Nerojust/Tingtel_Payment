@@ -1,6 +1,7 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.chaos.view.PinView;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +56,7 @@ public class SignUpSim2OtpFragment extends Fragment {
     private SessionManager sessionManager;
 
 
+    @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim2_otp, container, false);
@@ -200,10 +203,14 @@ public class SignUpSim2OtpFragment extends Fragment {
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
         addSimSendObject.setPhone2(Sim2PhoneNumber);
-        addSimSendObject.setUser_phone(sessionManager.getNumberFromLogin());
-        addSimSendObject.setSim2_network(Sim2Network);
-        addSimSendObject.setSim2_serial(Sim2Serial);
+        addSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+        addSimSendObject.setSim2Network(Sim2Network);
+        addSimSendObject.setSim2Serial(Sim2Serial);
         addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(addSimSendObject);
+        sessionManager.setAddSimJsonObject(jsonObject);
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.addSim(addSimSendObject, new AddSimInterface() {

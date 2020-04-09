@@ -1,7 +1,6 @@
 package tingtel.payment.fragments.signup;
 
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +24,6 @@ import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
-import tingtel.payment.activities.MainActivity;
 import tingtel.payment.adapters.SpinnerAdapter;
 import tingtel.payment.models.otp.SendOTPresponse;
 import tingtel.payment.models.otp.SendOTPsendObject;
@@ -209,14 +207,14 @@ public class SignUpSim1Fragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (isRemoving()) {
-            if (sessionManager.getComingFromDashboard()) {
-                startActivity(new Intent(getContext(), MainActivity.class));
-                Objects.requireNonNull(getActivity()).finish();
-            }
-        }
-    }
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        if (isRemoving()) {
+//            if (sessionManager.getComingFromDashboard()) {
+//                startActivity(new Intent(getContext(), MainActivity.class));
+//                Objects.requireNonNull(getActivity()).finish();
+//            }
+//        }
+//    }
 }

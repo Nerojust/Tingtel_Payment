@@ -61,7 +61,7 @@ public class SignUpHomeFragment extends Fragment {
     }
 
     private void saveDatatoPrefs() {
-        sessionManager.setFirstName(Objects.requireNonNull(firstName.getText()).toString().trim());
+        sessionManager.setFirstNameFromLogin(Objects.requireNonNull(firstName.getText()).toString().trim());
         sessionManager.setLastName(Objects.requireNonNull(lastName.getText()).toString().trim());
         sessionManager.setEmailAddress(Objects.requireNonNull(emailAddress.getText()).toString().trim());
         sessionManager.setUsername(Objects.requireNonNull(username.getText()).toString().trim());

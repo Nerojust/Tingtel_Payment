@@ -3,8 +3,7 @@ package tingtel.payment.models.transaction_history;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class Transaction {
+public class TransactionHistory {
 
     @SerializedName("id")
     @Expose
@@ -38,10 +37,10 @@ public class Transaction {
     private String beneficiaryMsisdn;
     @SerializedName("ussd_response_message")
     @Expose
-    private Object ussdResponseMessage;
+    private String ussdResponseMessage;
     @SerializedName("api_ref")
     @Expose
-    private Object apiRef;
+    private String apiRef;
 
     public Integer getId() {
         return id;
@@ -123,19 +122,19 @@ public class Transaction {
         this.beneficiaryMsisdn = beneficiaryMsisdn;
     }
 
-    public Object getUssdResponseMessage() {
+    public String getUssdResponseMessage() {
         return ussdResponseMessage;
     }
 
-    public void setUssdResponseMessage(Object ussdResponseMessage) {
+    public void setUssdResponseMessage(String ussdResponseMessage) {
         this.ussdResponseMessage = ussdResponseMessage;
     }
 
-    public Object getApiRef() {
+    public String getApiRef() {
         return apiRef;
     }
 
-    public void setApiRef(Object apiRef) {
+    public void setApiRef(String apiRef) {
         this.apiRef = apiRef;
     }
 

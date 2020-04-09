@@ -7,35 +7,33 @@ public class AddSimSendObject {
 
     @SerializedName("user_phone")
     @Expose
-    private String user_phone;
-
+    private String userPhone;
     @SerializedName("phone2")
     @Expose
     private String phone2;
-
     @SerializedName("sim2_network")
     @Expose
-    private String sim2_network;
-
+    private String sim2Network;
     @SerializedName("sim2_serial")
     @Expose
-    private String sim2_serial;
-
+    private String sim2Serial;
+    @SerializedName("phone_sim")
+    @Expose
+    private String phoneSim;
     @SerializedName("email")
     @Expose
     private String email;
-
     @SerializedName("hash")
     @Expose
     private String hash;
 
 
-    public String getUser_phone() {
-        return user_phone;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setUser_phone(String user_phone) {
-        this.user_phone = user_phone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public String getPhone2() {
@@ -46,20 +44,28 @@ public class AddSimSendObject {
         this.phone2 = phone2;
     }
 
-    public String getSim2_network() {
-        return sim2_network;
+    public String getSim2Network() {
+        return sim2Network;
     }
 
-    public void setSim2_network(String sim2_network) {
-        this.sim2_network = sim2_network;
+    public void setSim2Network(String sim2Network) {
+        this.sim2Network = sim2Network;
     }
 
-    public String getSim2_serial() {
-        return sim2_serial;
+    public String getSim2Serial() {
+        return sim2Serial;
     }
 
-    public void setSim2_serial(String sim2_serial) {
-        this.sim2_serial = sim2_serial;
+    public void setSim2Serial(String sim2Serial) {
+        this.sim2Serial = sim2Serial;
+    }
+
+    public String getPhoneSim() {
+        return phoneSim;
+    }
+
+    public void setPhoneSim(String phoneSim) {
+        this.phoneSim = phoneSim;
     }
 
     public String getEmail() {

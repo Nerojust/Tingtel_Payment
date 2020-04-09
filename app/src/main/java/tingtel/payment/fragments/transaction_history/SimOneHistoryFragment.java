@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -114,14 +113,8 @@ public class SimOneHistoryFragment extends Fragment {
 
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
-        String num = AppUtils.getSessionManagerInstance().getSimPhoneNumber();
-        if (num!=null) {
-            transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(num));
-        }else {
-            Toast.makeText(getContext(), "Register a sim first", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-            return;
-        }
+        transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
+
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(transactionHistorySendObject);
@@ -131,7 +124,7 @@ public class SimOneHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getPhone1Transactions().size() == 0) {
+                    if (transactionHistoryResponse.getResults().get(0).getTransactionHistory().size() == 0) {
                         noRecordFoundLayout.setVisibility(View.VISIBLE);
                         swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {

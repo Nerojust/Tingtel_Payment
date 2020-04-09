@@ -12,12 +12,9 @@ public class TransactionHistoryResponse {
     @SerializedName("code")
     @Expose
     private String code;
-    @SerializedName("phone1_transactions")
+    @SerializedName("results")
     @Expose
-    private List<Phone1Transaction> phone1Transactions = null;
-    @SerializedName("phone2_transactions")
-    @Expose
-    private List<Phone2Transaction> phone2Transactions = null;
+    private List<Result> results = null;
 
     public String getCode() {
         return code;
@@ -27,20 +24,12 @@ public class TransactionHistoryResponse {
         this.code = code;
     }
 
-    public List<Phone1Transaction> getPhone1Transactions() {
-        return phone1Transactions;
+    public List<Result> getResults() {
+        return results;
     }
 
-    public void setPhone1Transactions(List<Phone1Transaction> phone1Transactions) {
-        this.phone1Transactions = phone1Transactions;
-    }
-
-    public List<Phone2Transaction> getPhone2Transactions() {
-        return phone2Transactions;
-    }
-
-    public void setPhone2Transactions(List<Phone2Transaction> phone2Transactions) {
-        this.phone2Transactions = phone2Transactions;
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 
 }

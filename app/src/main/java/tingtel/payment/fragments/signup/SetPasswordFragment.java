@@ -86,7 +86,7 @@ public class SetPasswordFragment extends Fragment {
 
         CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject();
         customerRegistrationSendObject.setFirstName(sessionManager.getFirstName());
-        customerRegistrationSendObject.setLastName(sessionManager.getLastName());
+        customerRegistrationSendObject.setLastName(sessionManager.getLastNameFromLogin());
         customerRegistrationSendObject.setEmail(sessionManager.getEmailAddress());
         customerRegistrationSendObject.setUsername(sessionManager.getUserame());
         customerRegistrationSendObject.setSim1(sim1);
@@ -97,6 +97,7 @@ public class SetPasswordFragment extends Fragment {
         Gson gson = new Gson();
         String jsonObject = gson.toJson(customerRegistrationSendObject);
         sessionManager.setRegistrationJsonObject(jsonObject);
+
 
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();

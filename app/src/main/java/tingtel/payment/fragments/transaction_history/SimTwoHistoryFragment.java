@@ -123,7 +123,7 @@ public class SimTwoHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getPhone2Transactions().size() == 0) {
+                    if (transactionHistoryResponse.getResults().get(1).getTransactionHistory().size() == 0) {
                         noRecordFoundLayout.setVisibility(View.VISIBLE);
                         swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {

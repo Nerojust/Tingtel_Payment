@@ -13,6 +13,10 @@ import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
 import tingtel.payment.models.delete_account.DeleteAccountSendObject;
+import tingtel.payment.models.delete_sim.DeleteSimResponse;
+import tingtel.payment.models.delete_sim.DeleteSimSendObject;
+import tingtel.payment.models.delete_transaction.DeleteTransactionResponse;
+import tingtel.payment.models.delete_transaction.DeleteTransactionSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -65,4 +69,10 @@ public interface PostServiceInterface {
 
     @POST("deleteAccount")
     Call<DeleteAccountResponse> deleteAccount(@Body DeleteAccountSendObject deleteAccountSendObject);
+
+    @POST("delete_sim")
+    Call<DeleteSimResponse> deleteSim(@Body DeleteSimSendObject deleteSimSendObject);
+
+    @POST("delete_single_transaction")
+    Call<DeleteTransactionResponse> deleteAsingleTransaction(@Body DeleteTransactionSendObject deleteTransactionSendObject);
 }

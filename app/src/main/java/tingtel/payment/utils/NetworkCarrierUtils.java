@@ -64,17 +64,6 @@ public class NetworkCarrierUtils {
                         new String[]{Manifest.permission.READ_PHONE_STATE},
                         109);
             }
-        } else {
-
-            /*List<String> carrierNames = new ArrayList<>();
-            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            // Get carrier name (Network Operator Name)
-            carrierNames.add(telephonyManager.getNetworkOperatorName());
-            String name = telephonyManager.getNetworkOperatorName();
-            String dd = telephonyManager.getSimSerialNumber();
-
-            Toast.makeText(context, name + "_____"+dd, Toast.LENGTH_SHORT).show();
-*/
         }
     }
 

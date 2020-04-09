@@ -58,40 +58,47 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
+        String amount = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getAmount();
+        String date = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getCreatedAt();
+        String sender_number = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getUserPhone();
+        String receiver_number = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryMsisdn();
+        String reference_id = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getRef();
+        int statusId = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getStatus();
+        String receiver_network = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryNetwork();
+        String sender_network = responseFromTransaction.getResults().get(1).getTransactionHistory().get(position).getSourceNetwork();
+
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
+        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), amount));
+        holder.tvDate.setText(formateDate(date));
+        holder.tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(sender_number));
+        holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(receiver_number));
+        holder.ref_id.setText(reference_id);
 
-        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), responseFromTransaction.getPhone2Transactions().get(position).getAmount()));
-        holder.tvDate.setText(formateDate(responseFromTransaction.getPhone2Transactions().get(position).getCreatedAt()));
-        holder.tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(responseFromTransaction.getPhone2Transactions().get(position).getUserPhone()));
-        holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(responseFromTransaction.getPhone2Transactions().get(position).getBeneficiaryMsisdn()));
-        holder.ref_id.setText(responseFromTransaction.getPhone2Transactions().get(position).getRef());
-        Integer statusId = responseFromTransaction.getPhone2Transactions().get(position).getStatus();
         if (statusId == 0) {
             holder.status.setText("Pending");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
         } else if (statusId == 1) {
             holder.status.setText("Completed");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
-        }else if (statusId ==2){
+        } else if (statusId == 2) {
             holder.status.setText("Sent, Pending SMS");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
         }
-        String senderNetwork = responseFromTransaction.getPhone2Transactions().get(position).getSourceNetwork();
-        String receiverNetwork = responseFromTransaction.getPhone2Transactions().get(position).getBeneficiaryNetwork();
 
-        setNetworkLogo(senderNetwork, holder.imageSenderNetwork);
-        setNetworkLogo(receiverNetwork, holder.imgReceiverNetwork);
+        setNetworkLogo(sender_network, holder.imageSenderNetwork);
+        setNetworkLogo(receiver_network, holder.imgReceiverNetwork);
 
 
         holder.container.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, StatusActivity.class);
-            intent.putExtra("amount", responseFromTransaction.getPhone2Transactions().get(position).getAmount());
-            intent.putExtra("ref_id", responseFromTransaction.getPhone2Transactions().get(position).getRef());
-            intent.putExtra("status", responseFromTransaction.getPhone2Transactions().get(position).getStatus());
-            intent.putExtra("sender_number", responseFromTransaction.getPhone2Transactions().get(position).getUserPhone());
-            intent.putExtra("receiver_number", responseFromTransaction.getPhone2Transactions().get(position).getBeneficiaryMsisdn());
-            intent.putExtra("date", formateDate(responseFromTransaction.getPhone2Transactions().get(position).getCreatedAt()));
+            intent.putExtra("amount", amount);
+            intent.putExtra("ref_id", reference_id);
+            intent.putExtra("status", statusId);
+            intent.putExtra("sender_number", sender_number);
+            intent.putExtra("receiver_number", receiver_number);
+            intent.putExtra("date", formateDate(date));
             mContext.startActivity(intent);
         });
 
@@ -112,7 +119,7 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
 
     @Override
     public int getItemCount() {
-        return responseFromTransaction.getPhone2Transactions().size();
+        return responseFromTransaction.getResults().get(1).getTransactionHistory().size();
     }
 
 

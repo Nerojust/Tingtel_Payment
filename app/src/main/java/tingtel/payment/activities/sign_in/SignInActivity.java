@@ -11,7 +11,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -89,7 +88,6 @@ public class SignInActivity extends GPSutils {
                     @Override
                     public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                         super.onAuthenticationError(errorCode, errString);
-                        //Toast.makeText(getApplicationContext(), "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
                         usernameEditext.requestFocus();
                     }
 
@@ -97,18 +95,26 @@ public class SignInActivity extends GPSutils {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
-                        // Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-                        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(SignInActivity.this))) {
-                            loginUserWithFingerprint();
+                        if (AppUtils.isLocationEnabled(SignInActivity.this)) {
+                            if (AppUtils.isNetworkAvailable(Objects.requireNonNull(SignInActivity.this))) {
+                                loginUserWithFingerprint();
+
+                            } else {
+                                AppUtils.showSnackBar("No network available", passwordEditext);
+                            }
+
                         } else {
-                            AppUtils.showSnackBar("No network available", passwordEditext);
+                            showDialogMessage(getString(R.string.put_on_your_gps), () -> {
+                                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(myIntent);
+                            });
                         }
                     }
 
                     @Override
                     public void onAuthenticationFailed() {
                         super.onAuthenticationFailed();
-                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -207,7 +213,7 @@ public class SignInActivity extends GPSutils {
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 sessionManager.startLoginSession();
                 sessionManager.setPassword(password);
-                saveDetailsToPref(loginResponses);
+                saveDetailsToPrefFromLoginResponse(loginResponses);
 
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -240,12 +246,29 @@ public class SignInActivity extends GPSutils {
 
     }
 
-    private void saveDetailsToPref(CustomerLoginResponse loginResponses) {
-        sessionManager.setFirstName(loginResponses.getUserInfo().get(0).getFirstName());
+    private void saveDetailsToPrefFromLoginResponse(CustomerLoginResponse loginResponses) {
+        //name, email and number
+        sessionManager.setFirstNameFromLogin(loginResponses.getUserInfo().get(0).getFirstName());
         sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
         sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
+        //sim 1 details
+        sessionManager.setSimOnePhoneNumberFromLogin(loginResponses.getSim1().get(0).getPhone());
+        sessionManager.setSimOneSerialICCIDFromLogin(loginResponses.getSim1().get(0).getSim1Serial());
+        sessionManager.setNetworkNameSimOneFromLogin(loginResponses.getSim1().get(0).getUserNetwork());
+        //sim 2 details
+        sessionManager.setSimTwoPhoneNumberFromLogin(loginResponses.getSim2().get(0).getPhone2());
+        sessionManager.setSimTwoSerialICCIDFromLogin(loginResponses.getSim2().get(0).getSim2Serial());
+        sessionManager.setNetworkNameSimTwoFromLogin(loginResponses.getSim2().get(0).getSim2UserNetwork());
+        //sim 3 details
+        sessionManager.setSimThreePhoneNumberFromLogin(loginResponses.getSim3().get(0).getPhone3());
+        sessionManager.setSimThreeSerialICCIDFromLogin(loginResponses.getSim3().get(0).getSim3Serial());
+        sessionManager.setNetworkNameSimThreeFromLogin(loginResponses.getSim3().get(0).getSim3UserNetwork());
+        //sim 4 details
+        sessionManager.setSimFourPhoneNumberFromLogin(loginResponses.getSim4().get(0).getPhone4());
+        sessionManager.setSimFourSerialICCIDFromLogin(loginResponses.getSim4().get(0).getSim4Serial());
+        sessionManager.setNetworkNameSimFourFromLogin(loginResponses.getSim4().get(0).getSim4UserNetwork());
     }
-//todo: work on set is registered: check very well
+
 
     /**
      * this method handles the logging in of the user.
@@ -271,7 +294,7 @@ public class SignInActivity extends GPSutils {
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 AppUtils.dismissLoadingDialog();
                 sessionManager.startLoginSession();
-                saveDetailsToPref(loginResponses);
+                saveDetailsToPrefFromLoginResponse(loginResponses);
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);

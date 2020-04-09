@@ -100,9 +100,9 @@ public class AddSimActivity extends AppCompatActivity {
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
         addSimSendObject.setPhone2(retrievedPhoneNumber);
-        addSimSendObject.setUser_phone(sessionManager.getNumberFromLogin());
-        addSimSendObject.setSim2_network(selectedSpinnerNetwork);
-        addSimSendObject.setSim2_serial("");
+        addSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+        addSimSendObject.setSim2Network(selectedSpinnerNetwork);
+        addSimSendObject.setSim2Serial("");
         addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();

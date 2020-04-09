@@ -42,7 +42,7 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
     }
 
-    public String formateDate(String dateString) {
+    private String formateDate(String dateString) {
         Date date;
         String formattedDate = "";
         try {
@@ -58,14 +58,23 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        String amount = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getAmount();
+        String date = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getCreatedAt();
+        String sender_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getUserPhone();
+        String receiver_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryMsisdn();
+        String reference_id = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getRef();
+        int statusId = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getStatus();
+        String receiver_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryNetwork();
+        String sender_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getSourceNetwork();
+
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
-        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), transactionHistoryResponse.getPhone1Transactions().get(position).getAmount()));
-        holder.tvDate.setText(formateDate(transactionHistoryResponse.getPhone1Transactions().get(position).getCreatedAt()));
-        holder.tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(transactionHistoryResponse.getPhone1Transactions().get(position).getUserPhone()));
-        holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryMsisdn()));
-        holder.ref_id.setText(transactionHistoryResponse.getPhone1Transactions().get(position).getRef());
-        Integer statusId = transactionHistoryResponse.getPhone1Transactions().get(position).getStatus();
+        holder.tvAmount.setText(String.format("%s%s", mContext.getResources().getString(R.string.naira), amount));
+        holder.tvDate.setText(formateDate(date));
+        holder.tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(sender_number));
+        holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(receiver_number));
+        holder.ref_id.setText(reference_id);
+
         if (statusId == 0) {
             holder.status.setText("Pending");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
@@ -76,21 +85,19 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
             holder.status.setText("Sent,Pending SMS");
             holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
         }
-        String senderNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getSourceNetwork();
-        String receiverNetwork = transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryNetwork();
 
-        setNetworkLogo(senderNetwork, holder.imageSenderNetwork);
-        setNetworkLogo(receiverNetwork, holder.imgReceiverNetwork);
+        setNetworkLogo(sender_network, holder.imageSenderNetwork);
+        setNetworkLogo(receiver_network, holder.imgReceiverNetwork);
 
 
         holder.container.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, StatusActivity.class);
-            intent.putExtra("amount", transactionHistoryResponse.getPhone1Transactions().get(position).getAmount());
-            intent.putExtra("ref_id", transactionHistoryResponse.getPhone1Transactions().get(position).getRef());
-            intent.putExtra("status", transactionHistoryResponse.getPhone1Transactions().get(position).getStatus());
-            intent.putExtra("sender_number", transactionHistoryResponse.getPhone1Transactions().get(position).getUserPhone());
-            intent.putExtra("receiver_number", transactionHistoryResponse.getPhone1Transactions().get(position).getBeneficiaryMsisdn());
-            intent.putExtra("date", formateDate(transactionHistoryResponse.getPhone1Transactions().get(position).getCreatedAt()));
+            intent.putExtra("amount", amount);
+            intent.putExtra("ref_id", reference_id);
+            intent.putExtra("status", statusId);
+            intent.putExtra("sender_number", sender_number);
+            intent.putExtra("receiver_number", receiver_number);
+            intent.putExtra("date", formateDate(date));
             mContext.startActivity(intent);
         });
 
@@ -111,7 +118,7 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
     @Override
     public int getItemCount() {
-        return transactionHistoryResponse.getPhone1Transactions().size();
+        return transactionHistoryResponse.getResults().get(0).getTransactionHistory().size();
     }
 
 
