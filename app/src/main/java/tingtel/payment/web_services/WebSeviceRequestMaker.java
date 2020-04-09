@@ -20,6 +20,10 @@ import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
 import tingtel.payment.models.delete_account.DeleteAccountSendObject;
+import tingtel.payment.models.delete_sim.DeleteSimResponse;
+import tingtel.payment.models.delete_sim.DeleteSimSendObject;
+import tingtel.payment.models.delete_transaction.DeleteTransactionResponse;
+import tingtel.payment.models.delete_transaction.DeleteTransactionSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -42,6 +46,8 @@ import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
+import tingtel.payment.web_services.interfaces.DeleteSimInterface;
+import tingtel.payment.web_services.interfaces.DeleteSingleHistoryInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 import tingtel.payment.web_services.interfaces.ReportIssueInterface;
@@ -512,6 +518,82 @@ public class WebSeviceRequestMaker {
                     Log.e("Login error", error);
                 } else {
                     deleteAccountInterface.onError("Network error");
+                }
+            }
+        });
+    }
+
+    public void deleteSingleTransaction(DeleteTransactionSendObject deleteTransactionSendObject, DeleteSingleHistoryInterface deleteSingleHistoryInterface) {
+        Call<DeleteTransactionResponse> call = postInterfaceService.deleteAsingleTransaction(deleteTransactionSendObject);
+        call.enqueue(new Callback<DeleteTransactionResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DeleteTransactionResponse> call, @NonNull Response<DeleteTransactionResponse> response) {
+                if (response.isSuccessful()) {
+                    DeleteTransactionResponse deleteAccountResponse = response.body();
+
+                    if (deleteAccountResponse != null) {
+                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
+                            deleteSingleHistoryInterface.onSuccess(deleteAccountResponse);
+                        } else {
+                            deleteSingleHistoryInterface.onError(deleteAccountResponse.getDescription());
+                        }
+                    }
+                } else {
+                    deleteSingleHistoryInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DeleteTransactionResponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        deleteSingleHistoryInterface.onError("Network Error, please try again");
+                    } else {
+                        deleteSingleHistoryInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    deleteSingleHistoryInterface.onError("Network error");
+                }
+            }
+        });
+    }
+
+    public void deleteAsim(DeleteSimSendObject deleteSimSendObject, DeleteSimInterface deleteSimInterface) {
+        Call<DeleteSimResponse> call = postInterfaceService.deleteSim(deleteSimSendObject);
+        call.enqueue(new Callback<DeleteSimResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DeleteSimResponse> call, @NonNull Response<DeleteSimResponse> response) {
+                if (response.isSuccessful()) {
+                    DeleteSimResponse deleteAccountResponse = response.body();
+
+                    if (deleteAccountResponse != null) {
+                        if (deleteAccountResponse.getCode().equals(Constants.SUCCESS)) {
+                            deleteSimInterface.onSuccess(deleteAccountResponse);
+                        } else {
+                            deleteSimInterface.onError(deleteAccountResponse.getDescription());
+                        }
+                    }
+                } else {
+                    deleteSimInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DeleteSimResponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        deleteSimInterface.onError("Network Error, please try again");
+                    } else {
+                        deleteSimInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    deleteSimInterface.onError("Network error");
                 }
             }
         });
