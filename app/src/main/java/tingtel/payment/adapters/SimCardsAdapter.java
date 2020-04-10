@@ -120,7 +120,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 }
             });
 
-
+ 
             imgDelete.setOnClickListener(v -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 ViewGroup viewGroup = activity.findViewById(android.R.id.content);
