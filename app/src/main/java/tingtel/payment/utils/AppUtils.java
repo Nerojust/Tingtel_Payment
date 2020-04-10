@@ -145,7 +145,9 @@ public class AppUtils {
 
     public static String checkPhoneNumberAndRemovePrefix(String number) {
         if (number.substring(0, 3).equals("234")) {
-            number = number.replace("234", "0");
+            if (number.startsWith("234")) {
+                return "0" + number.substring("234".length());
+            }
             return number;
         } else if (number.substring(0, 4).equals("+234")) {
             number = number.replace("+234", "0");
@@ -154,19 +156,6 @@ public class AppUtils {
             return number;
         }
     }
-
-//    public static String checkPhoneNumberAndRemovePrefix(String number) {
-//        if (number.substring(0, 3).equals("234")) {
-//            number = "0"+ number.substring(2);
-//            return number;
-//        } else if (number.substring(0, 4).equals("+234")) {
-//             number = "0"+ number.substring(3);
-//             return number;
-//        } else {
-//            return number;
-//        }
-//    }
-
 
     public static void showSnackBar(String msg, View view) {
         Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
