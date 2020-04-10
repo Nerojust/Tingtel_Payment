@@ -75,13 +75,13 @@ public class SetPasswordFragment extends Fragment {
         AppUtils.initLoadingDialog(getContext());
 
         Sim1 sim1 = new Sim1();
-        sim1.setPhone(sessionManager.getSimPhoneNumber());
+        sim1.setPhone(sessionManager.getSimOnePhoneNumber());
         sim1.setUserNetwork(sessionManager.getUserNetwork());
         sim1.setSerialNumber(sessionManager.getSimSerialICCID());
 
         Sim2 sim2 = new Sim2();
-        sim2.setPhone(sessionManager.getSimPhoneNumber1());
-        sim2.setUserNetwork(sessionManager.getNetworkName1());
+        sim2.setPhone(sessionManager.getSimTwoPhoneNumber());
+        sim2.setUserNetwork(sessionManager.getSimTwoNetworkName());
         sim2.setSerialNumber(sessionManager.getSimSerialICCID1());
 
         CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject();
@@ -92,7 +92,7 @@ public class SetPasswordFragment extends Fragment {
         customerRegistrationSendObject.setSim1(sim1);
         customerRegistrationSendObject.setSim2(sim2);
         customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
-        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimPhoneNumber()));
+        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimOnePhoneNumber()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(customerRegistrationSendObject);

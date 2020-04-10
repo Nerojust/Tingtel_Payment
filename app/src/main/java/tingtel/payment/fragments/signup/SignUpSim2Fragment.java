@@ -180,7 +180,7 @@ public class SignUpSim2Fragment extends Fragment {
 
 
     private void getDataFromCarrier(View view) {
-        Sim2Network = sessionManager.getNetworkName1();
+        Sim2Network = sessionManager.getSimTwoNetworkName();
         Sim2Serial = sessionManager.getSimSerialICCID1();
 
         NoOfSIm = sessionManager.getSimStatus();

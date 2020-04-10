@@ -19,11 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
+import tingtel.payment.models.delete_sim.DeleteSimResponse;
+import tingtel.payment.models.delete_sim.DeleteSimSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
+import tingtel.payment.web_services.WebSeviceRequestMaker;
+import tingtel.payment.web_services.interfaces.DeleteSimInterface;
 
 public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyViewHolder> {
     private final Context mContext;
@@ -33,6 +38,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     private AppDatabase appDatabase;
     private Fragment navhost;
     private NavController navController;
+    private int now_position;
 
     public SimCardsAdapter(Context mContext, List lst, Activity activity) {
 
@@ -47,7 +53,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
 
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.row_sim_card, parent, false);
+        view = mInflater.inflate(R.layout.manage_sim_cards_layout, parent, false);
         // click listener here
         return new SimCardsAdapter.MyViewHolder(view);
 
@@ -59,10 +65,10 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         holder.imgDelete.setTag(mData.get(position));
         holder.tvPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(mData.get(position).getPhoneNumber()));
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
+        now_position = position;
 
-
-        if (mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber()) ||
-                mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimPhoneNumber1())) {
+        if (mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber()) ||
+                mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimTwoPhoneNumber())) {
             holder.on_off_switch.setChecked(true);
 
         } else {
@@ -126,15 +132,39 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 Button btnNo = dialogView.findViewById(R.id.btn_no);
 
                 btnYes.setOnClickListener(v1 -> {
+                    AppUtils.initLoadingDialog(mContext);
 
-                    SimCards SimCardsModel = (SimCards) v.getTag();
-                    int id = SimCardsModel.getId();
-                    appDatabase.simCardsDao().deleteSimCard(id);
-                    activity.startActivity(activity.getIntent());
-                    activity.finish();
-                    activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    alertDialog.dismiss();
+                    DeleteSimSendObject deleteSimSendObject = new DeleteSimSendObject();
+                    deleteSimSendObject.setSimNumber(mData.get(now_position).getPhoneNumber());
+                    deleteSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+                    deleteSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
+                    WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+                    webSeviceRequestMaker.deleteAsim(deleteSimSendObject, new DeleteSimInterface() {
+                        @Override
+                        public void onSuccess(DeleteSimResponse deleteSimResponse) {
+                            SimCards SimCardsModel = (SimCards) v.getTag();
+                            int id = SimCardsModel.getId();
+                            appDatabase.simCardsDao().deleteSimCard(id);
+                            activity.startActivity(activity.getIntent());
+                            activity.finish();
+                            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            alertDialog.dismiss();
+                            AppUtils.dismissLoadingDialog();
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            AppUtils.dismissLoadingDialog();
+                            AppUtils.showDialog(error, activity);
+                        }
+
+                        @Override
+                        public void onErrorCode(int errorCode) {
+                            AppUtils.dismissLoadingDialog();
+                            AppUtils.showDialog(String.valueOf(errorCode), activity);
+                        }
+                    });
                 });
 
                 btnNo.setOnClickListener(v12 -> alertDialog.dismiss());

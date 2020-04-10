@@ -320,7 +320,7 @@ public class TransferAirtimeFragment extends Fragment {
     private boolean sim1ExistsCheck() {
         String Sim1Serial = sessionManager.getSimSerialICCID();
         if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-            sessionManager.setSimPhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+            sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
             return true;
         } else {
             return false;
@@ -330,7 +330,7 @@ public class TransferAirtimeFragment extends Fragment {
     private boolean sim2ExistsCheck() {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
         if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            sessionManager.setSimPhoneNumber1(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+            sessionManager.setSimTwoPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
             return true;
         } else {
             return false;
@@ -340,8 +340,8 @@ public class TransferAirtimeFragment extends Fragment {
 
     private void populatePhoneNumberViews() {
         noOfSIm = sessionManager.getSimStatus();
-        String sim1Number = sessionManager.getSimPhoneNumber();
-        String sim2Number = sessionManager.getSimPhoneNumber1();
+        String sim1Number = sessionManager.getSimOnePhoneNumber();
+        String sim2Number = sessionManager.getSimTwoPhoneNumber();
         if (sim1Number==null||sim2Number==null){
             Toast.makeText(getContext(), "Register ur sim/s", Toast.LENGTH_SHORT).show();
             return;
@@ -355,7 +355,7 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1":
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.GONE);
-                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim1Number));
+                sim1Textview.setText(sessionManager.getSimOneNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim1Number));
 
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_white));
                 sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
@@ -365,8 +365,8 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1 SIM2":
                 sim1Textview.setVisibility(View.VISIBLE);
                 sim2Textview.setVisibility(View.VISIBLE);
-                sim1Textview.setText(sessionManager.getNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim1Number));
-                sim2Textview.setText(sessionManager.getNetworkName1() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim2Number));
+                sim1Textview.setText(sessionManager.getSimOneNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim1Number));
+                sim2Textview.setText(sessionManager.getSimTwoNetworkName() + "\n" + AppUtils.checkPhoneNumberAndRemovePrefix(sim2Number));
 
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
                 sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));

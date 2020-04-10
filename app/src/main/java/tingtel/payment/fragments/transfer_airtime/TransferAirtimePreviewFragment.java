@@ -82,10 +82,10 @@ public class TransferAirtimePreviewFragment extends Fragment {
         getExtrasFromIntent();
 
         if (SimNo == 0) {
-            SenderPhoneNumber = sessionManager.getSimPhoneNumber();
+            SenderPhoneNumber = sessionManager.getSimOnePhoneNumber();
             SimSerial = sessionManager.getSimSerialICCID();
         } else if (SimNo == 1) {
-            SenderPhoneNumber = sessionManager.getSimPhoneNumber1();
+            SenderPhoneNumber = sessionManager.getSimTwoPhoneNumber();
             SimSerial = sessionManager.getSimSerialICCID1();
         }
         SenderPhoneNumber = AppUtils.checkPhoneNumberAndRestructure(SenderPhoneNumber);

@@ -8,11 +8,11 @@ public class SessionManager {
 
     private static final String INTRO_STATUS = "IsIntroOpened";
     private static final String LOGIN_STATUS = "LoginStatus";
-    private static final String NETWORK_NAME = "NETWORK NAME";
+    private static final String NETWORK_NAME_Sim_one = "NETWORK NAME";
     private static final String NUMBER_OF_SIMS_ON_DEVICE = "NUMBER_OF_SIMS_ON_DEVICE";
     private static final String SIM_SERIAL = "SIM_SERIAL";
     private static final String SIM_STATUS = "SIM_STATUS";
-    private static final String NETWORK_NAME1 = "NETWORK_NAME1";
+    private static final String NETWORK_NAME_Sim_two = "NETWORK_NAME_Sim_two";
     private static final String NUMBER_OF_SIMS_ON_DEVICE1 = "NUMBER_OF_SIMS_ON_DEVICE1";
     private static final String SIM_SERIAL1 = "SIM_SERIAL1";
 
@@ -75,6 +75,7 @@ public class SessionManager {
     private static final String SIM_3_NETWORK_FROM_LOGIN = "SIM_3_NETWORK_FROM_LOGIN";
     private static final String SIM_4_NETWORK_FROM_LOGIN = "SIM_4_NETWORK_FROM_LOGIN";
     private static final String ADD_SIM = "ADD_SIM";
+    private static final String SERIAL_MATCH = "SERIAL_MATCH";
 
 
     private final SharedPreferences pref = getSharedPreferencesCustomer();
@@ -168,27 +169,35 @@ public class SessionManager {
     }
 
 
-    public String getNetworkName() {
-        return getStringPreference(NETWORK_NAME);
+    public String getSimOneNetworkName() {
+        return getStringPreference(NETWORK_NAME_Sim_one);
     }
 
-    public void setNetworkName(String networkname) {
-        setStringPreference(NETWORK_NAME, networkname);
+    public void setSimOneNetworkName(String networkname) {
+        setStringPreference(NETWORK_NAME_Sim_one, networkname);
     }
 
-    public String getSimPhoneNumber() {
+    public String getSimTwoNetworkName() {
+        return getStringPreference(NETWORK_NAME_Sim_two);
+    }
+
+    public void setSimTwoNetworkName(String networkname) {
+        setStringPreference(NETWORK_NAME_Sim_two, networkname);
+    }
+
+    public String getSimOnePhoneNumber() {
         return getStringPreference(PHONE_NUMBER);
     }
 
-    public void setSimPhoneNumber(String phoneNumber) {
+    public void setSimOnePhoneNumber(String phoneNumber) {
         setStringPreference(PHONE_NUMBER, phoneNumber);
     }
 
-    public String getSimPhoneNumber1() {
+    public String getSimTwoPhoneNumber() {
         return getStringPreference(PHONE_NUMBER1);
     }
 
-    public void setSimPhoneNumber1(String phoneNumber) {
+    public void setSimTwoPhoneNumber(String phoneNumber) {
         setStringPreference(PHONE_NUMBER1, phoneNumber);
     }
 
@@ -208,14 +217,6 @@ public class SessionManager {
         setStringPreference(SIM_SERIAL, iccid);
     }
 
-
-    public String getNetworkName1() {
-        return getStringPreference(NETWORK_NAME1);
-    }
-
-    public void setNetworkName1(String networkname) {
-        setStringPreference(NETWORK_NAME1, networkname);
-    }
 
     public int getNumberOfSimsOnTheDevice1() {
         return getIntPreference(NUMBER_OF_SIMS_ON_DEVICE1);
@@ -656,11 +657,19 @@ public class SessionManager {
         setStringPreference(SIM_4_NETWORK_FROM_LOGIN, network);
     }
 
-    public String getAddSimJsonObject(){
+    public String getAddSimJsonObject() {
         return getStringPreference(ADD_SIM);
     }
 
     public void setAddSimJsonObject(String jsonObject) {
         setStringPreference(ADD_SIM, jsonObject);
+    }
+
+    public boolean getSerialsDontMatchAnyOnDevice() {
+        return getBooleanPreference(SERIAL_MATCH);
+    }
+
+    public void setSerialsDontMatchAnyOnDevice(boolean b) {
+        setBooleanPreference(SERIAL_MATCH, b);
     }
 }

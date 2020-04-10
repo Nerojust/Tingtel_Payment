@@ -157,8 +157,8 @@ public class SignUpSim1OtpFragment extends Fragment {
 
     private void saveSimDetails() {
         //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
-        sessionManager.setSimPhoneNumber(Sim1PhoneNumber);
-        sessionManager.setNetworkName(Sim1Network);
+        sessionManager.setSimOnePhoneNumber(Sim1PhoneNumber);
+        sessionManager.setSimOneNetworkName(Sim1Network);
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
 
@@ -218,11 +218,10 @@ public class SignUpSim1OtpFragment extends Fragment {
 
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
-        addSimSendObject.setPhone2(Sim1PhoneNumber);
         addSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
-        addSimSendObject.setSim2Network(Sim1Network);
-        addSimSendObject.setSim2Serial(Sim1Serial);
-        addSimSendObject.setPhoneSim("1");
+        addSimSendObject.setNewPhone(Sim1PhoneNumber);
+        addSimSendObject.setSimNetwork(Sim1Network);
+        addSimSendObject.setSimSerial(Sim1Serial);
         addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
         Gson gson = new Gson();

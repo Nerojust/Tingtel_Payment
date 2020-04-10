@@ -73,7 +73,9 @@ public class DashboardFragment extends Fragment {
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransferAirtime.setOnClickListener(v -> {
-            checkIfSimIsRegistered();
+            if (sessionManager.getSerialsDontMatchAnyOnDevice()) {
+                checkIfSimIsRegistered();
+            }
             navController.navigate(R.id.action_mainFragment_to_transferAirtimeActivity, null);
         });
 
@@ -123,7 +125,7 @@ public class DashboardFragment extends Fragment {
     private boolean sim1ExistsCheck() {
         String Sim1Serial = sessionManager.getSimSerialICCID();
         if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-            sessionManager.setSimPhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+            sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
             return true;
         } else {
             return false;
@@ -133,7 +135,7 @@ public class DashboardFragment extends Fragment {
     private boolean sim2ExistsCheck() {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
         if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            sessionManager.setSimPhoneNumber1(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+            sessionManager.setSimTwoPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
             return true;
         } else {
             return false;

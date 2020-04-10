@@ -28,11 +28,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.settings.AddSimActivity"
-            android:label="Add a new Sim"
-            android:parentActivityName=".activities.settings.SettingsActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".activities.history.StatusActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />

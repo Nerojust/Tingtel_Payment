@@ -8,25 +8,21 @@ public class AddSimSendObject {
     @SerializedName("user_phone")
     @Expose
     private String userPhone;
-    @SerializedName("phone2")
+    @SerializedName("new_phone")
     @Expose
-    private String phone2;
-    @SerializedName("sim2_network")
+    private String newPhone;
+    @SerializedName("sim_network")
     @Expose
-    private String sim2Network;
-    @SerializedName("sim2_serial")
+    private String simNetwork;
+    @SerializedName("sim_serial")
     @Expose
-    private String sim2Serial;
-    @SerializedName("phone_sim")
-    @Expose
-    private String phoneSim;
+    private String simSerial;
     @SerializedName("email")
     @Expose
     private String email;
     @SerializedName("hash")
     @Expose
     private String hash;
-
 
     public String getUserPhone() {
         return userPhone;
@@ -36,36 +32,28 @@ public class AddSimSendObject {
         this.userPhone = userPhone;
     }
 
-    public String getPhone2() {
-        return phone2;
+    public String getNewPhone() {
+        return newPhone;
     }
 
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
+    public void setNewPhone(String newPhone) {
+        this.newPhone = newPhone;
     }
 
-    public String getSim2Network() {
-        return sim2Network;
+    public String getSimNetwork() {
+        return simNetwork;
     }
 
-    public void setSim2Network(String sim2Network) {
-        this.sim2Network = sim2Network;
+    public void setSimNetwork(String simNetwork) {
+        this.simNetwork = simNetwork;
     }
 
-    public String getSim2Serial() {
-        return sim2Serial;
+    public String getSimSerial() {
+        return simSerial;
     }
 
-    public void setSim2Serial(String sim2Serial) {
-        this.sim2Serial = sim2Serial;
-    }
-
-    public String getPhoneSim() {
-        return phoneSim;
-    }
-
-    public void setPhoneSim(String phoneSim) {
-        this.phoneSim = phoneSim;
+    public void setSimSerial(String simSerial) {
+        this.simSerial = simSerial;
     }
 
     public String getEmail() {
@@ -83,4 +71,6 @@ public class AddSimSendObject {
     public void setHash(String hash) {
         this.hash = hash;
     }
+
+
 }

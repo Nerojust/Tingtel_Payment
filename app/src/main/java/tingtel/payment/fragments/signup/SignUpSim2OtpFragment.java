@@ -144,8 +144,8 @@ public class SignUpSim2OtpFragment extends Fragment {
     private void saveSimDetails() {
 
         //serial and network name gotten were already set by user so lets set the phone number & network name (ported numbers)
-        sessionManager.setSimPhoneNumber1(Sim2PhoneNumber);
-        sessionManager.setNetworkName1(Sim2Network);
+        sessionManager.setSimTwoPhoneNumber(Sim2PhoneNumber);
+        sessionManager.setSimTwoNetworkName(Sim2Network);
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
 
@@ -202,10 +202,10 @@ public class SignUpSim2OtpFragment extends Fragment {
 
         AddSimSendObject addSimSendObject = new AddSimSendObject();
         addSimSendObject.setEmail(sessionManager.getEmailFromLogin());
-        addSimSendObject.setPhone2(Sim2PhoneNumber);
         addSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
-        addSimSendObject.setSim2Network(Sim2Network);
-        addSimSendObject.setSim2Serial(Sim2Serial);
+        addSimSendObject.setNewPhone(Sim2PhoneNumber);
+        addSimSendObject.setSimNetwork(Sim2Network);
+        addSimSendObject.setSimSerial(Sim2Serial);
         addSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
         Gson gson = new Gson();
@@ -220,7 +220,7 @@ public class SignUpSim2OtpFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 Objects.requireNonNull(getActivity()).startActivity(intent);
                 getActivity().finish();
-                Toast.makeText(getActivity(), "Sim added successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), addSimResponse.getDescription(), Toast.LENGTH_LONG).show();
 
             }
 

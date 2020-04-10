@@ -75,9 +75,9 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         qr1Layout.setVisibility(View.GONE);
 
         if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 1) {
-            if (sessionManager.getSimPhoneNumber() != null) {
+            if (sessionManager.getSimOnePhoneNumber() != null) {
                 try {
-                    convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber(), qrSim1Imageview);
+                    convertToQRcode(AppUtils.getSessionManagerInstance().getSimOnePhoneNumber(), qrSim1Imageview);
                     qr1Layout.setVisibility(View.VISIBLE);
 
 
@@ -91,10 +91,10 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
         } else if (sessionManager.getTotalNumberOfSimsDetectedOnDevice() == 2) {
             radioGroupLayout.setVisibility(View.VISIBLE);
             populateSimRadioButtons();
-            /*if (sessionManager.getSimPhoneNumber() != null) {
-                if (sessionManager.getSimPhoneNumber1() != null) {
+            /*if (sessionManager.getSimOnePhoneNumber() != null) {
+                if (sessionManager.getSimTwoPhoneNumber() != null) {
                     try {
-                        convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber1(), qrSim2Imageview);
+                        convertToQRcode(AppUtils.getSessionManagerInstance().getSimTwoPhoneNumber(), qrSim2Imageview);
                         qr2Layout.setVisibility(View.VISIBLE);
                         qr1Layout.setVisibility(View.GONE);
                     } catch (WriterException e) {
@@ -126,9 +126,9 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
 
                 switch (selectedId) {
                     case R.id.radioSim1:
-                        if (sessionManager.getSimPhoneNumber() != null) {
+                        if (sessionManager.getSimOnePhoneNumber() != null) {
                             try {
-                                convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber(), qrSim1Imageview);
+                                convertToQRcode(AppUtils.getSessionManagerInstance().getSimOnePhoneNumber(), qrSim1Imageview);
                                 qr2Layout.setVisibility(View.GONE);
                                 qr1Layout.setVisibility(View.VISIBLE);
                                 /*Bitmap bm = ((BitmapDrawable) qrSim1Imageview.getDrawable()).getBitmap();
@@ -150,10 +150,10 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.radioSim2:
-                        if (!sessionManager.getNetworkName1().equalsIgnoreCase("ntel")) {
-                            if (sessionManager.getSimPhoneNumber1() != null) {
+                        if (!sessionManager.getSimTwoNetworkName().equalsIgnoreCase("ntel")) {
+                            if (sessionManager.getSimTwoPhoneNumber() != null) {
                                 try {
-                                    convertToQRcode(AppUtils.getSessionManagerInstance().getSimPhoneNumber1(), qrSim2Imageview);
+                                    convertToQRcode(AppUtils.getSessionManagerInstance().getSimTwoPhoneNumber(), qrSim2Imageview);
                                     qr2Layout.setVisibility(View.VISIBLE);
                                     qr1Layout.setVisibility(View.GONE);
                                 } catch (WriterException e) {
@@ -229,14 +229,14 @@ public class QRCodeDisplayActivity extends AppCompatActivity {
             case "SIM1":
                 rbSim1.setVisibility(View.VISIBLE);
                 rbSim1.setVisibility(View.GONE);
-                rbSim1.setText(sessionManager.getNetworkName());
+                rbSim1.setText(sessionManager.getSimOneNetworkName());
                 break;
 
             case "SIM1 SIM2":
                 rbSim1.setVisibility(View.VISIBLE);
                 rbSim2.setVisibility(View.VISIBLE);
-                rbSim1.setText(sessionManager.getNetworkName() + " (" + sessionManager.getSimPhoneNumber() + ")");
-                rbSim2.setText(sessionManager.getNetworkName1() + " (" + sessionManager.getSimPhoneNumber1() + ")");
+                rbSim1.setText(sessionManager.getSimOneNetworkName() + " (" + sessionManager.getSimOnePhoneNumber() + ")");
+                rbSim2.setText(sessionManager.getSimTwoNetworkName() + " (" + sessionManager.getSimTwoPhoneNumber() + ")");
                 break;
         }
     }

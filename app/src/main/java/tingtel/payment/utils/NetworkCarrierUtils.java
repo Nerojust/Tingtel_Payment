@@ -38,10 +38,10 @@ public class NetworkCarrierUtils {
                         carrierNameList.add(carrierName);
                         numberOfSimsOnTheDevice += 1;
                         if (numberOfSimsOnTheDevice == 1) {
-                            sessionManager.setNetworkName(displayName.toString());
+                            sessionManager.setSimOneNetworkName(displayName.toString());
                             sessionManager.setSimSerialICCID(iccid);
                         } else if (numberOfSimsOnTheDevice == 2) {
-                            sessionManager.setNetworkName1(displayName.toString());
+                            sessionManager.setSimTwoNetworkName(displayName.toString());
                             sessionManager.setSimSerialICCID1(iccid);
                         }
 

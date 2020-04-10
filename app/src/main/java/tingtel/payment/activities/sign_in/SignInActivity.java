@@ -60,6 +60,16 @@ public class SignInActivity extends GPSutils {
     private BiometricPrompt.PromptInfo promptInfo;
     private String data;
     private byte[] encryptedText;
+    private String serial1Login;
+    private String serial2Login;
+    private String serial3Login;
+    private String serial4Login;
+    private String sim1SerialOnDevice;
+    private String sim2SerialOnDevice;
+    private String phone1Login;
+    private String phone2Login;
+    private String phone3Login;
+    private String phone4Login;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -215,6 +225,7 @@ public class SignInActivity extends GPSutils {
                 sessionManager.setPassword(password);
                 saveDetailsToPrefFromLoginResponse(loginResponses);
 
+                compareSerialsFromResponse(loginResponses);
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -244,6 +255,89 @@ public class SignInActivity extends GPSutils {
             }
         });
 
+    }
+
+    private void compareSerialsFromResponse(CustomerLoginResponse loginResponse) {
+
+        sim1SerialOnDevice = sessionManager.getSimSerialICCID();
+        sim2SerialOnDevice = sessionManager.getSimSerialICCID1();
+
+        serial1Login = loginResponse.getSim1().get(0).getSim1Serial();
+        serial2Login = loginResponse.getSim2().get(0).getSim2Serial();
+        serial3Login = loginResponse.getSim3().get(0).getSim3Serial();
+        serial4Login = loginResponse.getSim4().get(0).getSim4Serial();
+
+        phone1Login = loginResponse.getSim1().get(0).getPhone();
+        phone2Login = loginResponse.getSim2().get(0).getPhone2();
+        phone3Login = loginResponse.getSim3().get(0).getPhone3();
+        phone4Login = loginResponse.getSim4().get(0).getPhone4();
+
+        String NoOfSIm = sessionManager.getSimStatus();
+
+        boolean serial1Correlated = isSerialCorrelated(serial1Login, sim1SerialOnDevice);
+        boolean serial2Correlated = isSerialCorrelated(serial2Login, sim1SerialOnDevice);
+        boolean serial3Correlated = isSerialCorrelated(serial3Login, sim1SerialOnDevice);
+        boolean serial4Correlated = isSerialCorrelated(serial4Login, sim1SerialOnDevice);
+
+        switch (NoOfSIm) {
+            case "NO SIM":
+
+                break;
+
+            case "SIM1":
+                if (serial1Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone1Login);
+                } else if (serial2Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone2Login);
+                } else if (serial3Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone3Login);
+                } else if (serial4Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone4Login);
+                } else {
+                    //either null or not a match found
+                    sessionManager.setSerialsDontMatchAnyOnDevice(true);
+                }
+                break;
+            case "SIM1 SIM2":
+                if (serial1Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone1Login);
+                } else if (serial2Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone2Login);
+                } else if (serial3Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone3Login);
+                } else if (serial4Correlated) {
+                    sessionManager.setSimOnePhoneNumber(phone4Login);
+                } else {
+                    //either null or not a match found
+                    sessionManager.setSerialsDontMatchAnyOnDevice(true);
+                }
+
+                boolean serial1Correlated1 = isSerialCorrelated(serial1Login, sim2SerialOnDevice);
+                boolean serial2Correlated1 = isSerialCorrelated(serial2Login, sim2SerialOnDevice);
+                boolean serial3Correlated1 = isSerialCorrelated(serial3Login, sim2SerialOnDevice);
+                boolean serial4Correlated1 = isSerialCorrelated(serial4Login, sim2SerialOnDevice);
+
+                if (serial1Correlated1) {
+                    sessionManager.setSimTwoPhoneNumber(phone1Login);
+                } else if (serial2Correlated1) {
+                    sessionManager.setSimTwoPhoneNumber(phone2Login);
+                } else if (serial3Correlated1) {
+                    sessionManager.setSimTwoPhoneNumber(phone3Login);
+                } else if (serial4Correlated1) {
+                    sessionManager.setSimTwoPhoneNumber(phone4Login);
+                } else {
+                    //either null or not a match found
+                    sessionManager.setSerialsDontMatchAnyOnDevice(true);
+                }
+                break;
+        }
+    }
+
+    private boolean isSerialCorrelated(String loginSerial, String deviceSerial) {
+        if (loginSerial != null) {
+            return loginSerial.equalsIgnoreCase(deviceSerial);
+        }
+        return false;
     }
 
     private void saveDetailsToPrefFromLoginResponse(CustomerLoginResponse loginResponses) {
@@ -295,6 +389,8 @@ public class SignInActivity extends GPSutils {
                 AppUtils.dismissLoadingDialog();
                 sessionManager.startLoginSession();
                 saveDetailsToPrefFromLoginResponse(loginResponses);
+
+                compareSerialsFromResponse(loginResponses);
 
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 startActivity(intent);
