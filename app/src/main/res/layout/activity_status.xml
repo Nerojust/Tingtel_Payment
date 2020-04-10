@@ -58,17 +58,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:padding="@dimen/_5ssp"
-                android:text="Transaction Status:"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp" />
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_weight="4"
+                    android:gravity="right"
+                    android:padding="@dimen/_5ssp"
+                    android:text="Transaction Status:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <ImageView
+                    android:id="@+id/deleteImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_delete_black_24dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,32 +136,19 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <LinearLayout
+
+            <Button
+                android:id="@+id/refreshButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:orientation="horizontal">
+                android:layout_weight="4"
+                android:background="@drawable/dashboard_buttons"
+                android:text="Refresh Status"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
 
-
-                <Button
-                    android:id="@+id/refreshButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_weight="4"
-                    android:background="@drawable/dashboard_buttons"
-                    android:text="Refresh Status"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13ssp" />
-
-                <ImageView
-                    android:id="@+id/deleteImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_delete_black_24dp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
