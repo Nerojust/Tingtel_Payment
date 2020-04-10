@@ -148,7 +148,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                     webSeviceRequestMaker.deleteAsim(deleteSimSendObject, new DeleteSimInterface() {
                         @Override
                         public void onSuccess(DeleteSimResponse deleteSimResponse) {
-
+                            AppUtils.showDialog("Deleted Successfully", activity);
                             int id = SimCardsModel.getId();
                             appDatabase.simCardsDao().deleteSimCard(id);
                             activity.startActivity(activity.getIntent());
