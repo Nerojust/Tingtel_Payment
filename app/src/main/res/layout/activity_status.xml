@@ -96,9 +96,9 @@
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1.5"
                     android:gravity="start"
-                    android:textIsSelectable="true"
                     android:text=""
                     android:textColor="@color/tingtel_red_color"
+                    android:textIsSelectable="true"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     tools:text="27490378379E" />
@@ -121,16 +121,32 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/refreshButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:background="@drawable/dashboard_buttons"
-                android:text="Refresh Status"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13ssp" />
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/refreshButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="4"
+                    android:background="@drawable/dashboard_buttons"
+                    android:text="Refresh Status"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp" />
+
+                <ImageView
+                    android:id="@+id/deleteImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_delete_black_24dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

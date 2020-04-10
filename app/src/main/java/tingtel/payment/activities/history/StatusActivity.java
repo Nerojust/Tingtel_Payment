@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.ReportIssueActivity;
 import tingtel.payment.activities.settings.SettingsActivity;
+import tingtel.payment.models.delete_transaction.DeleteTransactionResponse;
+import tingtel.payment.models.delete_transaction.DeleteTransactionSendObject;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
 import tingtel.payment.utils.AppUtils;
@@ -34,11 +37,12 @@ import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
+import tingtel.payment.web_services.interfaces.DeleteSingleHistoryInterface;
 
 public class StatusActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
     private static final String TAG = "Status Activity";
     private VerticalStepView stepView;
-    private ImageView backButtonImageview, homeImageview, settingsImageview;
+    private ImageView backButtonImageview, homeImageview, settingsImageview, deleteImageview;
     private TextView complaintTextview, referenceIdTextview;
     private String simNumber;
     private SessionManager sessionManager;
@@ -96,8 +100,64 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
         refreshButton.setOnClickListener(v -> {
             recreate();
         });
-
+        deleteImageview.setOnClickListener(v -> showDeleteDialog());
         complaintTextview.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
+    }
+
+    private void showDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_delete_transaction, viewGroup, false);
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+
+        Button btnYes = dialogView.findViewById(R.id.btn_yes);
+        Button btnNo = dialogView.findViewById(R.id.btn_no);
+
+        btnYes.setOnClickListener(v12 -> {
+            if (AppUtils.isNetworkAvailable(this)) {
+                //perform deletion
+                alertDialog.dismiss();
+                deleteTransaction();
+            } else {
+                AppUtils.showSnackBar("No network available", deleteImageview);
+            }
+        });
+
+        btnNo.setOnClickListener(v1 -> alertDialog.dismiss());
+        alertDialog.show();
+    }
+
+    private void deleteTransaction() {
+        AppUtils.initLoadingDialog(this);
+
+        DeleteTransactionSendObject deleteTransactionSendObject = new DeleteTransactionSendObject();
+        deleteTransactionSendObject.setRef(referenceId);
+        deleteTransactionSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+        deleteTransactionSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
+
+        WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
+        webSeviceRequestMaker.deleteSingleTransaction(deleteTransactionSendObject, new DeleteSingleHistoryInterface() {
+            @Override
+            public void onSuccess(DeleteTransactionResponse deleteTransactionResponse) {
+                Toast.makeText(StatusActivity.this, deleteTransactionResponse.getDescription(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(StatusActivity.this, MainActivity.class));
+                finish();
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onError(String error) {
+                AppUtils.showDialog(error, StatusActivity.this);
+                AppUtils.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onErrorCode(int errorCode) {
+                AppUtils.showSnackBar(String.valueOf(errorCode), deleteImageview);
+                AppUtils.dismissLoadingDialog();
+            }
+        });
     }
 
     @Override
@@ -115,8 +175,8 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
         complaintTextview = findViewById(R.id.complaintTextview);
         referenceIdTextview = findViewById(R.id.referenceIdTextview);
         refreshButton = findViewById(R.id.refreshButton);
+        deleteImageview = findViewById(R.id.deleteImage);
 
-        // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, hh:mm a");
         stepView = findViewById(R.id.step_view);
     }
 
