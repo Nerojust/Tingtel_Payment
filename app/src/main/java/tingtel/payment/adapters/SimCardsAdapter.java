@@ -134,8 +134,10 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 btnYes.setOnClickListener(v1 -> {
                     AppUtils.initLoadingDialog(mContext);
 
+                    SimCards SimCardsModel = (SimCards) v.getTag();
                     DeleteSimSendObject deleteSimSendObject = new DeleteSimSendObject();
-                    deleteSimSendObject.setSimNumber(mData.get(now_position).getPhoneNumber());
+                    deleteSimSendObject.setSimNumber(AppUtils.checkPhoneNumberAndRestructure(SimCardsModel.getPhoneNumber()));
+                    Log.e("TingtelApp", "my request number is" + AppUtils.checkPhoneNumberAndRestructure(mData.get(now_position).getPhoneNumber()));
                     deleteSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
                     deleteSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
@@ -143,7 +145,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                     webSeviceRequestMaker.deleteAsim(deleteSimSendObject, new DeleteSimInterface() {
                         @Override
                         public void onSuccess(DeleteSimResponse deleteSimResponse) {
-                            SimCards SimCardsModel = (SimCards) v.getTag();
+
                             int id = SimCardsModel.getId();
                             appDatabase.simCardsDao().deleteSimCard(id);
                             activity.startActivity(activity.getIntent());
@@ -157,6 +159,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                         public void onError(String error) {
                             AppUtils.dismissLoadingDialog();
                             AppUtils.showDialog(error, activity);
+                            Log.e("TingtelApp", "my error is" + error);
                         }
 
                         @Override

@@ -94,7 +94,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
                     sim.setSimNetwork(loginResponses.getSim1().get(0).getUserNetwork());
                     //adding to database
                     appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "number is" + loginResponses.getSim1().get(0).getPhone());
+                    Log.e("TingtelApp", "my number is" + loginResponses.getSim1().get(0).getPhone());
                 }
                 if (loginResponses.getSim2().get(0).getPhone2() != null) {
                     SimCards sim = new SimCards();
@@ -103,7 +103,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
                     sim.setSimNetwork(loginResponses.getSim2().get(0).getSim2UserNetwork());
                     //adding to database
                     appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "number is" + loginResponses.getSim2().get(0).getPhone2());
+                    Log.e("TingtelApp", "my number is" + loginResponses.getSim2().get(0).getPhone2());
                 }
 
 
@@ -114,7 +114,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
                     sim.setSimNetwork(loginResponses.getSim3().get(0).getSim3UserNetwork());
                     //adding to database
                     appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "number is" + loginResponses.getSim3().get(0).getPhone3());
+                    Log.e("TingtelApp", "my number is" + loginResponses.getSim3().get(0).getPhone3());
                 }
                 if (loginResponses.getSim4().get(0).getPhone4() != null) {
                     SimCards sim = new SimCards();
@@ -123,7 +123,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
                     sim.setSimNetwork(loginResponses.getSim4().get(0).getSim4UserNetwork());
                     //adding to database
                     appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "number is" + loginResponses.getSim4().get(0).getPhone4());
+                    Log.e("TingtelApp", "my number is" + loginResponses.getSim4().get(0).getPhone4());
                 }
 
 
