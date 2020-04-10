@@ -6,30 +6,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class DeleteSimSendObject {
 
-    @SerializedName("user_phone")
+    @SerializedName("phone")
     @Expose
-    private String userPhone;
-    @SerializedName("sim_number")
+    private String phone;
+    @SerializedName("phone_number")
     @Expose
-    private String simNumber;
+    private String phone_number;
     @SerializedName("hash")
     @Expose
     private String hash;
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getSimNumber() {
-        return simNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setSimNumber(String simNumber) {
-        this.simNumber = simNumber;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getHash() {
@@ -39,5 +39,4 @@ public class DeleteSimSendObject {
     public void setHash(String hash) {
         this.hash = hash;
     }
-
 }

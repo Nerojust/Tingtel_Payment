@@ -136,9 +136,9 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
 
                     SimCards SimCardsModel = (SimCards) v.getTag();
                     DeleteSimSendObject deleteSimSendObject = new DeleteSimSendObject();
-                    deleteSimSendObject.setSimNumber(AppUtils.checkPhoneNumberAndRestructure(SimCardsModel.getPhoneNumber()));
+                    deleteSimSendObject.setPhone_number(AppUtils.checkPhoneNumberAndRestructure(SimCardsModel.getPhoneNumber()));
                     Log.e("TingtelApp", "my request number is" + AppUtils.checkPhoneNumberAndRestructure(mData.get(now_position).getPhoneNumber()));
-                    deleteSimSendObject.setUserPhone(sessionManager.getNumberFromLogin());
+                    deleteSimSendObject.setPhone(sessionManager.getNumberFromLogin());
                     deleteSimSendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
 
                     WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
