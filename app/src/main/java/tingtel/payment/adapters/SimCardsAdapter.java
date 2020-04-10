@@ -63,6 +63,9 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
     public void onBindViewHolder(final SimCardsAdapter.MyViewHolder holder, final int position) {
         holder.itemView.setTag(mData.get(position));
         holder.imgDelete.setTag(mData.get(position));
+        Log.e("TingtelApp", "first number is" + AppUtils.checkPhoneNumberAndRemovePrefix(mData.get(position).getPhoneNumber()));
+        Log.e("TingtelApp", "second number is" + mData.get(position).getPhoneNumber());
+
         holder.tvPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(mData.get(position).getPhoneNumber()));
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
         now_position = position;

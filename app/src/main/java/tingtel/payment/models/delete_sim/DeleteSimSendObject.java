@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class DeleteSimSendObject {
 
-    @SerializedName("user_phone")
+    @SerializedName("phone")
     @Expose
     private String userPhone;
-    @SerializedName("sim_number")
+    @SerializedName("phone_number")
     @Expose
     private String simNumber;
     @SerializedName("hash")
