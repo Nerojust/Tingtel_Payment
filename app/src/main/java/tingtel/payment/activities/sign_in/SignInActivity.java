@@ -34,6 +34,8 @@ import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.settings.ForgotPasswordActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
+import tingtel.payment.database.AppDatabase;
+import tingtel.payment.models.SimCards;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
@@ -67,6 +69,7 @@ public class SignInActivity extends GPSutils {
     private String sim1SerialOnDevice;
     private String sim2SerialOnDevice;
     private String phone1Login;
+    private AppDatabase appDatabase;
     private String phone2Login;
     private String phone3Login;
     private String phone4Login;
@@ -76,6 +79,9 @@ public class SignInActivity extends GPSutils {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        appDatabase = AppDatabase.getDatabaseInstance(this);
+
         sessionManager = AppUtils.getSessionManagerInstance();
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
@@ -361,6 +367,48 @@ public class SignInActivity extends GPSutils {
         sessionManager.setSimFourPhoneNumberFromLogin(loginResponses.getSim4().get(0).getPhone4());
         sessionManager.setSimFourSerialICCIDFromLogin(loginResponses.getSim4().get(0).getSim4Serial());
         sessionManager.setNetworkNameSimFourFromLogin(loginResponses.getSim4().get(0).getSim4UserNetwork());
+
+        appDatabase.simCardsDao().delete();
+
+        if (loginResponses.getSim1().get(0).getPhone() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim1().get(0).getPhone());
+            sim.setSimSerial(loginResponses.getSim1().get(0).getSim1Serial());
+            sim.setSimNetwork(loginResponses.getSim1().get(0).getUserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "number is" + loginResponses.getSim1().get(0).getPhone());
+        }
+        if (loginResponses.getSim2().get(0).getPhone2() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim2().get(0).getPhone2());
+            sim.setSimSerial(loginResponses.getSim2().get(0).getSim2Serial());
+            sim.setSimNetwork(loginResponses.getSim2().get(0).getSim2UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "number is" + loginResponses.getSim2().get(0).getPhone2());
+        }
+
+
+        if (loginResponses.getSim3().get(0).getPhone3() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim3().get(0).getPhone3());
+            sim.setSimSerial(loginResponses.getSim3().get(0).getSim3Serial());
+            sim.setSimNetwork(loginResponses.getSim3().get(0).getSim3UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "number is" + loginResponses.getSim3().get(0).getPhone3());
+        }
+        if (loginResponses.getSim4().get(0).getPhone4() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim4().get(0).getPhone4());
+            sim.setSimSerial(loginResponses.getSim4().get(0).getSim4Serial());
+            sim.setSimNetwork(loginResponses.getSim4().get(0).getSim4UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "number is" + loginResponses.getSim4().get(0).getPhone4());
+        }
+
     }
 
 
