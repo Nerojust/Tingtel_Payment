@@ -2,6 +2,7 @@ package tingtel.payment.fragments.transaction_history;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import tingtel.payment.adapters.SimOneHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
 
@@ -43,6 +45,7 @@ public class SimOneHistoryFragment extends Fragment {
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View dialogView;
+
 
     public SimOneHistoryFragment() {
         // Required empty public constructor
@@ -133,13 +136,53 @@ public class SimOneHistoryFragment extends Fragment {
                     } else {
                         noRecordFoundLayout.setVisibility(View.GONE);
                         swipeRefreshLayout.setVisibility(View.VISIBLE);
-                        SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
-                        recyclerView.setAdapter(historyAdapter);
-                        historyAdapter.notifyDataSetChanged();
 
-                        if (swipeRefreshLayout.isRefreshing()) {
-                            swipeRefreshLayout.setRefreshing(false);
+
+                        SessionManager sessionManager = AppUtils.getSessionManagerInstance();
+
+
+                        for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
+                            Log.e("TingtelApp", "Server no is: " + transactionHistoryResponse.getResults().get(i).getPhoneNumber() + "Sim1No is " + sessionManager.getSimOnePhoneNumber());
+
+                            if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
+
+                                if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
+
+                                    if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
+                                     //   noRecordFound.setVisibility(View.VISIBLE);
+                                        swipeRefreshLayout.setVisibility(View.GONE);
+                                        AppUtils.showDialog("No Record Found", getActivity());
+                                    } else {
+                                       // noRecordFound.setVisibility(View.GONE);
+                                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                                        SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
+                                        recyclerView.setAdapter(historyAdapter);
+                                        historyAdapter.notifyDataSetChanged();
+                                        recyclerView.setHasFixedSize(true);
+                                        recyclerView.smoothScrollToPosition(0);
+                                        if (swipeRefreshLayout.isRefreshing()) {
+                                            swipeRefreshLayout.setRefreshing(false);
+                                        }
+                                    }
+
+                                }
+                            }
+
                         }
+
+                        
+
+
+
+
+
+//                        SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
+//                        recyclerView.setAdapter(historyAdapter);
+//                        historyAdapter.notifyDataSetChanged();
+//
+//                        if (swipeRefreshLayout.isRefreshing()) {
+//                            swipeRefreshLayout.setRefreshing(false);
+//                        }
                     }
                 } else {
                     AppUtils.showDialog("Server Error", getActivity());
