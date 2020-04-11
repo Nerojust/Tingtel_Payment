@@ -16,7 +16,7 @@
         android:visibility="visible" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
+        android:id="@+id/swipeLayout_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/recent"
@@ -25,14 +25,14 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
+            android:id="@+id/rv_history_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
-        android:id="@+id/no_result_found_layout"
+        android:id="@+id/no_result_found_layout_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

@@ -9,16 +9,16 @@ public class Result {
 
     @SerializedName("phone_number")
     @Expose
-    private Object phoneNumber;
+    private String phoneNumber;
     @SerializedName("transaction_history")
     @Expose
     private List<TransactionHistory> transactionHistory = null;
 
-    public Object getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Object phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

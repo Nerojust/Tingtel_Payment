@@ -15,16 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
+import tingtel.payment.models.transaction_history.Result;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdapter.MyViewHolder> {
     private final Context mContext;
     private final TransactionHistoryResponse transactionHistoryResponse;
+    private int count;
+    private int where;
+
+    private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
     public SimOneHistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
         this.mContext = mContext;
@@ -58,14 +65,14 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        String amount = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getAmount();
-        String date = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getCreatedAt();
-        String sender_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getUserPhone();
-        String receiver_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryMsisdn();
-        String reference_id = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getRef();
-        int statusId = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getStatus();
-        String receiver_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryNetwork();
-        String sender_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getSourceNetwork();
+        String amount = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getAmount();
+        String date = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getCreatedAt();
+        String sender_number = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getUserPhone();
+        String receiver_number = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getBeneficiaryMsisdn();
+        String reference_id = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getRef();
+        int statusId = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getStatus();
+        String receiver_network = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getBeneficiaryNetwork();
+        String sender_network = transactionHistoryResponse.getResults().get(where).getTransactionHistory().get(position).getSourceNetwork();
 
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
@@ -118,9 +125,34 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
     @Override
     public int getItemCount() {
-        return transactionHistoryResponse.getResults().get(0).getTransactionHistory().size();
+
+        return getCountFromResponse();
     }
 
+    private int getCountFromResponse() {
+        String currentSim1Number = sessionManager.getSimOnePhoneNumber();
+        String currentSim2Number = sessionManager.getSimTwoPhoneNumber();
+        count = 0;
+        where = 0;
+        List<Result> results = transactionHistoryResponse.getResults();
+        int i = 0;
+        while (i < results.size()) {
+            if (results.get(i).getTransactionHistory() != null && results.get(i).getPhoneNumber() != null) {
+                int size = results.get(i).getTransactionHistory().size();
+                String number = results.get(i).getPhoneNumber();
+                if (size != 0) {
+                    if (number.equals(currentSim1Number)) {
+                        count = size;
+                        break;
+                    }
+                }
+            }
+            i++;
+            where++;
+        }
+
+        return count;
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -36,8 +37,8 @@ public class SingleSimFragment extends Fragment {
     private View dialogView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_one_history, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_single_sim, container, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
         dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
@@ -57,9 +58,9 @@ public class SingleSimFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        noRecordFoundLayout = view.findViewById(R.id.no_result_found_layout);
-        recyclerView = view.findViewById(R.id.rv_history_1);
-        swipeRefreshLayout = view.findViewById(R.id.swipeLayout);
+        noRecordFoundLayout = view.findViewById(R.id.no_result_found_layout_single);
+        recyclerView = view.findViewById(R.id.rv_history_single);
+        swipeRefreshLayout = view.findViewById(R.id.swipeLayout_single);
 
         swipeRefreshLayout.setOnRefreshListener(this::getHistory);
 
@@ -81,7 +82,6 @@ public class SingleSimFragment extends Fragment {
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
         transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
 
-
         Gson gson = new Gson();
         String jsonObject = gson.toJson(transactionHistorySendObject);
 
@@ -97,11 +97,11 @@ public class SingleSimFragment extends Fragment {
                             alertDialog.dismiss();
                         }
                     } else {
+                        SingleHistoryAdapter adapter = new SingleHistoryAdapter(getContext(), transactionHistoryResponse);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                         noRecordFoundLayout.setVisibility(View.GONE);
                         swipeRefreshLayout.setVisibility(View.VISIBLE);
-                        SingleHistoryAdapter historyAdapter = new SingleHistoryAdapter(getActivity(), transactionHistoryResponse);
-                        recyclerView.setAdapter(historyAdapter);
-                        historyAdapter.notifyDataSetChanged();
 
                         if (swipeRefreshLayout.isRefreshing()) {
                             swipeRefreshLayout.setRefreshing(false);
@@ -111,7 +111,6 @@ public class SingleSimFragment extends Fragment {
                     AppUtils.showDialog("Server Error", getActivity());
                 }
 
-                AppUtils.dismissLoadingDialog();
                 AppUtils.dismissLoadingDialog();
             }
 

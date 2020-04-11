@@ -9,22 +9,30 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
+import tingtel.payment.models.transaction_history.Result;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 
 public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdapter.MyViewHolder> {
     private final Context mContext;
     private final TransactionHistoryResponse transactionHistoryResponse;
+    private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
+    private int count;
+    private int where;
 
     public SingleHistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
         this.mContext = mContext;
@@ -32,13 +40,11 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
-        View view;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.row_history_sim_one, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_history_single_sim, parent, false);
         // click listener here
-        return new MyViewHolder(view);
+        return new SingleHistoryAdapter.MyViewHolder(view);
 
     }
 
@@ -58,14 +64,15 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        String amount = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getAmount();
-        String date = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getCreatedAt();
-        String sender_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getUserPhone();
-        String receiver_number = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryMsisdn();
-        String reference_id = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getRef();
-        int statusId = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getStatus();
-        String receiver_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getBeneficiaryNetwork();
-        String sender_network = transactionHistoryResponse.getResults().get(0).getTransactionHistory().get(position).getSourceNetwork();
+        Toast.makeText(mContext, "on bind", Toast.LENGTH_SHORT).show();
+        String amount = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getAmount();
+        String date = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getCreatedAt();
+        String sender_number = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getUserPhone();
+        String receiver_number = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryMsisdn();
+        String reference_id = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getRef();
+        int statusId = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getStatus();
+        String receiver_network = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryNetwork();
+        String sender_network = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getSourceNetwork();
 
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
@@ -118,7 +125,37 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
 
     @Override
     public int getItemCount() {
-        return transactionHistoryResponse.getResults().get(0).getTransactionHistory().size();
+
+        return getCountFromResponse();
+    }
+
+    private int getCountFromResponse() {
+        String currentSim1Number = sessionManager.getSimOnePhoneNumber();
+        String currentSim2Number = sessionManager.getSimTwoPhoneNumber();
+        count = 0;
+        where = -1;
+        List<Result> results = transactionHistoryResponse.getResults();
+        int i = 0;
+        while (i < results.size()) {
+            if (results.get(i).getTransactionHistory() != null && results.get(i).getPhoneNumber() != null) {
+                int size = results.get(i).getTransactionHistory().size();
+                String number = results.get(i).getPhoneNumber();
+                if (size != 0) {
+                    if (number.equals(currentSim1Number)) {
+                        count = size;
+                        break;
+                    } else if (number.equals(currentSim2Number)) {
+                        count = size;
+                        break;
+                    }
+
+                }
+            }
+            i++;
+            where++;
+        }
+
+        return count;
     }
 
 
@@ -129,7 +166,6 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
         final TextView tvSenderPhoneNumber;
         final TextView tvReceiverPhoneNumber;
         final ImageView imgReceiverNetwork, imageSenderNetwork;
-        //  final ImageView btnDelete;
         final LinearLayout container;
 
         MyViewHolder(View itemView) {
@@ -141,7 +177,6 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
             tvReceiverPhoneNumber = itemView.findViewById(R.id.tv_receiver_phone_number);
             imgReceiverNetwork = itemView.findViewById(R.id.img_receiver_network);
             imageSenderNetwork = itemView.findViewById(R.id.img_sender_network);
-            //btnDelete = itemView.findViewById(R.id.btn_delete);
             status = itemView.findViewById(R.id.status);
             ref_id = itemView.findViewById(R.id.ref_id_tv);
         }
