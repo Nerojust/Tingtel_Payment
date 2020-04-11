@@ -13,16 +13,19 @@ import androidx.navigation.fragment.NavHostFragment;
 import java.util.Objects;
 
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 
 public class SignUpActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
 
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         NavController navController = null;
@@ -31,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
         }
         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
-        Intent intent = getIntent();
+        intent = getIntent();
         if (intent.getStringExtra("task") == null) {
             sessionManager.setIsRegistered(false);
         } else {
@@ -67,5 +70,25 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
     @Override
     public void doLogout() {
         new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (intent.getStringExtra("task") != null) {
+
+            if (intent.getStringExtra("task").equalsIgnoreCase("registerSim1") ||
+                    intent.getStringExtra("task").equalsIgnoreCase("registerSim2")) {
+
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }
