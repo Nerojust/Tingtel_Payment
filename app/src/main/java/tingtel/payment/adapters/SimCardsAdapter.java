@@ -2,6 +2,7 @@ package tingtel.payment.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
+import tingtel.payment.activities.settings.ManageSimActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
 import tingtel.payment.models.delete_sim.DeleteSimResponse;
@@ -135,7 +137,6 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 Button btnNo = dialogView.findViewById(R.id.btn_no);
 
                 btnYes.setOnClickListener(v1 -> {
-                    alertDialog.dismiss();
                     AppUtils.initLoadingDialog(mContext);
 
                     SimCards SimCardsModel = (SimCards) v.getTag();
@@ -152,11 +153,14 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                             AppUtils.showDialog("Deleted Successfully", activity);
                             int id = SimCardsModel.getId();
                             appDatabase.simCardsDao().deleteSimCard(id);
-                            activity.startActivity(activity.getIntent());
-                            activity.finish();
-                            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                            activity.startActivity(activity.getIntent());
+////
+////                            activity.finish();
+////                            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+////                            alertDialog.dismiss();
+////                            AppUtils.dismissLoadingDialog();
                             alertDialog.dismiss();
-                            AppUtils.dismissLoadingDialog();
+                            activity.startActivity(new Intent(activity, ManageSimActivity.class));
 
                         }
 
