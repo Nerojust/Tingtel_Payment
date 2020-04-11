@@ -197,10 +197,18 @@ public class TransferAirtimeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (isSim1TextviewClicked) {
-            if (sessionManager.getClickedNetwork() != null) {
-                sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
-                sim1Textview.setTextColor(getResources().getColor(R.color.white));
+            if (noOfSIm.equalsIgnoreCase("SIM1")) {
+                if (sessionManager.getClickedNetwork() != null) {
+                    sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_red));
+                    sim1Textview.setTextColor(getResources().getColor(R.color.white));
+                }
+            } else if (noOfSIm.equalsIgnoreCase("SIM1 SIM2")) {
+                if (sessionManager.getClickedNetwork() != null) {
+                    sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left2));
+                    sim1Textview.setTextColor(getResources().getColor(R.color.white));
+                }
             }
+
         } else if (isSim2TextviewClicked) {
             sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right));
             sim2Textview.setTextColor(getResources().getColor(R.color.white));

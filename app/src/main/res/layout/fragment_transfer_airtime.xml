@@ -91,7 +91,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@color/tingtel_lighter_gray"
                     android:orientation="vertical"
@@ -157,7 +156,7 @@
                     android:layout_marginTop="@dimen/_10ssp"
                     android:background="@color/tingtel_lighter_gray"
                     android:orientation="vertical"
-                    android:paddingVertical="@dimen/_7ssp">
+                    android:paddingVertical="@dimen/_15ssp">
 
 
                     <TextView

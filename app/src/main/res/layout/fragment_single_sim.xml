@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.transaction_history.SimOneHistoryFragment">
+    tools:context=".fragments.transaction_history.SingleSimFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history_1"
+            android:id="@+id/rv_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

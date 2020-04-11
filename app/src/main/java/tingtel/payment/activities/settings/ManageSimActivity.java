@@ -55,7 +55,6 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
     private void initRv() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
     }
 
     private void initViews() {
