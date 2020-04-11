@@ -135,6 +135,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 Button btnNo = dialogView.findViewById(R.id.btn_no);
 
                 btnYes.setOnClickListener(v1 -> {
+                    alertDialog.dismiss();
                     AppUtils.initLoadingDialog(mContext);
 
                     SimCards SimCardsModel = (SimCards) v.getTag();
@@ -156,6 +157,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             alertDialog.dismiss();
                             AppUtils.dismissLoadingDialog();
+
                         }
 
                         @Override
