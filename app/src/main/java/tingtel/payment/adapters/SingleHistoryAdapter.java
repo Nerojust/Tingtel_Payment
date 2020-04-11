@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,19 +21,18 @@ import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
-import tingtel.payment.models.transaction_history.Result;
-import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
+import tingtel.payment.models.transaction_history.TransactionHistory;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
 public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdapter.MyViewHolder> {
     private final Context mContext;
-    private final TransactionHistoryResponse transactionHistoryResponse;
+    private List<TransactionHistory> transactionHistoryResponse;
     private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
     private int count;
     private int where;
 
-    public SingleHistoryAdapter(Context mContext, TransactionHistoryResponse transactionHistoryResponse) {
+    public SingleHistoryAdapter(Context mContext, List<TransactionHistory> transactionHistoryResponse) {
         this.mContext = mContext;
         this.transactionHistoryResponse = transactionHistoryResponse;
     }
@@ -64,15 +62,14 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Toast.makeText(mContext, "on bind", Toast.LENGTH_SHORT).show();
-        String amount = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getAmount();
-        String date = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getCreatedAt();
-        String sender_number = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getUserPhone();
-        String receiver_number = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryMsisdn();
-        String reference_id = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getRef();
-        int statusId = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getStatus();
-        String receiver_network = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getBeneficiaryNetwork();
-        String sender_network = transactionHistoryResponse.getResults().get(1).getTransactionHistory().get(position).getSourceNetwork();
+        String amount = transactionHistoryResponse.get(position).getAmount();
+        String date = transactionHistoryResponse.get(position).getCreatedAt();
+        String sender_number = transactionHistoryResponse.get(position).getUserPhone();
+        String receiver_number = transactionHistoryResponse.get(position).getBeneficiaryMsisdn();
+        String reference_id = transactionHistoryResponse.get(position).getRef();
+        int statusId = transactionHistoryResponse.get(position).getStatus();
+        String receiver_network = transactionHistoryResponse.get(position).getBeneficiaryNetwork();
+        String sender_network = transactionHistoryResponse.get(position).getSourceNetwork();
 
         //set animation for recycler view
         holder.container.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation));
@@ -126,36 +123,7 @@ public class SingleHistoryAdapter extends RecyclerView.Adapter<SingleHistoryAdap
     @Override
     public int getItemCount() {
 
-        return getCountFromResponse();
-    }
-
-    private int getCountFromResponse() {
-        String currentSim1Number = sessionManager.getSimOnePhoneNumber();
-        String currentSim2Number = sessionManager.getSimTwoPhoneNumber();
-        count = 0;
-        where = -1;
-        List<Result> results = transactionHistoryResponse.getResults();
-        int i = 0;
-        while (i < results.size()) {
-            if (results.get(i).getTransactionHistory() != null && results.get(i).getPhoneNumber() != null) {
-                int size = results.get(i).getTransactionHistory().size();
-                String number = results.get(i).getPhoneNumber();
-                if (size != 0) {
-                    if (number.equals(currentSim1Number)) {
-                        count = size;
-                        break;
-                    } else if (number.equals(currentSim2Number)) {
-                        count = size;
-                        break;
-                    }
-
-                }
-            }
-            i++;
-            where++;
-        }
-
-        return count;
+        return transactionHistoryResponse.size();
     }
 
 

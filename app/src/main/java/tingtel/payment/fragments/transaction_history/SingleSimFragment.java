@@ -26,6 +26,7 @@ import tingtel.payment.adapters.SingleHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.utils.AppUtils;
+import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
 
@@ -35,16 +36,18 @@ public class SingleSimFragment extends Fragment {
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View dialogView;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_single_sim, container, false);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
         dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);
         alertDialog = builder.create();
-
+        sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews(view);
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
@@ -63,7 +66,6 @@ public class SingleSimFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeLayout_single);
 
         swipeRefreshLayout.setOnRefreshListener(this::getHistory);
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setReverseLayout(true);
@@ -90,21 +92,27 @@ public class SingleSimFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getResults().get(0).getTransactionHistory().size() == 0) {
-                        noRecordFoundLayout.setVisibility(View.VISIBLE);
-                        swipeRefreshLayout.setVisibility(View.GONE);
-                        if (alertDialog.isShowing()) {
-                            alertDialog.dismiss();
-                        }
-                    } else {
-                        SingleHistoryAdapter adapter = new SingleHistoryAdapter(getContext(), transactionHistoryResponse);
-                        recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                        noRecordFoundLayout.setVisibility(View.GONE);
-                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
+                        if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
+                            if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
+                                if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
+                                    noRecordFoundLayout.setVisibility(View.VISIBLE);
+                                    swipeRefreshLayout.setVisibility(View.GONE);
+                                    if (alertDialog.isShowing()) {
+                                        alertDialog.dismiss();
+                                    }
+                                } else {
+                                    SingleHistoryAdapter adapter = new SingleHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                    noRecordFoundLayout.setVisibility(View.GONE);
+                                    swipeRefreshLayout.setVisibility(View.VISIBLE);
 
-                        if (swipeRefreshLayout.isRefreshing()) {
-                            swipeRefreshLayout.setRefreshing(false);
+                                    if (swipeRefreshLayout.isRefreshing()) {
+                                        swipeRefreshLayout.setRefreshing(false);
+                                    }
+                                }
+                            }
                         }
                     }
                 } else {

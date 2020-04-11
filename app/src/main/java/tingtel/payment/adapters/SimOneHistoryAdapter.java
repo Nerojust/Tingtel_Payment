@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
@@ -20,9 +21,7 @@ import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
-import tingtel.payment.models.transaction_history.Result;
 import tingtel.payment.models.transaction_history.TransactionHistory;
-import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
@@ -40,13 +39,13 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         view = mInflater.inflate(R.layout.row_history_sim_one, parent, false);
         // click listener here
-        return new MyViewHolder(view);
+        return new SimOneHistoryAdapter.MyViewHolder(view);
 
     }
 
@@ -129,31 +128,6 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
 
         return transactionHistoryResponse.size();
     }
-
-//    private int getCountFromResponse() {
-//        String currentSim1Number = sessionManager.getSimOnePhoneNumber();
-//        String currentSim2Number = sessionManager.getSimTwoPhoneNumber();
-//        count = 0;
-//        where = 0;
-//        List<Result> results = transactionHistoryResponse.getResults();
-//        int i = 0;
-//        while (i < results.size()) {
-//            if (results.get(i).getTransactionHistory() != null && results.get(i).getPhoneNumber() != null) {
-//                int size = results.get(i).getTransactionHistory().size();
-//                String number = results.get(i).getPhoneNumber();
-//                if (size != 0) {
-//                    if (number.equals(currentSim1Number)) {
-//                        count = size;
-//                        break;
-//                    }
-//                }
-//            }
-//            i++;
-//            where++;
-//        }
-//
-//        return count;
-//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
