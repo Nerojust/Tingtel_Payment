@@ -124,6 +124,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
             Intent intent = new Intent(getContext(), HistoryActivity.class);
             intent.putExtra("simNo", SimNo);
+            intent.putExtra("task","preview_status");
             startActivity(intent);
         });
 

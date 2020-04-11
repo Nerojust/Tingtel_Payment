@@ -1,5 +1,6 @@
 package tingtel.payment.activities.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import tingtel.payment.R;
+import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.history.main.SectionsPagerAdapter;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.MyApplication;
@@ -47,6 +49,22 @@ public class HistoryActivity extends AppCompatActivity implements MyApplication.
                 TabLayout tabs = findViewById(R.id.tabs);
                 tabs.setupWithViewPager(viewPager);
                 break;
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+
+        if (intent.getStringExtra("task") != null) {
+            if (intent.getStringExtra("task").equalsIgnoreCase("preview_status")) {
+                startActivity(new Intent(this, MainActivity.class));
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
         }
 
     }
