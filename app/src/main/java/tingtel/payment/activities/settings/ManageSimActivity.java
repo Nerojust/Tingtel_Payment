@@ -1,18 +1,16 @@
 package tingtel.payment.activities.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 
@@ -21,8 +19,6 @@ import java.util.List;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
-import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.sign_in.SignInActivity;
 import tingtel.payment.adapters.SimCardsAdapter;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;
@@ -35,11 +31,14 @@ import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
 public class ManageSimActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
-    List<SimCards> simCards = new ArrayList<>();
-    AppDatabase appDatabase;
-    RecyclerView recyclerView;
-    SimCardsAdapter adapter;
-    SessionManager sessionManager;
+    private List<SimCards> simCards = new ArrayList<>();
+    private AppDatabase appDatabase;
+    private RecyclerView recyclerView;
+    private SimCardsAdapter adapter;
+
+    private LinearLayout noRecordFoundLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,26 +48,26 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
         sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews();
-
+        initRv();
         makeLoginRequestToFetchSimDetails();
+    }
 
-        simCards = appDatabase.simCardsDao().getAllItems();
-
-        adapter = new SimCardsAdapter(this, simCards, this);
-
+    private void initRv() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-
     }
-
 
     private void initViews() {
         recyclerView = findViewById(R.id.rv_simCards);
+        noRecordFoundLayout = findViewById(R.id.no_result_found_layout);
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setOnRefreshListener(this::makeLoginRequestToFetchSimDetails);
     }
 
     private void makeLoginRequestToFetchSimDetails() {
+        AppUtils.initLoadingDialog(this);
 
         CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
         loginSendObject.setUsername(sessionManager.getUserame());
@@ -84,78 +83,85 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
         webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
-
+                recyclerView.removeAllViewsInLayout();
                 appDatabase.simCardsDao().delete();
 
-                if (loginResponses.getSim1().get(0).getPhone() != null) {
-                    SimCards sim = new SimCards();
-                    sim.setPhoneNumber(loginResponses.getSim1().get(0).getPhone());
-                    sim.setSimSerial(loginResponses.getSim1().get(0).getSim1Serial());
-                    sim.setSimNetwork(loginResponses.getSim1().get(0).getUserNetwork());
-                    //adding to database
-                    appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "my number is" + loginResponses.getSim1().get(0).getPhone());
-                }
-                if (loginResponses.getSim2().get(0).getPhone2() != null) {
-                    SimCards sim = new SimCards();
-                    sim.setPhoneNumber(loginResponses.getSim2().get(0).getPhone2());
-                    sim.setSimSerial(loginResponses.getSim2().get(0).getSim2Serial());
-                    sim.setSimNetwork(loginResponses.getSim2().get(0).getSim2UserNetwork());
-                    //adding to database
-                    appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "my number is" + loginResponses.getSim2().get(0).getPhone2());
-                }
+                saveNewDataIntoDatabase(loginResponses);
 
-
-                if (loginResponses.getSim3().get(0).getPhone3() != null) {
-                    SimCards sim = new SimCards();
-                    sim.setPhoneNumber(loginResponses.getSim3().get(0).getPhone3());
-                    sim.setSimSerial(loginResponses.getSim3().get(0).getSim3Serial());
-                    sim.setSimNetwork(loginResponses.getSim3().get(0).getSim3UserNetwork());
-                    //adding to database
-                    appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "my number is" + loginResponses.getSim3().get(0).getPhone3());
+                simCards = appDatabase.simCardsDao().getAllItems();
+                if (simCards.size() == 0) {
+                    noRecordFoundLayout.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setVisibility(View.GONE);
+                } else {
+                    noRecordFoundLayout.setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    adapter = new SimCardsAdapter(ManageSimActivity.this, simCards, ManageSimActivity.this);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
                 }
-                if (loginResponses.getSim4().get(0).getPhone4() != null) {
-                    SimCards sim = new SimCards();
-                    sim.setPhoneNumber(loginResponses.getSim4().get(0).getPhone4());
-                    sim.setSimSerial(loginResponses.getSim4().get(0).getSim4Serial());
-                    sim.setSimNetwork(loginResponses.getSim4().get(0).getSim4UserNetwork());
-                    //adding to database
-                    appDatabase.simCardsDao().insert(sim);
-                    Log.e("TingtelApp", "my number is" + loginResponses.getSim4().get(0).getPhone4());
-                }
-
-
                 AppUtils.dismissLoadingDialog();
-
-
             }
 
             @Override
             public void onError(String error) {
-                if (error.equalsIgnoreCase("Invalid Hash Key"))
-                    AppUtils.showSnackBar("Invalid credentials", recyclerView);
-                else {
-                    if (error.contains("failed to connect")) {
-                        AppUtils.showSnackBar("Network error, please try again",   recyclerView);
-                    } else {
-                        AppUtils.showSnackBar(error, recyclerView);
-                    }
-                }
-
+                AppUtils.showDialog(error, ManageSimActivity.this);
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 AppUtils.dismissLoadingDialog();
             }
 
             @Override
             public void onErrorCode(int errorCode) {
                 AppUtils.dismissLoadingDialog();
+                noRecordFoundLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 AppUtils.showSnackBar(String.valueOf(errorCode), recyclerView);
             }
         });
 
 
+    }
 
+    private void saveNewDataIntoDatabase(CustomerLoginResponse loginResponses) {
+        if (loginResponses.getSim1().get(0).getPhone() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim1().get(0).getPhone());
+            sim.setSimSerial(loginResponses.getSim1().get(0).getSim1Serial());
+            sim.setSimNetwork(loginResponses.getSim1().get(0).getUserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "my number is" + loginResponses.getSim1().get(0).getPhone());
+        }
+        if (loginResponses.getSim2().get(0).getPhone2() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim2().get(0).getPhone2());
+            sim.setSimSerial(loginResponses.getSim2().get(0).getSim2Serial());
+            sim.setSimNetwork(loginResponses.getSim2().get(0).getSim2UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "my number is" + loginResponses.getSim2().get(0).getPhone2());
+        }
+        if (loginResponses.getSim3().get(0).getPhone3() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim3().get(0).getPhone3());
+            sim.setSimSerial(loginResponses.getSim3().get(0).getSim3Serial());
+            sim.setSimNetwork(loginResponses.getSim3().get(0).getSim3UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "my number is" + loginResponses.getSim3().get(0).getPhone3());
+        }
+        if (loginResponses.getSim4().get(0).getPhone4() != null) {
+            SimCards sim = new SimCards();
+            sim.setPhoneNumber(loginResponses.getSim4().get(0).getPhone4());
+            sim.setSimSerial(loginResponses.getSim4().get(0).getSim4Serial());
+            sim.setSimNetwork(loginResponses.getSim4().get(0).getSim4UserNetwork());
+            //adding to database
+            appDatabase.simCardsDao().insert(sim);
+            Log.e("TingtelApp", "my number is" + loginResponses.getSim4().get(0).getPhone4());
+        }
     }
 
 
