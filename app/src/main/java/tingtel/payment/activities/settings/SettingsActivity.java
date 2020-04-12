@@ -65,7 +65,6 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));
         manageSimLayout.setOnClickListener(v -> startActivity(new Intent(this, ManageSimActivity.class)));
-        // addSimlayout.setOnClickListener(v->startActivity(new Intent(this, AddSimActivity.class)));
         tutorialLayout.setOnClickListener(v -> startActivity(new Intent(this, TutorialActivity.class)));
         reportIssueLayout.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
 
@@ -117,7 +116,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
         });
 
         aboutUsLayout.setOnClickListener(v -> {
-
+            startActivity(new Intent(this, AboutUsActivity.class));
         });
 
         logoutButton.setOnClickListener(v -> {

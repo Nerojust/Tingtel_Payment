@@ -74,21 +74,15 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
 
     @Override
     public void onBackPressed() {
-
-
         if (intent.getStringExtra("task") != null) {
-
             if (intent.getStringExtra("task").equalsIgnoreCase("registerSim1") ||
                     intent.getStringExtra("task").equalsIgnoreCase("registerSim2")) {
-
                 startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-
             } else {
                 super.onBackPressed();
             }
         } else {
             super.onBackPressed();
         }
-
     }
 }

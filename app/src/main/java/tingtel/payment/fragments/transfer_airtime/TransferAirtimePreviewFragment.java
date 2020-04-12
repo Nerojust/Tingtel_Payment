@@ -222,7 +222,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         tvSenderPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(SenderPhoneNumber));
         tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(ReceiverPhoneNumber));
         //calculate 10% of amount entered
-        double dividedAmount = Integer.parseInt(Amount) / 10;
+        double dividedAmount = Integer.parseInt(Amount) / Constants.TINGTEL_PERCENT;
         double balanceAmount = Integer.parseInt(Amount) - dividedAmount;
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");

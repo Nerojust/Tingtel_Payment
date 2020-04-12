@@ -97,6 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Account"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />

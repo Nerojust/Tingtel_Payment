@@ -76,7 +76,6 @@ public class MyApplication extends Application implements LifecycleObserver {
 
         // delay in milliseconds i.e. 5 min = 300000 ms
         private static Timer longTimer;
-        private static int logoutTime;
 
         public static synchronized void startLogoutTimer(final Context context, LogOutListener logOutListener) {
             stopLogoutTimer();
@@ -85,9 +84,10 @@ public class MyApplication extends Application implements LifecycleObserver {
             //todo: change back
             //10secs
             //logoutTime = 10000;
-
+            //1min 15sec
+            int logoutTime = 90000;
             //3 minutes
-            logoutTime = 180000;
+            //logoutTime = 180000;
 
             //10 minutes
             //logoutTime = 1000000;

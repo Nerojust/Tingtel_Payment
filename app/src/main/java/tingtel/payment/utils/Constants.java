@@ -38,4 +38,5 @@ public class Constants {
     public static final String TINGTEL_9MOBILE = "08174612405";
     public static final String TINGTEL_GLO = "09058815819";
 
+    public static final int TINGTEL_PERCENT = 10;
 }
