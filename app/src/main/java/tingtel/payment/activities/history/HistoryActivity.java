@@ -33,12 +33,6 @@ public class HistoryActivity extends AppCompatActivity implements MyApplication.
             case "SIM1":
                 setContentView(R.layout.activity_history_2);
 
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                SingleSimFragment singleSimFragment = new SingleSimFragment();
-//                fragmentTransaction.replace(android.R.id.content, singleSimFragment);
-//                fragmentTransaction.commit();
-
                 break;
             case "SIM1 SIM2":
                 setContentView(R.layout.activity_history);

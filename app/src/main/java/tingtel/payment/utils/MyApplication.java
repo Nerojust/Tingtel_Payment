@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.ProcessLifecycleOwner;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,6 +31,7 @@ public class MyApplication extends Application implements LifecycleObserver {
     private static MyApplication myApplication;
     private String LOG_TAG = "ApplicationObserver";
     private Retrofit retrofit;
+    private boolean logoutCounter;
 
 
     public static SharedPreferences getSharedPreferencesCustomer() {
@@ -44,7 +46,7 @@ public class MyApplication extends Application implements LifecycleObserver {
     public void onCreate() {
         super.onCreate();
         myApplication = this;
-
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         OkHttpClient okHttpClientNetwork = new OkHttpClient().newBuilder()
                 .callTimeout(2, TimeUnit.MINUTES)
@@ -69,6 +71,34 @@ public class MyApplication extends Application implements LifecycleObserver {
         return retrofit;
     }
 
+//    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+//    public void onResume() {
+//        Log.e("logoutCounter", "Onresume");
+//        if (logoutCounter) {
+//            Log.e("logoutCounter", "Finished Counting");
+//            Intent intent = new Intent(this, SignInActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        }
+//    }
+//
+//    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+//    public void onPause() {
+//        Log.e("logoutCounter", "Onpause");
+//
+//        logoutCounter = false;
+//        new CountDownTimer(200000, 1000) { //200 seconds
+//            public void onTick(long millisUntilFinished) {
+//                long time = millisUntilFinished / 1000;
+//                Log.e("logoutCounter", "seconds remaining: " + time);
+//            }
+//
+//            public void onFinish() {
+//                logoutCounter = true;
+//            }
+//        }.start();
+//    }
+
     //inactivity logout settings
     public static class LogOutTimerUtil {
 
@@ -82,10 +112,10 @@ public class MyApplication extends Application implements LifecycleObserver {
             //logoutTime = sessionManagerAgent.getSessionIdleTimeForAgent() * 60000;
             //todo: change back
             //10secs
-            //logoutTime = 10000;
+            logoutTime = 10000;
 
             //3 minutes
-            logoutTime = 180000;
+            //logoutTime = 180000;
 
             //10 minutes
             //logoutTime = 1000000;
