@@ -29,6 +29,7 @@ public class MyApplication extends Application implements LifecycleObserver {
 
     private static final String CUSTOMER_SESSION = "Tingtelpref";
     private static MyApplication myApplication;
+    private static int logoutTime;
     private String LOG_TAG = "ApplicationObserver";
     private Retrofit retrofit;
     private boolean logoutCounter;
@@ -73,7 +74,6 @@ public class MyApplication extends Application implements LifecycleObserver {
 
     //inactivity logout settings
     public static class LogOutTimerUtil {
-
         // delay in milliseconds i.e. 5 min = 300000 ms
         private static Timer longTimer;
 
@@ -81,13 +81,12 @@ public class MyApplication extends Application implements LifecycleObserver {
             stopLogoutTimer();
 
             //logoutTime = sessionManagerAgent.getSessionIdleTimeForAgent() * 60000;
-            //todo: change back
             //10secs
             //logoutTime = 10000;
             //1min 15sec
-            int logoutTime = 90000;
+            //logoutTime = 90000;
             //3 minutes
-            //logoutTime = 180000;
+            logoutTime = 180000;
 
             //10 minutes
             //logoutTime = 1000000;
@@ -101,6 +100,12 @@ public class MyApplication extends Application implements LifecycleObserver {
                         try {
                             boolean foreGround = new LogOutTimerUtil.ForegroundCheckTask().execute(context).get();
                             if (foreGround) {
+                                try {
+                                    logOutListener.doLogout();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }else {
                                 try {
                                     logOutListener.doLogout();
                                 } catch (Exception e) {
@@ -157,7 +162,6 @@ public class MyApplication extends Application implements LifecycleObserver {
     public class AddHeaderInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
-
             Request.Builder builder = chain.request().newBuilder();
             builder.addHeader("Username", Constants.USERNAME);
             builder.addHeader("Password", BuildConfig.HEADER_PASSWORD);

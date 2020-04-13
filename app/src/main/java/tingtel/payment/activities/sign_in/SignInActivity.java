@@ -1,5 +1,6 @@
 package tingtel.payment.activities.sign_in;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -23,11 +24,21 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.cert.CertificateException;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
@@ -40,6 +51,7 @@ import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
+import tingtel.payment.utils.Cryptography;
 import tingtel.payment.utils.GPSutils;
 import tingtel.payment.utils.NetworkCarrierUtils;
 import tingtel.payment.utils.SessionManager;
@@ -73,8 +85,11 @@ public class SignInActivity extends GPSutils {
     private String phone2Login;
     private String phone3Login;
     private String phone4Login;
+    @SuppressLint({"NewApi", "LocalSuppress"})
+    private Cryptography cryptography;
+    private String encryptedPassword;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +101,37 @@ public class SignInActivity extends GPSutils {
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
         initViews();
-        initListeners();
+        try {
+            initListeners();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        }
         checkBoxRememberSettings();
         startFingerprintAuthentication();
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void startFingerprintAuthentication() {
+
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
@@ -163,7 +203,11 @@ public class SignInActivity extends GPSutils {
     }
 
 
-    private void initListeners() {
+    @SuppressLint("NewApi")
+    private void initListeners() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, InvalidAlgorithmParameterException, IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+
+        cryptography = new Cryptography(KEY_NAME);
+
         fingerprintTextview.setOnClickListener(view -> {
             if (sessionManager.getPassword() != null && !Objects.requireNonNull(usernameEditext.getText()).toString().isEmpty()) {
                 biometricPrompt.authenticate(promptInfo);
@@ -225,17 +269,19 @@ public class SignInActivity extends GPSutils {
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.loginInUser(loginSendObject, new LoginResponseInterface() {
+            @SuppressLint("NewApi")
             @Override
             public void onSuccess(CustomerLoginResponse loginResponses) {
                 sessionManager.startLoginSession();
                 sessionManager.setPassword(password);
+
+                encryptPasswordDetails(password);
+
                 saveDetailsToPrefFromLoginResponse(loginResponses);
 
                 compareSerialsFromResponse(loginResponses);
 
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                gotoMainActivity();
                 AppUtils.dismissLoadingDialog();
             }
 
@@ -261,6 +307,29 @@ public class SignInActivity extends GPSutils {
             }
         });
 
+    }
+
+    private void gotoMainActivity() {
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void encryptPasswordDetails(String password) {
+        try {
+            encryptedPassword = cryptography.encrypt(password);
+            sessionManager.setEncryptedPassword(encryptedPassword);
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void compareSerialsFromResponse(CustomerLoginResponse loginResponse) {
@@ -440,10 +509,7 @@ public class SignInActivity extends GPSutils {
 
                 compareSerialsFromResponse(loginResponses);
 
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
+                gotoMainActivity();
             }
 
             @Override
@@ -493,7 +559,6 @@ public class SignInActivity extends GPSutils {
             return false;
         });
         rememberMeCheckbox = findViewById(R.id.rememberMeCheckbox);
-
         fingerprintTextview = findViewById(R.id.fingerprint);
         tvSignUp = findViewById(R.id.tv_signup);
         btnSingIn = findViewById(R.id.btn_sign_in);
