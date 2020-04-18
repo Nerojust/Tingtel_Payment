@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -89,8 +90,8 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
             builder.setView(dialogView);
             AlertDialog alertDialog = builder.create();
 
-            Button btnYes = dialogView.findViewById(R.id.btn_yes);
-            Button btnNo = dialogView.findViewById(R.id.btn_no);
+            TextView btnYes = dialogView.findViewById(R.id.btn_yes);
+            TextView btnNo = dialogView.findViewById(R.id.btn_no);
 
             btnYes.setOnClickListener(v12 -> {
                 if (AppUtils.isNetworkAvailable(this)) {

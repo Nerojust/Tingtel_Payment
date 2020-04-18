@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -86,7 +86,9 @@ public class SimOneHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistory();
         } else {
-            AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+            Toast.makeText(getContext(), "No network available", Toast.LENGTH_LONG).show();
+            getActivity().finish();
+
         }
 
 
@@ -149,11 +151,11 @@ public class SimOneHistoryFragment extends Fragment {
                                 if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
 
                                     if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
-                                     //   noRecordFound.setVisibility(View.VISIBLE);
+                                        //   noRecordFound.setVisibility(View.VISIBLE);
                                         swipeRefreshLayout.setVisibility(View.GONE);
                                         AppUtils.showDialog("No Record Found", getActivity());
                                     } else {
-                                       // noRecordFound.setVisibility(View.GONE);
+                                        // noRecordFound.setVisibility(View.GONE);
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);
                                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
                                         recyclerView.setAdapter(historyAdapter);
@@ -169,11 +171,6 @@ public class SimOneHistoryFragment extends Fragment {
                             }
 
                         }
-
-
-
-
-
 
 
 //                        SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
@@ -209,22 +206,11 @@ public class SimOneHistoryFragment extends Fragment {
             }
         });
     }
-//todo: check this
-//    @Override
-//    public void onDetach() {
-//        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
-//        if (status) {
-//            startActivity(new Intent(getContext(), MainActivity.class));
-//            Objects.requireNonNull(getActivity()).finish();
-//        }
-//        super.onDetach();
-//
-//    }
-
 
     private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
-        Button retry = dialogView.findViewById(R.id.btn_ok);
+        TextView retry = dialogView.findViewById(R.id.btn_yes);
+        TextView cancel = dialogView.findViewById(R.id.btn_no);
 
         tvMessage.setText(message);
         retry.setOnClickListener(v -> {
@@ -238,6 +224,10 @@ public class SimOneHistoryFragment extends Fragment {
             }
 
             alertDialog.dismiss();
+        });
+        cancel.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            Objects.requireNonNull(getActivity()).finish();
         });
         alertDialog.show();
     }

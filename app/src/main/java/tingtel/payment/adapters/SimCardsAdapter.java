@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -74,7 +73,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
             holder.imageNetwork.setBackgroundResource(R.drawable.mtn_logo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-            holder.imageNetwork.setBackgroundResource(R.drawable.airtel_logo);
+            holder.imageNetwork.setBackgroundResource(R.drawable.airtellogo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
             holder.imageNetwork.setBackgroundResource(R.drawable.glo_logo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("9mo")
@@ -123,8 +122,8 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
                 builder.setView(dialogView);
                 AlertDialog alertDialog = builder.create();
 
-                Button btnYes = dialogView.findViewById(R.id.btn_yes);
-                Button btnNo = dialogView.findViewById(R.id.btn_no);
+                TextView btnYes = dialogView.findViewById(R.id.btn_yes);
+                TextView btnNo = dialogView.findViewById(R.id.btn_no);
 
                 btnYes.setOnClickListener(v1 -> {
                     alertDialog.dismiss();

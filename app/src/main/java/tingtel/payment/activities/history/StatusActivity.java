@@ -111,8 +111,8 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();
 
-        Button btnYes = dialogView.findViewById(R.id.btn_yes);
-        Button btnNo = dialogView.findViewById(R.id.btn_no);
+        TextView btnYes = dialogView.findViewById(R.id.btn_yes);
+        TextView btnNo = dialogView.findViewById(R.id.btn_no);
 
         btnYes.setOnClickListener(v12 -> {
             if (AppUtils.isNetworkAvailable(this)) {

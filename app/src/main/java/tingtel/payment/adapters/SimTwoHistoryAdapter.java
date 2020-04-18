@@ -20,9 +20,7 @@ import java.util.Locale;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.history.StatusActivity;
-import tingtel.payment.models.transaction_history.Result;
 import tingtel.payment.models.transaction_history.TransactionHistory;
-import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.SessionManager;
 
@@ -115,7 +113,7 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
         if (networkLogo.substring(0, 3).equalsIgnoreCase("mtn")) {
             imageView.setBackgroundResource(R.drawable.mtn_logo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("air")) {
-            imageView.setBackgroundResource(R.drawable.airtel_logo);
+            imageView.setBackgroundResource(R.drawable.airtellogo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("glo")) {
             imageView.setBackgroundResource(R.drawable.glo_logo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("9mo")

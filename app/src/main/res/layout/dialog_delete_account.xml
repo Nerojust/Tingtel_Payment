@@ -1,62 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp">
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/tingtel_one" />
 
         <TextView
+            android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_regular"
-            android:text="Tingtel"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/are_you_sure_you_want_to_delete_your_account_n_nb_your_data_would_be_erased"
             android:textAlignment="center"
-            android:textSize="@dimen/_13ssp"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/_13ssp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_yes"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/tingtel_gray_color" />
+
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="5"
-                android:textSize="@dimen/_11ssp"
-                android:background="@drawable/dashboard_buttons"
-                android:text="@string/yes_delete"
-                android:textColor="#FFF" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/_11ssp"
-                android:layout_weight="5"
-                android:background="@drawable/success_buttons"
-                android:text="@string/cancel"
-                android:textColor="#FFF" />
+                <TextView
+                    android:id="@+id/btn_yes"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/yes_delete"
+                    android:textColor="@color/tingtel_red_color"
+                    android:textSize="@dimen/_11ssp" />
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/tingtel_gray_color" />
+
+                <TextView
+                    android:id="@+id/btn_no"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="@color/tingtel_gray_color"
+                    android:textSize="@dimen/_11ssp" />
+
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

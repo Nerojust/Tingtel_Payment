@@ -246,7 +246,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             imgSender.setBackgroundResource(R.drawable.mtn_logo);
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            imgSender.setBackgroundResource(R.drawable.airtel_logo);
+            imgSender.setBackgroundResource(R.drawable.airtellogo);
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
             imgSender.setBackgroundResource(R.drawable.glo_logo);
         } else if (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")
@@ -258,7 +258,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("mtn")) {
             imgReceiver.setBackgroundResource(R.drawable.mtn_logo);
         } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("air")) {
-            imgReceiver.setBackgroundResource(R.drawable.airtel_logo);
+            imgReceiver.setBackgroundResource(R.drawable.airtellogo);
         } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("glo")) {
             imgReceiver.setBackgroundResource(R.drawable.glo_logo);
         } else if (ReceiverSimNetwork.substring(0, 3).equalsIgnoreCase("9mo")

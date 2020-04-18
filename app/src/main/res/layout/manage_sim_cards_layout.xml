@@ -3,102 +3,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/tingtel_lighter_gray">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/tingtel_lighter_gray">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/img_network"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.7"
+                    tools:src="@drawable/mtn_logo" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/img_network"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/phone_number"
+                        android:textColor="@color/tingtel_red_color"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_network_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/img_network"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/img_network"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/tingtel_red_color" />
+
+                <Switch
+                    android:id="@+id/switchbutton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:clickable="false"
+                    android:fontFamily="@font/rubik_regular"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp">
+                    android:text="Inactive"
+                    android:textSize="@dimen/_8ssp" />
 
-                    <ImageView
-                        android:id="@+id/img_network"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:layout_weight="0.7"
-                        tools:src="@drawable/mtn_logo" />
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/tingtel_red_color" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_phone_number"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/img_network"
-                            android:fontFamily="@font/rubik_regular"
-                            android:text="@string/phone_number"
-                            android:textColor="@color/tingtel_red_color"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_network_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/img_network"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/img_network"
-                            android:fontFamily="@font/rubik_regular"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/tingtel_red_color" />
-
-                    <Switch
-                        android:id="@+id/switchbutton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="2"
-                        android:clickable="false"
-                        android:fontFamily="@font/rubik_regular"
-                        android:gravity="center"
-                        android:text="Inactive"
-                        android:textSize="@dimen/_8ssp" />
-
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/tingtel_red_color" />
-
-                    <ImageView
-                        android:id="@+id/btn_delete"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.7"
-                        android:src="@drawable/ic_delete_black_24dp"
-                        android:text="@string/delete" />
-                </LinearLayout>
-            </RelativeLayout>
+                <ImageView
+                    android:id="@+id/btn_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.7"
+                    android:src="@drawable/ic_delete_black_24dp"
+                    android:text="@string/delete" />
+            </LinearLayout>
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

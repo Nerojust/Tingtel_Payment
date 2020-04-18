@@ -114,7 +114,7 @@ public class SimOneHistoryAdapter extends RecyclerView.Adapter<SimOneHistoryAdap
         if (networkLogo.substring(0, 3).equalsIgnoreCase("mtn")) {
             imageView.setBackgroundResource(R.drawable.mtn_logo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("air")) {
-            imageView.setBackgroundResource(R.drawable.airtel_logo);
+            imageView.setBackgroundResource(R.drawable.airtellogo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("glo")) {
             imageView.setBackgroundResource(R.drawable.glo_logo);
         } else if (networkLogo.substring(0, 3).equalsIgnoreCase("9mo")

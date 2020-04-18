@@ -67,7 +67,7 @@ public class SignUpSim2Fragment extends Fragment {
 
     private void initSpinner() {
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
-        spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtel_logo, R.drawable.nmobile_logo, R.drawable.glo_logo};
+        spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtellogo, R.drawable.nmobile_logo, R.drawable.glo_logo};
 
         SpinnerAdapter mCustomAdapter = new SpinnerAdapter(Objects.requireNonNull(getActivity()), spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);

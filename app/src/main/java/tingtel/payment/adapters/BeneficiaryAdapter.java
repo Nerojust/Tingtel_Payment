@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,7 +62,7 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
         if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
             holder.imageNetwork.setBackgroundResource(R.drawable.mtn_logo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-            holder.imageNetwork.setBackgroundResource(R.drawable.airtel_logo);
+            holder.imageNetwork.setBackgroundResource(R.drawable.airtellogo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
             holder.imageNetwork.setBackgroundResource(R.drawable.glo_logo);
         } else if (holder.tvNetworkName.getText().toString().substring(0, 3).equalsIgnoreCase("9mo")
@@ -96,31 +95,23 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
             imageNetwork = itemView.findViewById(R.id.img_network);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Toast.makeText(activity, "kjjkk", Toast.LENGTH_LONG).show();
-                    Beneficiary BeneficiaryModel = (Beneficiary) v.getTag();
-                    Intent intent = new Intent("selectedbeneficiary");
-                    intent.putExtra("phoneNumber", BeneficiaryModel.getPhoneNumber());
-                    LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-
-                }
+            itemView.setOnClickListener(v -> {
+                Beneficiary BeneficiaryModel = (Beneficiary) v.getTag();
+                Intent intent = new Intent("selectedbeneficiary");
+                intent.putExtra("phoneNumber", BeneficiaryModel.getPhoneNumber());
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             });
 
 
             imgDelete.setOnClickListener(v -> {
-//                navhost = ((SettingsActivity) activity).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-//                navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 ViewGroup viewGroup = activity.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_delete_beneficiary, viewGroup, false);
                 builder.setView(dialogView);
                 AlertDialog alertDialog = builder.create();
 
-                Button btnYes = dialogView.findViewById(R.id.btn_yes);
-                Button btnNo = dialogView.findViewById(R.id.btn_no);
+                TextView btnYes = dialogView.findViewById(R.id.btn_yes);
+                TextView btnNo = dialogView.findViewById(R.id.btn_no);
 
                 btnYes.setOnClickListener(v1 -> {
 

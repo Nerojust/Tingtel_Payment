@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,7 +26,6 @@ import java.util.Objects;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.history.main.PageViewModel;
-import tingtel.payment.adapters.SimOneHistoryAdapter;
 import tingtel.payment.adapters.SimTwoHistoryAdapter;
 import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
@@ -89,7 +88,8 @@ public class SimTwoHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistoryForSimTwo();
         } else {
-            AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+            Toast.makeText(getContext(), "No network available", Toast.LENGTH_LONG).show();
+            getActivity().finish();
         }
 
         return view;
@@ -136,12 +136,7 @@ public class SimTwoHistoryFragment extends Fragment {
                         noRecordFoundLayout.setVisibility(View.GONE);
                         swipeRefreshLayout.setVisibility(View.VISIBLE);
 
-
-
-
-
                         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
-
 
                         for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
                             Log.e("TingtelApp", "Server no is: " + transactionHistoryResponse.getResults().get(i).getPhoneNumber() + "Sim1No is " + sessionManager.getSimTwoPhoneNumber());
@@ -171,21 +166,6 @@ public class SimTwoHistoryFragment extends Fragment {
                             }
 
                         }
-
-
-
-
-
-
-
-
-//                        SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getContext(), transactionHistoryResponse);
-//                        recyclerView.setAdapter(historyAdapter);
-//                        historyAdapter.notifyDataSetChanged();
-//
-//                        if (swipeRefreshLayout.isRefreshing()) {
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
                     }
                 } else {
                     AppUtils.showSnackBar("Server Error", getView());
@@ -213,9 +193,11 @@ public class SimTwoHistoryFragment extends Fragment {
 
     private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
-        Button retry = dialogView.findViewById(R.id.btn_ok);
+        TextView retry = dialogView.findViewById(R.id.btn_yes);
+        TextView cancel = dialogView.findViewById(R.id.btn_no);
 
         tvMessage.setText(message);
+
         retry.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                 getAllHistoryForSimTwo();
@@ -223,6 +205,10 @@ public class SimTwoHistoryFragment extends Fragment {
                 AppUtils.showSnackBar("No network available", noRecordFoundLayout);
             }
             alertDialog.dismiss();
+        });
+        cancel.setOnClickListener(v->{
+            alertDialog.dismiss();
+            Objects.requireNonNull(getActivity()).finish();
         });
         alertDialog.show();
     }
