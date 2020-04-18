@@ -33,12 +33,12 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.history.HistoryActivity"
-            android:label="History"
+            android:label="HISTORY"
             android:parentActivityName=".activities.MainActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.ForgotPasswordActivity"
-            android:label="Reset Password"
+            android:label="RESET PASSWORD"
             android:parentActivityName=".activities.sign_in.SignInActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -47,10 +47,11 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.settings.AboutUsActivity"
-            android:label="About"
+            android:label="ABOUT US"
             android:parentActivityName=".activities.settings.SettingsActivity" />
         <activity
             android:name=".activities.settings.ReportIssueActivity"
+            android:label="ISSUE REPORT"
             android:parentActivityName=".activities.settings.SettingsActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -82,7 +83,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.sign_up.SignUpActivity"
-            android:label="Register"
+            android:label="REGISTER"
             android:parentActivityName=".activities.sign_in.SignInActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
