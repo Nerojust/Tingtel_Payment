@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Your Recent Transactions"
+        android:text="@string/your_recent_transactions"
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         android:visibility="visible" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
             android:gravity="center"
-            android:text="No record found"
+            android:text="@string/no_record_found"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
             android:visibility="visible" />

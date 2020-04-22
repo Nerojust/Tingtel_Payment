@@ -72,7 +72,7 @@ public class TransferAirtimeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
-        AppUtils.showProgressTracker(view);
+        AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
@@ -245,6 +245,7 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
+            btnNext.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
 
         } else if (isSim2TextviewClicked) {
             if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
@@ -271,6 +272,7 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
+            btnNext.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
 
         } else {
             Toast.makeText(getContext(), "Click on a number first", Toast.LENGTH_SHORT).show();

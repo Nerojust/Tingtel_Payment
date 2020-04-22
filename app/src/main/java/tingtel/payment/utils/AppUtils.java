@@ -118,9 +118,9 @@ public class AppUtils {
         return saltStr;
     }
 
-    public static void showProgressTracker(View view) {
+    public static void showProgressTracker(View view, Context context) {
 
-        String[] descriptionData = {"Sender", "Receiver", "Summary"};
+        String[] descriptionData = {context.getResources().getString(R.string.sender), context.getResources().getString(R.string.receiver), context.getResources().getString(R.string.summary)};
         StateProgressBar stateProgressBar = view.findViewById(R.id.your_state_progress_bar_id);
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("font/rubik_regular.ttf");

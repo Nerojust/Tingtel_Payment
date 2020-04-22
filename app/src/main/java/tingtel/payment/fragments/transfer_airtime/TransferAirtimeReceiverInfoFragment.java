@@ -179,7 +179,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private void initViews(View view) {
         AppUtils.getSessionManagerInstance().setSelectedRvNetwork("");
 
-        AppUtils.showProgressTracker(view);
+        AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);

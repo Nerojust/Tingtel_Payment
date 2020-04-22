@@ -221,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="Help/Support"
+                        android:text="@string/help_support"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />
 
@@ -309,7 +309,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="More Options"
+                        android:text="@string/more_options"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />
 
@@ -334,7 +334,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="4"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="Privacy Policy"
+                            android:text="@string/privacy_policy"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -362,7 +362,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="4"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="About Us"
+                            android:text="@string/about_us"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -393,7 +393,7 @@
                             android:drawableRight="@drawable/ic_share"
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="Share App"
+                            android:text="@string/share_app"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -422,7 +422,7 @@
                             android:layout_weight="4"
                             android:drawableRight="@drawable/ic_delete_black_24dp"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="Delete Account"
+                            android:text="@string/delete_account"
                             android:textColor="@color/tingtel_red_color"
                             android:textSize="15sp" />
 
@@ -455,7 +455,7 @@
             android:background="@color/tingtel_red_color"
             android:fontFamily="@font/rubik_regular"
             android:gravity="center"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp" />
     </LinearLayout>

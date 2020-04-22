@@ -106,11 +106,11 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
             on_off_switch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Log.v("Switch State=", "" + isChecked);
                 if (isChecked) {
-                    on_off_switch.setText("Active");
+                    on_off_switch.setText(mContext.getResources().getString(R.string.active));
                     // do something when check is selected
                 } else {
                     //do something when unchecked
-                    on_off_switch.setText("Inactive");
+                    on_off_switch.setText(mContext.getResources().getString(R.string.inactive));
                 }
             });
 

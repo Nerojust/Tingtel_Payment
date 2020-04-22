@@ -76,7 +76,7 @@
                     android:clickable="false"
                     android:fontFamily="@font/rubik_regular"
                     android:gravity="center"
-                    android:text="Inactive"
+                    android:text="@string/inactive"
                     android:textSize="@dimen/_8ssp" />
 
                 <View

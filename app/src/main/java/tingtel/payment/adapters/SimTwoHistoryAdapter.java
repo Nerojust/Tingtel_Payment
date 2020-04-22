@@ -82,13 +82,13 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
         holder.ref_id.setText(reference_id);
 
         if (statusId == 0) {
-            holder.status.setText("Pending");
+            holder.status.setText(mContext.getResources().getString(R.string.pending));
             holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
         } else if (statusId == 1) {
-            holder.status.setText("Completed");
+            holder.status.setText(mContext.getResources().getString(R.string.completed));
             holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
         } else if (statusId == 2) {
-            holder.status.setText("Sent, Pending SMS");
+            holder.status.setText(mContext.getResources().getString(R.string.sent_pending_sms));
             holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
         }
 

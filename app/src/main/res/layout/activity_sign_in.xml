@@ -108,7 +108,7 @@
             android:layout_toRightOf="@id/rememberMeCheckbox"
             android:fontFamily="@font/rubik_regular"
             android:gravity="right"
-            android:text="Login with fingerprint"
+            android:text="@string/login_with_fingerprint"
             android:textStyle="bold"
             android:visibility="gone" />
 
@@ -140,7 +140,7 @@
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/rubik_regular"
         android:gravity="center"
-        android:text="or"
+        android:text="@string/or"
         android:textSize="12sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/tv_signup"
@@ -155,7 +155,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:background="@drawable/success_buttons"
-        android:text="register"
+        android:text="@string/REGISTER"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         app:layout_constraintBottom_toTopOf="@+id/forgotPassword"

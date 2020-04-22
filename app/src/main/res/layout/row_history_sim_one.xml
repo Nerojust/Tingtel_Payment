@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Status"
+                        android:text="@string/status"
                         android:textSize="9sp"
                         android:textStyle="italic" />
 
@@ -152,7 +152,7 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="@dimen/_7ssp"
                         android:textStyle="bold"
@@ -164,7 +164,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="7dp"
                         android:gravity="center"
-                        android:text="Ref_ID"
+                        android:text="@string/ref_id"
                         android:textSize="9sp"
                         android:textStyle="italic" />
 
@@ -175,7 +175,6 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
-                        android:text="Date"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9ssp"
                         android:textStyle="bold"
@@ -197,7 +196,6 @@
                         android:fontFamily="@font/rubik_regular"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Date"
                         android:textSize="@dimen/_8ssp"
                         android:textStyle="bold"
                         tools:text="Fri. 23rd Aug., 2020" />
@@ -209,22 +207,11 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/rubik_regular"
                         android:layout_weight="1"
-                        android:text=""
                         android:gravity="center"
                         android:textColor="@color/tingtel_light_red"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         tools:text="N450.00" />
-
-
-                   <!-- <ImageView
-                        android:id="@+id/btn_delete"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="end"
-                        android:fontFamily="@font/rubik_regular"
-                        android:src="@drawable/ic_delete_black_24dp" />-->
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

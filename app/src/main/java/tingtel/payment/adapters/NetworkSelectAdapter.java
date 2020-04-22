@@ -53,8 +53,6 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     public void onBindViewHolder(final NetworkSelectAdapter.MyViewHolder holder, final int position) {
         holder.itemView.setTag(mData.get(position));
         holder.imgNetwork.setImageResource(mData.get(position).getImage());
-        //  holder.tvNetworkName.setText(mData.get(position).getName());
-
         holder.imgCheck.setVisibility(View.GONE);
 
         if (selectedItem == position) {
@@ -86,14 +84,11 @@ public class NetworkSelectAdapter extends RecyclerView.Adapter<NetworkSelectAdap
     class MyViewHolder extends RecyclerView.ViewHolder {
         final ImageView imgNetwork;
         final ImageView imgCheck;
-        //final TextView tvNetworkName;
-
 
         MyViewHolder(View itemView) {
             super(itemView);
             imgNetwork = itemView.findViewById(R.id.img_network);
             imgCheck = itemView.findViewById(R.id.img_check);
-            //tvNetworkName = itemView.findViewById(R.id.tv_name);
         }
     }
 }

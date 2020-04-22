@@ -20,8 +20,7 @@
             android:id="@+id/splashimage"
             android:layout_width="116dp"
             android:layout_height="93dp"
-            android:src="@drawable/tingtellogo"
-            android:text="Tingtel" />
+            android:src="@drawable/tingtellogo" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="220dp"
             android:gravity="center"
-            android:text="No record found"
+            android:text="@string/no_record_found"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
             android:visibility="visible" />

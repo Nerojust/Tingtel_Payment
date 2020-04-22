@@ -99,7 +99,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:gravity="right"
-                    android:text="YOUR REFERENCE ID IS: "
+                    android:text="@string/your_reference_id_is"
                     android:textSize="@dimen/_10ssp"
                     tools:text="YOUR REFERENCE ID IS :" />
 
@@ -145,7 +145,7 @@
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_weight="4"
                 android:background="@drawable/dashboard_buttons"
-                android:text="Refresh Status"
+                android:text="@string/refresh_status"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/tingtel_light_gray"
-                    android:text="What does above mean?"
+                    android:text="@string/what_does_above_mean"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
 
@@ -187,7 +187,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:background="@color/tingtel_light_gray"
-                        android:text="Completed"
+                        android:text="@string/completed"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
@@ -209,7 +209,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:background="@color/tingtel_light_gray"
-                        android:text="Processing"
+                        android:text="@string/processing"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
@@ -230,7 +230,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:background="@color/tingtel_light_gray"
-                        android:text="Pending"
+                        android:text="@string/pending"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
             </LinearLayout>
@@ -243,7 +243,7 @@
                 android:background="@color/tingtel_light_gray"
                 android:paddingHorizontal="@dimen/_25sdp"
                 android:paddingVertical="@dimen/_10sdp"
-                android:text="If all circles are checked, that means your transaction was successful"
+                android:text="@string/if_all_circles_are_checked_that_means_your_transaction_was_successful"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="italic" />
 
@@ -255,7 +255,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:paddingHorizontal="@dimen/_25sdp"
                 android:paddingVertical="@dimen/_10sdp"
-                android:text="Have a complaint? Click here"
+                android:text="@string/have_a_complaint_click_here"
                 android:textColor="@color/tingtel_red_color"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="italic" />

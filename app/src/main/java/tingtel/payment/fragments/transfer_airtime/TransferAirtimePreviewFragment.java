@@ -177,7 +177,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * @param view
      */
     private void initViews(View view) {
-        AppUtils.showProgressTracker(view);
+        AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
 
         sessionManager = AppUtils.getSessionManagerInstance();
         backButtonImageview = view.findViewById(R.id.backArrowLayout);

@@ -104,7 +104,7 @@
                         android:layout_marginTop="@dimen/_8ssp"
                         android:layout_marginBottom="@dimen/_5ssp"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="TRANSFER FROM"
+                        android:text="@string/transfer_from"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -165,7 +165,7 @@
                         android:layout_marginHorizontal="@dimen/_20ssp"
                         android:layout_marginBottom="@dimen/_5ssp"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="TRANSFER AMOUNT"
+                        android:text="@string/transfer_amount"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -206,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
-                            android:background="@color/tingtel_gray_color"
+                            android:background="@color/tingtel_red_color"
                             android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
                             android:text="@string/check_balance"
@@ -232,7 +232,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20ssp"
-            android:background="@drawable/dashboard_buttons"
+            android:background="@drawable/dashboard_buttons_gray"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/next"
             android:textColor="@color/white"
