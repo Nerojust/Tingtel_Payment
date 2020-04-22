@@ -160,6 +160,7 @@
     <string name="receiver">Receiver</string>
     <string name="summary">Summary</string>
     <string name="reset_password">RESET PASSWORD</string>
+    <string name="request_sent">Request Sent</string>
 
 
 </resources>

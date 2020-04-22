@@ -154,5 +154,6 @@
     <string name="receiver">le receveur</string>
     <string name="summary">le sommaire</string>
     <string name="reset_password">RÉINITIALISER LE MOT DE PASSE</string>
+    <string name="request_sent">Request Sent</string>
 
 </resources>
