@@ -195,6 +195,8 @@
     <string name="code_resent">Code resent</string>
     <string name="beneficiary_saved">Beneficiary Saved</string>
     <string name="no_beneficiary_found">No beneficiary found</string>
+    <string name="manage_beneficiaries">MANAGE BENEFICIARIES</string>
+    <string name="BENEFICIARIES">BENEFICIARIES</string>
 
 
 </resources>

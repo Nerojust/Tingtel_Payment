@@ -49,6 +49,4 @@ public class SelectBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
         return view;
     }
-
-
 }

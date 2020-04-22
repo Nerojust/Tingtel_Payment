@@ -180,5 +180,7 @@
     <string name="code_resent">Renvoi du code</string>
     <string name="beneficiary_saved">Bénéficiaire sauvé</string>
     <string name="no_beneficiary_found">Aucun bénéficiaire trouvé</string>
+    <string name="manage_beneficiaries">GÉRER LES BÉNÉFICIAIRES</string>
+    <string name="BENEFICIARIES">LES BÉNÉFICIAIRES</string>
 
 </resources>

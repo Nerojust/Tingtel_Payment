@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
+        android:layout_marginBottom="10dp"
         app:cardMaxElevation="2dp"
         app:cardPreventCornerOverlap="false">
 

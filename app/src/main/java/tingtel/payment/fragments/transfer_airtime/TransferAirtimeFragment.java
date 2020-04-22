@@ -153,7 +153,10 @@ public class TransferAirtimeFragment extends Fragment {
                 sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
             }
 
-            releaseButtons(btnCheckBalance);
+            if (setNetworkTv1()) return;
+            SimNo = 0;
+            SimSerial = sessionManager.getSimSerialICCID();
+            releaseCheckBalanceButton(btnCheckBalance);
         });
 
         sim2Textview.setOnClickListener(v -> {
@@ -165,7 +168,11 @@ public class TransferAirtimeFragment extends Fragment {
             sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
             sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
 
-            releaseButtons(btnCheckBalance);
+            if (setNetworkTv2()) return;
+            SimNo = 1;
+            SimSerial = sessionManager.getSimSerialICCID1();
+
+            releaseCheckBalanceButton(btnCheckBalance);
         });
 
 
@@ -175,7 +182,6 @@ public class TransferAirtimeFragment extends Fragment {
                 AppUtils.showSnackBar(getResources().getString(R.string.select_a_number_and_check_balance), sim1Textview);
                 return;
             }
-
             performCheckBeforeDialing();
         });
 
@@ -191,6 +197,7 @@ public class TransferAirtimeFragment extends Fragment {
                 bundle.putString("simSerial", "" + SimSerial);
                 bundle.putInt("simNo", SimNo);
                 bundle.putString("amount", finalamount);
+
                 navController.navigate(R.id.action_transferAirtimeFragment2_to_transferAirtimeReceiverInfoFragment2, bundle);
             }
         });
@@ -211,14 +218,21 @@ public class TransferAirtimeFragment extends Fragment {
                     sim1Textview.setTextColor(getResources().getColor(R.color.white));
                 }
             }
+            releaseCheckBalanceButton(btnCheckBalance);
 
         } else if (isSim2TextviewClicked) {
             sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right));
             sim2Textview.setTextColor(getResources().getColor(R.color.white));
+            releaseCheckBalanceButton(btnCheckBalance);
         }
     }
 
-    private void releaseButtons(Button button) {
+    private void releaseCheckBalanceButton(Button button) {
+        button.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons_));
+        button.setEnabled(true);
+        button.setClickable(true);
+    }
+    private void releaseNextButton(Button button) {
         button.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
         button.setEnabled(true);
         button.setClickable(true);
@@ -227,27 +241,7 @@ public class TransferAirtimeFragment extends Fragment {
 
     private void performCheckBeforeDialing() {
         if (isSim1TextviewClicked) {
-            if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-                SimNetwork = "Mtn";
-                UssdCode = "*556#";
-                sessionManager.setClickedNetwork("mtn");
-            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-                SimNetwork = "Airtel";
-                UssdCode = "*123#";
-                sessionManager.setClickedNetwork("airtel");
-            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-                SimNetwork = "Glo";
-                UssdCode = "*124*1#";
-                sessionManager.setClickedNetwork("glo");
-            } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-                    (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-                SimNetwork = "9mobile";
-                UssdCode = "*232#";
-                sessionManager.setClickedNetwork("eti");
-            } else {
-                Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
-                return;
-            }
+            if (setNetworkTv1()) return;
 
             SimNo = 0;
             SimSerial = sessionManager.getSimSerialICCID();
@@ -255,26 +249,10 @@ public class TransferAirtimeFragment extends Fragment {
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
 
-            releaseButtons(btnNext);
+            releaseNextButton(btnNext);
 
         } else if (isSim2TextviewClicked) {
-            if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
-                SimNetwork = "Mtn";
-                UssdCode = "*556#";
-            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
-                SimNetwork = "Airtel";
-                UssdCode = "*123#";
-            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
-                SimNetwork = "Glo";
-                UssdCode = "*124*1#";
-            } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
-                    (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
-                SimNetwork = "9mobile";
-                UssdCode = "*232#";
-            } else {
-                Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
-                return;
-            }
+            if (setNetworkTv2()) return;
 
             SimNo = 1;
 
@@ -283,12 +261,58 @@ public class TransferAirtimeFragment extends Fragment {
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
 
-            releaseButtons(btnNext);
+            releaseNextButton(btnNext);
 
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.click_a_number_first), Toast.LENGTH_SHORT).show();
         }
         sessionManager.setWhichSimWasClicked(SimNo);
+    }
+
+    private boolean setNetworkTv2() {
+        if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+            SimNetwork = "Mtn";
+            UssdCode = "*556#";
+        } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+            SimNetwork = "Airtel";
+            UssdCode = "*123#";
+        } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+            SimNetwork = "Glo";
+            UssdCode = "*124*1#";
+        } else if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
+                (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+            SimNetwork = "9mobile";
+            UssdCode = "*232#";
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean setNetworkTv1() {
+        if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
+            SimNetwork = "Mtn";
+            UssdCode = "*556#";
+            sessionManager.setClickedNetwork("mtn");
+        } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("air")) {
+            SimNetwork = "Airtel";
+            UssdCode = "*123#";
+            sessionManager.setClickedNetwork("airtel");
+        } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("glo")) {
+            SimNetwork = "Glo";
+            UssdCode = "*124*1#";
+            sessionManager.setClickedNetwork("glo");
+        } else if (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("9mo") ||
+                (sim1Textview.getText().toString().substring(0, 3).equalsIgnoreCase("eti"))) {
+            SimNetwork = "9mobile";
+            UssdCode = "*232#";
+            sessionManager.setClickedNetwork("eti");
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     private void confirmSimRegistrations() {

@@ -28,6 +28,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.settings.ManageBeneficiariesActivity"
+            android:label="@string/BENEFICIARIES"
+            android:parentActivityName=".activities.settings.SettingsActivity" />
+        <activity
             android:name=".activities.history.StatusActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />

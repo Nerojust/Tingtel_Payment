@@ -206,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
-                            android:background="@drawable/dashboard_buttons_gray"
+                            android:background="@drawable/dashboard_buttons_gray_"
                             android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
                             android:clickable="false"
