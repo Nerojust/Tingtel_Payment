@@ -92,24 +92,32 @@ public class SingleSimFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
-                        if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
-                            if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
-                                if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
-                                    noRecordFoundLayout.setVisibility(View.VISIBLE);
-                                    swipeRefreshLayout.setVisibility(View.GONE);
-                                    if (alertDialog.isShowing()) {
-                                        alertDialog.dismiss();
-                                    }
-                                } else {
-                                    SingleHistoryAdapter adapter = new SingleHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
-                                    recyclerView.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
-                                    noRecordFoundLayout.setVisibility(View.GONE);
-                                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    if (transactionHistoryResponse.getResults().size() == 0) {
+                        noRecordFoundLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                        if (alertDialog.isShowing()) {
+                            alertDialog.dismiss();
+                        }
+                    } else {
+                        for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
+                            if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
+                                if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
+                                    if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
+                                        noRecordFoundLayout.setVisibility(View.VISIBLE);
+                                        swipeRefreshLayout.setVisibility(View.GONE);
+                                        if (alertDialog.isShowing()) {
+                                            alertDialog.dismiss();
+                                        }
+                                    } else {
+                                        SingleHistoryAdapter adapter = new SingleHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
+                                        recyclerView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+                                        noRecordFoundLayout.setVisibility(View.GONE);
+                                        swipeRefreshLayout.setVisibility(View.VISIBLE);
 
-                                    if (swipeRefreshLayout.isRefreshing()) {
-                                        swipeRefreshLayout.setRefreshing(false);
+                                        if (swipeRefreshLayout.isRefreshing()) {
+                                            swipeRefreshLayout.setRefreshing(false);
+                                        }
                                     }
                                 }
                             }

@@ -123,7 +123,7 @@ public class SimTwoHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getResults().get(1).getTransactionHistory().size() == 0) {
+                    if (transactionHistoryResponse.getResults().size() == 0) {
                         noRecordFoundLayout.setVisibility(View.VISIBLE);
                         swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {
@@ -152,8 +152,6 @@ public class SimTwoHistoryFragment extends Fragment {
                                         SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
                                         recyclerView.setAdapter(historyAdapter);
                                         historyAdapter.notifyDataSetChanged();
-                                        recyclerView.setHasFixedSize(true);
-                                        recyclerView.smoothScrollToPosition(0);
                                         if (swipeRefreshLayout.isRefreshing()) {
                                             swipeRefreshLayout.setRefreshing(false);
                                         }

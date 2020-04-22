@@ -129,7 +129,7 @@ public class SimOneHistoryFragment extends Fragment {
             @Override
             public void onSuccess(TransactionHistoryResponse transactionHistoryResponse) {
                 if (transactionHistoryResponse != null) {
-                    if (transactionHistoryResponse.getResults().get(0).getTransactionHistory().size() == 0) {
+                    if (transactionHistoryResponse.getResults().size() == 0) {
                         noRecordFoundLayout.setVisibility(View.VISIBLE);
                         swipeRefreshLayout.setVisibility(View.GONE);
                         if (alertDialog.isShowing()) {
@@ -160,8 +160,6 @@ public class SimOneHistoryFragment extends Fragment {
                                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
                                         recyclerView.setAdapter(historyAdapter);
                                         historyAdapter.notifyDataSetChanged();
-                                        recyclerView.setHasFixedSize(true);
-                                        recyclerView.smoothScrollToPosition(0);
                                         if (swipeRefreshLayout.isRefreshing()) {
                                             swipeRefreshLayout.setRefreshing(false);
                                         }
