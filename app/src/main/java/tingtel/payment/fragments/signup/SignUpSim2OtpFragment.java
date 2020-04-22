@@ -79,7 +79,7 @@ public class SignUpSim2OtpFragment extends Fragment {
 
                 new Handler().postDelayed(this::performProcessAction, 1500);
             } else {
-                AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
+                AppUtils.showSnackBar(getResources().getString(R.string.incorrect_otp_try_again), getView());
                 pinView.setText(null);
                 pinView.requestFocus();
                 Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -91,7 +91,7 @@ public class SignUpSim2OtpFragment extends Fragment {
     private void performProcessAction() {
         AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
         if (appdatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
-            Toast.makeText(getActivity(), "This Sim has already been registered, kindly delete from setting and Re-register", Toast.LENGTH_LONG).show();
+            AppUtils.showDialog(getResources().getString(R.string.sim_already_registered), getActivity());
         } else {
             saveSimDetails();
         }
@@ -100,7 +100,7 @@ public class SignUpSim2OtpFragment extends Fragment {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                 makeAddSimRequest();
             } else {
-                AppUtils.showSnackBar("No network available", resendOTP);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), resendOTP);
             }
         } else {
             navController.navigate(R.id.action_signUpSim2OtpFragment_to_setPasswordFragment, null);
@@ -122,8 +122,7 @@ public class SignUpSim2OtpFragment extends Fragment {
             @Override
             public void onSuccess(SendOTPresponse sendOTPresponse) {
                 AppUtils.dismissLoadingDialog();
-                AppUtils.showSnackBar("Code resent", getView());
-
+                AppUtils.showDialog(getResources().getString(R.string.code_resent), getActivity());
             }
 
             @Override

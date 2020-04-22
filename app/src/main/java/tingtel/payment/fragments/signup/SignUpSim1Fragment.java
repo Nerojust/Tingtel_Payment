@@ -3,7 +3,6 @@ package tingtel.payment.fragments.signup;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class SignUpSim1Fragment extends Fragment {
         initViews(view);
         initListeners(view);
         getCarrierOfSim(getContext(), getActivity());
-        getDataFromCarrier(view);
+        getDataFromCarrier();
         initSpinner();
 
         return view;
@@ -94,11 +93,11 @@ public class SignUpSim1Fragment extends Fragment {
                 generatedOTP = AppUtils.generateOTP();
                 sessionManager.setOTP(generatedOTP);
                 phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
-                //Toast.makeText(getContext(), phoneNumber, Toast.LENGTH_SHORT).show();
+
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                     sendOTPtoCustomer();
                 } else {
-                    AppUtils.showSnackBar("No network available", tvPhoneNumber);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), tvPhoneNumber);
                 }
 
             }
@@ -154,12 +153,12 @@ public class SignUpSim1Fragment extends Fragment {
 
     private boolean isValidFields() {
         if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().isEmpty()) {
-            AppUtils.showSnackBar("Number is required", tvPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), tvPhoneNumber);
             tvPhoneNumber.requestFocus();
             return false;
         }
         if (tvPhoneNumber.getText().toString().length() < 11) {
-            AppUtils.showSnackBar("Number is too short", tvPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.number_too_short), tvPhoneNumber);
             tvPhoneNumber.requestFocus();
             return false;
         }
@@ -178,7 +177,7 @@ public class SignUpSim1Fragment extends Fragment {
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
-    private void getDataFromCarrier(View view) {
+    private void getDataFromCarrier() {
         Sim1Network = sessionManager.getSimOneNetworkName();
         Sim2Network = sessionManager.getSimTwoNetworkName();
 
@@ -186,7 +185,7 @@ public class SignUpSim1Fragment extends Fragment {
         Sim2Serial = sessionManager.getSimSerialICCID1();
 
         NoOfSIm = sessionManager.getSimStatus();
-        Log.e("getDefaultCarrier", "No of sim is " + NoOfSIm);
+//        Log.e("getDefaultCarrier", "No of sim is " + NoOfSIm);
 
         if (Sim1Network.substring(0, 3).equalsIgnoreCase("mtn")) {
             mSpinner.setSelection(0);
@@ -206,15 +205,4 @@ public class SignUpSim1Fragment extends Fragment {
             tvSimInfo.setText(getResources().getString(R.string.glo_sim_detected));
         }
     }
-
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        if (isRemoving()) {
-//            if (sessionManager.getComingFromDashboard()) {
-//                startActivity(new Intent(getContext(), MainActivity.class));
-//                Objects.requireNonNull(getActivity()).finish();
-//            }
-//        }
-//    }
 }

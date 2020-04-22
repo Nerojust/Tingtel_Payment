@@ -65,10 +65,10 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
                 if (AppUtils.isValidFieldsNumbersAndLetters(edName.getText().toString().trim())) {
                     saveBeneficiary();
                 } else {
-                    Toast.makeText(activity, "Invalid character/s detected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getResources().getString(R.string.invalid_characters), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                AppUtils.showSnackBar("Fill in a name", edName);
+                AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), edName);
                 edName.requestFocus();
             }
         });
@@ -112,7 +112,7 @@ public class SaveBeneficiarySheetFragment extends BottomSheetDialogFragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(activity, "Beneficiary saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, getResources().getString(R.string.beneficiary_saved), Toast.LENGTH_SHORT).show();
             }
         }
         SaveTask st = new SaveTask();

@@ -161,6 +161,40 @@
     <string name="summary">Summary</string>
     <string name="reset_password">RESET PASSWORD</string>
     <string name="request_sent">Request Sent</string>
+    <string name="cannot_check_balance_for_this_network">Cant Check USSD Balance for this network</string>
+    <string name="click_a_number_first">Click on a number first</string>
+    <string name="new_sim_detected">New Sim Detected, You Need to Register this sim on your account</string>
+    <string name="insert_a_sim_card">Insert a sim card</string>
+    <string name="select_a_number">Select a number</string>
+    <string name="amount_is_required">Amount is required</string>
+    <string name="minimum_is">Amount is too low. Minimum is</string>
+    <string name="check_balance_first">Please Check Account Balance First</string>
+    <string name="select_a_number_and_check_balance">Select a number and check balance</string>
+    <string name="enter_receivers_number">Enter receivers number</string>
+    <string name="number_too_short">Number is too short. Must be 11 digits</string>
+    <string name="select_a_network">Select a network</string>
+    <string name="enter_network_pin">Enter network pin</string>
+    <string name="pin_too_short">Pin is too short</string>
+    <string name="hi">Hi</string>
+    <string name="no_network_available">No network available</string>
+    <string name="please_login_with_new_details">Please login in with new details</string>
+    <string name="server_error_try_again">Server error. Please try again later --</string>
+    <string name="invalid_hash_key">invalid hash key</string>
+    <string name="this_is_required">This is required</string>
+    <string name="password_is_too_short">Password is too short</string>
+    <string name="password_do_not_match">Passwords do not match</string>
+    <string name="first_name_is_required">First name is required</string>
+    <string name="name_is_too_short">First name is too short</string>
+    <string name="last_name_is_required">Last name is required</string>
+    <string name="invalid_email_address">Invalid email address</string>
+    <string name="username_is_required">Username is required</string>
+    <string name="incorrect_otp_try_again">Incorrect OTP, please try again</string>
+    <string name="verified">Verified</string>
+    <string name="sim_already_registered">This Sim has already been registered, kindly delete from setting and Re-register</string>
+    <string name="sim_added_successfully">Sim added successfully</string>
+    <string name="code_resent">Code resent</string>
+    <string name="beneficiary_saved">Beneficiary Saved</string>
+    <string name="no_beneficiary_found">No beneficiary found</string>
 
 
 </resources>

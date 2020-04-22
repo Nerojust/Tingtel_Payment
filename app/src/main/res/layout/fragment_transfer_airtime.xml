@@ -206,9 +206,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
-                            android:background="@color/tingtel_red_color"
+                            android:background="@drawable/dashboard_buttons_gray"
                             android:fontFamily="@font/rubik_regular"
                             android:gravity="center"
+                            android:clickable="false"
+                            android:enabled="false"
                             android:text="@string/check_balance"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10ssp" />
@@ -235,6 +237,8 @@
             android:background="@drawable/dashboard_buttons_gray"
             android:fontFamily="@font/rubik_regular"
             android:text="@string/next"
+            android:clickable="false"
+            android:enabled="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp" />
     </FrameLayout>

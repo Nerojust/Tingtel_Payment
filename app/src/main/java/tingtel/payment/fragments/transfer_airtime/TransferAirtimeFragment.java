@@ -1,5 +1,6 @@
 package tingtel.payment.fragments.transfer_airtime;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +36,6 @@ import static tingtel.payment.utils.AppUtils.dialUssdCode;
 
 public class TransferAirtimeFragment extends Fragment {
 
-    TextView tvGetTransferPin;
     private Button btnCheckBalance;
     private EditText edAmount;
     private Button btnNext;
@@ -53,7 +53,6 @@ public class TransferAirtimeFragment extends Fragment {
     private boolean isSim1TextviewClicked = false;
     private boolean isSim2TextviewClicked = false;
     private String noOfSIm;
-    // private SoftInputAssist softInputAssist;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -153,6 +152,8 @@ public class TransferAirtimeFragment extends Fragment {
                 sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
                 sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
             }
+
+            releaseButtons(btnCheckBalance);
         });
 
         sim2Textview.setOnClickListener(v -> {
@@ -163,13 +164,15 @@ public class TransferAirtimeFragment extends Fragment {
 
             sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
             sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_left));
+
+            releaseButtons(btnCheckBalance);
         });
 
 
         btnCheckBalance.setOnClickListener(v -> {
 
             if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
-                AppUtils.showSnackBar("Select a number and check balance", sim1Textview);
+                AppUtils.showSnackBar(getResources().getString(R.string.select_a_number_and_check_balance), sim1Textview);
                 return;
             }
 
@@ -215,6 +218,12 @@ public class TransferAirtimeFragment extends Fragment {
         }
     }
 
+    private void releaseButtons(Button button) {
+        button.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
+        button.setEnabled(true);
+        button.setClickable(true);
+    }
+
 
     private void performCheckBeforeDialing() {
         if (isSim1TextviewClicked) {
@@ -236,7 +245,7 @@ public class TransferAirtimeFragment extends Fragment {
                 UssdCode = "*232#";
                 sessionManager.setClickedNetwork("eti");
             } else {
-                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -245,7 +254,8 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
-            btnNext.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
+
+            releaseButtons(btnNext);
 
         } else if (isSim2TextviewClicked) {
             if (sim2Textview.getText().toString().substring(0, 3).equalsIgnoreCase("mtn")) {
@@ -262,7 +272,7 @@ public class TransferAirtimeFragment extends Fragment {
                 SimNetwork = "9mobile";
                 UssdCode = "*232#";
             } else {
-                Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -272,10 +282,11 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
-            btnNext.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
+
+            releaseButtons(btnNext);
 
         } else {
-            Toast.makeText(getContext(), "Click on a number first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.click_a_number_first), Toast.LENGTH_SHORT).show();
         }
         sessionManager.setWhichSimWasClicked(SimNo);
     }
@@ -295,8 +306,7 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1":
 
                 if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                    // navigateToSim1Register();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
                     Intent intent2 = new Intent(getActivity(), SignUpActivity.class);
                     intent2.putExtra("task", "registerSim1");
                     startActivity(intent2);
@@ -306,8 +316,7 @@ public class TransferAirtimeFragment extends Fragment {
             case "SIM1 SIM2":
 
                 if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                    // navigateToSim1Register();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
                     Intent intent3 = new Intent(getActivity(), SignUpActivity.class);
                     intent3.putExtra("task", "registerSim1");
                     startActivity(intent3);
@@ -315,8 +324,7 @@ public class TransferAirtimeFragment extends Fragment {
                 }
 
                 if (!sim2ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You Need to Register this sim on your account", Toast.LENGTH_LONG).show();
-                    // navigateToSim2Register();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
                     Intent intent4 = new Intent(getActivity(), SignUpActivity.class);
                     intent4.putExtra("task", "registerSim2");
                     startActivity(intent4);
@@ -348,11 +356,12 @@ public class TransferAirtimeFragment extends Fragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void populatePhoneNumberViews() {
         noOfSIm = sessionManager.getSimStatus();
         String sim1Number = sessionManager.getSimOnePhoneNumber();
         String sim2Number = sessionManager.getSimTwoPhoneNumber();
-        if (sim1Number==null||sim2Number==null){
+        if (sim1Number == null || sim2Number == null) {
             Toast.makeText(getContext(), "Register ur sim/s", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -360,7 +369,7 @@ public class TransferAirtimeFragment extends Fragment {
             case "NO SIM":
                 sim1Textview.setVisibility(View.GONE);
                 sim2Textview.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "Insert a sim card", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.insert_a_sim_card), Toast.LENGTH_SHORT).show();
                 break;
             case "SIM1":
                 sim1Textview.setVisibility(View.VISIBLE);
@@ -390,24 +399,24 @@ public class TransferAirtimeFragment extends Fragment {
 
     private boolean isValidAllFields() {
         if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
-            AppUtils.showSnackBar("Select a number", sim1Textview);
+            AppUtils.showSnackBar(getResources().getString(R.string.select_a_number), sim1Textview);
             return false;
         }
 
         if (edAmount.getText().toString().isEmpty()) {
-            AppUtils.showSnackBar("Amount is required", edAmount);
+            AppUtils.showSnackBar(getResources().getString(R.string.amount_is_required), edAmount);
             edAmount.requestFocus();
             return false;
         }
         if (edAmount.getText().toString().trim().length() < 2) {
-            AppUtils.showSnackBar("Amount is too low. Minimum is " + getResources().getString(R.string.naira) + "100", edAmount);
+            AppUtils.showSnackBar(getResources().getString(R.string.minimum_is) + getResources().getString(R.string.naira) + "100", edAmount);
             edAmount.requestFocus();
             return false;
         }
 
         //todo: add not
         if (!balanceChecked) {
-            AppUtils.showSnackBar("Please Check Account Balance First", btnCheckBalance);
+            AppUtils.showSnackBar(getResources().getString(R.string.check_balance_first), btnCheckBalance);
             return false;
         }
 

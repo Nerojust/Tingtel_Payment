@@ -206,27 +206,27 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private boolean isValidFields() {
         String network = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
         if (edReceiverPhoneNumber.getText().toString().isEmpty()) {
-            AppUtils.showSnackBar("Enter receivers number", edReceiverPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.enter_receivers_number), edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
         if (edReceiverPhoneNumber.getText().toString().length() < Constants.MINIMUM_PHONE_NUMBER_DIGITS) {
-            AppUtils.showSnackBar("Number is too short. Must be 11 digits", edReceiverPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.number_too_short), edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();
             return false;
         }
 
         if (network.equals("")) {
-            AppUtils.showSnackBar("Select a network", edPin);
+            AppUtils.showSnackBar(getResources().getString(R.string.select_a_network), edPin);
             return false;
         }
         if (edPin.getText().toString().isEmpty()) {
-            AppUtils.showSnackBar("Enter network pin", edPin);
+            AppUtils.showSnackBar(getResources().getString(R.string.enter_network_pin), edPin);
             edPin.requestFocus();
             return false;
         }
         if (edPin.getText().toString().length() < 4) {
-            AppUtils.showSnackBar("Pin is too short", edPin);
+            AppUtils.showSnackBar(getResources().getString(R.string.pin_too_short), edPin);
             edPin.requestFocus();
             return false;
         }

@@ -30,8 +30,6 @@ public class DashboardFragment extends Fragment {
     private NavController navController;
     private AppDatabase appDatabase;
     private SessionManager sessionManager;
-    private String REGISTER_SIM_1 = "registerSim1";
-    private String REGISTER_SIM_2 = "registerSim2";
     private ImageView settingsImagview;
     private Button btnTransferAirtime, btnHistory;
 
@@ -63,7 +61,7 @@ public class DashboardFragment extends Fragment {
 
         //setting the retrieved customer name
         if (sessionManager.getFirstName() != null) {
-            customerName.setText("Hi ".concat(sessionManager.getFirstName()));
+            customerName.setText(getResources().getString(R.string.hi).concat(" ").concat(sessionManager.getFirstName()));
         } else {
             customerName.setText(getResources().getString(R.string.welcome_customer));
         }
@@ -88,6 +86,7 @@ public class DashboardFragment extends Fragment {
         //check if both sim 1 and sim 2 are in the db registered.
         String NoOfSIm = sessionManager.getSimStatus();
 
+        String REGISTER_SIM_1 = "registerSim1";
         switch (NoOfSIm) {
             case "NO SIM":
                 gotoSignUpActivity(REGISTER_SIM_1);
@@ -95,20 +94,21 @@ public class DashboardFragment extends Fragment {
 
             case "SIM1":
                 if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
                     gotoSignUpActivity(REGISTER_SIM_1);
                     return;
                 }
                 break;
             case "SIM1 SIM2":
                 if (!sim1ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
                     gotoSignUpActivity(REGISTER_SIM_1);
                     return;
                 }
 
                 if (!sim2ExistsCheck()) {
-                    Toast.makeText(getActivity(), "New Sim Detected, You need to register this sim on your account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.new_sim_detected), Toast.LENGTH_LONG).show();
+                    String REGISTER_SIM_2 = "registerSim2";
                     gotoSignUpActivity(REGISTER_SIM_2);
                     return;
                 }

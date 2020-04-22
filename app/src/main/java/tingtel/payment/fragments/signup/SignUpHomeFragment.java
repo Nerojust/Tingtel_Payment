@@ -39,12 +39,12 @@ public class SignUpHomeFragment extends Fragment {
         sessionManager = AppUtils.getSessionManagerInstance();
 
         initViews(view);
-        initListeners(view);
+        initListeners();
         return view;
 
     }
 
-    private void initListeners(View view) {
+    private void initListeners() {
         tvLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SignInActivity.class);
             Objects.requireNonNull(getActivity()).startActivity(intent);
@@ -82,43 +82,43 @@ public class SignUpHomeFragment extends Fragment {
 
     private boolean isValidFields() {
         if (firstName.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("First name is required", firstName);
+            AppUtils.showSnackBar(getResources().getString(R.string.first_name_is_required), firstName);
             firstName.requestFocus();
             return false;
         }
         if (firstName.getText().toString().trim().length() < 3) {
-            AppUtils.showSnackBar("First name is too short", firstName);
+            AppUtils.showSnackBar(getResources().getString(R.string.name_is_too_short), firstName);
             firstName.requestFocus();
             return false;
         }
         if (lastName.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Last name is required", lastName);
+            AppUtils.showSnackBar(getResources().getString(R.string.last_name_is_required), lastName);
             lastName.requestFocus();
             return false;
         }
         if (lastName.getText().toString().trim().length() < 3) {
-            AppUtils.showSnackBar("Last name is too short", lastName);
+            AppUtils.showSnackBar(getResources().getString(R.string.name_is_too_short), lastName);
             lastName.requestFocus();
             return false;
         }
         if (emailAddress.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Email is required", emailAddress);
+            AppUtils.showSnackBar(getResources().getString(R.string.email_is_required), emailAddress);
             emailAddress.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(emailAddress.getText().toString().trim())) {
-            AppUtils.showSnackBar("Invalid email address", emailAddress);
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_email_address), emailAddress);
             emailAddress.requestFocus();
             return false;
         }
 
         if (username.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Username is required", username);
+            AppUtils.showSnackBar(getResources().getString(R.string.username_is_required), username);
             username.requestFocus();
             return false;
         }
         if (username.getText().toString().trim().length() < 3) {
-            AppUtils.showSnackBar("Username is too short", username);
+            AppUtils.showSnackBar(getResources().getString(R.string.name_is_too_short), username);
             username.requestFocus();
             return false;
         }

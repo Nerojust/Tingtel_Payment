@@ -1,7 +1,6 @@
 package tingtel.payment.fragments.transfer_airtime;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -153,7 +152,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             UssdCode = "*232#";
         } else {
 
-            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
             return;
         }
         statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
@@ -310,7 +309,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             );
 
         } else {
-            Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -342,12 +341,8 @@ public class TransferAirtimePreviewFragment extends Fragment {
                 //after sending the request ahead, begin the transfer process.
                 runAirtimeTransferUssd();
                 nextLayout.setVisibility(View.VISIBLE);
-                Bundle bundle = getBundle();
 
                 AppUtils.dismissLoadingDialog();
-
-                //navController.navigate(R.id.action_transferAirtimePreviewFragment2_to_transferAirtimeSuccessFragment, bundle);
-
             }
 
             @Override
@@ -366,18 +361,6 @@ public class TransferAirtimePreviewFragment extends Fragment {
             }
         });
     }
-
-    private Bundle getBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putString("senderSimNetwork", SenderSimNetwork);
-        bundle.putString("receiverSimNetwork", ReceiverSimNetwork);
-        bundle.putString("simSerial", SimSerial);
-        bundle.putInt("simNo", SimNo);
-        bundle.putString("amount", Amount);
-        bundle.putString("receiverPhoneNumber", ReceiverPhoneNumber);
-        return bundle;
-    }
-
     /**
      * save the details to database.
      */
@@ -415,19 +398,5 @@ public class TransferAirtimePreviewFragment extends Fragment {
  */
         SaveTask st = new SaveTask();
         st.execute();
-    }
-
-    /**
-     * send the sms to user
-     */
-    private void sendSms() {
-        Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
-        sendIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        sendIntent.setType("vnd.android-dir/mms-sms");
-        sendIntent.setData(Uri.parse("sms:" + "432"));
-        sendIntent.putExtra("sms_body", "2U " + TingtelNumber + " " + Amount + " " + Pin);
-
-        startActivity(sendIntent);
-
     }
 }

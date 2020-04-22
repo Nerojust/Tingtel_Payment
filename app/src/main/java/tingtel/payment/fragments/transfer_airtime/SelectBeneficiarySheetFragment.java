@@ -37,7 +37,7 @@ public class SelectBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
         if (beneficiaryList.size() == 0) {
             noResult.setVisibility(View.VISIBLE);
-            noResult.setText("No beneficiary found");
+            noResult.setText(getResources().getString(R.string.no_beneficiary_found));
         } else {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);

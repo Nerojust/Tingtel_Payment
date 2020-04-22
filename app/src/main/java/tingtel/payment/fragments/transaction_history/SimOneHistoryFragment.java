@@ -86,7 +86,7 @@ public class SimOneHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistory();
         } else {
-            Toast.makeText(getContext(), "No network available", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();
             getActivity().finish();
 
         }
@@ -153,7 +153,7 @@ public class SimOneHistoryFragment extends Fragment {
                                     if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
                                         //   noRecordFound.setVisibility(View.VISIBLE);
                                         swipeRefreshLayout.setVisibility(View.GONE);
-                                        AppUtils.showDialog("No Record Found", getActivity());
+                                        AppUtils.showDialog(getResources().getString(R.string.no_record_found), getActivity());
                                     } else {
                                         // noRecordFound.setVisibility(View.GONE);
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);
@@ -171,15 +171,6 @@ public class SimOneHistoryFragment extends Fragment {
                             }
 
                         }
-
-
-//                        SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getActivity(), transactionHistoryResponse);
-//                        recyclerView.setAdapter(historyAdapter);
-//                        historyAdapter.notifyDataSetChanged();
-//
-//                        if (swipeRefreshLayout.isRefreshing()) {
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
                     }
                 } else {
                     AppUtils.showDialog("Server Error", getActivity());
@@ -220,7 +211,7 @@ public class SimOneHistoryFragment extends Fragment {
                 }
                 getAllHistory();
             } else {
-                AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), noRecordFoundLayout);
             }
 
             alertDialog.dismiss();

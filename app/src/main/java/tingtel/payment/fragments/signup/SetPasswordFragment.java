@@ -31,12 +31,10 @@ import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 
 
 public class SetPasswordFragment extends Fragment {
-
     private TextInputEditText tvPassword1;
     private TextInputEditText tvPassword2;
     private Button btnSetPassword;
     private SessionManager sessionManager;
-    private String hash;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -56,7 +54,7 @@ public class SetPasswordFragment extends Fragment {
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getContext()))) {
                     registerUser();
                 } else {
-                    AppUtils.showSnackBar("No network available", tvPassword1);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), tvPassword1);
                 }
             }
         });
@@ -99,7 +97,6 @@ public class SetPasswordFragment extends Fragment {
         sessionManager.setRegistrationJsonObject(jsonObject);
 
 
-
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.createANewUser(customerRegistrationSendObject, new CreateNewUserInterface() {
             @Override
@@ -107,13 +104,13 @@ public class SetPasswordFragment extends Fragment {
                 AppUtils.dismissLoadingDialog();
                 sessionManager.clearSharedPreferences();
                 gotoLoginActivity();
-                Toast.makeText(getContext(), "Please login in with new details", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.please_login_with_new_details), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(String error) {
-                if (error.equalsIgnoreCase("invalid hash key")) {
-                    AppUtils.showSnackBar("Server error. Please try again later.::" + error, tvPassword1);
+                if (error.equalsIgnoreCase(getResources().getString(R.string.invalid_hash_key))) {
+                    AppUtils.showSnackBar(getResources().getString(R.string.server_error_try_again) + error, tvPassword1);
                 } else {
                     AppUtils.showSnackBar(error, tvPassword1);
                 }
@@ -140,29 +137,29 @@ public class SetPasswordFragment extends Fragment {
 
     private boolean isValidFields() {
         if (Objects.requireNonNull(tvPassword1.getText()).toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("New Password is required", tvPassword1);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), tvPassword1);
             tvPassword1.requestFocus();
             return false;
         }
         if (tvPassword1.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", tvPassword1);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_too_short), tvPassword1);
             tvPassword1.requestFocus();
             return false;
         }
 
         if (Objects.requireNonNull(tvPassword2.getText()).toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("This is required", tvPassword2);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), tvPassword2);
             tvPassword2.requestFocus();
             return false;
         }
 
         if (tvPassword2.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", tvPassword2);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_too_short), tvPassword2);
             tvPassword2.requestFocus();
             return false;
         }
         if (!tvPassword1.getText().toString().trim().equals(tvPassword2.getText().toString().trim())) {
-            AppUtils.showSnackBar("Passwords do not match", tvPassword1);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_do_not_match), tvPassword1);
             tvPassword2.requestFocus();
             return false;
         }

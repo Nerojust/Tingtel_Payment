@@ -1,9 +1,9 @@
 package tingtel.payment.fragments.signup;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +52,15 @@ public class SignUpSim2Fragment extends Fragment {
     private String phoneNumber;
 
 
+    @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_sim2, container, false);
 
         initViews(view);
-        initListeners(view);
+        initListeners();
         getCarrierOfSim(getContext(), getActivity());
-        getDataFromCarrier(view);
+        getDataFromCarrier();
         initSpinner();
 
         return view;
@@ -87,12 +88,12 @@ public class SignUpSim2Fragment extends Fragment {
 
     private boolean isValidFields() {
         if (Objects.requireNonNull(tvPhoneNumber.getText()).toString().isEmpty()) {
-            AppUtils.showSnackBar("Number is required", tvPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), tvPhoneNumber);
             tvPhoneNumber.requestFocus();
             return false;
         }
         if (tvPhoneNumber.getText().toString().length() < 11) {
-            AppUtils.showSnackBar("Number is too short", tvPhoneNumber);
+            AppUtils.showSnackBar(getResources().getString(R.string.number_too_short), tvPhoneNumber);
             tvPhoneNumber.requestFocus();
             return false;
         }
@@ -100,7 +101,7 @@ public class SignUpSim2Fragment extends Fragment {
         return true;
     }
 
-    private void initListeners(View view) {
+    private void initListeners() {
         btnNext.setOnClickListener(v -> {
 //todo: add validations
             if (isValidFields()) {
@@ -112,7 +113,7 @@ public class SignUpSim2Fragment extends Fragment {
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                     sendOTPtoCustomer();
                 } else {
-                    AppUtils.showSnackBar("No network available", tvPhoneNumber);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), tvPhoneNumber);
                 }
             }
         });
@@ -179,12 +180,12 @@ public class SignUpSim2Fragment extends Fragment {
     }
 
 
-    private void getDataFromCarrier(View view) {
+    private void getDataFromCarrier() {
         Sim2Network = sessionManager.getSimTwoNetworkName();
         Sim2Serial = sessionManager.getSimSerialICCID1();
 
         NoOfSIm = sessionManager.getSimStatus();
-        Log.e("getDefaultCarrier", "No of sim is " + NoOfSIm);
+        //Log.e("getDefaultCarrier", "No of sim is " + NoOfSIm);
 
         if (Sim2Network.substring(0, 3).equalsIgnoreCase("mtn")) {
             mSpinner.setSelection(0);

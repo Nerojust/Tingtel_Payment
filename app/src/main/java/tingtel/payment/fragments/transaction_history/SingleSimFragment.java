@@ -53,7 +53,7 @@ public class SingleSimFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getHistory();
         } else {
-            AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+            AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), noRecordFoundLayout);
         }
 
 
@@ -116,7 +116,7 @@ public class SingleSimFragment extends Fragment {
                         }
                     }
                 } else {
-                    AppUtils.showDialog("Server Error", getActivity());
+                    AppUtils.showDialog(getResources().getString(R.string.server_error_try_again), getActivity());
                 }
 
                 AppUtils.dismissLoadingDialog();
@@ -139,18 +139,6 @@ public class SingleSimFragment extends Fragment {
             }
         });
     }
-//todo: check this
-//    @Override
-//    public void onDetach() {
-//        boolean status = AppUtils.getSessionManagerInstance().getComingFromSuccess();
-//        if (status) {
-//            startActivity(new Intent(getContext(), MainActivity.class));
-//            Objects.requireNonNull(getActivity()).finish();
-//        }
-//        super.onDetach();
-//
-//    }
-
 
     private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
@@ -164,7 +152,7 @@ public class SingleSimFragment extends Fragment {
                 }
                 getHistory();
             } else {
-                AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), noRecordFoundLayout);
             }
 
             alertDialog.dismiss();

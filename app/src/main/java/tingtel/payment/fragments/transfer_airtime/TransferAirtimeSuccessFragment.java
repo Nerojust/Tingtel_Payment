@@ -110,8 +110,7 @@ public class TransferAirtimeSuccessFragment extends Fragment {
                 (SenderSimNetwork.substring(0, 3).equalsIgnoreCase("eti"))) {
             UssdCode = "*232#";
         } else {
-
-            Toast.makeText(getActivity(), "Cant Check USSD Balance for this network", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.cannot_check_balance_for_this_network), Toast.LENGTH_LONG).show();
             return;
         }
         statusButton.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));

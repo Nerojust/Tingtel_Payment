@@ -4,9 +4,7 @@
     <string name="ob_header1">BIENVENUE CHEZ TINGTEL</string>
     <string name="ob_header2">EFFECTUEZ DES TRANSFERTS SUR N\'IMPORTE QUEL RÉSEAU AU NIGERIA</string>
     <string name="ob_header3">PERMISSION REQUISE</string>
-
     <string name="ob_get_started">COMMENCER</string>
-
     <string name="ob_desc1">Tingtel est une application unifiée pour le transfert de temps d\'antenne vers tous les réseaux au Nigeria</string>
     <string name="ob_desc2">Transférez facilement le temps d\'antenne entre les réseaux au Nigéria</string>
     <string name="ob_desc3">Pour utiliser Tingtel, veuillez accepter les autorisations requises, cliquez sur "Commencer"</string>
@@ -101,9 +99,6 @@
     <string name="put_on_your_gps">L\'emplacement est nécessaire pour continuer</string>
     <string name="loading_please_wait">Chargement, veuillez patienter...</string>
     <string name="welcome_customer">Bienvenue client</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sim_one_history">Histoire du Sim 1</string>
     <string name="sim_two_history">Histoire de Sim 2</string>
     <string name="do_you_want_to_delete_this_record">VOULEZ-VOUS SUPPRIMER CET ENREGISTREMENT?</string>
@@ -155,5 +150,35 @@
     <string name="summary">le sommaire</string>
     <string name="reset_password">RÉINITIALISER LE MOT DE PASSE</string>
     <string name="request_sent">Request Sent</string>
+    <string name="cannot_check_balance_for_this_network">Impossible de vérifier le solde USSD pour ce réseau</string>
+    <string name="click_a_number_first">Cliquez d\'abord sur un numéro</string>
+    <string name="new_sim_detected">Nouveau sim détecté, vous devez enregistrer ce sim sur votre compte</string>
+    <string name="insert_a_sim_card">Insérez une carte SIM</string>
+    <string name="select_a_number">Sélectionnez un nombre</string>
+    <string name="amount_is_required">Un montant est requis</string>
+    <string name="select_a_number_and_check_balance">Sélectionnez un numéro et vérifiez le solde</string>
+    <string name="enter_receivers_number">Entrez le numéro du récepteur</string>
+    <string name="number_too_short">Le nombre est trop court. Doit être composé de 11 chiffres</string>
+    <string name="select_a_network">Sélectionnez un réseau</string>
+    <string name="enter_network_pin">Entrez le code PIN du réseau</string>
+    <string name="pin_too_short">La broche est trop courte</string>
+    <string name="hi">salut</string>
+    <string name="no_network_available">Aucun réseau disponible</string>
+    <string name="please_login_with_new_details">Veuillez vous connecter avec de nouveaux détails</string>
+    <string name="server_error_try_again">Erreur du serveur. Veuillez réessayer plus tard. —</string>
+    <string name="this_is_required">Ceci est nécessaire</string>
+    <string name="password_is_too_short">Le mot de passe est trop court</string>
+    <string name="password_do_not_match">Les mots de passe ne correspondent pas</string>
+    <string name="first_name_is_required">Le prénom est requis</string>
+    <string name="last_name_is_required">Le nom est obligatoire</string>
+    <string name="invalid_email_address">Adresse e-mail invalide</string>
+    <string name="username_is_required">Nom d\'utilisateur est nécessaire</string>
+    <string name="incorrect_otp_try_again">OTP incorrect, veuillez réessayer</string>
+    <string name="verified">Vérifié</string>
+    <string name="sim_already_registered">Ce Sim a déjà été enregistré, veuillez le supprimer du réglage et vous réinscrire</string>
+    <string name="sim_added_successfully">Sim ajouté avec succès</string>
+    <string name="code_resent">Renvoi du code</string>
+    <string name="beneficiary_saved">Bénéficiaire sauvé</string>
+    <string name="no_beneficiary_found">Aucun bénéficiaire trouvé</string>
 
 </resources>

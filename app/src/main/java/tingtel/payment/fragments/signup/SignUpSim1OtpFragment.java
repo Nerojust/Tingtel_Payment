@@ -79,12 +79,12 @@ public class SignUpSim1OtpFragment extends Fragment {
             String appOTP = sessionManager.getOTP();
 //check if both otp's match
             if (customerOTP.equals(appOTP)) {
-                Toast.makeText(getContext(), "Verified", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.verified), Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(this::performProcessAction, 1500);
 
             } else {
-                AppUtils.showSnackBar("Incorrect OTP, please try again", getView());
+                AppUtils.showSnackBar(getResources().getString(R.string.incorrect_otp_try_again), getView());
                 pinView.setText(null);
                 pinView.requestFocus();
                 Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -94,7 +94,7 @@ public class SignUpSim1OtpFragment extends Fragment {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                 resendOTPtoCustomer();
             } else {
-                AppUtils.showSnackBar("No network available", resendOtp);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), resendOtp);
             }
         });
     }
@@ -113,7 +113,7 @@ public class SignUpSim1OtpFragment extends Fragment {
             @Override
             public void onSuccess(SendOTPresponse sendOTPresponse) {
                 AppUtils.dismissLoadingDialog();
-                AppUtils.showSnackBar("Code resent", getView());
+                AppUtils.showDialog(getResources().getString(R.string.code_resent), getActivity());
 
             }
 
@@ -136,7 +136,7 @@ public class SignUpSim1OtpFragment extends Fragment {
     private void performProcessAction() {
         AppDatabase appdatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
         if (appdatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
-            AppUtils.showDialog("This Sim has already been registered, kindly delete from setting and Re-register", getActivity());
+            AppUtils.showDialog(getResources().getString(R.string.sim_already_registered), getActivity());
         } else {
             saveSimDetails();
         }
@@ -241,8 +241,7 @@ public class SignUpSim1OtpFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 Objects.requireNonNull(getActivity()).startActivity(intent);
                 getActivity().finish();
-                Toast.makeText(getActivity(), "Sim added successfully", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getActivity(), getResources().getString(R.string.sim_added_successfully), Toast.LENGTH_LONG).show();
             }
 
             @Override

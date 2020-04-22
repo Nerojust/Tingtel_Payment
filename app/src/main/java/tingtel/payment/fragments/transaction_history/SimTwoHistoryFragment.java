@@ -45,7 +45,6 @@ public class SimTwoHistoryFragment extends Fragment {
     private AlertDialog alertDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View dialogView;
-    private PageViewModel pageViewModel;
 
     public SimTwoHistoryFragment() {
         // Required empty public constructor
@@ -62,7 +61,7 @@ public class SimTwoHistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+        PageViewModel pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -78,8 +77,8 @@ public class SimTwoHistoryFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_two_history, container, false);
 
         initViews(view);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        ViewGroup viewGroup = getActivity().findViewById(android.R.id.content);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+        ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
         dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);
         alertDialog = builder.create();
@@ -88,7 +87,7 @@ public class SimTwoHistoryFragment extends Fragment {
         if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
             getAllHistoryForSimTwo();
         } else {
-            Toast.makeText(getContext(), "No network available", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();
             getActivity().finish();
         }
 
@@ -112,8 +111,6 @@ public class SimTwoHistoryFragment extends Fragment {
     }
 
     private void getAllHistoryForSimTwo() {
-        //AppUtils.initLoadingDialog(getContext());
-
         TransactionHistorySendObject transactionHistorySendObject = new TransactionHistorySendObject();
         transactionHistorySendObject.setHash(AppUtils.generateHash("tingtel", BuildConfig.HEADER_PASSWORD));
         transactionHistorySendObject.setUserPhone(AppUtils.checkPhoneNumberAndRestructure(AppUtils.getSessionManagerInstance().getNumberFromLogin()));
@@ -170,7 +167,6 @@ public class SimTwoHistoryFragment extends Fragment {
                 } else {
                     AppUtils.showSnackBar("Server Error", getView());
                 }
-                //AppUtils.dismissLoadingDialog();
             }
 
             @Override
@@ -202,7 +198,7 @@ public class SimTwoHistoryFragment extends Fragment {
             if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
                 getAllHistoryForSimTwo();
             } else {
-                AppUtils.showSnackBar("No network available", noRecordFoundLayout);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), noRecordFoundLayout);
             }
             alertDialog.dismiss();
         });
