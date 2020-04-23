@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -70,12 +71,42 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
                     String number = intent.getStringExtra("phoneNumber");
                     retrievedNetworkFromBottomSheet = intent.getStringExtra("network");
                     edReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(Objects.requireNonNull(number)));
+                    setReceiversNetworkRv(retrievedNetworkFromBottomSheet);
                     bottomSheetFragment.dismiss();
 
                 }
             }
         }
     };
+
+    private void setReceiversNetworkRv(String selectedNetwork) {
+
+
+        if (selectedNetwork != null) {
+
+            int pos = -1;
+            if (selectedNetwork.equalsIgnoreCase("MTN")) {
+                pos = 0;
+            } else if (selectedNetwork.equalsIgnoreCase("9MOBILE")) {
+                pos = 1;
+            } else if (selectedNetwork.equalsIgnoreCase("AIRTEL")) {
+                pos = 2;
+            } else if (selectedNetwork.equalsIgnoreCase("GLO")) {
+                pos = 3;
+            }
+
+            int finalPos = pos;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (finalPos != -1) {
+                        recyclerView.findViewHolderForAdapterPosition(finalPos).itemView.performClick();
+                    }
+                }
+            }, 5);
+        }
+    }
 
     public void onResume() {
         super.onResume();
