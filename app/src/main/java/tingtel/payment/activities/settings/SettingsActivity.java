@@ -79,7 +79,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
                 String shareMessage = "\nLet me recommend you this application\n\n";
                 shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                startActivity(Intent.createChooser(shareIntent, "Select an app to share Tingtel with"));
+                startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.select_an_app_to_share_tingtel_with)));
             } catch (Exception e) {
                 //e.toString();
             }
@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
                     //perform deletion
                     deleteAccount();
                 } else {
-                    AppUtils.showSnackBar("No network available", deleteAccountLayout);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), deleteAccountLayout);
                 }
             });
 
@@ -113,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tingtel.com/privacy-policy"));
                 startActivity(myIntent);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(this, "No Web browser Found.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getResources().getString(R.string.no_browser_found), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         });
@@ -126,12 +126,12 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
             builder.setMessage(getResources().getString(R.string.do_you_want_to_logout))
                     .setCancelable(false)
-                    .setPositiveButton("Yes", (dialog, id) -> {
+                    .setPositiveButton(getResources().getString(R.string.yes), (dialog, id) -> {
                         startActivity(new Intent(this, SignInActivity.class));
                         AppUtils.getSessionManagerInstance().logout();
                         finishAffinity();
                     })
-                    .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                    .setNegativeButton(getResources().getString(R.string.no), (dialog, id) -> dialog.cancel());
             android.app.AlertDialog alert = builder.create();
             alert.show();
 
@@ -151,7 +151,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
             @Override
             public void onSuccess(DeleteAccountResponse deleteAccountResponse) {
                 AppUtils.dismissLoadingDialog();
-                Toast.makeText(SettingsActivity.this, "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, getResources().getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

@@ -25,7 +25,6 @@ public class ReportIssueActivity extends AppCompatActivity implements MyApplicat
 
 
     private EditText edTitle, edDetails;
-    private Button btnReport;
     private SessionManager sessionManager;
 
     @Override
@@ -34,7 +33,7 @@ public class ReportIssueActivity extends AppCompatActivity implements MyApplicat
         setContentView(R.layout.activity_report_issue);
         sessionManager = AppUtils.getSessionManagerInstance();
         edDetails = findViewById(R.id.ed_details);
-        btnReport = findViewById(R.id.btn_report);
+        Button btnReport = findViewById(R.id.btn_report);
 
         btnReport.setOnClickListener(v -> {
             if (!edDetails.getText().toString().trim().isEmpty()) {
@@ -42,13 +41,13 @@ public class ReportIssueActivity extends AppCompatActivity implements MyApplicat
                     if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
                         sendReport();
                     } else {
-                        AppUtils.showSnackBar("No network available", edDetails);
+                        AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), edDetails);
                     }
                 } else {
-                    AppUtils.showSnackBar("Message is too short", edDetails);
+                    AppUtils.showSnackBar(getResources().getString(R.string.message_is_too_short), edDetails);
                 }
             } else {
-                AppUtils.showSnackBar("Message box must not be empty", edDetails);
+                AppUtils.showSnackBar(getResources().getString(R.string.message_box_must_not_be_empty), edDetails);
                 edDetails.requestFocus();
             }
         });
@@ -74,7 +73,7 @@ public class ReportIssueActivity extends AppCompatActivity implements MyApplicat
                 AppUtils.dismissLoadingDialog();
                 edDetails.setText("");
                 edDetails.clearFocus();
-                AppUtils.showDialog("Thank you, we would look into it", ReportIssueActivity.this);
+                AppUtils.showDialog(getResources().getString(R.string.thank_you_we_will_look_into_it), ReportIssueActivity.this);
             }
 
             @Override

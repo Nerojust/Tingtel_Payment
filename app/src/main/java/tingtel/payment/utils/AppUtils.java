@@ -143,6 +143,18 @@ public class AppUtils {
         }
     }
 
+    public static void changeStatusOfButton(Context context, Button button, boolean isEnabled) {
+        if (isEnabled) {
+            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons));
+            button.setEnabled(true);
+            button.setClickable(true);
+        } else {
+            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons_gray));
+            button.setEnabled(false);
+            button.setClickable(false);
+        }
+    }
+
     public static String checkPhoneNumberAndRemovePrefix(String number) {
         if (number.substring(0, 3).equals("234")) {
             if (number.startsWith("234")) {
@@ -290,10 +302,10 @@ public class AppUtils {
 
     public static void logOutInactivitySessionTimeout(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Alert");
-        builder.setMessage("Session timeout");
+        builder.setTitle(activity.getResources().getString(R.string.alert));
+        builder.setMessage(activity.getResources().getString(R.string.session_timeout));
         builder.setCancelable(false);
-        builder.setPositiveButton("OK", (dialog, id) -> {
+        builder.setPositiveButton(activity.getResources().getString(R.string.okay), (dialog, id) -> {
             Intent intent = new Intent(activity, SignInActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -311,43 +323,4 @@ public class AppUtils {
             e.printStackTrace();
         }
     }
-/*
-    public static void errorCodeSwitch(Context context, int errorCode) {
-        switch (errorCode) {
-            case (401):
-                SessionManager sessionManagerCustomer = new SessionManager();
-                AppUtils.sessionExpiredDialog(context, sessionManagerCustomer, context.getResources().getString(R.string.session_expired));
-                AppUtils.dismissLoadingDialog();
-                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
-                break;
-            case (403):
-                AppUtils.showDialogWarning(context, context.getResources().getString(R.string.forbidden_by_network_));
-                AppUtils.dismissLoadingDialog();
-                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
-                break;
-            case (500):
-                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
-                AppUtils.showSweetDialogWarning(context, context.getResources().getString(R.string.server_might_not_be_available_));
-                AppUtils.dismissLoadingDialog();
-                break;
-            default:
-                Log.d(TAG, "errorCode: ".concat(String.valueOf(errorCode)));
-                AppUtils.dismissLoadingDialog();
-                AppUtils.showDialogWarning(context, String.valueOf(errorCode));
-                break;
-        }
-    }
-
-    private static void showDialogWarning(Context context, String string) {
-
-    }
-
-    private static void goToLoginActivity(Context context, SessionManagerAgent sessionManagerAgent) {
-        Intent intent = new Intent(context, loginActivity.class);
-        sessionManagerAgent.clearSharedPreferences();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }*/
-
 }

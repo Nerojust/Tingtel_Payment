@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -156,7 +158,7 @@ public class SignInActivity extends GPSutils {
                                 loginUserWithFingerprint();
 
                             } else {
-                                AppUtils.showSnackBar("No network available", passwordEditext);
+                                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
                             }
 
                         } else {
@@ -195,9 +197,9 @@ public class SignInActivity extends GPSutils {
 
 
         promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for Tingtel")
-                .setSubtitle("Log in using your fingerprint")
-                .setNegativeButtonText("No, thanks.")
+                .setTitle(getResources().getString(R.string.biometric_login_for_tingtel))
+                .setSubtitle(getResources().getString(R.string.login_with_fingerprint))
+                .setNegativeButtonText(getResources().getString(R.string.no_thanks))
                 .build();
 
     }
@@ -212,7 +214,7 @@ public class SignInActivity extends GPSutils {
             if (sessionManager.getPassword() != null && !Objects.requireNonNull(usernameEditext.getText()).toString().isEmpty()) {
                 biometricPrompt.authenticate(promptInfo);
             } else {
-                AppUtils.showDialog("Please login with your credentials first to use this", this);
+                AppUtils.showDialog(getResources().getString(R.string.please_login_with_your_credentials_to_use_this), this);
             }
         });
         tvSignUp.setOnClickListener(v -> {
@@ -230,7 +232,7 @@ public class SignInActivity extends GPSutils {
 
                             loginUserWithPassword();
                         } else {
-                            AppUtils.showSnackBar("No network available", passwordEditext);
+                            AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
                         }
                     }
                 } else {
@@ -241,7 +243,7 @@ public class SignInActivity extends GPSutils {
                 }
                 //todo:uncomment later before making network call
             } else {
-                AppUtils.showSnackBar("No network available", usernameEditext);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), usernameEditext);
             }
         });
 
@@ -315,6 +317,7 @@ public class SignInActivity extends GPSutils {
         finish();
     }
 
+    @SuppressLint("NewApi")
     private void encryptPasswordDetails(String password) {
         try {
             encryptedPassword = cryptography.encrypt(password);
@@ -420,22 +423,6 @@ public class SignInActivity extends GPSutils {
         sessionManager.setFirstNameFromLogin(loginResponses.getUserInfo().get(0).getFirstName());
         sessionManager.setEmailFromLogin(loginResponses.getUserInfo().get(0).getEmail());
         sessionManager.setNumberFromLogin(loginResponses.getUserInfo().get(0).getPhone());
-        //sim 1 details
-        sessionManager.setSimOnePhoneNumberFromLogin(loginResponses.getSim1().get(0).getPhone());
-        sessionManager.setSimOneSerialICCIDFromLogin(loginResponses.getSim1().get(0).getSim1Serial());
-        sessionManager.setNetworkNameSimOneFromLogin(loginResponses.getSim1().get(0).getUserNetwork());
-        //sim 2 details
-        sessionManager.setSimTwoPhoneNumberFromLogin(loginResponses.getSim2().get(0).getPhone2());
-        sessionManager.setSimTwoSerialICCIDFromLogin(loginResponses.getSim2().get(0).getSim2Serial());
-        sessionManager.setNetworkNameSimTwoFromLogin(loginResponses.getSim2().get(0).getSim2UserNetwork());
-        //sim 3 details
-        sessionManager.setSimThreePhoneNumberFromLogin(loginResponses.getSim3().get(0).getPhone3());
-        sessionManager.setSimThreeSerialICCIDFromLogin(loginResponses.getSim3().get(0).getSim3Serial());
-        sessionManager.setNetworkNameSimThreeFromLogin(loginResponses.getSim3().get(0).getSim3UserNetwork());
-        //sim 4 details
-        sessionManager.setSimFourPhoneNumberFromLogin(loginResponses.getSim4().get(0).getPhone4());
-        sessionManager.setSimFourSerialICCIDFromLogin(loginResponses.getSim4().get(0).getSim4Serial());
-        sessionManager.setNetworkNameSimFourFromLogin(loginResponses.getSim4().get(0).getSim4UserNetwork());
 
         appDatabase.simCardsDao().delete();
 
@@ -549,7 +536,27 @@ public class SignInActivity extends GPSutils {
     private void initViews() {
         usernameEditext = findViewById(R.id.tv_username);
         passwordEditext = findViewById(R.id.tv_password);
+        passwordEditext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 4 && !Objects.requireNonNull(usernameEditext.getText()).toString().isEmpty()) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(SignInActivity.this), btnSingIn, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(SignInActivity.this), btnSingIn, false);
+                }
+
+            }
+        });
         passwordEditext.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (isValidFields()) {
@@ -579,24 +586,24 @@ public class SignInActivity extends GPSutils {
 
     private boolean isValidFields() {
         if (Objects.requireNonNull(usernameEditext.getText()).toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Username is required", usernameEditext);
+            AppUtils.showSnackBar(getResources().getString(R.string.username_is_required), usernameEditext);
             usernameEditext.requestFocus();
             return false;
         }
         if (!AppUtils.isValidFieldsNumbersAndLetters(usernameEditext.getText().toString().trim())) {
-            AppUtils.showSnackBar("Invalid character/s detected", usernameEditext);
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_characters), usernameEditext);
             usernameEditext.requestFocus();
             return false;
         }
 
         if (Objects.requireNonNull(passwordEditext.getText()).toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Password is required", passwordEditext);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_required), passwordEditext);
             passwordEditext.requestFocus();
             return false;
         }
 
         if (passwordEditext.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", passwordEditext);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_too_short), passwordEditext);
             passwordEditext.requestFocus();
             return false;
         }
@@ -609,11 +616,11 @@ public class SignInActivity extends GPSutils {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.do_you_want_to_exit))
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> {
+                .setPositiveButton(getResources().getString(R.string.yes), (dialog, id) -> {
                     finishAffinity();
                     SignInActivity.this.onSuperBackPressed();
                 })
-                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                .setNegativeButton(getResources().getString(R.string.no), (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
 

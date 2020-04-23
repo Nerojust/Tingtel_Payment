@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements MyApplication.Log
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.do_you_want_to_logout))
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> {
+                .setPositiveButton(getResources().getString(R.string.yes), (dialog, id) -> {
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MyApplication.Log
                     startActivity(intent);
                     MainActivity.this.onSuperBackPressed();
                 })
-                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                .setNegativeButton(getResources().getString(R.string.no), (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
 

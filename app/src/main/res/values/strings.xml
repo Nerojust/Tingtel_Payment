@@ -197,6 +197,24 @@
     <string name="no_beneficiary_found">No beneficiary found</string>
     <string name="manage_beneficiaries">MANAGE BENEFICIARIES</string>
     <string name="BENEFICIARIES">BENEFICIARIES</string>
+    <string name="session_timeout">Session Timeout, please login again</string>
+    <string name="okay">Okay</string>
+    <string name="alert">Alert</string>
+    <string name="biometric_login_for_tingtel">Biometric login for Tingtel</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="please_login_with_your_credentials_to_use_this">Please login with your credentials first to use this</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="you_need_to_register_sim_2_before_making_any_transactions">You need To register Sim 2 before making any transactions</string>
+    <string name="you_need_to_register_sim1_before_making_any_transactions">You need To register Sim 1 before making any transactions</string>
+    <string name="select_an_app_to_share_tingtel_with">Select an app to share Tingtel with</string>
+    <string name="no_browser_found">No Web browser Found.</string>
+    <string name="account_deleted_successfully">Account Deleted Successfully</string>
+    <string name="message_is_too_short">Message is too short</string>
+    <string name="message_box_must_not_be_empty">Message box must not be empty</string>
+    <string name="thank_you_we_will_look_into_it">Thank you, we would look into it</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
 
 
 </resources>

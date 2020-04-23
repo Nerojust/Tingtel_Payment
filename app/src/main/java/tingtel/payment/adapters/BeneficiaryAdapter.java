@@ -99,6 +99,7 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
                 Beneficiary BeneficiaryModel = (Beneficiary) v.getTag();
                 Intent intent = new Intent("selectedbeneficiary");
                 intent.putExtra("phoneNumber", BeneficiaryModel.getPhoneNumber());
+                intent.putExtra("network", BeneficiaryModel.getNetwork());
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             });
 
@@ -127,5 +128,4 @@ public class BeneficiaryAdapter extends RecyclerView.Adapter<BeneficiaryAdapter.
             });
         }
     }
-
 }

@@ -20,7 +20,7 @@
     <string name="sim_2">SIM 2</string>
     <string name="next">PROCHAIN</string>
     <string name="tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button">TINGTEL VOUS AIDE À TRANSFÉRER LE TEMPS D\'AIR DE TOUT RÉSEAU À D\'AUTRES RÉSEAUX. \n POUR COMMENCER, CLIQUEZ SUR LE BOUTON TRANSFERT AIRTIME.</string>
-    <string name="transfer_airtime">TRANSFERT AIRTIME</string>
+    <string name="transfer_airtime">TRANSFERT DE TEMPS D\'ANTENNE</string>
     <string name="history">HISTOIRE</string>
     <string name="welcome_martins">Salut, TOM CRUISE</string>
     <string name="naira">"\u20A6"</string>
@@ -52,7 +52,7 @@
     <string name="service_fee">FRAIS DE SERVICE</string>
     <string name="amount_to_be_credited">MONTANT CRÉDITÉ</string>
     <string name="transfer">TRANSFERT</string>
-    <string name="preview">CONFIRMER</string>
+    <string name="preview">APERÇU</string>
     <string name="enter_your_current_password">MOT DE PASSE ACTUEL</string>
     <string name="set_your_new_password">NOUVEAU MOT DE PASSE</string>
     <string name="re_enter_your_new_password">RETAPER LE MOT DE PASSE</string>
@@ -182,5 +182,22 @@
     <string name="no_beneficiary_found">Aucun bénéficiaire trouvé</string>
     <string name="manage_beneficiaries">GÉRER LES BÉNÉFICIAIRES</string>
     <string name="BENEFICIARIES">LES BÉNÉFICIAIRES</string>
+    <string name="session_timeout">Délai d\'expiration de la session, veuillez vous reconnecter</string>
+    <string name="okay">D\'ACCORD</string>
+    <string name="alert">Alerte</string>
+    <string name="biometric_login_for_tingtel">Biometric login for Tingtel</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="please_login_with_your_credentials_to_use_this">Please login with your credentials first to use this</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="yes">Yes</string>
+    <string name="you_need_to_register_sim_2_before_making_any_transactions">You need To register Sim 2 before making any transactions</string>
+    <string name="you_need_to_register_sim1_before_making_any_transactions">You need To register Sim 1 before making any transactions</string>
+    <string name="select_an_app_to_share_tingtel_with">Select an app to share Tingtel with</string>
+    <string name="no_browser_found">No Web browser Found.</string>
+    <string name="account_deleted_successfully">Account Deleted Successfully</string>
+    <string name="message_is_too_short">Message is too short</string>
+    <string name="message_box_must_not_be_empty">Message box must not be empty</string>
+    <string name="thank_you_we_will_look_into_it">Thank you, we would look into it</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
 
 </resources>

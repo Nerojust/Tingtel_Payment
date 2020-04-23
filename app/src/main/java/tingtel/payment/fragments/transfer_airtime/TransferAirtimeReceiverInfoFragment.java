@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ import tingtel.payment.adapters.NetworkSelectAdapter;
 import tingtel.payment.models.NetworkSelect;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
+import tingtel.payment.utils.SessionManager;
 
 
 public class TransferAirtimeReceiverInfoFragment extends Fragment {
@@ -50,33 +53,29 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private int SimNo;
     private String Amount;
     private String SimSerial;
+    private SessionManager sessionManager;
     private Button btnPreview;
     private NavController navController;
     private ImageView whatIsPin;
     private ImageView homeImageview, settingsImagview;
     private EditText edPin;
     private EditText edReceiverPhoneNumber;
+    private ImageView imgSelectBeneficiary, backButtonImageview;
+    private List<NetworkSelect> networkList = new ArrayList<>();
+    private String retrievedNetworkFromBottomSheet;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("barcodeSerialcaptured")) {
-                if (intent.getAction().equalsIgnoreCase("barcodeSerialcaptured")) {
-                    edReceiverPhoneNumber.setText(AppUtils.getSessionManagerInstance().getScannedCodeResult());
-                }
-            }
-
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
                 if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
                     String number = intent.getStringExtra("phoneNumber");
-                    edReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(number));
+                    retrievedNetworkFromBottomSheet = intent.getStringExtra("network");
+                    edReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(Objects.requireNonNull(number)));
                     bottomSheetFragment.dismiss();
 
                 }
             }
         }
     };
-
-    private ImageView imgSelectBeneficiary, backButtonImageview;
-    private List<NetworkSelect> networkList = new ArrayList<>();
 
     public void onResume() {
         super.onResume();
@@ -93,7 +92,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transfer_airtime_receiver_info, container, false);
-
+        sessionManager = AppUtils.getSessionManagerInstance();
         getExtrasFromIntent();
         initViews(view);
         initListeners();
@@ -189,22 +188,39 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
         btnPreview = view.findViewById(R.id.btn_preview);
 
         edPin = view.findViewById(R.id.pinEditext);
+        edPin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 4 && !edReceiverPhoneNumber.getText().toString().isEmpty()) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnPreview, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnPreview, false);
+                }
+            }
+        });
         whatIsPin = view.findViewById(R.id.whatIsPin_id);
         edReceiverPhoneNumber = view.findViewById(R.id.receivers_phone_number_edittext);
         imgSelectBeneficiary = view.findViewById(R.id.img_beneficiary);
-
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
         Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
-
-
     }
 
 
     private boolean isValidFields() {
-        String network = AppUtils.getSessionManagerInstance().getSelectedRvNetwork();
+        String network = sessionManager.getSelectedRvNetwork();
         if (edReceiverPhoneNumber.getText().toString().isEmpty()) {
             AppUtils.showSnackBar(getResources().getString(R.string.enter_receivers_number), edReceiverPhoneNumber);
             edReceiverPhoneNumber.requestFocus();

@@ -68,7 +68,6 @@ public class TransferAirtimeFragment extends Fragment {
         return view;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
         AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
@@ -117,6 +116,11 @@ public class TransferAirtimeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(final Editable s) {
+                if (s.length() > 1 && balanceChecked) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, false);
+                }
             }
         });
 
@@ -177,7 +181,6 @@ public class TransferAirtimeFragment extends Fragment {
 
 
         btnCheckBalance.setOnClickListener(v -> {
-
             if (!isSim1TextviewClicked && !isSim2TextviewClicked) {
                 AppUtils.showSnackBar(getResources().getString(R.string.select_a_number_and_check_balance), sim1Textview);
                 return;
@@ -232,11 +235,6 @@ public class TransferAirtimeFragment extends Fragment {
         button.setEnabled(true);
         button.setClickable(true);
     }
-    private void releaseNextButton(Button button) {
-        button.setBackground(getResources().getDrawable(R.drawable.dashboard_buttons));
-        button.setEnabled(true);
-        button.setClickable(true);
-    }
 
 
     private void performCheckBeforeDialing() {
@@ -249,8 +247,6 @@ public class TransferAirtimeFragment extends Fragment {
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
 
-            releaseNextButton(btnNext);
-
         } else if (isSim2TextviewClicked) {
             if (setNetworkTv2()) return;
 
@@ -260,8 +256,6 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
-
-            releaseNextButton(btnNext);
 
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.click_a_number_first), Toast.LENGTH_SHORT).show();
@@ -402,7 +396,7 @@ public class TransferAirtimeFragment extends Fragment {
 
                 sim1Textview.setBackground(getResources().getDrawable(R.drawable.sim_full_white));
                 sim1Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
-
+                Toast.makeText(getContext(), getResources().getString(R.string.select_a_number_and_check_balance), Toast.LENGTH_LONG).show();
                 break;
 
             case "SIM1 SIM2":
@@ -416,7 +410,7 @@ public class TransferAirtimeFragment extends Fragment {
 
                 sim2Textview.setTextColor(getResources().getColor(R.color.tingtel_red_color));
                 sim2Textview.setBackground(getResources().getDrawable(R.drawable.sim_corners_right2));
-
+                Toast.makeText(getContext(), getResources().getString(R.string.select_a_number_and_check_balance), Toast.LENGTH_LONG).show();
                 break;
         }
     }

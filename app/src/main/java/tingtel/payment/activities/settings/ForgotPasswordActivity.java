@@ -37,7 +37,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyAppli
                     //send password to email
                     Toast.makeText(this, "Password sent", Toast.LENGTH_SHORT).show();
                 } else {
-                    AppUtils.showSnackBar("No network available", emailAddressEdittext);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), emailAddressEdittext);
                 }
 
             }

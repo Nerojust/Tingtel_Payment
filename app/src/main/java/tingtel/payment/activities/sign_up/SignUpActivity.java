@@ -43,13 +43,13 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
                 if (navController != null) {
                     navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim1Fragment, null);
                 }
-                AppUtils.showDialog("You need To register Sim 1 before making any transactions", SignUpActivity.this);
+                AppUtils.showDialog(getResources().getString(R.string.you_need_to_register_sim1_before_making_any_transactions), SignUpActivity.this);
 
             } else if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim2")) {
                 if (navController != null) {
                     navController.navigate(R.id.action_signUpHomeFragment_to_signUpSim2Fragment, null);
                 }
-                AppUtils.showDialog("You need To register Sim 2 before making any transactions", SignUpActivity.this);
+                AppUtils.showDialog(getResources().getString(R.string.you_need_to_register_sim_2_before_making_any_transactions), SignUpActivity.this);
             }
         }
     }

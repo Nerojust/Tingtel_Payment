@@ -44,7 +44,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
                     changePasswordForUser();
                 } else {
-                    AppUtils.showSnackBar("No network available", btnChangePassword);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), btnChangePassword);
                 }
             }
         });
@@ -74,8 +74,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
         webSeviceRequestMaker.changePassword(changePasswordSendObject, new ChangePasswordInterface() {
             @Override
             public void onSuccess(ChangePasswordResponse changePasswordResponse) {
-                //AppUtils.showSnackBar("Password Successfully Changed", edRenterNewPassword);
-                AppUtils.showDialog("Password changed successfully", ChangePasswordActivity.this);
+                AppUtils.showDialog(getResources().getString(R.string.password_changed_successfully), ChangePasswordActivity.this);
                 clearViews();
                 AppUtils.dismissLoadingDialog();
             }
@@ -104,7 +103,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
 
     private boolean isValidFields() {
         if (edNewPassword.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("New Password is required", edNewPassword);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), edNewPassword);
             edNewPassword.requestFocus();
             return false;
         }
@@ -114,12 +113,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
             return false;
         }
         if (edNewPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", edNewPassword);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_too_short), edNewPassword);
             edNewPassword.requestFocus();
             return false;
         }
         if (edRenterNewPassword.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Field is required", edRenterNewPassword);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), edRenterNewPassword);
             edRenterNewPassword.requestFocus();
             return false;
         }
@@ -129,12 +128,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
             return false;
         }
         if (edRenterNewPassword.getText().toString().trim().length() < Constants.MINIMUM_DIGIT_PASSWORD) {
-            AppUtils.showSnackBar("Password is too short", edRenterNewPassword);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_is_too_short), edRenterNewPassword);
             edRenterNewPassword.requestFocus();
             return false;
         }
         if (!edNewPassword.getText().toString().trim().equals(edRenterNewPassword.getText().toString().trim())) {
-            AppUtils.showSnackBar("New passwords do not match", edRenterNewPassword);
+            AppUtils.showSnackBar(getResources().getString(R.string.password_do_not_match), edRenterNewPassword);
             edRenterNewPassword.requestFocus();
             return false;
         }
