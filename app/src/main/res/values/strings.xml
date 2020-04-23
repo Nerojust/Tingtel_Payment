@@ -218,6 +218,9 @@
     <string name="new_email_fields_do_not_match">New Email fields do not match</string>
     <string name="new_email_is_required">New Email is required</string>
     <string name="transaction_status">Transaction Status:</string>
+    <string name="you">(You)</string>
+    <string name="at">at</string>
+    <string name="no_sim_detected">No Sim Detected</string>
 
 
 </resources>

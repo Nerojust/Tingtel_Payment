@@ -27,7 +27,7 @@ public class HistoryActivity extends AppCompatActivity implements MyApplication.
 
         switch (NoOfSIm) {
             case "NO SIM":
-                Toast.makeText(this, "No sim detected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.no_sim_detected), Toast.LENGTH_SHORT).show();
                 break;
 
             case "SIM1":

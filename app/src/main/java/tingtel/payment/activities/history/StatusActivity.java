@@ -120,7 +120,7 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
                 alertDialog.dismiss();
                 deleteTransaction();
             } else {
-                AppUtils.showSnackBar("No network available", deleteImageview);
+                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), deleteImageview);
             }
         });
 
@@ -181,18 +181,18 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
     }
 
     private void setStepViewToPendingStatusHistory() {
-        list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
-        list0.add("TO TINGTEL \n at " + created_date);
-        list0.add("From TINGTEL");
-        list0.add("To " + receiver_number);
+        list0.add(getResources().getString(R.string.naira) + amount + " " + getResources().getString(R.string.from) + " " + sender_number + " " + getResources().getString(R.string.you));
+        list0.add(getResources().getString(R.string.to) + " TINGTEL \n " + getResources().getString(R.string.at) + " " + created_date);
+        list0.add(getResources().getString(R.string.from) + " TINGTEL");
+        list0.add(getResources().getString(R.string.to) + " " + receiver_number);
         setStepParams(list0, list0.size() - 2);
     }
 
     private void setStepViewToCompletedStatusHistory() {
-        list0.add(getResources().getString(R.string.naira) + amount + " from " + sender_number + "(You)");
-        list0.add("TO TINGTEL \n at " + created_date);
-        list0.add("From TINGTEL");
-        list0.add("To " + receiver_number);
+        list0.add(getResources().getString(R.string.naira) + amount + " " + getResources().getString(R.string.from) + " " + sender_number + " " + getResources().getString(R.string.you));
+        list0.add(getResources().getString(R.string.to) + " TINGTEL \n " + getResources().getString(R.string.at) + " " + created_date);
+        list0.add(getResources().getString(R.string.from) + " TINGTEL");
+        list0.add(getResources().getString(R.string.to) + " " + receiver_number);
         setStepParams(list0, list0.size());
     }
 
@@ -233,7 +233,7 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
                     }
 
                 } else {
-                    AppUtils.showDialog("No transactions found", StatusActivity.this);
+                    AppUtils.showDialog(getResources().getString(R.string.no_record_found), StatusActivity.this);
                 }
                 AppUtils.dismissLoadingDialog();
             }

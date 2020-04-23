@@ -203,6 +203,9 @@
     <string name="new_email_fields_do_not_match">Les nouveaux champs de messagerie ne correspondent pas</string>
     <string name="new_email_is_required">Un nouveau courriel est requis</string>
     <string name="transaction_status">Statut de la transaction:</string>
+    <string name="you">(Vous)</string>
+    <string name="at">à</string>
+    <string name="no_sim_detected">Aucun Sim détecté</string>
 
 
 </resources>
