@@ -61,7 +61,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
 
         ChangePasswordSendObject changePasswordSendObject = new ChangePasswordSendObject();
         changePasswordSendObject.setEmail(sessionManager.getEmailFromLogin());
-        //todo: get from login
         changePasswordSendObject.setPhone(sessionManager.getNumberFromLogin());
         changePasswordSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailFromLogin(), sessionManager.getNumberFromLogin()));
         changePasswordSendObject.setPassword(edRenterNewPassword.getText().toString().trim());

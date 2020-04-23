@@ -44,7 +44,7 @@ public class ChangeEmailActivity extends AppCompatActivity implements MyApplicat
                 if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
                     changeEmailForUser();
                 } else {
-                    AppUtils.showSnackBar("No network available", btnChangeEmail);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), btnChangeEmail);
                 }
             }
         });
@@ -101,27 +101,27 @@ public class ChangeEmailActivity extends AppCompatActivity implements MyApplicat
 
     private boolean isValidFields() {
         if (edNewEmail.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("New Email is required", edNewEmail);
+            AppUtils.showSnackBar(getResources().getString(R.string.new_email_is_required), edNewEmail);
             edNewEmail.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(edNewEmail.getText().toString().trim())) {
-            AppUtils.showSnackBar("Invalid email address", edNewEmail);
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_email_address), edNewEmail);
             edNewEmail.requestFocus();
             return false;
         }
         if (edRenterNewEmail.getText().toString().trim().isEmpty()) {
-            AppUtils.showSnackBar("Field is required", edRenterNewEmail);
+            AppUtils.showSnackBar(getResources().getString(R.string.this_is_required), edRenterNewEmail);
             edRenterNewEmail.requestFocus();
             return false;
         }
         if (!AppUtils.isValidEmailAddress(edRenterNewEmail.getText().toString().trim())) {
-            AppUtils.showSnackBar("Invalid email address", edRenterNewEmail);
+            AppUtils.showSnackBar(getResources().getString(R.string.invalid_email_address), edRenterNewEmail);
             edRenterNewEmail.requestFocus();
             return false;
         }
         if (!edNewEmail.getText().toString().trim().equals(edRenterNewEmail.getText().toString().trim())) {
-            AppUtils.showSnackBar("New Email fields do not match", edRenterNewEmail);
+            AppUtils.showSnackBar(getResources().getString(R.string.new_email_fields_do_not_match), edRenterNewEmail);
             edRenterNewEmail.requestFocus();
             return false;
         }
