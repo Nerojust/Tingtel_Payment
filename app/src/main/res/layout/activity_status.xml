@@ -72,7 +72,7 @@
                     android:layout_weight="4"
                     android:gravity="right"
                     android:padding="@dimen/_5ssp"
-                    android:text="Transaction Status:"
+                    android:text="@string/transaction_status"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 

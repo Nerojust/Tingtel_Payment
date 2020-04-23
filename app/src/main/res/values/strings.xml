@@ -217,6 +217,7 @@
     <string name="password_changed_successfully">Password changed successfully</string>
     <string name="new_email_fields_do_not_match">New Email fields do not match</string>
     <string name="new_email_is_required">New Email is required</string>
+    <string name="transaction_status">Transaction Status:</string>
 
 
 </resources>
