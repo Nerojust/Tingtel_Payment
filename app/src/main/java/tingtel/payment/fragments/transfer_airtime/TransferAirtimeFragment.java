@@ -357,6 +357,7 @@ public class TransferAirtimeFragment extends Fragment {
         String Sim1Serial = sessionManager.getSimSerialICCID();
         if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() > 0) {
             sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+            sessionManager.setSimOneNetworkName(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork());
             return true;
         } else {
             return false;
@@ -367,6 +368,7 @@ public class TransferAirtimeFragment extends Fragment {
         String Sim2Serial = sessionManager.getSimSerialICCID1();
         if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() > 0) {
             sessionManager.setSimTwoPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+            sessionManager.setSimTwoNetworkName(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork());
             return true;
         } else {
             return false;

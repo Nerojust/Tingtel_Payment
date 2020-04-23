@@ -107,4 +107,6 @@ public class ReportIssueActivity extends AppCompatActivity implements MyApplicat
     public void doLogout() {
         new Handler(Looper.getMainLooper()).post(() -> AppUtils.logOutInactivitySessionTimeout(this));
     }
+
+
 }

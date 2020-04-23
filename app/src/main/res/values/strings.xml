@@ -221,6 +221,7 @@
     <string name="you">(You)</string>
     <string name="at">at</string>
     <string name="no_sim_detected">No Sim Detected</string>
+    <string name="an_otp_has_been_sent_to_your_phone_number">An OTP Has Been Sent to Your Phone Number</string>
 
 
 </resources>

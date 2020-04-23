@@ -14,18 +14,19 @@ import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
+import tingtel.payment.database.AppDatabase;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.utils.SessionManager;
 
 public class SignUpActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
     Intent intent;
-
+AppDatabase appDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        appDatabase = AppDatabase.getDatabaseInstance(this);
 
         Fragment navhost = getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         NavController navController = null;
@@ -37,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity implements MyApplication.L
         intent = getIntent();
         if (intent.getStringExtra("task") == null) {
             sessionManager.setIsRegistered(false);
+            appDatabase.simCardsDao().delete();
         } else {
             sessionManager.setIsRegistered(true);
             if (Objects.requireNonNull(intent.getStringExtra("task")).equalsIgnoreCase("registerSim1")) {

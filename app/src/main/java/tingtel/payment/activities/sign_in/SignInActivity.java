@@ -45,7 +45,7 @@ import javax.crypto.NoSuchPaddingException;
 import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
-import tingtel.payment.activities.settings.ForgotPasswordActivity;
+import tingtel.payment.activities.forgot_password.ForgotPasswordActivity;
 import tingtel.payment.activities.sign_up.SignUpActivity;
 import tingtel.payment.database.AppDatabase;
 import tingtel.payment.models.SimCards;

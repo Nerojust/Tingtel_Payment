@@ -1,4 +1,4 @@
-package tingtel.payment.activities.settings;
+package tingtel.payment.activities.forgot_password;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,25 +25,36 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyAppli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        emailAddressEdittext = findViewById(R.id.emailEdittext);
-        Button submitButton = findViewById(R.id.btn_submit);
 
-        submitButton.setOnClickListener(v -> {
-            retrievedEmailAaddress = emailAddressEdittext.getText().toString();
 
-            if (isValidFields()) {
 
-                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
-                    //send password to email
-                    Toast.makeText(this, "Password sent", Toast.LENGTH_SHORT).show();
-                } else {
-                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), emailAddressEdittext);
-                }
 
-            }
-            //todo: make retrofit call to the forgot password endpoint and handle the response
 
-        });
+
+
+
+
+
+
+//        emailAddressEdittext = findViewById(R.id.emailEdittext);
+//        Button submitButton = findViewById(R.id.btn_submit);
+//
+//        submitButton.setOnClickListener(v -> {
+//            retrievedEmailAaddress = emailAddressEdittext.getText().toString();
+//
+//            if (isValidFields()) {
+//
+//                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+//                    //send password to email
+//                    Toast.makeText(this, "Password sent", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), emailAddressEdittext);
+//                }
+//
+//            }
+//            //todo: make retrofit call to the forgot password endpoint and handle the response
+//
+//        });
     }
 
     /**

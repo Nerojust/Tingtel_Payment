@@ -60,7 +60,7 @@ public class SimCardsAdapter extends RecyclerView.Adapter<SimCardsAdapter.MyView
         holder.imgDelete.setTag(mData.get(position));
         holder.tvPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(mData.get(position).getPhoneNumber()));
         holder.tvNetworkName.setText(mData.get(position).getSimNetwork());
-
+        Log.e("gggp", mData.get(position).getPhoneNumber() + " " + sessionManager.getSimOnePhoneNumber() + " " + sessionManager.getSimTwoPhoneNumber());
         if (mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber()) ||
                 mData.get(position).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimTwoPhoneNumber())) {
             holder.on_off_switch.setChecked(true);

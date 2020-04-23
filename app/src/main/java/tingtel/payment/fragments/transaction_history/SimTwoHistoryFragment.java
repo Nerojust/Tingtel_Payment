@@ -187,7 +187,7 @@ public class SimTwoHistoryFragment extends Fragment {
 
     private void displayDialog(String message) {
         TextView tvMessage = dialogView.findViewById(R.id.tv_message);
-        TextView retry = dialogView.findViewById(R.id.btn_yes);
+        TextView retry = dialogView.findViewById(R.id.btn_ok);
         TextView cancel = dialogView.findViewById(R.id.btn_no);
 
         tvMessage.setText(message);
