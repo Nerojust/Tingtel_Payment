@@ -61,6 +61,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
 
@@ -70,11 +71,10 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_weight="4"
-                    android:gravity="right"
                     android:padding="@dimen/_5ssp"
                     android:text="@string/transaction_status"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <ImageView
                     android:id="@+id/deleteImage"
@@ -82,6 +82,7 @@
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:src="@drawable/ic_delete_black_24dp" />
             </LinearLayout>
 

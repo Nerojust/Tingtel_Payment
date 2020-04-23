@@ -69,7 +69,7 @@
     <string name="report_issue">NUMÉRO DE RAPPORT</string>
     <string name="enter_sim_2_details">ENTREZ LES DÉTAILS DE LA SIM 2</string>
     <string name="select_sim_2_network">SÉLECTIONNER LE RÉSEAU SIM 2</string>
-    <string name="from">DE</string>
+    <string name="from">de</string>
     <string name="to">À</string>
     <string name="manage_sims">GÉRER LES SIMS</string>
     <string name="tutorial_how_to_use">TUTORIAL (COMMENT UTILISER)</string>
