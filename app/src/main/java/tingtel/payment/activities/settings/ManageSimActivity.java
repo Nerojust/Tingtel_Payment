@@ -1,5 +1,6 @@
 package tingtel.payment.activities.settings;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,7 @@ import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.MyApplication;
+import tingtel.payment.utils.NetworkCarrierUtils;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
@@ -124,6 +127,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void saveNewDataIntoDatabase(CustomerLoginResponse loginResponses) {
         if (loginResponses.getSim1().get(0).getPhone() != null) {
             SimCards sim = new SimCards();
@@ -160,6 +164,38 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
             //adding to database
             appDatabase.simCardsDao().insert(sim);
             Log.e("TingtelApp", "my number is" + loginResponses.getSim4().get(0).getPhone4());
+        }
+
+
+        updateSimDetails();
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void updateSimDetails() {
+        NetworkCarrierUtils.getCarrierOfSim(getApplicationContext(), ManageSimActivity.this);
+        String NoOfSIm = sessionManager.getSimStatus();
+        String Sim1Serial = sessionManager.getSimSerialICCID();
+        String Sim2Serial = sessionManager.getSimSerialICCID1();
+
+        switch (NoOfSIm) {
+            case "NO SIM":
+                break;
+            case "SIM1":
+
+                sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+                sessionManager.setSimOneNetworkName(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork());
+                sessionManager.setSimTwoPhoneNumber("");
+                sessionManager.setSimTwoNetworkName("");
+
+                break;
+            case "SIM1 SIM2":
+                sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
+                sessionManager.setSimOneNetworkName(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork());
+                sessionManager.setSimTwoPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
+                sessionManager.setSimTwoNetworkName(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork());
+                break;
         }
     }
 
