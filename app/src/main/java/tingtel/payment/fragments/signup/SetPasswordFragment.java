@@ -3,6 +3,8 @@ package tingtel.payment.fragments.signup;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,6 +134,26 @@ public class SetPasswordFragment extends Fragment {
 
         tvPassword1 = view.findViewById(R.id.tv_password1);
         tvPassword2 = view.findViewById(R.id.tv_password2);
+        tvPassword2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() >= 5) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSetPassword, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSetPassword, false);
+                }
+            }
+        });
         btnSetPassword = view.findViewById(R.id.btn_set_password);
     }
 

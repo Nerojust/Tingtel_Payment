@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,6 +184,26 @@ public class SignUpSim2OtpFragment extends Fragment {
 
     private void initViews(View view) {
         pinView = view.findViewById(R.id.pinView);
+        pinView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 4) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnConfirmOtp, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnConfirmOtp, false);
+                }
+            }
+        });
         resendOTP = view.findViewById(R.id.resendOTPTextview);
         btnConfirmOtp = view.findViewById(R.id.btn_confirm_otp);
 

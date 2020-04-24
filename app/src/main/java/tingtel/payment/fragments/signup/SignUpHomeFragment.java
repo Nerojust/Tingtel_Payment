@@ -3,6 +3,8 @@ package tingtel.payment.fragments.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +74,27 @@ public class SignUpHomeFragment extends Fragment {
         lastName = view.findViewById(R.id.tv_last_name);
         emailAddress = view.findViewById(R.id.tv_email_address);
         username = view.findViewById(R.id.tv_username);
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 4 && !firstName.getText().toString().isEmpty()
+                        && !lastName.getText().toString().isEmpty() && !emailAddress.getText().toString().isEmpty()) {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSignUp, true);
+                } else {
+                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSignUp, false);
+                }
+            }
+        });
 
         tvLogin = view.findViewById(R.id.tv_login);
         btnSignUp = view.findViewById(R.id.btn_sign_up);
