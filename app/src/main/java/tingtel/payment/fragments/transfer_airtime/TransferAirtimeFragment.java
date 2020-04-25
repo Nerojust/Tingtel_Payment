@@ -381,7 +381,7 @@ public class TransferAirtimeFragment extends Fragment {
         noOfSIm = sessionManager.getSimStatus();
         String sim1Number = sessionManager.getSimOnePhoneNumber();
         String sim2Number = sessionManager.getSimTwoPhoneNumber();
-        if (sim1Number == null || sim2Number == null) {
+        if (sim1Number.equals("") || sim2Number.equals("")) {
             Toast.makeText(getContext(), "Register ur sim/s", Toast.LENGTH_SHORT).show();
             return;
         }
