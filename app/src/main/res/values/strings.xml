@@ -107,9 +107,6 @@
     <string name="put_on_your_gps">Location is needed to proceed</string>
     <string name="loading_please_wait">Loading, please wait...</string>
     <string name="welcome_customer">Welcome Customer</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sim_one_history">Sim 1 History</string>
     <string name="sim_two_history">Sim 2 History</string>
     <string name="do_you_want_to_delete_this_record">DO YOU WANT TO DELETE THIS RECORD?</string>
@@ -222,6 +219,7 @@
     <string name="at">at</string>
     <string name="no_sim_detected">No Sim Detected</string>
     <string name="an_otp_has_been_sent_to_your_phone_number">An OTP Has Been Sent to Your Phone Number</string>
+    <string name="not_registered_sign_up">Not Registered? Signup</string>
 
 
 </resources>

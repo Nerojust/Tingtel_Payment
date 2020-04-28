@@ -17,6 +17,8 @@ import tingtel.payment.models.delete_sim.DeleteSimResponse;
 import tingtel.payment.models.delete_sim.DeleteSimSendObject;
 import tingtel.payment.models.delete_transaction.DeleteTransactionResponse;
 import tingtel.payment.models.delete_transaction.DeleteTransactionSendObject;
+import tingtel.payment.models.forgot_password.ForgotPasswordResponse;
+import tingtel.payment.models.forgot_password.ForgotPasswordSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -75,4 +77,7 @@ public interface PostServiceInterface {
 
     @POST("delete_single_transaction")
     Call<DeleteTransactionResponse> deleteAsingleTransaction(@Body DeleteTransactionSendObject deleteTransactionSendObject);
+
+    @POST("forgot_password")
+    Call<ForgotPasswordResponse> forgotPassword(@Body ForgotPasswordSendObject forgotPasswordSendObject);
 }

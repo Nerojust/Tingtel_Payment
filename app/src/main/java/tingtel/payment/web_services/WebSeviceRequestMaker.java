@@ -24,6 +24,8 @@ import tingtel.payment.models.delete_sim.DeleteSimResponse;
 import tingtel.payment.models.delete_sim.DeleteSimSendObject;
 import tingtel.payment.models.delete_transaction.DeleteTransactionResponse;
 import tingtel.payment.models.delete_transaction.DeleteTransactionSendObject;
+import tingtel.payment.models.forgot_password.ForgotPasswordResponse;
+import tingtel.payment.models.forgot_password.ForgotPasswordSendObject;
 import tingtel.payment.models.login.CustomerLoginResponse;
 import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.models.otp.SendOTPresponse;
@@ -48,6 +50,7 @@ import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
 import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 import tingtel.payment.web_services.interfaces.DeleteSimInterface;
 import tingtel.payment.web_services.interfaces.DeleteSingleHistoryInterface;
+import tingtel.payment.web_services.interfaces.ForgotPasswordInterface;
 import tingtel.payment.web_services.interfaces.GetUserProfileInterface;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 import tingtel.payment.web_services.interfaces.ReportIssueInterface;
@@ -518,6 +521,44 @@ public class WebSeviceRequestMaker {
                     Log.e("Login error", error);
                 } else {
                     deleteAccountInterface.onError("Network error");
+                }
+            }
+        });
+    }
+
+    public void forgotPassword(ForgotPasswordSendObject forgotPasswordSendObject, ForgotPasswordInterface forgotPasswordInterface) {
+        Call<ForgotPasswordResponse> call = postInterfaceService.forgotPassword(forgotPasswordSendObject);
+        call.enqueue(new Callback<ForgotPasswordResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ForgotPasswordResponse> call, @NonNull Response<ForgotPasswordResponse> response) {
+                if (response.isSuccessful()) {
+                    ForgotPasswordResponse forgotPasswordResponse = response.body();
+
+                    if (forgotPasswordResponse != null) {
+                        if (forgotPasswordResponse.getCode().equals(Constants.SUCCESS)) {
+                            forgotPasswordInterface.onSuccess(forgotPasswordResponse);
+                        } else {
+                            forgotPasswordInterface.onError(forgotPasswordResponse.getDescription());
+                        }
+                    }
+                } else {
+                    forgotPasswordInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ForgotPasswordResponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        forgotPasswordInterface.onError("Network Error, please try again");
+                    } else {
+                        forgotPasswordInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    forgotPasswordInterface.onError("Network error");
                 }
             }
         });
