@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_height="match_parent"
     tools:context=".activities.settings.AboutUsActivity">
 
     <TextView
@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tingtel_technology_solutions"
-        android:textSize="24sp"
         android:textColor="@color/tingtel_red_color"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
@@ -28,11 +28,60 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/_17sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center"
-        android:layout_height="wrap_content"
         android:text="@string/no_29_ribadu_road_off_awolowo_road_ikoyi_lagos_state_nigeria"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Support Numbers"
+        android:textColor="@color/tingtel_red_color"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_17sdp"
+        android:gravity="center"
+        android:text="+23480359000000"
+        android:textSize="18sp" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_17sdp"
+        android:gravity="center"
+        android:text="+23480284789374"
+        android:textSize="18sp" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_17sdp"
+        android:gravity="center"
+        android:text="+23480237862330"
+        android:textSize="18sp" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_17sdp"
+        android:gravity="center"
+        android:text="+23480589284783"
         android:textSize="18sp" />
 </LinearLayout>

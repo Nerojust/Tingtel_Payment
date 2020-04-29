@@ -540,10 +540,8 @@ public class SignInActivity extends GPSutils {
         MobileAds.initialize(this, initializationStatus -> {});
 
         AdView adView = findViewById(R.id.adView);
-        AdView adView1 = findViewById(R.id.adView1);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-        adView1.loadAd(adRequest);
 
         usernameEditext = findViewById(R.id.tv_username);
         passwordEditext = findViewById(R.id.tv_password);

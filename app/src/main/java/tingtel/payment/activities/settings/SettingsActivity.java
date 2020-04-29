@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +33,9 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
 
     Button logoutButton;
     private LinearLayout changePasswordLayout, manageBeneficiariesLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, qrCodeLayout, shareAppLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+            reportIssueLayout, qrCodeLayout, faqLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     private SessionManager sessionManager;
+    private ImageView shareImageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +49,14 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
     private void initViews() {
         backArrowLayout = findViewById(R.id.backArrowLayout);
         //qrCodeLayout = findViewById(R.id.qrCodeLayout);
-
+        shareImageview = findViewById(R.id.shareImageview);
         changePasswordLayout = findViewById(R.id.changePasswordLayout);
         changeEmailAddressLayout = findViewById(R.id.changeEmailLayout);
         manageSimLayout = findViewById(R.id.manageSimLayout);
         manageBeneficiariesLayout = findViewById(R.id.manageBeneficiariesLayout);
         tutorialLayout = findViewById(R.id.tutorialLayout);
         reportIssueLayout = findViewById(R.id.reportIssueLayout);
-        shareAppLayout = findViewById(R.id.shareAppLayout);
+        faqLayout = findViewById(R.id.faqLayout);
         deleteAccountLayout = findViewById(R.id.deleteAccountLayout);
         privacyPolicyLayout = findViewById(R.id.privacyPolicyLayout);
         aboutUsLayout = findViewById(R.id.aboutUsLayout);
@@ -70,8 +72,8 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
         manageBeneficiariesLayout.setOnClickListener(v -> startActivity(new Intent(this, ManageBeneficiariesActivity.class)));
         tutorialLayout.setOnClickListener(v -> startActivity(new Intent(this, TutorialActivity.class)));
         reportIssueLayout.setOnClickListener(v -> startActivity(new Intent(this, ReportIssueActivity.class)));
-
-        shareAppLayout.setOnClickListener(v -> {
+        faqLayout.setOnClickListener(v -> startActivity(new Intent(this, FaqActivity.class)));
+        shareImageview.setOnClickListener(v -> {
             try {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");

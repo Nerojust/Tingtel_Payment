@@ -27,6 +27,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.settings.FaqActivity"
+            android:label="@string/faq"
+            android:parentActivityName=".activities.settings.SettingsActivity"/>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3223394163127231~3493954191" />

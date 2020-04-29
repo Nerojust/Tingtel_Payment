@@ -20,10 +20,7 @@
     <string name="yes_delete">YES, DELETE</string>
     <string name="cancel">NO, CANCEL</string>
     <string name="are_you_sure_you_want_to_delete_your_account_n_nb_your_data_would_be_erased">ARE YOUR SURE YOU WANT TO DELETE YOUR ACCOUNT? YOUR DATA WILL BE ERASED.</string>
-
     <string name="change_email">CHANGE EMAIL</string>
-
-
     <string name="sim_1">SIM 1</string>
     <string name="sim_2">SIM 2</string>
     <string name="next">NEXT</string>
@@ -220,6 +217,8 @@
     <string name="no_sim_detected">No Sim Detected</string>
     <string name="an_otp_has_been_sent_to_your_phone_number">An OTP Has Been Sent to Your Phone Number</string>
     <string name="not_registered_sign_up">Not Registered? Signup</string>
+    <string name="faq">FAQ\'s</string>
+    <string name="frequently_asked_questions">FREQUENTLY ASKED QUESTIONS</string>
 
 
 </resources>

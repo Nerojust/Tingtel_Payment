@@ -206,6 +206,12 @@
     <string name="you">(Vous)</string>
     <string name="at">à</string>
     <string name="no_sim_detected">Aucun Sim détecté</string>
-
-
+    <string name="faq">FAQ\'s</string>
+    <string name="frequently_asked_questions">Questions fréquemment posées</string>
+    <string name="minimum_is">Le montant est trop faible. Le minimum est</string>
+    <string name="check_balance_first">Veuillez d\'abord vérifier le solde du compte</string>
+    <string name="invalid_hash_key">clé de hachage non valide</string>
+    <string name="name_is_too_short">Le prénom est trop court</string>
+    <string name="an_otp_has_been_sent_to_your_phone_number">Un OTP a été envoyé à votre numéro de téléphone</string>
+    <string name="not_registered_sign_up">Non enregistré? S\'inscrire</string>
 </resources>
