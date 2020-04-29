@@ -74,11 +74,11 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
     private void makeLoginRequestToFetchSimDetails() {
         AppUtils.initLoadingDialog(this);
 
-        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
-        loginSendObject.setUsername(sessionManager.getUserame());
-        loginSendObject.setPassword(sessionManager.getPassword());
-        loginSendObject.setHash(AppUtils.getSHA512(sessionManager.getUserame() + sessionManager.getPassword() + BuildConfig.HASH_KEY));
-
+        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject.Builder()
+                .username(sessionManager.getUserame())
+                .password(sessionManager.getPassword())
+                .hash(AppUtils.getSHA512(sessionManager.getUserame() + sessionManager.getPassword() + BuildConfig.HASH_KEY))
+                .build();
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(loginSendObject);
