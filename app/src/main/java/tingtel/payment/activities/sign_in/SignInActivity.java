@@ -23,6 +23,9 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
@@ -534,6 +537,14 @@ public class SignInActivity extends GPSutils {
     }
 
     private void initViews() {
+        MobileAds.initialize(this, initializationStatus -> {});
+
+        AdView adView = findViewById(R.id.adView);
+        AdView adView1 = findViewById(R.id.adView1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+        adView1.loadAd(adRequest);
+
         usernameEditext = findViewById(R.id.tv_username);
         passwordEditext = findViewById(R.id.tv_password);
         passwordEditext.addTextChangedListener(new TextWatcher() {

@@ -42,6 +42,9 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
     private LinearLayout noRecordFoundLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SessionManager sessionManager;
+    private String sim2number;
+    private String sim2number1;
+    private String sim2network;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +174,6 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void updateSimDetails() {
         NetworkCarrierUtils.getCarrierOfSim(getApplicationContext(), ManageSimActivity.this);
@@ -191,10 +193,21 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
 
                 break;
             case "SIM1 SIM2":
-                sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
-                sessionManager.setSimOneNetworkName(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork());
-                sessionManager.setSimTwoPhoneNumber(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber());
-                sessionManager.setSimTwoNetworkName(appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork());
+                String sim1number = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber();
+                String sim1network = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork();
+
+                if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() == 0) {
+                    sim2number = "";
+                    sim2network="";
+                } else {
+                    sim2number = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber();
+                    sim2network = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork();
+                }
+
+                sessionManager.setSimOnePhoneNumber(sim1number);
+                sessionManager.setSimOneNetworkName(sim1network);
+                sessionManager.setSimTwoPhoneNumber(sim2number);
+                sessionManager.setSimTwoNetworkName(sim2network);
                 break;
         }
     }

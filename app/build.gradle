@@ -7,6 +7,7 @@ android {
         applicationId "tingtel.payment"
         minSdkVersion 17
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -59,7 +60,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     //step progress indicator
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
-
+    implementation 'com.github.baoyachi:StepView:1.9'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
@@ -67,4 +68,6 @@ dependencies {
     //biometric
     implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    implementation 'com.google.android.gms:play-services-ads:19.1.0'
 }

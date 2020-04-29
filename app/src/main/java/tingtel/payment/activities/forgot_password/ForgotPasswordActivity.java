@@ -54,9 +54,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyAppli
     private void makeForgotPasswordRequest() {
         ForgotPasswordSendObject forgotPasswordSendObject = new ForgotPasswordSendObject();
         forgotPasswordSendObject.setEmail(retrievedEmailAaddress);
-        forgotPasswordSendObject.setPhone();
-        forgotPasswordSendObject.setPassword();
-        forgotPasswordSendObject.setHash();
+        //forgotPasswordSendObject.setPhone();
+        //forgotPasswordSendObject.setPassword();
+        //forgotPasswordSendObject.setHash();
 
         WebSeviceRequestMaker webSeviceRequestMaker = new WebSeviceRequestMaker();
         webSeviceRequestMaker.forgotPassword(forgotPasswordSendObject, new ForgotPasswordInterface() {
