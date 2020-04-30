@@ -84,15 +84,16 @@ public class SetPasswordFragment extends Fragment {
         sim2.setUserNetwork(sessionManager.getSimTwoNetworkName());
         sim2.setSerialNumber(sessionManager.getSimSerialICCID1());
 
-        CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject();
-        customerRegistrationSendObject.setFirstName(sessionManager.getFirstName());
-        customerRegistrationSendObject.setLastName(sessionManager.getLastNameFromLogin());
-        customerRegistrationSendObject.setEmail(sessionManager.getEmailAddress());
-        customerRegistrationSendObject.setUsername(sessionManager.getUserame());
-        customerRegistrationSendObject.setSim1(sim1);
-        customerRegistrationSendObject.setSim2(sim2);
-        customerRegistrationSendObject.setPassword(Objects.requireNonNull(tvPassword1.getText()).toString().trim());
-        customerRegistrationSendObject.setHash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimOnePhoneNumber()));
+        CustomerRegistrationSendObject customerRegistrationSendObject = new CustomerRegistrationSendObject.Builder()
+                .firstName(sessionManager.getFirstName())
+                .lastName(sessionManager.getLastNameFromLogin())
+                .email(sessionManager.getEmailAddress())
+                .username(sessionManager.getUserame())
+                .sim1(sim1)
+                .sim2(sim2)
+                .password(Objects.requireNonNull(tvPassword1.getText()).toString().trim())
+                .hash(AppUtils.generateHash(sessionManager.getEmailAddress(), sessionManager.getSimOnePhoneNumber()))
+                .build();
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(customerRegistrationSendObject);

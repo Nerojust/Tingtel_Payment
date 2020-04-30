@@ -87,7 +87,7 @@ public class SignUpHomeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 4 && !firstName.getText().toString().isEmpty()
+                if (s.length() >= 4 && !firstName.getText().toString().isEmpty()
                         && !lastName.getText().toString().isEmpty() && !emailAddress.getText().toString().isEmpty()) {
                     AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSignUp, true);
                 } else {

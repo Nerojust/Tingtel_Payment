@@ -33,9 +33,9 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
 
     Button logoutButton;
     private LinearLayout changePasswordLayout, manageBeneficiariesLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, qrCodeLayout, faqLayout, deleteAccountLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+            reportIssueLayout, qrCodeLayout, faqLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     private SessionManager sessionManager;
-    private ImageView shareImageview;
+    private ImageView shareImageview, deleteAccountImageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
         tutorialLayout = findViewById(R.id.tutorialLayout);
         reportIssueLayout = findViewById(R.id.reportIssueLayout);
         faqLayout = findViewById(R.id.faqLayout);
-        deleteAccountLayout = findViewById(R.id.deleteAccountLayout);
+        deleteAccountImageview =findViewById(R.id.deleteAccountImageview);
         privacyPolicyLayout = findViewById(R.id.privacyPolicyLayout);
         aboutUsLayout = findViewById(R.id.aboutUsLayout);
         logoutButton = findViewById(R.id.logoutButton);
@@ -87,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
             }
         });
 
-        deleteAccountLayout.setOnClickListener(v -> {
+        deleteAccountImageview.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             ViewGroup viewGroup = findViewById(android.R.id.content);
             View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_delete_account, viewGroup, false);
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
                     //perform deletion
                     deleteAccount();
                 } else {
-                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), deleteAccountLayout);
+                    AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), deleteAccountImageview);
                 }
             });
 

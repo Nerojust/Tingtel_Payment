@@ -30,70 +30,79 @@ public class CustomerRegistrationSendObject {
     @Expose
     private Sim2 sim2;
 
-    public String getEmail() {
-        return email;
+    private CustomerRegistrationSendObject(Builder builder) {
+        this.email = builder.email;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.password = builder.password;
+        this.username = builder.username;
+        this.hash = builder.hash;
+        this.sim1 = builder.sim1;
+        this.sim2 = builder.sim2;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public static Builder newCustomerRegistrationSendObject() {
+        return new Builder();
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public static final class Builder {
+        private String email;
+        private String firstName;
+        private String lastName;
+        private String password;
+        private String username;
+        private String hash;
+        private Sim1 sim1;
+        private Sim2 sim2;
 
-    public String getLastName() {
-        return lastName;
-    }
+        public Builder() {
+        }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+        public CustomerRegistrationSendObject build() {
+            return new CustomerRegistrationSendObject(this);
+        }
 
-    public String getPassword() {
-        return password;
-    }
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
 
-    public String getUsername() {
-        return username;
-    }
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
 
-    public String getHash() {
-        return hash;
-    }
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
 
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
+        public Builder hash(String hash) {
+            this.hash = hash;
+            return this;
+        }
 
-    public Sim1 getSim1() {
-        return sim1;
-    }
+        public Builder sim1(Sim1 sim1) {
+            this.sim1 = sim1;
+            return this;
+        }
 
-    public void setSim1(Sim1 sim1) {
-        this.sim1 = sim1;
+        public Builder sim2(Sim2 sim2) {
+            this.sim2 = sim2;
+            return this;
+        }
     }
-
-    public Sim2 getSim2() {
-        return sim2;
-    }
-
-    public void setSim2(Sim2 sim2) {
-        this.sim2 = sim2;
-    }
-
 }
 
 

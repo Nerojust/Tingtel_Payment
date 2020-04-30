@@ -51,6 +51,10 @@ public class AppUtils {
 
     private static SessionManager sessionManager;
     private static ProgressDialog progress;
+    private static AppUtils INSTANCE = new AppUtils();
+
+    private AppUtils() {
+    }
 
     public static SessionManager getSessionManagerInstance() {
         if (sessionManager == null) {
@@ -320,5 +324,9 @@ public class AppUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static AppUtils getInstance() {
+        return INSTANCE;
     }
 }
