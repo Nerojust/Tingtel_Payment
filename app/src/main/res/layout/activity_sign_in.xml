@@ -31,11 +31,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginStart="154dp"
-            android:layout_marginLeft="154dp"
+            android:layout_marginLeft="158dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="169dp"
-            android:layout_marginRight="153dp"
+            android:layout_marginRight="158dp"
             android:layout_marginBottom="63dp"
             android:src="@drawable/tingtel_one" />
     </RelativeLayout>

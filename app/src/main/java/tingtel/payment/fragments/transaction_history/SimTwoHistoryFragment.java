@@ -134,20 +134,19 @@ public class SimTwoHistoryFragment extends Fragment {
                         swipeRefreshLayout.setVisibility(View.VISIBLE);
 
                         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
+                        boolean found = false;
 
                         for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
                             Log.e("TingtelApp", "Server no is: " + transactionHistoryResponse.getResults().get(i).getPhoneNumber() + "Sim1No is " + sessionManager.getSimTwoPhoneNumber());
 
                             if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
-
                                 if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimTwoPhoneNumber())) {
-
                                     if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
-                                        //   noRecordFound.setVisibility(View.VISIBLE);
                                         swipeRefreshLayout.setVisibility(View.GONE);
                                         AppUtils.showDialog("No Record Found", getActivity());
+                                        break;
                                     } else {
-                                        // noRecordFound.setVisibility(View.GONE);
+                                        found = true;
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);
                                         SimTwoHistoryAdapter historyAdapter = new SimTwoHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
                                         recyclerView.setAdapter(historyAdapter);
@@ -155,11 +154,16 @@ public class SimTwoHistoryFragment extends Fragment {
                                         if (swipeRefreshLayout.isRefreshing()) {
                                             swipeRefreshLayout.setRefreshing(false);
                                         }
+                                        break;
                                     }
 
                                 }
                             }
 
+                        }
+                        if (!found) {
+                            noRecordFoundLayout.setVisibility(View.VISIBLE);
+                            swipeRefreshLayout.setVisibility(View.GONE);
                         }
                     }
                 } else {
@@ -200,7 +204,7 @@ public class SimTwoHistoryFragment extends Fragment {
             }
             alertDialog.dismiss();
         });
-        cancel.setOnClickListener(v->{
+        cancel.setOnClickListener(v -> {
             alertDialog.dismiss();
             Objects.requireNonNull(getActivity()).finish();
         });

@@ -141,21 +141,19 @@ public class SimOneHistoryFragment extends Fragment {
 
 
                         SessionManager sessionManager = AppUtils.getSessionManagerInstance();
-
+                        boolean found = false;
 
                         for (int i = 0; i < transactionHistoryResponse.getResults().size(); i++) {
                             Log.e("TingtelApp", "Server no is: " + transactionHistoryResponse.getResults().get(i).getPhoneNumber() + "Sim1No is " + sessionManager.getSimOnePhoneNumber());
 
                             if (transactionHistoryResponse.getResults().get(i).getPhoneNumber() != null) {
-
                                 if (transactionHistoryResponse.getResults().get(i).getPhoneNumber().equalsIgnoreCase(sessionManager.getSimOnePhoneNumber())) {
-
                                     if (transactionHistoryResponse.getResults().get(i).getTransactionHistory().size() == 0) {
-                                        //   noRecordFound.setVisibility(View.VISIBLE);
                                         swipeRefreshLayout.setVisibility(View.GONE);
                                         AppUtils.showDialog(getResources().getString(R.string.no_record_found), getActivity());
+                                        break;
                                     } else {
-                                        // noRecordFound.setVisibility(View.GONE);
+                                        found = true;
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);
                                         SimOneHistoryAdapter historyAdapter = new SimOneHistoryAdapter(getContext(), transactionHistoryResponse.getResults().get(i).getTransactionHistory());
                                         recyclerView.setAdapter(historyAdapter);
@@ -163,11 +161,16 @@ public class SimOneHistoryFragment extends Fragment {
                                         if (swipeRefreshLayout.isRefreshing()) {
                                             swipeRefreshLayout.setRefreshing(false);
                                         }
+                                        break;
                                     }
 
                                 }
                             }
 
+                        }
+                        if (!found) {
+                            noRecordFoundLayout.setVisibility(View.VISIBLE);
+                            swipeRefreshLayout.setVisibility(View.GONE);
                         }
                     }
                 } else {
