@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Objects;
 
 import tingtel.payment.R;
@@ -54,6 +58,13 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        MobileAds.initialize(getContext(), initializationStatus -> {
+        });
+
+        AdView adView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         settingsImagview = view.findViewById(R.id.settingsImageview);
         btnTransferAirtime = view.findViewById(R.id.btn_transfer_airtime);
         btnHistory = view.findViewById(R.id.btn_history);

@@ -8,6 +8,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 
 import java.util.Objects;
@@ -51,6 +54,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements MyAppli
     }
 
     private void initViews() {
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
         edNewPassword = findViewById(R.id.new_password);
         edRenterNewPassword = findViewById(R.id.re_entered_password);
         btnChangePassword = findViewById(R.id.btn_set_password);
