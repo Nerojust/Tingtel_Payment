@@ -263,11 +263,10 @@ public class SignInActivity extends GPSutils {
         String username = Objects.requireNonNull(usernameEditext.getText()).toString().trim();
         String password = Objects.requireNonNull(passwordEditext.getText()).toString().trim();
 
-        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject.Builder()
-                .username(username)
-                .password(password)
-                .hash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY))
-                .build();
+        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
+        loginSendObject.setUsername(username);
+        loginSendObject.setPassword(password);
+        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(loginSendObject);
@@ -481,11 +480,11 @@ public class SignInActivity extends GPSutils {
         String username = Objects.requireNonNull(usernameEditext.getText()).toString().trim();
         String password = Objects.requireNonNull(sessionManager.getPassword());
 
-        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject.Builder()
-                .username(username)
-                .password(password)
-                .hash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY))
-                .build();
+        CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
+        loginSendObject.setUsername(username);
+        loginSendObject.setPassword(password);
+        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
+
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(loginSendObject);

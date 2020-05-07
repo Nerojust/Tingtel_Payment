@@ -15,42 +15,27 @@ public class CustomerLoginSendObject {
     @Expose
     private String hash;
 
-    private CustomerLoginSendObject(Builder builder) {
-        this.username = builder.username;
-        this.password = builder.password;
-        this.hash = builder.hash;
+    public String getUsername() {
+        return username;
     }
 
-    public static Builder newCustomerLoginSendObject() {
-        return new Builder();
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
-    public static final class Builder {
-        private String username;
-        private String password;
-        private String hash;
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public Builder() {
-        }
+    public String getHash() {
+        return hash;
+    }
 
-        public CustomerLoginSendObject build() {
-            return new CustomerLoginSendObject(this);
-        }
-
-        public Builder username(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder hash(String hash) {
-            this.hash = hash;
-            return this;
-        }
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 }
