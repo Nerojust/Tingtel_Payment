@@ -219,6 +219,7 @@
     <string name="not_registered_sign_up">Not Registered? Signup</string>
     <string name="faq">FAQ\'s</string>
     <string name="frequently_asked_questions">FREQUENTLY ASKED QUESTIONS</string>
+    <string name="check_balance_now">Check balance now</string>
 
 
 </resources>

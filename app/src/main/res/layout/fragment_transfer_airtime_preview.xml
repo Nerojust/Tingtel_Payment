@@ -419,7 +419,7 @@
                             android:fontFamily="@font/rubik_regular"
                             android:text="@string/save_beneficiary"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/_9ssp" />
 
                         <Button
                             android:id="@+id/check_balance_button"
@@ -431,7 +431,7 @@
                             android:fontFamily="@font/rubik_regular"
                             android:text="@string/check_balance"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
 

@@ -70,7 +70,7 @@ public class TransferAirtimeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews(View view) {
-        AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
+        AppUtils.showProgressTracker(view, requireContext());
 
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
         homeImageview = view.findViewById(R.id.homeImageview);
@@ -117,26 +117,26 @@ public class TransferAirtimeFragment extends Fragment {
             @Override
             public void afterTextChanged(final Editable s) {
                 if (s.length() > 1 && balanceChecked) {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, true);
+                    AppUtils.changeStatusOfButton(requireContext(), btnNext, true);
                 } else {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, false);
+                    AppUtils.changeStatusOfButton(requireContext(), btnNext, false);
                 }
             }
         });
 
-        appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getContext()));
+        appDatabase = AppDatabase.getDatabaseInstance(requireContext());
 
-        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        Fragment navhost = requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
     private void initListeners() {
-        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> requireActivity().onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+            requireActivity().finish();
 
         });
 
@@ -160,6 +160,8 @@ public class TransferAirtimeFragment extends Fragment {
             if (setNetworkTv1()) return;
             SimNo = 0;
             SimSerial = sessionManager.getSimSerialICCID();
+
+            Toast.makeText(getContext(), getResources().getString(R.string.check_balance_now), Toast.LENGTH_LONG).show();
             releaseCheckBalanceButton(btnCheckBalance);
         });
 
@@ -176,6 +178,7 @@ public class TransferAirtimeFragment extends Fragment {
             SimNo = 1;
             SimSerial = sessionManager.getSimSerialICCID1();
 
+            Toast.makeText(getContext(), getResources().getString(R.string.check_balance_now), Toast.LENGTH_LONG).show();
             releaseCheckBalanceButton(btnCheckBalance);
         });
 
@@ -246,6 +249,7 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
+            edAmount.setEnabled(true);
 
         } else if (isSim2TextviewClicked) {
             if (setNetworkTv2()) return;
@@ -256,6 +260,7 @@ public class TransferAirtimeFragment extends Fragment {
 
             dialUssdCode(getActivity(), UssdCode, SimNo);
             balanceChecked = true;
+            edAmount.setEnabled(true);
 
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.click_a_number_first), Toast.LENGTH_SHORT).show();
@@ -382,7 +387,7 @@ public class TransferAirtimeFragment extends Fragment {
         String sim1Number = sessionManager.getSimOnePhoneNumber();
         String sim2Number = sessionManager.getSimTwoPhoneNumber();
 
-        if (sim2Number==null){
+        if (sim2Number == null) {
             Toast.makeText(getContext(), "Register ur sim 2", Toast.LENGTH_SHORT).show();
             return;
         }

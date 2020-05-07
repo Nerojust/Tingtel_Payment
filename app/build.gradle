@@ -21,8 +21,6 @@ android {
             buildConfigField "String", "PUBLIC_DEVELOPMENT", "\"http://45.58.119.26\""
             buildConfigField "String", "HEADER_PASSWORD", "\"967@1#-%3*\""
             buildConfigField "String", "HASH_KEY", "\"CBOPAY967834612944\""
-
-
         }
     }
     compileOptions {
@@ -40,14 +38,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.navigation:navigation-fragment:2.2.1'
-    implementation 'androidx.navigation:navigation-ui:2.2.1'
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'com.chaos.view:pinview:1.3.2'
-    implementation 'androidx.room:room-runtime:2.2.3'
-    annotationProcessor 'androidx.room:room-compiler:2.2.3'
+    implementation 'androidx.room:room-runtime:2.2.5'
+    annotationProcessor 'androidx.room:room-compiler:2.2.5'
     implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
     //for networking
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     //qr code library
     implementation 'me.dm7.barcodescanner:zxing:1.9'

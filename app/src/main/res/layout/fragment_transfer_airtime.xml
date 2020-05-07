@@ -192,6 +192,7 @@
                             android:layout_height="@dimen/_30ssp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
+                            android:enabled="false"
                             android:background="@null"
                             android:fontFamily="@font/rubik_regular"
                             android:inputType="number"
