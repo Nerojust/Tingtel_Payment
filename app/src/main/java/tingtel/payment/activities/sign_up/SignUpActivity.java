@@ -21,7 +21,8 @@ import tingtel.payment.utils.SessionManager;
 
 public class SignUpActivity extends AppCompatActivity implements MyApplication.LogOutTimerUtil.LogOutListener {
     Intent intent;
-AppDatabase appDatabase;
+    AppDatabase appDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

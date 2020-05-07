@@ -72,7 +72,7 @@ public class SignUpSim2Fragment extends Fragment {
         spinnerTitles = new String[]{"Mtn", "Airtel", "9Mobile", "Glo"};
         spinnerImages = new int[]{R.drawable.mtn_logo, R.drawable.airtellogo, R.drawable.nmobile_logo, R.drawable.glo_logo};
 
-        SpinnerAdapter mCustomAdapter = new SpinnerAdapter(Objects.requireNonNull(getActivity()), spinnerTitles, spinnerImages);
+        SpinnerAdapter mCustomAdapter = new SpinnerAdapter(requireActivity(), spinnerTitles, spinnerImages);
         mSpinner.setAdapter(mCustomAdapter);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,7 +112,7 @@ public class SignUpSim2Fragment extends Fragment {
 
                 phoneNumber = AppUtils.checkPhoneNumberAndRestructure(Objects.requireNonNull(tvPhoneNumber.getText()).toString().trim());
 
-                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+                if (AppUtils.isNetworkAvailable(requireActivity())) {
                     sendOTPtoCustomer();
                 } else {
                     AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), tvPhoneNumber);
@@ -186,9 +186,9 @@ public class SignUpSim2Fragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() == 11) {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, true);
+                    AppUtils.changeStatusOfButton(requireContext(), btnNext, true);
                 } else {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnNext, false);
+                    AppUtils.changeStatusOfButton(requireContext(), btnNext, false);
                 }
             }
         });
@@ -197,7 +197,7 @@ public class SignUpSim2Fragment extends Fragment {
         tvSimInfo = view.findViewById(R.id.tv_sim_info);
         sessionManager = AppUtils.getSessionManagerInstance();
 
-        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
+        Fragment navhost = requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_signup_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
@@ -228,11 +228,6 @@ public class SignUpSim2Fragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
 
     @Override
     public void onDestroyView() {
@@ -240,7 +235,7 @@ public class SignUpSim2Fragment extends Fragment {
         if (isRemoving()) {
             if (sessionManager.getComingFromDashboard()) {
                 startActivity(new Intent(getContext(), MainActivity.class));
-                Objects.requireNonNull(getActivity()).finish();
+                requireActivity().finish();
             }
         }
     }

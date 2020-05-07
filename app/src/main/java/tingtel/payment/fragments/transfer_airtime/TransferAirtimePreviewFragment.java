@@ -99,12 +99,12 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * instantiate listeners for click events.
      */
     private void initListeners() {
-        backButtonImageview.setOnClickListener(v -> Objects.requireNonNull(getActivity()).onBackPressed());
+        backButtonImageview.setOnClickListener(v -> requireActivity().onBackPressed());
 
         homeImageview.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+            requireActivity().finish();
 
         });
 
@@ -123,7 +123,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
             Intent intent = new Intent(getContext(), HistoryActivity.class);
             intent.putExtra("simNo", SimNo);
-            intent.putExtra("task","preview_status");
+            intent.putExtra("task", "preview_status");
             startActivity(intent);
         });
 
@@ -133,7 +133,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             bundle.putString("ReceiverPhoneNumber", ReceiverPhoneNumber);
             bundle.putString("ReceiverNetwork", ReceiverSimNetwork);
             bottomSheetFragment.setArguments(bundle);
-            bottomSheetFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), bottomSheetFragment.getTag());
+            bottomSheetFragment.show(requireActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
         });
 
 
@@ -166,7 +166,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
         if (isRemoving()) {
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+            requireActivity().finish();
         }
     }
 
@@ -176,7 +176,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * @param view
      */
     private void initViews(View view) {
-        AppUtils.showProgressTracker(view, Objects.requireNonNull(getContext()));
+        AppUtils.showProgressTracker(view, requireContext());
 
         sessionManager = AppUtils.getSessionManagerInstance();
         backButtonImageview = view.findViewById(R.id.backArrowLayout);
@@ -198,7 +198,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
 
         randomString = AppUtils.generateRandomString();
 
-        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        Fragment navhost = requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 
@@ -206,7 +206,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
      * get detail from intent
      */
     private void getExtrasFromIntent() {
-        SenderSimNetwork = Objects.requireNonNull(getArguments()).getString("senderSimNetwork");
+        SenderSimNetwork = requireArguments().getString("senderSimNetwork");
         ReceiverSimNetwork = getArguments().getString("receiverSimNetwork");
         SimNo = getArguments().getInt("simNo");
         Amount = getArguments().getString("amount");
@@ -361,6 +361,7 @@ public class TransferAirtimePreviewFragment extends Fragment {
             }
         });
     }
+
     /**
      * save the details to database.
      */
