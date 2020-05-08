@@ -45,6 +45,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:text="@string/from"
+                        android:fontFamily="@font/rubik_regular"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_8ssp"
                         android:textStyle="bold" />
@@ -88,6 +89,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
                         android:text="@string/to"
+                        android:fontFamily="@font/rubik_regular"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_8ssp"
                         android:textStyle="bold" />
@@ -100,7 +102,6 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="start"
-                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold"
@@ -141,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/status"
                         android:textSize="9sp"
                         android:textStyle="italic" />
@@ -163,6 +165,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="7dp"
                         android:gravity="center"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/ref_id"
                         android:textSize="9sp"
                         android:textStyle="italic" />

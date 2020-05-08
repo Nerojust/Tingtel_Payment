@@ -15,6 +15,7 @@
         android:id="@+id/tv_spinner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_regular"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/img_spinner_image"

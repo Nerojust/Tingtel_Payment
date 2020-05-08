@@ -44,6 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/from"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_8ssp"
@@ -87,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.4"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="@string/to"
                         android:textColor="@color/tingtel_gray_color"
                         android:textSize="@dimen/_8ssp"
@@ -142,6 +144,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/status"
+                        android:fontFamily="@font/rubik_regular"
                         android:textSize="9sp"
                         android:textStyle="italic" />
 
@@ -162,6 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
                         android:text="@string/ref_id"
                         android:textSize="9sp"
