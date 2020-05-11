@@ -133,7 +133,6 @@ public class SignInActivity extends GPSutils {
         startFingerprintAuthentication();
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void startFingerprintAuthentication() {
 

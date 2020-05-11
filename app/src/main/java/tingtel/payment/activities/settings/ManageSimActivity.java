@@ -184,16 +184,34 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
             case "NO SIM":
                 break;
             case "SIM1":
+                String sim1num;
+                String sim1net;
 
-                sessionManager.setSimOnePhoneNumber(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber());
-                sessionManager.setSimOneNetworkName(appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork());
+                if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() == 0) {
+                    sim1num = "";
+                    sim1net="";
+                } else {
+                    sim1num = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber();
+                    sim1net = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork();
+                }
+
+                sessionManager.setSimOnePhoneNumber(sim1num);
+                sessionManager.setSimOneNetworkName(sim1net);
                 sessionManager.setSimTwoPhoneNumber("");
                 sessionManager.setSimTwoNetworkName("");
 
                 break;
             case "SIM1 SIM2":
-                String sim1number = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber();
-                String sim1network = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork();
+                String sim1number;
+                String sim1network;
+
+                if (appDatabase.simCardsDao().getSerial(Sim1Serial).size() == 0) {
+                    sim1number = "";
+                    sim1network="";
+                } else {
+                    sim1number = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber();
+                    sim1network = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork();
+                }
 
                 if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() == 0) {
                     sim2number = "";
