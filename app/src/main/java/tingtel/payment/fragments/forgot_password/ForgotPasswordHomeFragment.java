@@ -1,15 +1,14 @@
 package tingtel.payment.fragments.forgot_password;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Objects;
 
@@ -33,7 +32,7 @@ public class ForgotPasswordHomeFragment extends Fragment {
 
 
 
-        Button submitButton = view.findViewById(R.id.btn_submit);
+        Button submitButton = view.findViewById(R.id.btn_get_otp);
 //
         submitButton.setOnClickListener(v -> {
           navController.navigate(R.id.action_forgotPasswordHomeFragment_to_forgotPasswordOtpFragment);

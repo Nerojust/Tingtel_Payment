@@ -33,6 +33,8 @@ import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
+import tingtel.payment.models.validate_user.ValidateUserResponse;
+import tingtel.payment.models.validate_user.ValidateUserSendObject;
 
 public interface PostServiceInterface {
 
@@ -80,4 +82,8 @@ public interface PostServiceInterface {
 
     @POST("forgot_password")
     Call<ForgotPasswordResponse> forgotPassword(@Body ForgotPasswordSendObject forgotPasswordSendObject);
+
+    @POST("validate_user")
+    Call<ValidateUserResponse> validateUser(@Body ValidateUserSendObject validateUserSendObject);
+
 }

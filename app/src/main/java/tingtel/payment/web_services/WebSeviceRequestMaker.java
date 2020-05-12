@@ -40,6 +40,8 @@ import tingtel.payment.models.transaction_history.TransactionHistoryResponse;
 import tingtel.payment.models.transaction_history.TransactionHistorySendObject;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusResponse;
 import tingtel.payment.models.transaction_status.CheckTransactionStatusSendObject;
+import tingtel.payment.models.validate_user.ValidateUserResponse;
+import tingtel.payment.models.validate_user.ValidateUserSendObject;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.MyApplication;
 import tingtel.payment.web_services.interfaces.AddSimInterface;
@@ -57,6 +59,7 @@ import tingtel.payment.web_services.interfaces.ReportIssueInterface;
 import tingtel.payment.web_services.interfaces.SendCreditDetailsInterface;
 import tingtel.payment.web_services.interfaces.SendOTPinterface;
 import tingtel.payment.web_services.interfaces.TransactionHistoryInterface;
+import tingtel.payment.web_services.interfaces.ValidateUserInterface;
 
 public class WebSeviceRequestMaker {
 
@@ -559,6 +562,44 @@ public class WebSeviceRequestMaker {
                     Log.e("Login error", error);
                 } else {
                     forgotPasswordInterface.onError("Network error");
+                }
+            }
+        });
+    }
+
+    public void validateUser(ValidateUserSendObject validateUserSendObject, ValidateUserInterface validateUserInterface) {
+        Call<ValidateUserResponse> call = postInterfaceService.validateUser(validateUserSendObject);
+        call.enqueue(new Callback<ValidateUserResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ValidateUserResponse> call, @NonNull Response<ValidateUserResponse> response) {
+                if (response.isSuccessful()) {
+                    ValidateUserResponse forgotPasswordResponse = response.body();
+
+                    if (forgotPasswordResponse != null) {
+                        if (forgotPasswordResponse.getCode().equals(Constants.SUCCESS)) {
+                            validateUserInterface.onSuccess(forgotPasswordResponse);
+                        } else {
+                            validateUserInterface.onError("Server Error. U003");
+                        }
+                    }
+                } else {
+                    validateUserInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ValidateUserResponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        validateUserInterface.onError("Network Error, please try again");
+                    } else {
+                        validateUserInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    validateUserInterface.onError("Network error");
                 }
             }
         });
