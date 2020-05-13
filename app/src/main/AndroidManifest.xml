@@ -52,6 +52,7 @@
         <activity
             android:name=".activities.forgot_password.ForgotPasswordActivity"
             android:label="@string/reset_password"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".activities.sign_in.SignInActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
