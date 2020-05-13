@@ -77,14 +77,14 @@ public class SimTwoHistoryFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sim_two_history, container, false);
 
         initViews(view);
-        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-        ViewGroup viewGroup = Objects.requireNonNull(getActivity()).findViewById(android.R.id.content);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        ViewGroup viewGroup = requireActivity().findViewById(android.R.id.content);
         dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_retry, viewGroup, false);
         builder.setView(dialogView);
         alertDialog = builder.create();
 
 
-        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getActivity()))) {
+        if (AppUtils.isNetworkAvailable(requireActivity())) {
             getAllHistoryForSimTwo();
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();

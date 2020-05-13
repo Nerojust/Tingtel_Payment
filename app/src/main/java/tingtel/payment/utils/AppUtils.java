@@ -97,6 +97,21 @@ public class AppUtils {
         return getSHA512(input1 + input2 + BuildConfig.HASH_KEY);
     }
 
+    @SuppressLint("NewApi")
+    public static String getSHA512(String input) {
+        String toReturn = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            digest.reset();
+            digest.update(input.getBytes(StandardCharsets.UTF_8));
+            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
     public static String generateRandomString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -283,22 +298,6 @@ public class AppUtils {
         if (progress.isShowing()) {
             progress.dismiss();
         }
-    }
-
-
-    @SuppressLint("NewApi")
-    public static String getSHA512(String input) {
-        String toReturn = null;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            digest.reset();
-            digest.update(input.getBytes(StandardCharsets.UTF_8));
-            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return toReturn;
     }
 
 

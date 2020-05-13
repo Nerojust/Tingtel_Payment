@@ -124,34 +124,8 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
 
     @Override
     public int getItemCount() {
-       // return responseFromTransaction.getResults().get(1).getTransactionHistory().size();
-    return responseFromTransaction.size();
+        return responseFromTransaction.size();
     }
-//    private int getCountFromResponse() {
-//        String currentSim1Number = sessionManager.getSimOnePhoneNumber();
-//        String currentSim2Number = sessionManager.getSimTwoPhoneNumber();
-//        count = 0;
-//        where = 0;
-//        List<Result> results = responseFromTransaction.getResults();
-//        int i = 0;
-//        while (i < results.size()) {
-//            if (results.get(i).getTransactionHistory() != null && results.get(i).getPhoneNumber() != null) {
-//                int size = results.get(i).getTransactionHistory().size();
-//                String number = results.get(i).getPhoneNumber();
-//                if (size != 0) {
-//                   if (number.equals(currentSim2Number)) {
-//                        count = size;
-//                        break;
-//                    }
-//
-//                }
-//            }
-//            i++;
-//            where++;
-//        }
-//
-//        return count;
-//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -160,7 +134,6 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
         final TextView tvSenderPhoneNumber;
         final TextView tvReceiverPhoneNumber;
         final ImageView imgReceiverNetwork, imageSenderNetwork;
-        //  final ImageView btnDelete;
         final LinearLayout container;
 
         MyViewHolder(View itemView) {
@@ -172,11 +145,8 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
             tvReceiverPhoneNumber = itemView.findViewById(R.id.tv_receiver_phone_number);
             imgReceiverNetwork = itemView.findViewById(R.id.img_receiver_network);
             imageSenderNetwork = itemView.findViewById(R.id.img_sender_network);
-            //btnDelete = itemView.findViewById(R.id.btn_delete);
             status = itemView.findViewById(R.id.status);
             ref_id = itemView.findViewById(R.id.ref_id_tv);
         }
     }
-
-
 }

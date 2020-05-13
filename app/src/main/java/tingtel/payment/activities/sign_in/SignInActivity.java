@@ -45,7 +45,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.activities.MainActivity;
 import tingtel.payment.activities.forgot_password.ForgotPasswordActivity;
@@ -265,7 +264,7 @@ public class SignInActivity extends GPSutils {
         CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
         loginSendObject.setUsername(username);
         loginSendObject.setPassword(password);
-        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
+        loginSendObject.setHash(AppUtils.generateHash(username, password));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(loginSendObject);
@@ -482,7 +481,7 @@ public class SignInActivity extends GPSutils {
         CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
         loginSendObject.setUsername(username);
         loginSendObject.setPassword(password);
-        loginSendObject.setHash(AppUtils.getSHA512(username + password + BuildConfig.HASH_KEY));
+        loginSendObject.setHash(AppUtils.generateHash(username, password));
 
 
         Gson gson = new Gson();

@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import tingtel.payment.BuildConfig;
 import tingtel.payment.R;
 import tingtel.payment.adapters.SimCardsAdapter;
 import tingtel.payment.database.AppDatabase;
@@ -77,7 +76,7 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
         CustomerLoginSendObject loginSendObject = new CustomerLoginSendObject();
         loginSendObject.setUsername(sessionManager.getUserame());
         loginSendObject.setPassword(sessionManager.getPassword());
-        loginSendObject.setHash(AppUtils.getSHA512(sessionManager.getUserame() + sessionManager.getPassword() + BuildConfig.HASH_KEY));
+        loginSendObject.setHash(AppUtils.generateHash(sessionManager.getUserame(), sessionManager.getPassword()));
 
         Gson gson = new Gson();
         String jsonObject = gson.toJson(loginSendObject);
@@ -209,8 +208,8 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
                     sim1number = "";
                     sim1network="";
                 } else {
-                    sim1number = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getPhoneNumber();
-                    sim1network = appDatabase.simCardsDao().getSerial(Sim2Serial).get(0).getSimNetwork();
+                    sim1number = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getPhoneNumber();
+                    sim1network = appDatabase.simCardsDao().getSerial(Sim1Serial).get(0).getSimNetwork();
                 }
 
                 if (appDatabase.simCardsDao().getSerial(Sim2Serial).size() == 0) {

@@ -53,7 +53,7 @@ public class SetPasswordFragment extends Fragment {
         btnSetPassword.setOnClickListener(v -> {
             if (isValidFields()) {
 
-                if (AppUtils.isNetworkAvailable(Objects.requireNonNull(getContext()))) {
+                if (AppUtils.isNetworkAvailable(requireContext())) {
                     registerUser();
                 } else {
                     AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), tvPassword1);
@@ -66,7 +66,7 @@ public class SetPasswordFragment extends Fragment {
     private void gotoLoginActivity() {
         Intent intent = new Intent(getActivity(), SignInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Objects.requireNonNull(getActivity()).startActivity(intent);
+        requireActivity().startActivity(intent);
 
         getActivity().finish();
     }
@@ -149,9 +149,9 @@ public class SetPasswordFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() >= 5) {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSetPassword, true);
+                    AppUtils.changeStatusOfButton(requireContext(), btnSetPassword, true);
                 } else {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnSetPassword, false);
+                    AppUtils.changeStatusOfButton(requireContext(), btnSetPassword, false);
                 }
             }
         });
