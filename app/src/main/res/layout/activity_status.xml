@@ -61,17 +61,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_weight="4"
-                    android:padding="@dimen/_5ssp"
                     android:text="@string/transaction_status"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp" />
@@ -98,8 +96,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
-                    android:gravity="right"
+                    android:layout_weight="1.5"
+                    android:gravity="start"
                     android:text="@string/your_reference_id_is"
                     android:textSize="@dimen/_10ssp"
                     tools:text="YOUR REFERENCE ID IS :" />
