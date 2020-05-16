@@ -85,11 +85,11 @@ public class SimTwoHistoryAdapter extends RecyclerView.Adapter<SimTwoHistoryAdap
             holder.status.setText(mContext.getResources().getString(R.string.request_sent));
             holder.status.setTextColor(mContext.getResources().getColor(R.color.tingtel_red_color));
         } else if (statusId == 1) {
-            holder.status.setText(mContext.getResources().getString(R.string.completed));
-            holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
-        } else if (statusId == 2) {
             holder.status.setText(mContext.getResources().getString(R.string.pending));
             holder.status.setTextColor(mContext.getResources().getColor(R.color.selected_dot));
+        } else if (statusId == 2) {
+            holder.status.setText(mContext.getResources().getString(R.string.completed));
+            holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
         }
 
         setNetworkLogo(sender_network, holder.imageSenderNetwork);

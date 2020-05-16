@@ -39,4 +39,5 @@ public class Constants {
     public static final String TINGTEL_GLO = "08153486243";
 
     public static final int TINGTEL_PERCENT = 10;
+    public static final long DEFAULT_SYNC_INTERVAL = 5 ;
 }

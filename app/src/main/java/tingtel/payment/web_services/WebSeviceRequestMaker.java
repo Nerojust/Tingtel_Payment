@@ -16,6 +16,8 @@ import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.models.change_Password.ChangePasswordResponse;
 import tingtel.payment.models.change_Password.ChangePasswordSendObject;
+import tingtel.payment.models.credit_notification.CreditNotificationResponse;
+import tingtel.payment.models.credit_notification.CreditNotificationSendObject;
 import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
@@ -49,6 +51,7 @@ import tingtel.payment.web_services.interfaces.ChangeEmailInterface;
 import tingtel.payment.web_services.interfaces.ChangePasswordInterface;
 import tingtel.payment.web_services.interfaces.CheckTransactionStatusInterface;
 import tingtel.payment.web_services.interfaces.CreateNewUserInterface;
+import tingtel.payment.web_services.interfaces.CreditNotificationInterface;
 import tingtel.payment.web_services.interfaces.DeleteAccountInterface;
 import tingtel.payment.web_services.interfaces.DeleteSimInterface;
 import tingtel.payment.web_services.interfaces.DeleteSingleHistoryInterface;
@@ -600,6 +603,45 @@ public class WebSeviceRequestMaker {
                     Log.e("Login error", error);
                 } else {
                     validateUserInterface.onError("Network error");
+                }
+            }
+        });
+    }
+
+
+    public void getCreditNotification(CreditNotificationSendObject creditNotificationSendObject, CreditNotificationInterface creditNotificationInterface) {
+        Call<CreditNotificationResponse> call = postInterfaceService.getCreditNotification(creditNotificationSendObject);
+        call.enqueue(new Callback<CreditNotificationResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CreditNotificationResponse> call, @NonNull Response<CreditNotificationResponse> response) {
+                if (response.isSuccessful()) {
+                    CreditNotificationResponse creditNotificationResponse = response.body();
+
+                    if (creditNotificationResponse != null) {
+                        if (creditNotificationResponse.getCode().equals(Constants.SUCCESS)) {
+                            creditNotificationInterface.onSuccess(creditNotificationResponse);
+                        } else {
+                            creditNotificationInterface.onError(creditNotificationResponse.getDescription());
+                        }
+                    }
+                } else {
+                    creditNotificationInterface.onError("Network error, please try again.");
+                    Log.d(TAG, String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CreditNotificationResponse> call, @NonNull Throwable t) {
+                if (t.getMessage() != null) {
+                    if (Objects.requireNonNull(t.getMessage()).contains("failed to connect")) {
+                        creditNotificationInterface.onError("Network Error, please try again");
+                    } else {
+                        creditNotificationInterface.onError(t.getMessage());
+                    }
+                    String error = (t.getMessage() == null) ? "No error message" : t.getMessage();
+                    Log.e("Login error", error);
+                } else {
+                    creditNotificationInterface.onError("Network error");
                 }
             }
         });

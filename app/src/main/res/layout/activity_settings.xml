@@ -25,23 +25,24 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
                 android:layout_height="25dp"
+                android:layout_weight="0.3"
                 android:gravity="start|center"
                 android:src="@drawable/back_arrow_settings" />
 
             <TextView
                 android:id="@+id/backArrow"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="2"
                 android:fontFamily="@font/rubik_regular"
                 android:gravity="start|center"
                 android:text="Back"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
             <ImageView
                 android:id="@+id/deleteAccountImageview"
                 android:layout_width="0dp"
@@ -49,6 +50,7 @@
                 android:layout_weight="0.6"
                 android:gravity="start|center"
                 android:src="@drawable/ic_delete_white" />
+
             <ImageView
                 android:id="@+id/shareImageview"
                 android:layout_width="0dp"
@@ -64,8 +66,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
 
             <TextView
@@ -113,8 +115,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
-                        android:fontFamily="@font/rubik_regular"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/rubik_regular"
                         android:text="Account"
                         android:textColor="@color/tingtel_red_color"
                         android:textSize="15sp" />
@@ -123,6 +125,37 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#CFCFCF" />
+
+                    <LinearLayout
+                        android:id="@+id/notificationLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="13dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="4"
+                            android:drawableLeft="@drawable/ic_notifications"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/rubik_regular"
+                            android:gravity="start|center"
+                            android:text="NOTIFICATIONS"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/right_arrow" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/changePasswordLayout"
@@ -219,6 +252,7 @@
                             android:layout_weight="0.2"
                             android:src="@drawable/right_arrow" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/manageBeneficiariesLayout"
                         android:layout_width="match_parent"

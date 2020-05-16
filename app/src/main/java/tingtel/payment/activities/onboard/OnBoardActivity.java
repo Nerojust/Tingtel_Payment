@@ -143,7 +143,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
         int[] header = {R.string.ob_header1, R.string.ob_header2, R.string.ob_header3};
         int[] desc = {R.string.ob_desc1, R.string.ob_desc2, R.string.ob_desc3};
-        int[] imageId = {R.drawable.ic_notifications, R.drawable.ic_order_confirmed, R.drawable.ic_security};
+        int[] imageId = {R.drawable.ic_notifications_svg, R.drawable.ic_order_confirmed, R.drawable.ic_security};
 
 
         for (int i = 0; i < imageId.length; i++) {

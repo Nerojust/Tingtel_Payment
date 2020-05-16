@@ -76,6 +76,8 @@ public class SessionManager {
     private static final String SIM_4_NETWORK_FROM_LOGIN = "SIM_4_NETWORK_FROM_LOGIN";
     private static final String ADD_SIM = "ADD_SIM";
     private static final String SERIAL_MATCH = "SERIAL_MATCH";
+    private static final String CREDIT_RECORDS = "CREDIT_RECORDS";
+    private static final String COMING_FROM_CREDIT = "COMING_FROM_CREDIT";
 
 
     private final SharedPreferences pref = getSharedPreferencesCustomer();
@@ -575,5 +577,21 @@ public class SessionManager {
 
     public void setSerialsDontMatchAnyOnDevice(boolean b) {
         setBooleanPreference(SERIAL_MATCH, b);
+    }
+
+    public boolean getSavedCreditRecords(){
+        return getBooleanPreference(CREDIT_RECORDS);
+    }
+
+    public void setSavedCreditRecords(boolean creditRecords) {
+        setBooleanPreference(CREDIT_RECORDS, creditRecords);
+    }
+
+    public boolean getComingFromCreditNotification(){
+        return getBooleanPreference(COMING_FROM_CREDIT);
+    }
+
+    public void setComingFromCreditNotification(boolean credit) {
+        setBooleanPreference(COMING_FROM_CREDIT, credit);
     }
 }

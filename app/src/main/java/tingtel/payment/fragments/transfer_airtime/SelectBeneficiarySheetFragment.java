@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.List;
-import java.util.Objects;
 
 import tingtel.payment.R;
 import tingtel.payment.adapters.BeneficiaryAdapter;
@@ -30,7 +29,7 @@ public class SelectBeneficiarySheetFragment extends BottomSheetDialogFragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_beneficiary);
         TextView noResult = view.findViewById(R.id.noResultFoundTextview);
-        AppDatabase appDatabase = AppDatabase.getDatabaseInstance(Objects.requireNonNull(getActivity()));
+        AppDatabase appDatabase = AppDatabase.getDatabaseInstance(requireActivity());
 
         List<Beneficiary> beneficiaryList = appDatabase.beneficiaryDao().getAllItems();
         BeneficiaryAdapter adapter = new BeneficiaryAdapter(getContext(), beneficiaryList, getActivity());

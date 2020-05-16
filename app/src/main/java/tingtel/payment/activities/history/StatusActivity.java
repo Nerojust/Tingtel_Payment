@@ -226,9 +226,12 @@ public class StatusActivity extends AppCompatActivity implements MyApplication.L
                 if (sendOTPresponse.getTransactions() != null) {
                     Integer status = sendOTPresponse.getTransactions().getStatus();
                     referenceIdTextview.setText(referenceId);
+
                     if (status == 0) {
                         setStepViewToPendingStatusHistory();
-                    } else {
+                    } else if (status == 1) {
+                        setStepViewToPendingStatusHistory();
+                    } else if (status == 2) {
                         setStepViewToCompletedStatusHistory();
                     }
 

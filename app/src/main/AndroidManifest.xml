@@ -28,9 +28,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.credit_notify.IncomingCreditNotifidationActivity"
+            android:label="CREDIT NOTIFICATIONS"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.settings.PushNotificationActivity" />
+        <activity
             android:name=".activities.settings.FaqActivity"
             android:label="@string/faq"
-            android:parentActivityName=".activities.settings.SettingsActivity"/>
+            android:parentActivityName=".activities.settings.SettingsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -52,8 +57,8 @@
         <activity
             android:name=".activities.forgot_password.ForgotPasswordActivity"
             android:label="@string/reset_password"
-            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".activities.sign_in.SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.transfer_airtime.TransferAirtimeActivity"
@@ -118,6 +123,10 @@
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".utils.GPSutils" />
+
+        <service
+            android:name=".web_services.NotificationService"
+            android:exported="false" />
     </application>
 
 </manifest>

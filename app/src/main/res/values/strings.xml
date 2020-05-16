@@ -224,5 +224,8 @@
     <string name="enter_your_email_adress_or_username_to_get_otp_on_your_registered_phone_number">ENTER YOUR EMAIL ADDRESS OR NUMBER TO GET OTP</string>
     <string name="enter_email_username">ENTER EMAIL/NUMBER</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

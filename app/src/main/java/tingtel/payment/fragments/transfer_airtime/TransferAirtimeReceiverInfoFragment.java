@@ -63,17 +63,15 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     private EditText edReceiverPhoneNumber;
     private ImageView imgSelectBeneficiary, backButtonImageview;
     private List<NetworkSelect> networkList = new ArrayList<>();
-    private String retrievedNetworkFromBottomSheet;
     private final BroadcastReceiver mas = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if (Objects.requireNonNull(intent.getAction()).equalsIgnoreCase("selectedbeneficiary")) {
                 if (intent.getAction().equalsIgnoreCase("selectedbeneficiary")) {
                     String number = intent.getStringExtra("phoneNumber");
-                    retrievedNetworkFromBottomSheet = intent.getStringExtra("network");
+                    String retrievedNetworkFromBottomSheet = intent.getStringExtra("network");
                     edReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(Objects.requireNonNull(number)));
                     setReceiversNetworkRv(retrievedNetworkFromBottomSheet);
                     bottomSheetFragment.dismiss();
-
                 }
             }
         }
@@ -115,7 +113,6 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
     }
 
     public void onDestroy() {
-        //softInputAssist.onDestroy();
         super.onDestroy();
         LocalBroadcastManager.getInstance(Objects.requireNonNull(getContext())).unregisterReceiver(this.mas);
     }
@@ -233,9 +230,9 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() == 4 && !edReceiverPhoneNumber.getText().toString().isEmpty()) {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnPreview, true);
+                    AppUtils.changeStatusOfButton(requireContext(), btnPreview, true);
                 } else {
-                    AppUtils.changeStatusOfButton(Objects.requireNonNull(getContext()), btnPreview, false);
+                    AppUtils.changeStatusOfButton(requireContext(), btnPreview, false);
                 }
             }
         });
@@ -245,7 +242,7 @@ public class TransferAirtimeReceiverInfoFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        Fragment navhost = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        Fragment navhost = requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = NavHostFragment.findNavController(Objects.requireNonNull(navhost));
     }
 

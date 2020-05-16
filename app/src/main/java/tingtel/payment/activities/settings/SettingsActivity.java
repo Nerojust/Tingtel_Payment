@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
 
     Button logoutButton;
     private LinearLayout changePasswordLayout, manageBeneficiariesLayout, changeEmailAddressLayout, manageSimLayout, tutorialLayout,
-            reportIssueLayout, qrCodeLayout, faqLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
+            reportIssueLayout, qrCodeLayout,notificationLayout, faqLayout, privacyPolicyLayout, aboutUsLayout, backArrowLayout;
     private SessionManager sessionManager;
     private ImageView shareImageview, deleteAccountImageview;
 
@@ -49,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
     private void initViews() {
         backArrowLayout = findViewById(R.id.backArrowLayout);
         //qrCodeLayout = findViewById(R.id.qrCodeLayout);
+        notificationLayout = findViewById(R.id.notificationLayout);
         shareImageview = findViewById(R.id.shareImageview);
         changePasswordLayout = findViewById(R.id.changePasswordLayout);
         changeEmailAddressLayout = findViewById(R.id.changeEmailLayout);
@@ -65,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity implements MyApplication
 
     private void initListeners() {
         backArrowLayout.setOnClickListener(v -> finish());
+        notificationLayout.setOnClickListener(v -> startActivity(new Intent(this, PushNotificationActivity.class)));
         //qrCodeLayout.setOnClickListener(v -> startActivity(new Intent(this, QRCodeDisplayActivity.class)));
         changePasswordLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangePasswordActivity.class)));
         changeEmailAddressLayout.setOnClickListener(v -> startActivity(new Intent(this, ChangeEmailActivity.class)));

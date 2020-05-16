@@ -9,6 +9,8 @@ import tingtel.payment.models.change_Email.ChangeEmailResponse;
 import tingtel.payment.models.change_Email.ChangeEmailSendObject;
 import tingtel.payment.models.change_Password.ChangePasswordResponse;
 import tingtel.payment.models.change_Password.ChangePasswordSendObject;
+import tingtel.payment.models.credit_notification.CreditNotificationResponse;
+import tingtel.payment.models.credit_notification.CreditNotificationSendObject;
 import tingtel.payment.models.customerInfo.CustomerInfoResponse;
 import tingtel.payment.models.customerInfo.CustomerInfoSendObject;
 import tingtel.payment.models.delete_account.DeleteAccountResponse;
@@ -85,5 +87,8 @@ public interface PostServiceInterface {
 
     @POST("validate_user")
     Call<ValidateUserResponse> validateUser(@Body ValidateUserSendObject validateUserSendObject);
+
+    @POST("received_info")
+    Call<CreditNotificationResponse> getCreditNotification(@Body CreditNotificationSendObject creditNotificationSendObject);
 
 }

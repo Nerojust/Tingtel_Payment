@@ -16,14 +16,16 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import java.util.concurrent.Executors;
 
 import tingtel.payment.dao.BeneficiaryDao;
+import tingtel.payment.dao.CreditHistoryDao;
 import tingtel.payment.dao.HistoryDao;
 import tingtel.payment.dao.SimCardsDao;
 import tingtel.payment.models.Beneficiary;
 import tingtel.payment.models.DateConverter;
 import tingtel.payment.models.History;
 import tingtel.payment.models.SimCards;
+import tingtel.payment.models.credit_notification.Data;
 
-@Database(entities = {SimCards.class, History.class, Beneficiary.class}, version = 1, exportSchema = false)
+@Database(entities = {SimCards.class, Data.class, History.class, Beneficiary.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -48,8 +50,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         Executors.newSingleThreadScheduledExecutor().execute(() -> {
-                            //   getInstance(context).databaseInterface().insertAll(BanksCode.populateBanksCodes());
-
                             AppDatabase database = AppDatabase.getInstance(context);
 
                             database.mIsDatabaseCreated.postValue("populated");
@@ -66,6 +66,8 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract SimCardsDao simCardsDao();
+
+    public abstract CreditHistoryDao creditHistoryDao();
 
     public abstract HistoryDao historyDao();
 
