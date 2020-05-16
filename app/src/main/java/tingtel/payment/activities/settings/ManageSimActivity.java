@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -63,6 +66,11 @@ public class ManageSimActivity extends AppCompatActivity implements MyApplicatio
     }
 
     private void initViews() {
+        MobileAds.initialize(this, initializationStatus -> {});
+
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
         recyclerView = findViewById(R.id.rv_simCards);
         noRecordFoundLayout = findViewById(R.id.no_result_found_layout);
         swipeRefreshLayout = findViewById(R.id.swipeLayout);

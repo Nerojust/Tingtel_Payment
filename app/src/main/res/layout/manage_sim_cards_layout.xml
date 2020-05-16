@@ -9,8 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:background="@color/tingtel_lighter_gray">
+        android:layout_marginTop="@dimen/_8sdp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -93,7 +92,13 @@
                     android:src="@drawable/ic_delete_black_24dp"
                     android:text="@string/delete" />
             </LinearLayout>
+
         </RelativeLayout>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/tingtel_light_gray" />
 
 </LinearLayout>

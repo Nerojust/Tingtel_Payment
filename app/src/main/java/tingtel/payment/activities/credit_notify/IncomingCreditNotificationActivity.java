@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Objects;
 
 import tingtel.payment.BuildConfig;
@@ -52,6 +56,12 @@ public class IncomingCreditNotificationActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        MobileAds.initialize(this, initializationStatus -> {});
+
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         backButtonImageview = findViewById(R.id.backArrowLayout);
         homeImageview = findViewById(R.id.homeImageview);
         settingsImagview = findViewById(R.id.settingsImageview);

@@ -95,7 +95,7 @@ public class DashboardFragment extends Fragment {
         } else {
             customerName.setText(getResources().getString(R.string.welcome_customer));
         }
-        getCreditHistory();
+        //getCreditHistory();
     }
 
     private void initListeners() {

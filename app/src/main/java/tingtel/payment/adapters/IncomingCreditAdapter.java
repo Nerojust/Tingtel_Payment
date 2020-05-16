@@ -12,25 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import tingtel.payment.R;
-import tingtel.payment.activities.history.StatusActivity;
+import tingtel.payment.activities.credit_notify.IncomingCreditDetailsActivity;
 import tingtel.payment.models.credit_notification.Data;
 import tingtel.payment.utils.AppUtils;
-import tingtel.payment.utils.SessionManager;
+
+import static tingtel.payment.utils.AppUtils.formateDate;
 
 public class IncomingCreditAdapter extends RecyclerView.Adapter<IncomingCreditAdapter.MyViewHolder> {
     private final Context mContext;
     private final List<Data> creditNotificationResponses;
-    private int count;
-    private int where;
-
-    private SessionManager sessionManager = AppUtils.getSessionManagerInstance();
 
     public IncomingCreditAdapter(Context mContext, List<Data> creditNotificationResponses) {
         this.mContext = mContext;
@@ -48,19 +41,7 @@ public class IncomingCreditAdapter extends RecyclerView.Adapter<IncomingCreditAd
 
     }
 
-    private String formateDate(String dateString) {
-        Date date;
-        String formattedDate = "";
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(dateString);
-            formattedDate = new SimpleDateFormat("MMMM dd, hh:mm a", Locale.getDefault()).format(date);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
-        return formattedDate;
-    }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
@@ -80,7 +61,7 @@ public class IncomingCreditAdapter extends RecyclerView.Adapter<IncomingCreditAd
         holder.tvReceiverPhoneNumber.setText(AppUtils.checkPhoneNumberAndRemovePrefix(receiver_number));
 
         holder.container.setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, StatusActivity.class);
+            Intent intent = new Intent(mContext, IncomingCreditDetailsActivity.class);
             intent.putExtra("amount", amount);
             intent.putExtra("ref_id", reference_id);
             intent.putExtra("status", statusId);

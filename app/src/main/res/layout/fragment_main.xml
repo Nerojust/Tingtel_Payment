@@ -51,11 +51,11 @@
                     android:background="@drawable/circle_bg"
                     android:fontFamily="@font/rubik_regular"
                     android:gravity="center_horizontal"
-                    android:text="2"
+                    android:text="1"
                     android:textAlignment="center"
                     android:textColor="@color/tingtel_red_color"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
             </LinearLayout>
 
             <LinearLayout

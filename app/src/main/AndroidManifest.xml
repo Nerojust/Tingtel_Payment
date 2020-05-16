@@ -27,6 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.credit_notify.IncomingCreditDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.credit_notify.IncomingCreditNotificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />

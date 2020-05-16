@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".activities.credit_notify.IncomingCreditNotificationActivity">
 
@@ -58,47 +60,104 @@
         android:textSize="@dimen/_13ssp"
         android:visibility="visible" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recent"
-        android:layout_margin="10dp"
-        android:visibility="gone">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
-        android:id="@+id/no_result_found_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/no_result_found"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/recent"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="220dp"
-            android:gravity="center"
-            android:text="@string/no_record_found"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:visibility="visible" />
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_20ssp"
+            android:layout_weight="2"
+            android:paddingVertical="10dp"
+            app:cardBackgroundColor="@color/tingtel_lighter_gray"
+            app:cardCornerRadius="@dimen/_18ssp">
 
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_empty" />
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recent"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <LinearLayout
+                android:id="@+id/no_result_found_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/no_result_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="220dp"
+                    android:gravity="center"
+                    android:text="@string/no_record_found"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_empty" />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_13ssp"
+                android:layout_marginVertical="@dimen/_20ssp"
+                android:layout_weight="2"
+                android:paddingVertical="10dp"
+                app:cardBackgroundColor="@color/tingtel_lighter_gray"
+                app:cardCornerRadius="@dimen/_18ssp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/_20sdp">
+
+                    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        ads:adSize="LARGE_BANNER"
+                        ads:adUnitId="ca-app-pub-3223394163127231/7226149794" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
     </LinearLayout>
+
+
 </LinearLayout>

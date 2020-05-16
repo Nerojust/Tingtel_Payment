@@ -35,6 +35,10 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -61,6 +65,20 @@ public class AppUtils {
             sessionManager = new SessionManager();
         }
         return sessionManager;
+    }
+
+    public static String formateDate(String dateString) {
+        Date date;
+        String formattedDate = "";
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(dateString);
+            formattedDate = new SimpleDateFormat("MMMM dd, hh:mm a", Locale.getDefault()).format(date);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return formattedDate;
     }
 
     public static boolean isNetworkAvailable(Context context) {
