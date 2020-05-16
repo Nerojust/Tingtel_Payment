@@ -28,8 +28,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.credit_notify.IncomingCreditNotifidationActivity"
-            android:label="CREDIT NOTIFICATIONS"
+            android:name=".activities.credit_notify.IncomingCreditNotificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.settings.PushNotificationActivity" />
         <activity

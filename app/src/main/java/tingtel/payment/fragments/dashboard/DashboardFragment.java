@@ -99,7 +99,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initListeners() {
-        notificationLayout.setOnClickListener(v -> navController.navigate(R.id.action_mainFragment_to_incomingCreditNotifidationActivity));
+        notificationLayout.setOnClickListener(v -> navController.navigate(R.id.action_mainFragment_to_incomingCreditNotificationActivity));
         settingsImagview.setOnClickListener(v -> startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         btnTransferAirtime.setOnClickListener(v -> {

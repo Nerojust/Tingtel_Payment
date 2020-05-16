@@ -25,8 +25,8 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_mainFragment_to_incomingCreditNotifidationActivity"
-            app:destination="@id/incomingCreditNotifidationActivity" />
+            android:id="@+id/action_mainFragment_to_incomingCreditNotificationActivity"
+            app:destination="@id/incomingCreditNotificationActivity" />
 
     </fragment>
     <activity
@@ -40,8 +40,8 @@
         android:label="activity_history"
         tools:layout="@layout/activity_history" />
     <activity
-        android:id="@+id/incomingCreditNotifidationActivity"
-        android:name="tingtel.payment.activities.credit_notify.IncomingCreditNotifidationActivity"
+        android:id="@+id/incomingCreditNotificationActivity"
+        android:name="tingtel.payment.activities.credit_notify.IncomingCreditNotificationActivity"
         android:label="activity_incoming_credit_notifidation"
         tools:layout="@layout/activity_incoming_credit_notifidation" />
 </navigation>
