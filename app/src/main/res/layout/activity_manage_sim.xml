@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tingtel_light_gray"
     android:orientation="vertical"
     tools:context=".activities.settings.ManageSimActivity">
 
@@ -25,6 +26,7 @@
                 android:paddingVertical="10dp"
                 app:cardBackgroundColor="@color/tingtel_lighter_gray"
                 app:cardCornerRadius="@dimen/_18ssp">
+
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipeLayout"
                     android:layout_width="match_parent"
@@ -69,7 +71,6 @@
                 </LinearLayout>
 
 
-
             </androidx.cardview.widget.CardView>
 
             <RelativeLayout
@@ -110,8 +111,6 @@
 
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

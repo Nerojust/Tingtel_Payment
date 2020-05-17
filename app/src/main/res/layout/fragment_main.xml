@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.dashboard.DashboardFragment">
 
 
@@ -55,7 +56,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/tingtel_red_color"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,113 +76,142 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="570dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <TextView
-        android:id="@+id/customerName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/rubik_regular"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
-        tools:text="@string/welcome_martins" />
-
-    <ImageView
-        android:id="@+id/imageView3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="113dp"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        android:src="@drawable/celebration"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerName" />
+        android:layout_height="match_parent"
+        android:background="@color/tingtel_light_gray"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_20ssp"
+            android:layout_weight="2"
+            android:paddingVertical="10dp"
+            app:cardBackgroundColor="@color/tingtel_lighter_gray"
+            app:cardCornerRadius="@dimen/_18ssp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/customerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="HI TAIWO"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="131dp"
+                        android:layout_height="94dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/celebration"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:paddingHorizontal="40dp"
+                        android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11ssp" />
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:fontFamily="@font/rubik_regular"
-        android:text="@string/tingtel_helps_you_transfer_airtime_of_any_networkto_other_networks_n_n_in_order_to_transfer_airtime_please_click_on_the_transfer_airtime_button"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_transfer_airtime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    <Button
+                        android:id="@+id/btn_transfer_airtime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="40dp"
+                        android:layout_marginTop="@dimen/_20ssp"
+                        android:background="@drawable/dashboard_buttons"
+                        android:fontFamily="@font/rubik_regular"
+                        android:paddingVertical="@dimen/_14ssp"
+                        android:text="AIRTIME"
+                        android:textColor="@color/tingtel_white"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv2" />
 
-    <Button
-        android:id="@+id/btn_transfer_airtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/dashboard_buttons"
-        android:fontFamily="@font/rubik_regular"
-        android:paddingVertical="@dimen/_20ssp"
-        android:text="@string/transfer_airtime"
-        android:textColor="@color/tingtel_white"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    <Button
+                        android:id="@+id/btn_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="40dp"
+                        android:layout_marginTop="@dimen/_13ssp"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/dashboard_buttons"
+                        android:fontFamily="@font/rubik_regular"
+                        android:paddingVertical="@dimen/_14ssp"
+                        android:text="WALLET"
+                        android:textColor="@color/tingtel_white"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
+                </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/dashboard_buttons"
-        android:fontFamily="@font/rubik_regular"
-        android:paddingVertical="@dimen/_20ssp"
-        android:text="@string/history"
-        android:textColor="@color/tingtel_white"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_transfer_airtime" />
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_weight="0.1"
-        app:adSize="LARGE_BANNER"
-        app:adUnitId="ca-app-pub-3223394163127231/7226149794"
-        app:layout_constraintTop_toBottomOf="@id/btn_history"
-        tools:layout_editor_absoluteX="0dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="184dp"
-        app:layout_constraintTop_toBottomOf="@id/adView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_13ssp"
+                android:layout_marginVertical="@dimen/_20ssp"
+                android:layout_weight="2"
+                android:paddingVertical="10dp"
+                app:cardBackgroundColor="@color/tingtel_lighter_gray"
+                app:cardCornerRadius="@dimen/_18ssp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/_20sdp">
+
+                    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        ads:adSize="LARGE_BANNER"
+                        ads:adUnitId="ca-app-pub-3223394163127231/7226149794" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

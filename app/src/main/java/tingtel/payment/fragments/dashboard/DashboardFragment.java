@@ -91,11 +91,11 @@ public class DashboardFragment extends Fragment {
 
         //setting the retrieved customer name
         if (sessionManager.getFirstName() != null) {
-            customerName.setText(getResources().getString(R.string.hi).concat(" ").concat(sessionManager.getFirstName()));
+            customerName.setText(getResources().getString(R.string.hi).concat(" ").concat(sessionManager.getFirstName().toUpperCase()));
         } else {
             customerName.setText(getResources().getString(R.string.welcome_customer));
         }
-        //getCreditHistory();
+        getCreditHistory();
     }
 
     private void initListeners() {

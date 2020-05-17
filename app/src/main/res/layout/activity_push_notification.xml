@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.settings.PushNotificationActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/rubik_regular"
+        android:gravity="start"
+        android:paddingVertical="@dimen/_15sdp"
+        android:text="This is a promotion from Tingtel. Enjoy 10% off service fees when you transfer more than 5000 per day"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/tingtel_light_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/rubik_regular"
+        android:gravity="start"
+        android:paddingVertical="@dimen/_15sdp"
+        android:text="This is a promotion from Tingtel. Enjoy more airtime top on any amount you buy when you pay user using QR code"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/tingtel_light_gray" />
+</LinearLayout>
