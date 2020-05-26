@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
@@ -56,13 +56,12 @@ import tingtel.payment.models.login.CustomerLoginSendObject;
 import tingtel.payment.utils.AppUtils;
 import tingtel.payment.utils.Constants;
 import tingtel.payment.utils.Cryptography;
-import tingtel.payment.utils.GPSutils;
 import tingtel.payment.utils.NetworkCarrierUtils;
 import tingtel.payment.utils.SessionManager;
 import tingtel.payment.web_services.WebSeviceRequestMaker;
 import tingtel.payment.web_services.interfaces.LoginResponseInterface;
 
-public class SignInActivity extends GPSutils {
+public class SignInActivity extends AppCompatActivity {
 
     private static final String KEY_NAME = "Tingtel";
     private static final String TAG = "Signinactivity";
@@ -100,7 +99,6 @@ public class SignInActivity extends GPSutils {
         setContentView(R.layout.activity_sign_in);
 
         appDatabase = AppDatabase.getDatabaseInstance(this);
-
         sessionManager = AppUtils.getSessionManagerInstance();
         NetworkCarrierUtils.getCarrierOfSim(this, this);
 
@@ -134,7 +132,6 @@ public class SignInActivity extends GPSutils {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void startFingerprintAuthentication() {
-
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
@@ -154,19 +151,11 @@ public class SignInActivity extends GPSutils {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
-                        if (AppUtils.isLocationEnabled(SignInActivity.this)) {
-                            if (AppUtils.isNetworkAvailable(Objects.requireNonNull(SignInActivity.this))) {
-                                loginUserWithFingerprint();
 
-                            } else {
-                                AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
-                            }
-
+                        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(SignInActivity.this))) {
+                            loginUserWithFingerprint();
                         } else {
-                            showDialogMessage(getString(R.string.put_on_your_gps), () -> {
-                                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivity(myIntent);
-                            });
+                            AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
                         }
                     }
 
@@ -208,7 +197,6 @@ public class SignInActivity extends GPSutils {
 
     @SuppressLint("NewApi")
     private void initListeners() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, InvalidAlgorithmParameterException, IOException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
-
         cryptography = new Cryptography(KEY_NAME);
 
         fingerprintTextview.setOnClickListener(view -> {
@@ -225,24 +213,16 @@ public class SignInActivity extends GPSutils {
 
         btnSingIn.setOnClickListener(v -> {
             if (AppUtils.isNetworkAvailable(this)) {
-                if (AppUtils.isLocationEnabled(this)) {
-                    if (isValidFields()) {
-                        if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
-                            sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
-                            sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
+                if (isValidFields()) {
+                    if (AppUtils.isNetworkAvailable(Objects.requireNonNull(this))) {
+                        sessionManager.setRememberLoginCheck(rememberMeCheckbox.isChecked());
+                        sessionManager.setUsername(Objects.requireNonNull(usernameEditext.getText()).toString().trim());
 
-                            loginUserWithPassword();
-                        } else {
-                            AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
-                        }
+                        loginUserWithPassword();
+                    } else {
+                        AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), passwordEditext);
                     }
-                } else {
-                    showDialogMessage(getString(R.string.put_on_your_gps), () -> {
-                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        this.startActivity(myIntent);
-                    });
                 }
-                //todo:uncomment later before making network call
             } else {
                 AppUtils.showSnackBar(getResources().getString(R.string.no_network_available), usernameEditext);
             }

@@ -125,7 +125,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".utils.GPSutils" />
 
         <service
             android:name=".web_services.NotificationService"

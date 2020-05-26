@@ -168,7 +168,7 @@
                         android:background="@drawable/dashboard_buttons"
                         android:fontFamily="@font/rubik_regular"
                         android:paddingVertical="@dimen/_14ssp"
-                        android:text="WALLET"
+                        android:text="@string/history"
                         android:textColor="@color/tingtel_white"
                         android:textSize="@dimen/_14ssp"
                         app:layout_constraintEnd_toEndOf="parent"

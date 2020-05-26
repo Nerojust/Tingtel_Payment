@@ -178,18 +178,6 @@ public class AppUtils {
         }
     }
 
-    public static void changeStatusOfButton(Context context, Button button, boolean isEnabled) {
-        if (isEnabled) {
-            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons));
-            button.setEnabled(true);
-            button.setClickable(true);
-        } else {
-            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons_gray));
-            button.setEnabled(false);
-            button.setClickable(false);
-        }
-    }
-
     public static String checkPhoneNumberAndRemovePrefix(String number) {
         if (number.substring(0, 3).equals("234")) {
             if (number.startsWith("234")) {
@@ -203,6 +191,19 @@ public class AppUtils {
             return number;
         }
     }
+
+    public static void changeStatusOfButton(Context context, Button button, boolean isEnabled) {
+        if (isEnabled) {
+            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons));
+            button.setEnabled(true);
+            button.setClickable(true);
+        } else {
+            button.setBackground(context.getResources().getDrawable(R.drawable.dashboard_buttons_gray));
+            button.setEnabled(false);
+            button.setClickable(false);
+        }
+    }
+
 
     public static void showSnackBar(String msg, View view) {
         Snackbar mySnackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
